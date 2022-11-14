@@ -4,6 +4,7 @@ import { Message } from '@triplo/api-interfaces';
 @Injectable()
 export class AppService {
   getData(): Message {
-    return { message: 'Welcome to api!' };
+    return {result: 200, message: "Yo what's up guys!"};
   }
 }
+
