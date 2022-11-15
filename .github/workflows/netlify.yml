@@ -16,10 +16,11 @@ jobs:
         run: |
           npm install
           npm run build
+          ls
       - uses: actions/upload-artifact@v2
         with:
           name: triplo artifacts
-          path: dist/
+          path: './dist/'
 
   netlify-deploy:
     runs-on: ubuntu-latest
