@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: npm install and build webpack
+      - name: npm install and build the Triplo website
         run: |
           npm install
           npm run build
           ls
       - uses: actions/upload-artifact@v2
         with:
-          name: triplo artifacts
+          name: Triplo
           path: './dist/'
 
   netlify-deploy:
@@ -27,6 +27,10 @@ jobs:
     needs: run-npm-build
     steps:
       - uses: actions/checkout@v2
+      - name: Download math result for job 2
+        uses: actions/download-artifact@v3
+        with:
+          name: Triplo
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
