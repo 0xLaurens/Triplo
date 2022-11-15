@@ -31,6 +31,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Triplo
+      - name: Check file structure
+        run: ls
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
