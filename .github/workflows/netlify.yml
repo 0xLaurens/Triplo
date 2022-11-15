@@ -20,24 +20,24 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Triplo
-          path: './dist/'
+          path: './dist/apps/triplo'
 
   netlify-deploy:
     runs-on: ubuntu-latest
     needs: run-npm-build
     steps:
       - uses: actions/checkout@v2
-      - name: Download math result for job 2
+      - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: Triplo
-          path: './dist/'
+          path: './dist/apps/triplo'
       - name: Check file structure
         run: ls
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
-          publish-dir: './dist/'
+          publish-dir: './dist/apps/triplo'
           production-branch: main
           enable-commit-comment: true
         env:

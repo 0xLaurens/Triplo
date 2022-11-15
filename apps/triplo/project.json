@@ -18,7 +18,8 @@
         "tsConfig": "apps/triplo/tsconfig.app.json",
         "assets": [
           "apps/triplo/src/favicon.ico",
-          "apps/triplo/src/assets"
+          "apps/triplo/src/assets",
+          "apps/triplo/src/_redirects"
         ],
         "styles": [
           "apps/triplo/src/styles.css",
