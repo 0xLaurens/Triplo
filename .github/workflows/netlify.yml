@@ -12,8 +12,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - run: npm i
-      - run: nx build
+      - name: install and build website
+        run: |
+          npm install
+          npm run build
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
         with:
