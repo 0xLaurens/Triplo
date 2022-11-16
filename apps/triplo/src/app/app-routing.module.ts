@@ -4,6 +4,7 @@ import {UserListComponent} from "./pages/user/user-list/user-list.component";
 import {UserDetailComponent} from "./pages/user/user-detail/user-detail.component";
 import {UserEditComponent} from "./pages/user/user-edit/user-edit.component";
 import {HeroComponent} from "./pages/home/hero/hero.component";
+import {AboutComponent} from "./pages/about/about.component";
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
       {path: ':id/edit', component: UserEditComponent}
     ]
   },
-  { path: '', component: HeroComponent }
+  { path: '', component: HeroComponent },
+  { path: 'About', component: AboutComponent }
 ];
 
 @NgModule({
