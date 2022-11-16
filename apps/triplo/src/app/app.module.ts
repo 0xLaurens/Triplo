@@ -9,10 +9,8 @@ import { UserEditComponent } from './pages/user/user-edit/user-edit.component';
 import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { MenubarModule } from 'primeng/menubar';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { HeroComponent } from './pages/home/hero/hero.component';
+import {NgbNavModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,9 +26,7 @@ import { HeroComponent } from './pages/home/hero/hero.component';
     HttpClientModule,
     RouterOutlet,
     AppRoutingModule,
-    MenubarModule,
-    ButtonModule,
-    InputTextModule,
+    NgbNavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

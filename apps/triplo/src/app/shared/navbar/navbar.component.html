@@ -1,10 +1,19 @@
-<p-menubar [model]="items">
-  <ng-template pTemplate="start">
-
-    <a [routerLink]="['/']">
-      <img src="assets/logo.png" height="60" class="mr-2"/>
-
-    </a>
-  </ng-template>
-  <button pButton label="Logout" icon="pi pi-power-off"></button>
-</p-menubar>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Triplo</a>
+    <div class="collapse navbar-collapse">
+      <div class="navbar-nav">
+        <ul ngbNav #nav="ngbNav">
+          <li ngbNavItem>
+            <a ngbNavLink routerLink="/">Home</a>
+            <ng-template ngbNavContent>First content</ng-template>
+          </li>
+          <li ngbNavItem>
+            <a ngbNavLink routerLink="Users">Users</a>
+            <ng-template ngbNavContent>Second content</ng-template>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
