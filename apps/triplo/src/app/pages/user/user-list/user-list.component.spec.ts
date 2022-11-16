@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserListComponent } from './user-list.component';
+import {RouterOutlet} from "@angular/router";
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
@@ -9,6 +10,7 @@ describe('UserListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserListComponent],
+      imports: [RouterOutlet]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserListComponent);

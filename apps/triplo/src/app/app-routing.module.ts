@@ -8,8 +8,8 @@ import {HeroComponent} from "./pages/home/hero/hero.component";
 const routes: Routes = [
   {
     path: 'Users', component: UserListComponent, children: [
-      {path: ':name', component: UserDetailComponent},
-      {path: ':name/edit', component: UserEditComponent}
+      {path: ':id', component: UserDetailComponent},
+      {path: ':id/edit', component: UserEditComponent}
     ]
   },
   { path: '', component: HeroComponent }
