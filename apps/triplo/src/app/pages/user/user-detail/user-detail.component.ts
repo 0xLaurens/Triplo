@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {User} from "../../../models/User/user";
+import {UserService} from "../../../models/User/user.service";
 
 @Component({
   selector: 'triplo-user-detail',
@@ -6,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styles: [],
 })
 export class UserDetailComponent implements OnInit {
-  constructor() {}
+  user!: User;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute, private readonly userService: UserService) {
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.user = this.userService.GetUser(
+        Number(params['id'])
+      );
+    });
+  }
+
+
 }

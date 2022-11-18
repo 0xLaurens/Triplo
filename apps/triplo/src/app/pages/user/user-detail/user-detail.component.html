@@ -1,1 +1,8 @@
-<p>user-detail works!</p>
+<div class="col-md-6 col-lg-4 item">
+  <h3 class="name">{{user.name.first}} {{user.name.last}}</h3>
+  <p class="title">Id: {{user.id}}</p>
+  <p class="title">Gender: {{user.gender}}</p>
+  <p class="title">Email: {{user.email}}</p>
+  <p class="title">Born: {{user.dob.month}}/{{user.dob.day}}/{{user.dob.year}}</p>
+  <p class="title">Created: {{user.registered.toLocaleDateString()}}</p>
+</div>

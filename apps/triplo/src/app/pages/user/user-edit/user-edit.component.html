@@ -1,1 +1,67 @@
-<p>user-edit works!</p>
+<div class="d-flex justify-content-between pb-3">
+  <h2>Edit</h2>
+  <h2>
+    <a (click)="close()"><i class="bi-x-square bi-x-bold"></i></a>
+  </h2>
+</div>
+
+<form
+  #userEditForm="ngForm"
+  name="form"
+  class="pb-3">
+
+  <div class="form-group row my-2">
+    <label class="col-4 col-form-label">Firstname</label>
+    <div class="col-8">
+      <input [(ngModel)]="user.name.first" name="Firstname" placeholder="Firstname" type="text" class="form-control"
+             required="required">
+    </div>
+  </div>
+  <div class="form-group row my-2">
+    <label class="col-4 col-form-label">Lastname</label>
+    <div class="col-8">
+      <input [(ngModel)]="user.name.last" name="Lastname" placeholder="Lastname" type="text" class="form-control"
+             required="required">
+    </div>
+  </div>
+  <div class="form-group my-2 row">
+    <label class="col-4 col-form-label">Email</label>
+    <div class="col-8">
+      <input [(ngModel)]="user.email" name="Email" placeholder="Email" type="text" class="form-control"
+             required="required">
+    </div>
+  </div>
+  <div class="form-group my-2 row">
+    <label class="col-4 col-form-label">Gender</label>
+    <div class="col-8">
+      <select [(ngModel)]="user.gender" name="Gender" class="form-select" required="required">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group my-2 row">
+    <label class="col-4 col-form-label">Date of birth</label>
+    <div class="col-8">
+      <div class="input-group">
+        <input
+          class="form-control"
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          [(ngModel)]="user.dob"
+          ngbDatepicker
+          #d="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-4 col-8 d-flex justify-content-end">
+      <button (click)="onSubmit()" name="submit" type="submit" class="btn btn-primary btn-get-started">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
