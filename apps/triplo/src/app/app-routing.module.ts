@@ -9,13 +9,13 @@ import {AboutComponent} from "./pages/about/about.component";
 const routes: Routes = [
   {
     path: 'Users', component: UserListComponent, children: [
-      {path: ':id', component: UserDetailComponent},
-      {path: ':id/edit', component: UserEditComponent},
       {path: 'create', component: UserEditComponent},
+      {path: ':id/edit', component: UserEditComponent},
+      {path: ':id', component: UserDetailComponent},
     ]
   },
-  { path: '', component: HeroComponent },
-  { path: 'About', component: AboutComponent }
+  {path: '', component: HeroComponent},
+  {path: 'About', component: AboutComponent}
 ];
 
 @NgModule({

@@ -1,9 +1,17 @@
 <section class="hero d-flex align-items-center">
   <div class="container">
     <div class="row">
-      <router-outlet></router-outlet>
+      <router-outlet #outlet="outlet"></router-outlet>
     </div>
     <div class="row">
+      <div class="d-flex justify-content-between pb-3">
+        <h2>Users</h2>
+        <h2 *ngIf="!outlet.isActivated">
+          <a routerLink="create" class="btn btn-primary">
+            Create User
+          </a>
+        </h2>
+      </div>
       <table class="table table-striped">
         <thead>
         <tr>
