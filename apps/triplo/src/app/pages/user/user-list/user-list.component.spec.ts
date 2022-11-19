@@ -17,7 +17,7 @@ describe('UserListComponent', () => {
 
     fixture = TestBed.createComponent(UserListComponent);
     component = fixture.componentInstance;
-    
+
     fixture.detectChanges();
   });
 
