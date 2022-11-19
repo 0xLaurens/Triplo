@@ -5,6 +5,9 @@ import {UserDetailComponent} from "./pages/user/user-detail/user-detail.componen
 import {UserEditComponent} from "./pages/user/user-edit/user-edit.component";
 import {HeroComponent} from "./pages/home/hero/hero.component";
 import {AboutComponent} from "./pages/about/about.component";
+import {AboutProjectComponent} from "./pages/about/about-project/about-project.component";
+import {AboutEntityComponent} from "./pages/about/about-entity/about-entity.component";
+import {AboutUserstoriesComponent} from "./pages/about/about-userstories/about-userstories.component";
 
 const routes: Routes = [
   {
@@ -15,7 +18,13 @@ const routes: Routes = [
     ]
   },
   {path: '', component: HeroComponent},
-  {path: 'About', component: AboutComponent}
+  {
+    path: 'About', component: AboutComponent, children: [
+      {path: 'Project', component: AboutProjectComponent},
+      {path: 'Entity', component: AboutEntityComponent},
+      {path: 'UserStories', component: AboutUserstoriesComponent}
+    ]
+  },
 ];
 
 @NgModule({
