@@ -1,5 +1,11 @@
 <div class="col-md-6 col-lg-4 item">
-  <h3 class="name">{{user.name.first}} {{user.name.last}}</h3>
+  <div class="d-flex justify-content-between pb-3">
+    <h2>Overview</h2>
+    <h2>
+      <a (click)="close()"><i class="bi-x-square bi-x-bold"></i></a>
+    </h2>
+  </div>
+  <h2 class="name">{{user.name.first}} {{user.name.last}}</h2>
   <p class="title">Id: {{user.id}}</p>
   <p class="title">Gender: {{user.gender}}</p>
   <p class="title">Email: {{user.email}}</p>

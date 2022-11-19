@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-between pb-3">
-  <h2>Edit</h2>
+  <h2 *ngIf="userExists">Edit</h2>
+  <h2 *ngIf="!userExists">Create</h2>
   <h2>
     <a (click)="close()"><i class="bi-x-square bi-x-bold"></i></a>
   </h2>
@@ -35,9 +36,9 @@
     <label class="col-4 col-form-label">Gender</label>
     <div class="col-8">
       <select [(ngModel)]="user.gender" name="Gender" class="form-select" required="required">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
+        <option [value]="gender.male">Male</option>
+        <option [value]="gender.female">Female</option>
+        <option [value]="gender.other">Other</option>
       </select>
     </div>
   </div>
@@ -48,7 +49,7 @@
         <input
           class="form-control"
           placeholder="yyyy-mm-dd"
-          name="dp"
+          name="Date of Birth"
           [(ngModel)]="user.dob"
           ngbDatepicker
           #d="ngbDatepicker"
