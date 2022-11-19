@@ -12,7 +12,10 @@
           </a>
         </h2>
       </div>
-      <table class="table table-striped">
+      <div *ngIf="!users">
+        <h5 class="name">No Users Found!</h5>
+      </div>
+      <table *ngIf="users" class="table table-striped">
         <thead>
         <tr>
           <th scope="col">#</th>

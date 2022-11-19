@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UserDetailComponent } from './user-detail.component';
+import {UserDetailComponent} from './user-detail.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {gender} from "../../../models/User/user";
+import {RouterLink} from "@angular/router";
 
 describe('UserDetailComponent', () => {
   let component: UserDetailComponent;
@@ -9,10 +12,12 @@ describe('UserDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserDetailComponent],
+      imports: [RouterLink, RouterTestingModule],
     }).compileComponents();
-
     fixture = TestBed.createComponent(UserDetailComponent);
     component = fixture.componentInstance;
+
+
     fixture.detectChanges();
   });
 

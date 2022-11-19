@@ -4,8 +4,10 @@
     <a (click)="close()"><i class="bi-x-square bi-x-bold"></i></a>
   </h2>
 </div>
-
-<div class="col-md-6 col-lg-4 pb-5">
+<div *ngIf="!user">
+  <h5 class="name">No User Found!</h5>
+</div>
+<div *ngIf="user" class="col-md-6 col-lg-4 pb-5">
   <h5 class="name">{{user.name.first}} {{user.name.last}}</h5>
   <p class="title">Id: {{user.id}}</p>
   <p class="title">Gender: {{user.gender}}</p>
