@@ -32,7 +32,7 @@ export class UserEditComponent implements OnInit {
         this.userExists = true;
       } else {
         this.user = {
-          dob: { year: 2022, month: 1, day: 1 },
+          dob: {year: 2012, month: 10, day: 17},
           email: "",
           gender: gender.other,
           id: 0,
@@ -49,10 +49,13 @@ export class UserEditComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.userExists)
+    if (this.userExists) {
       this.userService.UpdateUser(this.user);
-    else
+    }
+    else {
       this.userService.CreateUser(this.user);
-    close()
+    }
+
+    this.close()
   }
 }
