@@ -5,7 +5,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
-import {gender} from "../../../models/User/user";
+import {gender} from "@triplo/models";
 
 describe('UserEditComponent', () => {
   let component: UserEditComponent;
@@ -22,7 +22,9 @@ describe('UserEditComponent', () => {
     component = fixture.componentInstance;
     component.user = {
       id: 1,
-      name: {first: "John", last: "Doe"},
+      firstname: "John",
+      lastname: "Doe",
+      username: "JohnDoe123",
       email: "John@Doe.com",
       dob: {year: 2012, month: 10, day: 17},
       registered: new Date(),
