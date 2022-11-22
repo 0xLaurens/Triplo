@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {gender, User} from "../../../models/User/user";
+import { gender, User } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 @Component({

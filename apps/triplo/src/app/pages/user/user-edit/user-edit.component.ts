@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {gender, User} from "../../../models/User/user";
+import { gender, User } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -32,11 +32,13 @@ export class UserEditComponent implements OnInit {
         this.userExists = true;
       } else {
         this.user = {
+          username: "",
           dob: {year: 2012, month: 10, day: 17},
           email: "",
           gender: gender.other,
           id: 0,
-          name: {first: "", last: ""},
+          firstname: "",
+          lastname: "",
           registered: new Date,
         }
       }

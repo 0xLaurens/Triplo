@@ -1,13 +1,13 @@
 
 import {Injectable} from "@angular/core";
-import { user, gender } from "@triplo/models";
+import { User, gender } from "@triplo/models";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private users: user[] = [
+  private users: User[] = [
     {
       id: 1,
       username: "GamerMan",
@@ -61,20 +61,20 @@ export class UserService {
   ];
 
 
-  GetUsers(): user[] {
+  GetUsers(): User[] {
     return this.users;
   }
 
-  GetUser(id: number): user {
+  GetUser(id: number): User {
     return this.users.filter(u => u.id == id)[0];
   }
 
 
-  DeleteUser(id: number): user[] {
+  DeleteUser(id: number): User[] {
     return this.users.splice(this.users.findIndex(u => u.id == id), 1);
   }
 
-  UpdateUser(updatedUser: user) {
+  UpdateUser(updatedUser: User) {
     const updatedUsers = this.users.filter(
       (user) => user.id !== updatedUser.id
     );
@@ -82,7 +82,7 @@ export class UserService {
     this.users = updatedUsers;
   }
 
-  CreateUser(user: user) {
+  CreateUser(user: User) {
     user.id = this.users.length + 1
     this.users.push(user)
   }

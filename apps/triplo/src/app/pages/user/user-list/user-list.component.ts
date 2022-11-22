@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../../models/User/user";
+import { User } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 

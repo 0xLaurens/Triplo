@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SchemaModule } from "@triplo/schema";
 import { MongooseModule } from '@nestjs/mongoose';
 import {environment} from "../environments/environment";
+import {UserModule} from "../schema/user/user.module";
 
 @Module({
   imports: [
-    SchemaModule,
+    UserModule,
     MongooseModule.forRoot(environment.MONGO_URL)
   ],
   controllers: [AppController],
