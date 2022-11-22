@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@triplo/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@triplo/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@triplo/schema": ["libs/schema/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
