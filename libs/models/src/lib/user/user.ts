@@ -1,18 +1,14 @@
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 
-export interface User {
+export interface user {
   id: number;
-  name: Name;
+  username: string;
+  firstname: string;
+  lastname: string;
   gender: gender;
   email: string;
   dob: NgbDateStruct;
   registered: Date;
-}
-
-
-export interface Name {
-  first: string;
-  last: string;
 }
 
 export enum gender {

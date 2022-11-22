@@ -1,15 +1,18 @@
-import {gender, User} from "./user";
+
 import {Injectable} from "@angular/core";
+import { user, gender } from "@triplo/models";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private users: User[] = [
+  private users: user[] = [
     {
       id: 1,
-      name: {first: "John", last: "Doe"},
+      username: "GamerMan",
+      firstname: "John",
+      lastname: "Doe",
       email: "John@Doe.com",
       dob: {year: 2012, month: 10, day: 17},
       registered: new Date(),
@@ -17,7 +20,9 @@ export class UserService {
     },
     {
       id: 2,
-      name: {first: "Avery", last: "McKnight"},
+      username: "A.Knight",
+      firstname: "Avery",
+      lastname: "McKnight",
       email: "Avery.McKnight@gmail.com",
       dob: {year: 2001, month: 1, day: 17},
       registered: new Date(),
@@ -25,7 +30,9 @@ export class UserService {
     },
     {
       id: 3,
-      name: {first: "Elvis", last: "Pretzel"},
+      username: "Pretzel99",
+      firstname: "Frans",
+      lastname: "German",
       email: "PretzelLover99@gmail.com",
       dob: {year: 1987, month: 8, day: 23},
       registered: new Date(),
@@ -33,7 +40,9 @@ export class UserService {
     },
     {
       id: 4,
-      name: {first: "Hershey", last: "Kiss"},
+      username: "Hershey",
+      firstname: "Hershey",
+      lastname: "Kiss",
       email: "H.Kiss@gmail.com",
       dob: {year: 1999, month: 6, day: 21},
       registered: new Date(),
@@ -41,7 +50,9 @@ export class UserService {
     },
     {
       id: 5,
-      name: {first: "Albert", last: "Kiss"},
+      username: "Kiss",
+      firstname: "Albert",
+      lastname: "Kiss",
       email: "A.Kiss@gmail.com",
       dob: {year: 2002, month: 2, day: 16},
       registered: new Date(),
@@ -50,20 +61,20 @@ export class UserService {
   ];
 
 
-  GetUsers(): User[] {
+  GetUsers(): user[] {
     return this.users;
   }
 
-  GetUser(id: number): User {
+  GetUser(id: number): user {
     return this.users.filter(u => u.id == id)[0];
   }
 
 
-  DeleteUser(id: number): User[] {
+  DeleteUser(id: number): user[] {
     return this.users.splice(this.users.findIndex(u => u.id == id), 1);
   }
 
-  UpdateUser(updatedUser: User) {
+  UpdateUser(updatedUser: user) {
     const updatedUsers = this.users.filter(
       (user) => user.id !== updatedUser.id
     );
@@ -71,7 +82,7 @@ export class UserService {
     this.users = updatedUsers;
   }
 
-  CreateUser(user: User) {
+  CreateUser(user: user) {
     user.id = this.users.length + 1
     this.users.push(user)
   }
