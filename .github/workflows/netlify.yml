@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 jobs:
-  run-npm-build:
+  build-artifacts:
+    name: "Build Artifacts"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,9 +19,10 @@ jobs:
           name: Triplo
           path: './dist/apps/triplo'
 
-  run-npm-test:
+  run-tests:
+    name: "Run Tests"
     runs-on: ubuntu-latest
-    needs: run-npm-build
+    needs: build-artifacts
     steps:
       - uses: actions/checkout@v3
       - name: npm install and run test
@@ -31,9 +30,10 @@ jobs:
           npm install
           npm run test
 
-  netlify-deploy:
+  deploy-to-netlify:
+    name: "Deploy to Netlify"
     runs-on: ubuntu-latest
-    needs: run-npm-test
+    needs: run-tests
     steps:
       - uses: actions/checkout@v3
       - name: Download artifact
@@ -42,7 +42,7 @@ jobs:
           name: Triplo
           path: './dist/apps/triplo'
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
+        uses: nwtgck/actions-netlify@v1.2.4
         with:
           publish-dir: './dist/apps/triplo'
           production-branch: main
