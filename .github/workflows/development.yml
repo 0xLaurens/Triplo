@@ -8,7 +8,8 @@ on:
     branches:
       - development
 jobs:
-  run tests:
+  run-test:
+    name: "run test"
     runs-on: ubuntu-latest
     needs: run-npm-build
     steps:
