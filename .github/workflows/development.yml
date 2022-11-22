@@ -1,5 +1,5 @@
 # .github/workflows/development.yml
-name: Build and Deploy to Netlify
+name: Run test
 on:
   push:
     branches:
