@@ -3,7 +3,6 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UserListComponent} from './user-list.component';
 import {RouterLink} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
-import {gender} from "../../../models/User/user";
 
 describe('UserListComponent', () => {
   let component: UserListComponent;

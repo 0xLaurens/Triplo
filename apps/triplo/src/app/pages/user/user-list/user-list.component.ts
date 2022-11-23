@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../../../models/User/user";
+import { UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 
@@ -9,7 +9,7 @@ import {UserService} from "../../../models/User/user.service";
   styles: [],
 })
 export class UserListComponent implements OnInit {
-  users: User[] = [];
+  users: UserInterface[] = [];
 
   constructor(public userService: UserService) {
   }
@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
     this.users = this.userService.GetUsers()
   }
 
-  deleteUser(id: number) {
+  deleteUser(id: string) {
     this.userService.DeleteUser(id);
   }
 }

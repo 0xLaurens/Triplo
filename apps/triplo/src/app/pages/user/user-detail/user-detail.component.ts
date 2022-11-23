@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {gender, User} from "../../../models/User/user";
+import { UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {UserService} from "../../../models/User/user.service";
   styles: [],
 })
 export class UserDetailComponent implements OnInit {
-  user?: User;
+  user?: UserInterface;
 
   constructor(private route: ActivatedRoute, private readonly userService: UserService, private  router: Router) {
   }
@@ -17,7 +17,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.user = this.userService.GetUser(
-        Number(params['id'])
+        params['id']
       );
     });
   }

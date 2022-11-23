@@ -12,55 +12,28 @@
   class="pb-3">
 
   <div class="form-group row my-2">
-    <label class="col-4 col-form-label">Firstname</label>
+    <label class="col-4 col-form-label">Username</label>
     <div class="col-8">
       <input
         type="text"
         placeholder="Firstname"
         name="firstname"
         class="form-control"
-        [(ngModel)]="user.name.first"
-        #firstname="ngModel"
+        [(ngModel)]="user.username"
+        #username="ngModel"
         minlength="3"
         required
-        [ngClass]="{'is-invalid': firstname.invalid && firstname.touched}"
+        [ngClass]="{'is-invalid': username.invalid && username.touched}"
       />
       <div
-        *ngIf="firstname.invalid && firstname.touched"
+        *ngIf="username.invalid && username.touched"
         class="invalid-feedback"
       >
-        <div *ngIf="firstname.errors!['required']">
+        <div *ngIf="username.errors!['required']">
           Firstname is required
         </div>
-        <div *ngIf="firstname.errors!['minlength']">
+        <div *ngIf="username.errors!['minlength']">
           Firstname must be 3 chars long.
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row my-2">
-    <label class="col-4 col-form-label">Lastname</label>
-    <div class="col-8">
-      <input
-        type="text"
-        class="form-control"
-        name="lastname"
-        placeholder="Lastname"
-        [(ngModel)]="user.name.last"
-        #lastname="ngModel"
-        minlength="3"
-        required
-        [ngClass]="{'is-invalid': lastname.invalid && lastname.touched}"
-      />
-      <div
-        *ngIf="lastname.invalid && lastname.touched"
-        class="invalid-feedback"
-      >
-        <div *ngIf="lastname.errors!['required']">
-          Lastname is required
-        </div>
-        <div *ngIf="lastname.errors!['minlength']">
-          Lastname must be 3 chars long.
         </div>
       </div>
     </div>
@@ -113,32 +86,6 @@
       >
         <div *ngIf="Gender.errors!['required']">
           Gender is required
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="form-group row my-2">
-    <label class="col-4 col-form-label">Date Of Birth</label>
-    <div class="col-8">
-      <div class="input-group">
-        <input
-          class="form-control"
-          placeholder="yyyy-mm-dd"
-          name="dob"
-          [(ngModel)]="user.dob"
-          ngbDatepicker
-          #d="ngbDatepicker"
-          #dob="ngModel"
-          [ngClass]="{'is-invalid': dob.invalid && dob.touched }"
-        />
-        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
-      </div>
-      <div
-        *ngIf="dob.invalid && dob.touched"
-        class="invalid-feedback"
-      >
-        <div *ngIf="dob.errors">
-          Your birth date must be a valid date (Ex: yyyy-mm-dd).
         </div>
       </div>
     </div>
