@@ -1,6 +1,6 @@
 import {Controller, Get} from "@nestjs/common";
 import {UserRepository} from "./user.repository";
-import {User} from "@triplo/models";
+import {UserInterface} from "@triplo/models";
 
 @Controller()
 export class UserController {
@@ -9,7 +9,7 @@ export class UserController {
   }
 
   @Get("users")
-  async findAllUsers(): Promise<User[]> {
+  async findAllUsers(): Promise<UserInterface[]> {
     return this.userRepo.findAllUsers();
   }
 

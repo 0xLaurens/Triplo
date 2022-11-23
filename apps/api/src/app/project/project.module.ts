@@ -1,8 +1,8 @@
 import {Module} from "@nestjs/common";
 import {MongooseModule} from "@nestjs/mongoose";
 import {ProjectSchema} from "./project.schema";
-import {ProjectController} from "../../controllers/project/project.controller";
-import {ProjectRepository} from "../../repository/project/project.repository";
+import {ProjectController} from "./project.controller";
+import {ProjectRepository} from "./project.repository";
 
 @Module({
   imports: [

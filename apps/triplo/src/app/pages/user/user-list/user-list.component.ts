@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { User } from "@triplo/models"
+import { UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 
@@ -9,7 +9,7 @@ import {UserService} from "../../../models/User/user.service";
   styles: [],
 })
 export class UserListComponent implements OnInit {
-  users: User[] = [];
+  users: UserInterface[] = [];
 
   constructor(public userService: UserService) {
   }

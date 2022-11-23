@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { gender, User } from "@triplo/models"
+import { gender, UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styles: [],
 })
 export class UserEditComponent implements OnInit {
-  user!: User;
+  user!: UserInterface;
   gender = gender;
   userId!: number;
   userExists = false;

@@ -1,14 +1,14 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {Project} from "@triplo/models"
+import {ProjectInterface} from "@triplo/models"
 import {Model} from "mongoose";
 
 @Injectable()
 export class ProjectRepository {
- constructor(@InjectModel('Project') private projectModel: Model<Project>) {
+ constructor(@InjectModel('Project') private projectModel: Model<ProjectInterface>) {
  }
 
-  async findAllProjects(): Promise<Project[]> {
+  async findAllProjects(): Promise<ProjectInterface[]> {
    return this.projectModel.find();
   }
 }

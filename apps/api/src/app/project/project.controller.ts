@@ -1,6 +1,6 @@
 import {Controller, Get} from "@nestjs/common";
-import {ProjectRepository} from "../../repository/project/project.repository";
-import {Project} from "@triplo/models";
+import {ProjectRepository} from "./project.repository";
+import {ProjectInterface} from "@triplo/models";
 
 @Controller()
 export class ProjectController {
@@ -8,7 +8,7 @@ export class ProjectController {
   }
 
   @Get("projects")
-  async findAllProjects(): Promise<Project[]> {
+  async findAllProjects(): Promise<ProjectInterface[]> {
     return this.projectRepo.findAllProjects();
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { gender, User } from "@triplo/models"
+import { gender, UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {UserService} from "../../../models/User/user.service";
   styles: [],
 })
 export class UserDetailComponent implements OnInit {
-  user?: User;
+  user?: UserInterface;
 
   constructor(private route: ActivatedRoute, private readonly userService: UserService, private  router: Router) {
   }
