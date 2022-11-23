@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { gender, UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {v4 as uuid} from "uuid";
 
 
 @Component({
@@ -12,7 +13,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class UserEditComponent implements OnInit {
   user!: UserInterface;
   gender = gender;
-  userId!: number;
+  userId!: string;
   userExists = false;
 
   constructor(
@@ -24,7 +25,7 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.userId = Number(params['id'])
+      this.userId = params['id']
       if (this.userId) {
         this.user = this.userService.GetUser(
           this.userId
@@ -33,12 +34,9 @@ export class UserEditComponent implements OnInit {
       } else {
         this.user = {
           username: "",
-          dob: {year: 2012, month: 10, day: 17},
           email: "",
           gender: gender.other,
-          id: 0,
-          firstname: "",
-          lastname: "",
+          id: uuid(),
           registered: new Date,
         }
       }

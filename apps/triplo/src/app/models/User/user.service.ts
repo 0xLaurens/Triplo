@@ -1,6 +1,7 @@
 
 import {Injectable} from "@angular/core";
 import { UserInterface, gender } from "@triplo/models";
+import {v4 as uuid} from "uuid";
 
 
 @Injectable({
@@ -9,52 +10,37 @@ import { UserInterface, gender } from "@triplo/models";
 export class UserService {
   private users: UserInterface[] = [
     {
-      id: 1,
+      id: uuid(),
       username: "GamerMan",
-      firstname: "John",
-      lastname: "Doe",
       email: "John@Doe.com",
-      dob: {year: 2012, month: 10, day: 17},
       registered: new Date(),
       gender: gender.male,
     },
     {
-      id: 2,
+      id: uuid(),
       username: "A.Knight",
-      firstname: "Avery",
-      lastname: "McKnight",
       email: "Avery.McKnight@gmail.com",
-      dob: {year: 2001, month: 1, day: 17},
       registered: new Date(),
       gender: gender.female,
     },
     {
-      id: 3,
+      id: uuid(),
       username: "Pretzel99",
-      firstname: "Frans",
-      lastname: "German",
       email: "PretzelLover99@gmail.com",
-      dob: {year: 1987, month: 8, day: 23},
       registered: new Date(),
       gender: gender.other,
     },
     {
-      id: 4,
+      id: uuid(),
       username: "Hershey",
-      firstname: "Hershey",
-      lastname: "Kiss",
       email: "H.Kiss@gmail.com",
-      dob: {year: 1999, month: 6, day: 21},
       registered: new Date(),
       gender: gender.female,
     },
     {
-      id: 5,
+      id: uuid(),
       username: "Kiss",
-      firstname: "Albert",
-      lastname: "Kiss",
       email: "A.Kiss@gmail.com",
-      dob: {year: 2002, month: 2, day: 16},
       registered: new Date(),
       gender: gender.male,
     },
@@ -65,12 +51,12 @@ export class UserService {
     return this.users;
   }
 
-  GetUser(id: number): UserInterface {
+  GetUser(id: string): UserInterface {
     return this.users.filter(u => u.id == id)[0];
   }
 
 
-  DeleteUser(id: number): UserInterface[] {
+  DeleteUser(id: string): UserInterface[] {
     return this.users.splice(this.users.findIndex(u => u.id == id), 1);
   }
 
@@ -83,7 +69,7 @@ export class UserService {
   }
 
   CreateUser(user: UserInterface) {
-    user.id = this.users.length + 1
+    user.id = uuid();
     this.users.push(user)
   }
 }

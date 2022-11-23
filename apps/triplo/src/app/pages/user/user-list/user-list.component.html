@@ -19,8 +19,8 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First name</th>
-          <th scope="col">Last Name</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
           <th scope="col">View</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
@@ -29,8 +29,8 @@
         <tbody>
         <tr *ngFor="let user of users; index as i">
           <th scope="row">{{ i + 1 }}</th>
-          <td>{{ user.firstname }}</td>
-          <td>{{ user.lastname}}</td>
+          <td>{{ user.username}}</td>
+          <td>{{ user.email}}</td>
           <td><a [routerLink]="['/Users/'+ user.id]"><i class="bi bi-eye"></i></a></td>
           <td><a [routerLink]="['/Users/'+ user.id + '/edit']"><i class="bi bi-pen"></i></a></td>
           <td><a (click)="deleteUser(user.id)"><i class="bi bi-trash"></i></a></td>

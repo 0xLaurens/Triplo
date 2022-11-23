@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { gender, UserInterface } from "@triplo/models"
+import { UserInterface } from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 
 @Component({
@@ -17,7 +17,7 @@ export class UserDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.user = this.userService.GetUser(
-        Number(params['id'])
+        params['id']
       );
     });
   }

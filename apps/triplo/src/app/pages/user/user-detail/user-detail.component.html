@@ -8,11 +8,9 @@
   <h5 class="name">No User Found!</h5>
 </div>
 <div *ngIf="user" class="col-md-6 col-lg-4 pb-5">
-  <h5 class="name">{{user.lastname}} {{user.firstname}}</h5>
+  <h5 class="name">{{user.username}}</h5>
   <p class="title">Id: {{user.id}}</p>
-  <p class="title">Username: {{user.username}}</p>
   <p class="title">Gender: {{user.gender}}</p>
   <p class="title">Email: {{user.email}}</p>
-  <p class="title">Born: {{user.dob.month}}/{{user.dob.day}}/{{user.dob.year}}</p>
   <p class="title">Created: {{user.registered.toLocaleDateString()}}</p>
 </div>
