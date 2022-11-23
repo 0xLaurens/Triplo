@@ -1,5 +1,5 @@
 import {Controller, Get} from "@nestjs/common";
-import {UserRepository} from "../../repository/user/user.repository";
+import {UserRepository} from "./user.repository";
 import {User} from "@triplo/models";
 
 @Controller()
