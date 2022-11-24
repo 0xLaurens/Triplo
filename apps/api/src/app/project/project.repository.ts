@@ -5,18 +5,26 @@ import {Model} from "mongoose";
 
 @Injectable()
 export class ProjectRepository {
- constructor(@InjectModel('Project') private projectModel: Model<ProjectInterface>) {
- }
+  constructor(@InjectModel('Project') private projectModel: Model<ProjectInterface>) {
+  }
 
   async findAllProjects(): Promise<ProjectInterface[]> {
-   return this.projectModel.find();
+    return this.projectModel.find();
   }
 
   async updateProject(projectId: string, project: Partial<ProjectInterface>): Promise<ProjectInterface> {
-     return this.projectModel.findByIdAndUpdate(projectId, project, { new: true })
+    return this.projectModel.findByIdAndUpdate(projectId, project, {new: true})
   }
 
   async findProjectById(projectId: string): Promise<ProjectInterface> {
-   return this.projectModel.findById(projectId)
+    return this.projectModel.findById(projectId)
+  }
+
+  deleteCourse(projectId: string): Promise<ProjectInterface> {
+    return this.projectModel.findByIdAndDelete(projectId).exec()
+  }
+
+  createProject(project: Partial<ProjectInterface>): Promise<ProjectInterface> {
+    return this.projectModel.create(project)
   }
 }

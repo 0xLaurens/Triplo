@@ -1,6 +1,7 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 
-@Schema()
+
+@Schema({versionKey: false})
 export class Project {
   @Prop({required:true})
   name: string;
