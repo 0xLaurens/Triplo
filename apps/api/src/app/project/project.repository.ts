@@ -12,13 +12,11 @@ export class ProjectRepository {
    return this.projectModel.find();
   }
 
-  async updateProject(
-    projectId: string,
-    changes: Partial<ProjectInterface>
-  ): Promise<ProjectInterface> {
-   return this.projectModel.findOneAndUpdate(
-      {_id: projectId},
-      changes,
-      {new:true})
+  async updateProject(projectId: string, project: Partial<ProjectInterface>): Promise<ProjectInterface> {
+     return this.projectModel.findByIdAndUpdate(projectId, project, { new: true })
+  }
+
+  async findProjectById(projectId: string): Promise<ProjectInterface> {
+   return this.projectModel.findById(projectId)
   }
 }

@@ -1,12 +1,8 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {v4 as uuid} from "uuid"
 import mongoose from "mongoose";
 
 @Schema()
 export class Comment {
-  @Prop({default: uuid, index: true})
-  _id: number
-
   @Prop({})
   message: string;
 
