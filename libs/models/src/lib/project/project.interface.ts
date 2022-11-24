@@ -4,6 +4,5 @@ export interface ProjectInterface {
   created: Date;
   LikeCount: number;
   DislikeCount: number;
-  LikeRatio: number;
 }
 

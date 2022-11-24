@@ -5,5 +5,4 @@ export interface CommentInterface {
   username: string;
   LikeCount: number;
   DislikeCount: number;
-  LikeRatio: number;
 }

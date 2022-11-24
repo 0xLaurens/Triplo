@@ -14,9 +14,6 @@ export class Project {
 
   @Prop({default: 0})
   DislikeCount: number;
-
-  @Prop({default: 0})
-  LikeRatio: number;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);
