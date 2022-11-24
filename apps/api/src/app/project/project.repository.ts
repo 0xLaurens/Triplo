@@ -11,4 +11,14 @@ export class ProjectRepository {
   async findAllProjects(): Promise<ProjectInterface[]> {
    return this.projectModel.find();
   }
+
+  async updateProject(
+    projectId: string,
+    changes: Partial<ProjectInterface>
+  ): Promise<ProjectInterface> {
+   return this.projectModel.findOneAndUpdate(
+      {_id: projectId},
+      changes,
+      {new:true})
+  }
 }
