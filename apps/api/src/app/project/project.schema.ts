@@ -4,7 +4,7 @@ import {v4 as uuid } from "uuid"
 @Schema()
 export class Project {
   @Prop({default: uuid, index: true})
-  id: string;
+  _id: string;
 
   @Prop({required:true})
   name: string;

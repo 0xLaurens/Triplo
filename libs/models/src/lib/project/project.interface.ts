@@ -1,5 +1,5 @@
 export interface ProjectInterface {
-  id: string;
+  _id: string;
   name: string;
   created: Date;
   LikeCount: number;

@@ -5,7 +5,7 @@ import {gender} from "@triplo/models"
 @Schema()
 export class User {
   @Prop({default: uuid, index: true})
-  id: string;
+  _id: string;
 
   @Prop({required: true, unique: true})
   username: string;

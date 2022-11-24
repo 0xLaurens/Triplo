@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 @Schema()
 export class Comment {
   @Prop({default: uuid, index: true})
-  id: number
+  _id: number
 
   @Prop({})
   message: string;
