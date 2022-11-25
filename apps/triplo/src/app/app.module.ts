@@ -13,11 +13,10 @@ import { HeroComponent } from './pages/home/hero/hero.component';
 import { NgbDatepickerModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModule } from './models/User/user.module';
 import { FormsModule } from '@angular/forms';
-import { AboutProjectComponent } from './pages/about/about-project/about-project.component';
-import { AboutEntityComponent } from './pages/about/about-entity/about-entity.component';
-import { AboutUserstoriesComponent } from './pages/about/about-userstories/about-userstories.component';
-import {AboutModule} from "./pages/about/about.module";
-import {AboutComponent} from "./pages/about/about.component";
+import { AboutModule } from './pages/about/about.module';
+import { AboutComponent } from './pages/about/about.component';
+import {ProjectHttpService} from "./services/projects/project-http.service";
+import {ProjectModule} from "./pages/project/project.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +30,7 @@ import {AboutComponent} from "./pages/about/about.component";
   ],
   imports: [
     AboutModule,
+    ProjectModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
@@ -41,7 +41,7 @@ import {AboutComponent} from "./pages/about/about.component";
     UserModule,
     NgbDatepickerModule,
   ],
-  providers: [],
+  providers: [ProjectHttpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

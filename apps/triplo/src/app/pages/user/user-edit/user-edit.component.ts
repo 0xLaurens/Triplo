@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { gender, UserInterface } from "@triplo/models"
+import {gender, UserInterface} from "@triplo/models"
 import {UserService} from "../../../models/User/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {v4 as uuid} from "uuid";
@@ -36,7 +36,7 @@ export class UserEditComponent implements OnInit {
           username: "",
           email: "",
           gender: gender.other,
-          id: uuid(),
+          _id: uuid(),
           registered: new Date,
         }
       }
@@ -51,8 +51,7 @@ export class UserEditComponent implements OnInit {
   onSubmit() {
     if (this.userExists) {
       this.userService.UpdateUser(this.user);
-    }
-    else {
+    } else {
       this.userService.CreateUser(this.user);
     }
 

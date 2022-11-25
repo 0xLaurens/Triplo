@@ -8,6 +8,8 @@ import {AboutComponent} from "./pages/about/about.component";
 import {AboutUserstoriesComponent} from "./pages/about/about-userstories/about-userstories.component";
 import {AboutProjectComponent} from "./pages/about/about-project/about-project.component";
 import {AboutEntityComponent} from "./pages/about/about-entity/about-entity.component";
+import {ProjectOverviewComponent} from "./pages/project/project-overview/project-overview.component";
+import {ProjectDetailComponent} from "./pages/project/project-detail/project-detail.component";
 
 const routes: Routes = [
   {
@@ -25,6 +27,8 @@ const routes: Routes = [
       {path: 'UserStories', component: AboutUserstoriesComponent}
     ]
   },
+  {path: 'Projects', component: ProjectOverviewComponent},
+  {path: 'Projects/:id', component: ProjectDetailComponent}
 ];
 
 @NgModule({
