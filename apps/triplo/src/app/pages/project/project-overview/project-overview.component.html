@@ -1,0 +1,13 @@
+<section class="hero about d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <h2>Projects</h2>
+      <div class="row py-5">
+        <div class="col-lg-4 mb-3 align-items-stretch" *ngFor="let p of projects$ | async; let i = index">
+          <triplo-project-card-list [project]="p">
+          </triplo-project-card-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
