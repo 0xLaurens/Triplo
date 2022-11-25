@@ -6,6 +6,7 @@ import {ProjectEditComponent} from "./project-edit/project-edit.component";
 import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
 import {RouterLinkWithHref} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import {RouterLinkWithHref} from "@angular/router";
   ],
   imports: [
     CommonModule,
-    RouterLinkWithHref
+    RouterLinkWithHref,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ProjectHttpService]
 })

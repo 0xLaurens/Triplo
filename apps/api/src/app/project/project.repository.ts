@@ -20,7 +20,7 @@ export class ProjectRepository {
     return this.projectModel.findById(projectId)
   }
 
-  deleteCourse(projectId: string): Promise<ProjectInterface> {
+  deleteProject(projectId: string): Promise<ProjectInterface> {
     return this.projectModel.findByIdAndDelete(projectId).exec()
   }
 

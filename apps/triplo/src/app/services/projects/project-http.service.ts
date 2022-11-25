@@ -21,8 +21,8 @@ export class ProjectHttpService {
     return this.http.put<ProjectInterface>(`/api/projects/${projectId}`, changes)
   }
 
-  createProject(projectId: string, changes: Partial<ProjectInterface>): Observable<ProjectInterface> {
-    return this.http.post<ProjectInterface>(`/api/projects/${projectId}`, changes)
+  createProject(changes: Partial<ProjectInterface>): Observable<ProjectInterface> {
+    return this.http.post<ProjectInterface>(`/api/projects/`, changes)
   }
 
   deleteProject(projectId:string) {

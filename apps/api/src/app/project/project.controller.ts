@@ -25,16 +25,14 @@ export class ProjectController {
   }
 
   @Put(":projectId")
-  async updateCourse(
+  async updateProject(
     @Param("projectId") projectId: string,
     @Body() changes: Partial<ProjectInterface> ): Promise<ProjectInterface> {
     return this.projectRepo.updateProject(projectId, changes)
   }
 
   @Delete(":projectId")
-  async deleteCourse(
-    @Param("projectId") projectId: string
-  ) : Promise<ProjectInterface> {
-    return this.projectRepo.deleteCourse(projectId)
+  async deleteProject(@Param("projectId") projectId: string): Promise<ProjectInterface> {
+    return this.projectRepo.deleteProject(projectId)
   }
 }
