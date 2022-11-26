@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {ProjectInterface} from "@triplo/models";
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {TuiAlertService} from "@taiga-ui/core";
 
 @Component({
   selector: 'triplo-project-edit',
@@ -17,6 +18,8 @@ export class ProjectEditComponent implements OnInit {
   loading = false
 
   constructor(
+    @Inject(TuiAlertService)
+    private readonly alertService: TuiAlertService,
     private readonly projectService: ProjectHttpService,
     private readonly route: ActivatedRoute,
     private router: Router,
@@ -55,6 +58,7 @@ export class ProjectEditComponent implements OnInit {
       this.projectService.createProject(changes).subscribe(
         project => {
           this.loading = false;
+          this.alertService.open('Updated project', {label: "Success!"}).subscribe()
           this.router.navigate(["/Projects"])
         }
       );
@@ -62,7 +66,8 @@ export class ProjectEditComponent implements OnInit {
       this.projectService.updateProject(this.id, changes).subscribe(
         project => {
           this.loading = false;
-          this.router.navigate(["/Projects"])
+          this.alertService.open('Created project', {label: "Success!"}).subscribe()
+          // this.router.navigate(["/Projects"])
         }
       )
     }

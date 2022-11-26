@@ -10,13 +10,14 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { NgbDatepickerModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModule } from './models/User/user.module';
 import { FormsModule } from '@angular/forms';
 import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
 import {ProjectHttpService} from "./services/projects/project-http.service";
 import {ProjectModule} from "./pages/project/project.module";
+import {TuiAlertModule, TuiAlertService, TuiRootModule} from "@taiga-ui/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {ProjectModule} from "./pages/project/project.module";
     AboutComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     AboutModule,
     ProjectModule,
     FormsModule,
@@ -37,11 +39,10 @@ import {ProjectModule} from "./pages/project/project.module";
     RouterOutlet,
     RouterModule,
     AppRoutingModule,
-    NgbNavModule,
     UserModule,
-    NgbDatepickerModule,
+    TuiRootModule,
   ],
-  providers: [ProjectHttpService],
+  providers: [ProjectHttpService,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

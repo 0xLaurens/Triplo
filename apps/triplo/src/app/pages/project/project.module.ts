@@ -7,6 +7,7 @@ import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
 import {RouterLinkWithHref} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TuiAlertModule, TuiAlertService, TuiRootModule} from "@taiga-ui/core";
 
 
 @NgModule({
@@ -23,10 +24,12 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ProjectEditComponent
   ],
   imports: [
+    TuiRootModule,
     CommonModule,
     RouterLinkWithHref,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TuiAlertModule
   ],
   providers: [ProjectHttpService]
 })
