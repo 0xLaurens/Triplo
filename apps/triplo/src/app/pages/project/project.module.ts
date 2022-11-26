@@ -18,7 +18,7 @@ import {
   TUI_VALIDATION_ERRORS,
   TuiFieldErrorPipeModule,
   TuiInputModule,
-  TuiIslandModule,
+  TuiIslandModule, TuiTagModule,
   TuiTextAreaModule
 } from "@taiga-ui/kit";
 
@@ -56,7 +56,8 @@ export function minLengthValidator(context: { requiredLength: string }): string 
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     TuiTextAreaModule,
-    RouterLink
+    RouterLink,
+    TuiTagModule
   ],
   providers: [
     ProjectHttpService,

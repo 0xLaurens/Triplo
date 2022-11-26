@@ -1,4 +1,4 @@
-<div class="tui-island" >
+<div class="tui-island">
   <a
     class="h-100"
     tuiIsland
@@ -11,15 +11,26 @@
     <p class="text">
       {{project.description}}
     </p>
-    <a
-      tuiButton
-      type="button"
-      routerLink="/Projects/{{project._id}}"
-      size="m"
-      class="button"
-    >
-      Learn more
-      <span class="bi bi-arrow-right"></span>
-    </a>
+    <div class="py-3">
+      <a
+        tuiButton
+        type="button"
+        routerLink="/Projects/{{project._id}}"
+        size="m"
+        class="button"
+      >
+        Learn more
+        <span class="bi bi-arrow-right"></span>
+      </a>
+    </div>
+
+
+    <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let tag of project.Tags;">
+      <a class="tui-space_left-2" tuiTag [autoColor]="true" size="m" [value]="tag"></a>
+    </div>
+
   </a>
 </div>
+
+
+
