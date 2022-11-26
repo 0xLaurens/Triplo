@@ -50,6 +50,29 @@
             ></tui-error>
           </div>
 
+          <div class="tui-form__row">
+            <tui-input-tag
+              tuiHintContent="Separate tags with comma's or hit enter!"
+              class="b-form"
+              [tuiTextfieldLabelOutside]="true"
+              [tuiTextfieldCustomContent]="f['Tags'].valid ? success : ''"
+              formControlName="Tags"
+            >
+              Project Tags
+              <span class="tui-required"></span>
+            </tui-input-tag>
+            <ng-template #success>
+              <tui-svg
+                src="tuiIconCheckLarge"
+                class="success tui-space_left-3"
+              ></tui-svg>
+            </ng-template>
+            <tui-error
+              formControlName="Tags"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
           <div class="tui-form__buttons">
             <button
               [disabled]="projectForm.invalid || loading"

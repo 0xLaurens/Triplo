@@ -17,13 +17,17 @@ import {
 import {
   TUI_VALIDATION_ERRORS,
   TuiFieldErrorPipeModule,
-  TuiInputModule,
+  TuiInputModule, TuiInputTagModule,
   TuiIslandModule, TuiTagModule,
   TuiTextAreaModule
 } from "@taiga-ui/kit";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
+}
+
+export function maxLengthValidator(context: { requiredLength: string }): string {
+  return `Max amount of tags — ${context.requiredLength}`;
 }
 
 @NgModule({
@@ -57,7 +61,8 @@ export function minLengthValidator(context: { requiredLength: string }): string 
     TuiFieldErrorPipeModule,
     TuiTextAreaModule,
     RouterLink,
-    TuiTagModule
+    TuiTagModule,
+    TuiInputTagModule
   ],
   providers: [
     ProjectHttpService,
@@ -66,6 +71,7 @@ export function minLengthValidator(context: { requiredLength: string }): string 
       useValue: {
         required: `This Field is Required!`,
         minlength: minLengthValidator,
+        maxlength: maxLengthValidator,
       },
     }
   ]

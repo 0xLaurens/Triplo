@@ -2,28 +2,15 @@
   <a
     class="h-100"
     tuiIsland
-    routerLink="/Projects/{{project._id}}"
     size="l"
-    target="_blank"
+    routerLink="{{project._id}}"
     [hoverable]="true"
   >
+
     <h3 class="title title_size_s">{{project.name}}</h3>
     <p class="text">
       {{project.description}}
     </p>
-    <div class="py-3">
-      <a
-        tuiButton
-        type="button"
-        routerLink="/Projects/{{project._id}}"
-        size="m"
-        class="button"
-      >
-        Learn more
-        <span class="bi bi-arrow-right"></span>
-      </a>
-    </div>
-
 
     <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let tag of project.Tags;">
       <a class="tui-space_left-2" tuiTag [autoColor]="true" size="m" [value]="tag"></a>

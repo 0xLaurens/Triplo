@@ -17,7 +17,7 @@ describe('ProjectCardListComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(ProjectCardListComponent);
     component = fixture.componentInstance;
-    component.project = {DislikeCount: 0, LikeCount: 0, _id: "asdf", created: Date.prototype, description: "", name: ""}
+    component.project = {Tags: ["Tag", "Tag2"], DislikeCount: 0, LikeCount: 0, _id: "asdf", created: Date.prototype, description: "", name: ""}
     fixture.detectChanges();
   });
 
