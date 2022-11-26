@@ -10,35 +10,35 @@ import {v4 as uuid} from "uuid";
 export class UserService {
   private users: UserInterface[] = [
     {
-      id: uuid(),
+      _id: uuid(),
       username: "GamerMan",
       email: "John@Doe.com",
       registered: new Date(),
       gender: gender.male,
     },
     {
-      id: uuid(),
+      _id: uuid(),
       username: "A.Knight",
       email: "Avery.McKnight@gmail.com",
       registered: new Date(),
       gender: gender.female,
     },
     {
-      id: uuid(),
+      _id: uuid(),
       username: "Pretzel99",
       email: "PretzelLover99@gmail.com",
       registered: new Date(),
       gender: gender.other,
     },
     {
-      id: uuid(),
+      _id: uuid(),
       username: "Hershey",
       email: "H.Kiss@gmail.com",
       registered: new Date(),
       gender: gender.female,
     },
     {
-      id: uuid(),
+      _id: uuid(),
       username: "Kiss",
       email: "A.Kiss@gmail.com",
       registered: new Date(),
@@ -52,24 +52,24 @@ export class UserService {
   }
 
   GetUser(id: string): UserInterface {
-    return this.users.filter(u => u.id == id)[0];
+    return this.users.filter(u => u._id == id)[0];
   }
 
 
   DeleteUser(id: string): UserInterface[] {
-    return this.users.splice(this.users.findIndex(u => u.id == id), 1);
+    return this.users.splice(this.users.findIndex(u => u._id == id), 1);
   }
 
   UpdateUser(updatedUser: UserInterface) {
     const updatedUsers = this.users.filter(
-      (user) => user.id !== updatedUser.id
+      (user) => user._id !== updatedUser._id
     );
     updatedUsers.push(updatedUser);
     this.users = updatedUsers;
   }
 
   CreateUser(user: UserInterface) {
-    user.id = uuid();
+    user._id = uuid();
     this.users.push(user)
   }
 }

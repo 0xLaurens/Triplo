@@ -1,0 +1,20 @@
+<section class="hero about d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <div class="d-flex justify-content-between pb-3">
+        <h2>Project</h2>
+        <h2>
+          <a routerLink="Create" class="btn btn-primary">
+            Create Project
+          </a>
+        </h2>
+      </div>
+      <div class="row py-5">
+        <div class="col-lg-4 mb-3 align-items-stretch" *ngFor="let p of projects$ | async; let i = index">
+          <triplo-project-card-list [project]="p">
+          </triplo-project-card-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

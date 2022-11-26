@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - development
-  pull_request:
-    branches:
-      - main
-      - development
 jobs:
   run-test:
     name: "run test"

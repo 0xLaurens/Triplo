@@ -10,14 +10,14 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { NgbDatepickerModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserModule } from './models/User/user.module';
 import { FormsModule } from '@angular/forms';
-import { AboutProjectComponent } from './pages/about/about-project/about-project.component';
-import { AboutEntityComponent } from './pages/about/about-entity/about-entity.component';
-import { AboutUserstoriesComponent } from './pages/about/about-userstories/about-userstories.component';
-import {AboutModule} from "./pages/about/about.module";
-import {AboutComponent} from "./pages/about/about.component";
+import { AboutModule } from './pages/about/about.module';
+import { AboutComponent } from './pages/about/about.component';
+import {ProjectHttpService} from "./services/projects/project-http.service";
+import {ProjectModule} from "./pages/project/project.module";
+import { TuiAlertModule, TuiRootModule, TuiDialogModule } from "@taiga-ui/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -30,18 +30,21 @@ import {AboutComponent} from "./pages/about/about.component";
     AboutComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     AboutModule,
+    ProjectModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterOutlet,
     RouterModule,
     AppRoutingModule,
-    NgbNavModule,
     UserModule,
-    NgbDatepickerModule,
-  ],
-  providers: [],
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule
+],
+  providers: [ProjectHttpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

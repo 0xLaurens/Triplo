@@ -1,22 +1,22 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import {v4 as uuid } from "uuid"
 
-@Schema()
+
+@Schema({versionKey: false})
 export class Project {
-  @Prop({default: uuid, index: true})
-  id: string;
-
   @Prop({required:true})
   name: string;
+
+  @Prop({default: "No Description"})
+  description: string;
+
+  @Prop({default: Date.now})
+  created: Date;
 
   @Prop({default: 0})
   LikeCount: number;
 
   @Prop({default: 0})
   DislikeCount: number;
-
-  @Prop({default: 0})
-  LikeRatio: number;
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

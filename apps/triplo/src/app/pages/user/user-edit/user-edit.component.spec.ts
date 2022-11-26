@@ -21,7 +21,7 @@ describe('UserEditComponent', () => {
     fixture = TestBed.createComponent(UserEditComponent);
     component = fixture.componentInstance;
     component.user = {
-      id: "asdfCdaf1234sad9123aXZsdd23123f",
+      _id: "asdfCdaf1234sad9123aXZsdd23123f",
       username: "JohnDoe123",
       email: "John@Doe.com",
       registered: new Date(),
