@@ -1,4 +1,3 @@
-import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -17,7 +16,7 @@ import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
 import {ProjectHttpService} from "./services/projects/project-http.service";
 import {ProjectModule} from "./pages/project/project.module";
-import { TuiAlertModule, TuiAlertService, TuiRootModule, TuiDialogModule, TUI_SANITIZER } from "@taiga-ui/core";
+import { TuiAlertModule, TuiRootModule, TuiDialogModule } from "@taiga-ui/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
