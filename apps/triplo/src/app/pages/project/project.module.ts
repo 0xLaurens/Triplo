@@ -5,11 +5,26 @@ import {ProjectDetailComponent} from "./project-detail/project-detail.component"
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
 import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
-import {RouterLinkWithHref} from "@angular/router";
+import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TuiAlertModule, TuiAlertService, TuiButtonModule, TuiLinkModule, TuiRootModule} from "@taiga-ui/core";
-import {TuiIslandModule} from "@taiga-ui/kit";
+import {
+  TuiAlertModule,
+  TuiButtonModule, TuiErrorModule,
+  TuiHintModule,
+  TuiLinkModule,
+  TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
+} from "@taiga-ui/core";
+import {
+  TUI_VALIDATION_ERRORS,
+  TuiFieldErrorPipeModule,
+  TuiInputModule,
+  TuiIslandModule,
+  TuiTextAreaModule
+} from "@taiga-ui/kit";
 
+export function minLengthValidator(context: { requiredLength: string }): string {
+  return `Minimum length — ${context.requiredLength}`;
+}
 
 @NgModule({
   declarations: [
@@ -33,9 +48,27 @@ import {TuiIslandModule} from "@taiga-ui/kit";
     TuiAlertModule,
     TuiIslandModule,
     TuiLinkModule,
-    TuiButtonModule
+    TuiButtonModule,
+    TuiHintModule,
+    TuiTextfieldControllerModule,
+    TuiInputModule,
+    TuiSvgModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    TuiTextAreaModule,
+    RouterLink
   ],
-  providers: [ProjectHttpService]
+  providers: [
+    ProjectHttpService,
+    {
+      provide: TUI_VALIDATION_ERRORS,
+      useValue: {
+        required: `This Field is Required!`,
+        minlength: minLengthValidator,
+      },
+    }
+  ]
 })
 
-export class ProjectModule {}
+export class ProjectModule {
+}
