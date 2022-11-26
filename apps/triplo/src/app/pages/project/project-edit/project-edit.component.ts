@@ -67,7 +67,7 @@ export class ProjectEditComponent implements OnInit {
         project => {
           this.loading = false;
           this.alertService.open('Created project', {label: "Success!"}).subscribe()
-          // this.router.navigate(["/Projects"])
+          this.router.navigate(["/Projects"])
         }
       )
     }
