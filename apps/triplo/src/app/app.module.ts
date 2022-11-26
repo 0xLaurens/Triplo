@@ -45,7 +45,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     TuiDialogModule,
     TuiAlertModule
 ],
-  providers: [ProjectHttpService, {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
+  providers: [ProjectHttpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

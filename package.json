@@ -9,7 +9,7 @@
     "build": "nx build",
     "test": "nx test"
   },
-  "postinstall": "ngcc --async",
+  "postinstall": "ngcc",
   "private": true,
   "dependencies": {
     "@angular/animations": "~14.2.0",
@@ -29,6 +29,8 @@
     "@nrwl/angular": "15.0.13",
     "@popperjs/core": "^2.11.6",
     "@taiga-ui/cdk": "^2.69.0",
+    "@taiga-ui/core": "^2.69.0",
+    "@taiga-ui/icons": "^2.69.0",
     "@taiga-ui/kit": "^2.69.0",
     "@tinkoff/ng-dompurify": "3.0.0",
     "bootstrap": "^5.2.2",
