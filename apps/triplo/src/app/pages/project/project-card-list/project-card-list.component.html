@@ -1,18 +1,25 @@
-<div class="card h-100">
-  <div class="card-img-top">
-    <img src="" class="img-fluid" alt="">
-  </div>
-
-  <div class="card-body d-flex flex-column">
-    <div class="card-title">
-      <h4>{{project.name}}</h4>
-    </div>
-    <div class="card-text ">
-      <p>{{project.description}}</p>
-    </div>
-    <a routerLink="/Projects/{{project._id}}"
-       class="btn btn-primary align-self-auto mt-auto"> Learn More
-      <i class="bi bi-arrow-right"></i>
+<div class="tui-island" >
+  <a
+    class="h-100"
+    tuiIsland
+    routerLink="/Projects/{{project._id}}"
+    size="l"
+    target="_blank"
+    [hoverable]="true"
+  >
+    <h3 class="title title_size_s">{{project.name}}</h3>
+    <p class="text">
+      {{project.description}}
+    </p>
+    <a
+      tuiButton
+      type="button"
+      routerLink="/Projects/{{project._id}}"
+      size="m"
+      class="button"
+    >
+      Learn more
+      <span class="bi bi-arrow-right"></span>
     </a>
-  </div>
+  </a>
 </div>

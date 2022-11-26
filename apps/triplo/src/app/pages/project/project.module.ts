@@ -7,7 +7,8 @@ import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
 import {RouterLinkWithHref} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TuiAlertModule, TuiAlertService, TuiRootModule} from "@taiga-ui/core";
+import {TuiAlertModule, TuiAlertService, TuiButtonModule, TuiLinkModule, TuiRootModule} from "@taiga-ui/core";
+import {TuiIslandModule} from "@taiga-ui/kit";
 
 
 @NgModule({
@@ -29,7 +30,10 @@ import {TuiAlertModule, TuiAlertService, TuiRootModule} from "@taiga-ui/core";
     RouterLinkWithHref,
     FormsModule,
     ReactiveFormsModule,
-    TuiAlertModule
+    TuiAlertModule,
+    TuiIslandModule,
+    TuiLinkModule,
+    TuiButtonModule
   ],
   providers: [ProjectHttpService]
 })
