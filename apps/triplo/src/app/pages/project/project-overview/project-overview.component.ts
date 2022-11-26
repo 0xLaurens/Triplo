@@ -10,9 +10,15 @@ import {ProjectInterface} from "@triplo/models";
 })
 export class ProjectOverviewComponent implements OnInit {
   projects$!: Observable<ProjectInterface[]>;
+  showSkeleton = true;
   constructor(private readonly projectService: ProjectHttpService) {}
 
   ngOnInit(): void {
-   this.projects$ = this.projectService.findAllProjects()
+   this.projects$ = this.projectService.findAllProjects();
+   this.projects$.subscribe(
+     v => {
+       this.showSkeleton = false;
+     }
+   )
   }
 }

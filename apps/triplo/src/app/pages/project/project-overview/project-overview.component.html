@@ -20,6 +20,29 @@
         <triplo-project-card-list [project]="p">
         </triplo-project-card-list>
       </div>
+      <div class="tui-col_xs-12 tui-col_md-6 tui-col_lg-4 mb-3" *ngFor="let n of [0,1,2,3,4,5]">
+        <div class="tui-island" *ngIf="showSkeleton" >
+          <a
+            class="h-100"
+            tuiIsland
+            size="l"
+            [hoverable]="true"
+          >
+
+            <h3 class="title title_size_s" [class.tui-skeleton]="true">project</h3>
+            <p class="text" [class.tui-skeleton]="true">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam erat risus, faucibus commodo nulla vel,
+              egestas pretium
+            </p>
+
+            <div class="tui-island__paragraph tui-island__category d-inline-flex">
+              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
+              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
+              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

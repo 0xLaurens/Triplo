@@ -7,15 +7,14 @@
     [hoverable]="true"
   >
 
-    <h3 class="title title_size_s">{{project.name}}</h3>
+    <h3 class="title title_size_s" >{{project.name}}</h3>
     <p class="text">
       {{project.description}}
     </p>
 
     <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let tag of project.Tags;">
-      <a class="tui-space_left-2" tuiTag [autoColor]="true" size="m" [value]="tag"></a>
+      <a class="tui-space_left-2"tuiTag [autoColor]="true" size="m" [value]="tag"></a>
     </div>
-
   </a>
 </div>
 
