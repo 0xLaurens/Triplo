@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Observable} from "rxjs";
 import {ProjectInterface} from "@triplo/models";
-import {ProjectHttpService} from "../../../services/projects/project-http.service";
 
 @Component({
   selector: 'triplo-project-card-list',
@@ -16,7 +14,7 @@ export class ProjectCardListComponent implements OnInit {
   @Output()
   projectChanged = new EventEmitter()
 
-  constructor(private projectService: ProjectHttpService) {
+  constructor() {
   }
 
   ngOnInit(): void {
