@@ -4,12 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "nx",
-    "postinstall": "node ./decorate-angular-cli.js",
+    "postinstall": "node ./decorate-angular-cli.js && ngcc",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test"
   },
-  "postinstall": "ngcc",
   "private": true,
   "dependencies": {
     "@angular/animations": "~14.2.0",
