@@ -38,7 +38,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: Package
-          path: './dist/apps/api/package.json'
+          path: './dist/apps/api/'
+
+      - name: show files
+        run: |
+          ls -a
+          ls ./dist/apps/api
+          cat ./dist/apps/api/package.json
 
       - name: Build, Push and Release a Docker container to Heroku.
         uses: gonuit/heroku-docker-deploy@v1.3.3
