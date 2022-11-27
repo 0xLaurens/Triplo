@@ -10,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: npm install and build the Triplo website
+      - name: npm install and build the api
         run: |
           npm install
-          npm run build
+          npm run build api
       - uses: actions/upload-artifact@v3
         with:
-          name: api
+          name: triplo-api
           path: './dist/apps/api'
       - uses: actions/upload-artifact@v3
         with:
@@ -32,7 +32,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: api
+          name: triplo-api
           path: './dist/apps/api'
       - name: Download artifact package
         uses: actions/download-artifact@v3
