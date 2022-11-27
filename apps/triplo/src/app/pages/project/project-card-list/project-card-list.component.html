@@ -1,18 +1,22 @@
-<div class="card h-100">
-  <div class="card-img-top">
-    <img src="" class="img-fluid" alt="">
-  </div>
+<div class="tui-island">
+  <a
+    class="h-100"
+    tuiIsland
+    size="l"
+    routerLink="{{project._id}}"
+    [hoverable]="true"
+  >
 
-  <div class="card-body d-flex flex-column">
-    <div class="card-title">
-      <h4>{{project.name}}</h4>
+    <h3 class="title title_size_s" >{{project.name}}</h3>
+    <p class="text">
+      {{project.description}}
+    </p>
+
+    <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let tag of project.Tags;">
+      <a class="tui-space_left-2"tuiTag [autoColor]="true" size="m" [value]="tag"></a>
     </div>
-    <div class="card-text ">
-      <p>{{project.description}}</p>
-    </div>
-    <a routerLink="/Projects/{{project._id}}"
-       class="btn btn-primary align-self-auto mt-auto"> Learn More
-      <i class="bi bi-arrow-right"></i>
-    </a>
-  </div>
+  </a>
 </div>
+
+
+

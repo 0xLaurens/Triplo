@@ -3,7 +3,7 @@ import {Observable} from "rxjs";
 import {ProjectInterface} from "@triplo/models";
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TuiAlertService} from "@taiga-ui/core";
 
 @Component({
@@ -24,8 +24,7 @@ export class ProjectEditComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ) {
-  }
+  ){}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -33,7 +32,8 @@ export class ProjectEditComponent implements OnInit {
 
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      description: new FormControl('', [Validators.required])
+      description: new FormControl('', [Validators.required]),
+      Tags: new FormControl([], [Validators.maxLength(5)])
     };
     this.form = this.fb.group(formControls)
 
@@ -67,7 +67,7 @@ export class ProjectEditComponent implements OnInit {
         project => {
           this.loading = false;
           this.alertService.open('Created project', {label: "Success!"}).subscribe()
-          // this.router.navigate(["/Projects"])
+          this.router.navigate(["/Projects"])
         }
       )
     }
