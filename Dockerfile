@@ -5,13 +5,10 @@ WORKDIR /app
 # Copy dist.
 COPY package.json .
 # Install dependencies
-RUN npm i --omit=dev \
+RUN npm i --omit=dev
 
 # Define image.
 FROM docker.io/node:lts-alpine as runner
-# Set environment variables.
-ENV DEBIAN_FRONTEND=noninteractive
-# Define app directory.
 WORKDIR /app
 # Copy sources.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
