@@ -35,9 +35,7 @@
               egestas pretium
             </p>
 
-            <div class="tui-island__paragraph tui-island__category d-inline-flex">
-              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
-              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
+            <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let n of [0,1,2,3,4]">
               <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
             </div>
           </a>
