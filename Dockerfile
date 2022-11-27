@@ -1,4 +1,3 @@
-
 # Define image.
 FROM node:16.15.1-alpine
 # Set environment variables.
@@ -6,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Define app directory.
 WORKDIR /app
 # Copy dist.
-COPY ../../package.json .
+COPY package.json .
 # Install dependencies and create a user.
 RUN npm i -g npm ; \
   npm i --production --ignore-scripts --legacy-peer-deps ; \
