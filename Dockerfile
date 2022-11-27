@@ -11,8 +11,8 @@ RUN npm install --production --ignore-scripts
 FROM docker.io/node:lts-alpine as runner
 WORKDIR /app
 # Copy sources.
-COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=deps /usr/src/app/package.json ./package.json
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json ./package.json
 COPY /dist/apps/api ./dist
 # Set user.
 RUN chown -R node:node .
