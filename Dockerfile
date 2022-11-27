@@ -5,7 +5,7 @@ WORKDIR /app
 # Copy dist.
 COPY package.json .
 # Install dependencies
-RUN npm i
+RUN npm install --production
 
 # Define image.
 FROM docker.io/node:lts-alpine as runner
