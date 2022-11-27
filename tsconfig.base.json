@@ -10,32 +10,18 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@triplo/api-interfaces": [
-        "libs/api-interfaces/src/index.ts"
-      ],
-      "@triplo/core": [
-        "libs/core/src/index.ts"
-      ],
-      "@triplo/models": [
-        "libs/models/src/index.ts"
-      ],
-      "@triplo/schema": [
-        "libs/schema/src/index.ts"
-      ]
+      "@triplo/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@triplo/core": ["libs/core/src/index.ts"],
+      "@triplo/models": ["libs/models/src/index.ts"],
+      "@triplo/schema": ["libs/schema/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ],
+  "exclude": ["node_modules", "tmp"],
   "enableIvy": "true",
   "compilationMode": "partial"
 }
