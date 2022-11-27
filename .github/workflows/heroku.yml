@@ -43,7 +43,9 @@ jobs:
       - name: show files
         run: |
           ls -a
+          pwd
           ls ./dist/apps/api
+          pwd
           cat ./dist/apps/api/package.json
 
       - name: Build, Push and Release a Docker container to Heroku.
