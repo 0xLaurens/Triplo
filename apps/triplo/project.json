@@ -74,7 +74,7 @@
       "configurations": {
         "production": {
           "browserTarget": "triplo:build:production",
-          "proxyConfig": "proxy.prod.conf.json"
+          "proxyConfig": "apps/triplo/proxy.prod.conf.json"
         },
         "development": {
           "browserTarget": "triplo:build:development"
