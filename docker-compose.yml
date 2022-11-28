@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: triplo-web
+    build:
+      context: ./apps/triplo
+      dockerfile: Dockerfile
+    volumes:
+      - ./:./
+  api:
+    container_name: triplo-api
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
