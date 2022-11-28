@@ -17,7 +17,6 @@
         "tsConfig": "apps/api/tsconfig.app.json",
         "assets": [
           "apps/api/src/assets",
-          "apps/api/src/_redirects"
         ]
       },
       "configurations": {
