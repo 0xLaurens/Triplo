@@ -13,7 +13,7 @@ jobs:
       - name: npm install and build the Triplo website
         run: |
           npm install
-          npm run build
+          npm run build --production
       - uses: actions/upload-artifact@v3
         with:
           name: Triplo
