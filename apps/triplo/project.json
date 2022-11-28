@@ -53,6 +53,10 @@
             {
               "replace": "apps/triplo/src/environments/environment.ts",
               "with": "apps/triplo/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/triplo/src/proxy.conf.json",
+              "with": "apps/triplo/src/proxy.prod.conf.json"
             }
           ],
           "outputHashing": "all"
