@@ -20,6 +20,7 @@
           "apps/triplo/src/favicon.ico",
           "apps/triplo/src/assets",
           "apps/triplo/src/_redirects",
+          "libs/models",
           {
             "glob": "**/*",
             "input": "node_modules/@taiga-ui/icons/src",
@@ -73,7 +74,7 @@
       "configurations": {
         "production": {
           "browserTarget": "triplo:build:production",
-          "proxyConfig": "proxy.prod.conf.json"
+          "proxyConfig": "apps/triplo/proxy.prod.conf.json"
         },
         "development": {
           "browserTarget": "triplo:build:development"
