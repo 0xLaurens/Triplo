@@ -20,7 +20,6 @@
           "apps/triplo/src/favicon.ico",
           "apps/triplo/src/assets",
           "apps/triplo/src/_redirects",
-          "libs/models",
           {
             "glob": "**/*",
             "input": "node_modules/@taiga-ui/icons/src",
