@@ -9,8 +9,8 @@ export class ProjectHttpService {
   constructor(private http: HttpClient) {
   }
 
-  findAllProjects(): Observable<unknown>{
-    return this.http.get('/api/projects')
+  findAllProjects(): Observable<ProjectInterface[]>{
+    return this.http.get<ProjectInterface[]>('/api/projects')
   }
 
   findProjectById(projectId: string): Observable<ProjectInterface>{
