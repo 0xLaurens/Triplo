@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://api-triplo.herokuapp.com/",
+    "target": "https://api-triplo.herokuapp.com",
     "secure": false,
     "changeOrigin": true
   }
