@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
+import {BadRequestException, Body, Controller, Delete, Get, HttpException, Param, Post, Put} from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
 import {ProjectInterface} from "@triplo/models";
 
@@ -28,6 +28,10 @@ export class ProjectController {
   async updateProject(
     @Param("projectId") projectId: string,
     @Body() changes: Partial<ProjectInterface> ): Promise<ProjectInterface> {
+
+    if (changes._id)
+      throw new BadRequestException("Can't update project _id")
+
     return this.projectRepo.updateProject(projectId, changes)
   }
 
