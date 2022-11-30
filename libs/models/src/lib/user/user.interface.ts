@@ -1,4 +1,4 @@
-import {IsDate, IsEmail, IsEnum, IsMongoId, IsString} from "class-validator";
+import {IsDate, IsEmail, IsEnum, IsMongoId, IsString, Max, Min} from "class-validator";
 
 
 export enum gender {
@@ -13,6 +13,8 @@ export class UserInterface {
   _id: string;
 
   @IsString()
+  @Min(4)
+  @Max(10)
   username: string;
 
   @IsString()
