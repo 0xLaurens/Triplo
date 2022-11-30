@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -20,7 +19,7 @@ export class ProjectController {
 
   @Post()
   async createProject(
-    @Body() project: Partial<ProjectInterface>
+    @Body() project: ProjectInterface
   ): Promise<ProjectInterface> {
     return this.projectRepo.createProject(project)
   }
@@ -39,10 +38,7 @@ export class ProjectController {
   @Put(":projectId")
   async updateProject(
     @Param("projectId") projectId: string,
-    @Body() changes: Partial<ProjectInterface> ): Promise<ProjectInterface> {
-
-    if (changes._id)
-      throw new BadRequestException("Can't update project _id")
+    @Body() changes: ProjectInterface ): Promise<ProjectInterface> {
 
     return this.projectRepo.updateProject(projectId, changes)
   }
