@@ -1,15 +1,41 @@
-import {Controller, Get} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
 import {CommentRepository} from "./comment.repository";
-import {CommentInterface} from "../../../../../libs/models/src/lib/comment/comment.interface";
+import {CommentInterface} from "@triplo/models";
 
 
-@Controller()
+@Controller("comments")
 export class CommentController {
   constructor(private commentRepo: CommentRepository) {
   }
 
-  @Get("comments")
+
+  @Post()
+  async createComment(
+    @Body() comment: CommentInterface
+  ): Promise<CommentInterface> {
+    return this.commentRepo.createComment(comment)
+  }
+
+  @Get()
   async findAllComments(): Promise<CommentInterface[]> {
     return this.commentRepo.findAllComments();
+  }
+
+  @Get(":commentId")
+  async findCommentById(@Param("commentId") commentId: string): Promise<CommentInterface> {
+    return this.commentRepo.findCommentById(commentId)
+  }
+
+  @Put(":commentId")
+  async updateComment(
+    @Param("commentId") commentId: string,
+    @Body() changes: CommentInterface): Promise<CommentInterface> {
+
+    return this.commentRepo.updateComment(commentId, changes)
+  }
+
+  @Delete(":commentId")
+  async deleteComment(@Param("commentId") commentId: string): Promise<CommentInterface> {
+    return this.commentRepo.deleteComment(commentId)
   }
 }
