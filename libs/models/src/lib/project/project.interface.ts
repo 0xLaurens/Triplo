@@ -1,4 +1,4 @@
-import {ArrayMaxSize, ArrayUnique, IsArray, IsDate, IsInt, IsMongoId, IsString} from "class-validator";
+import {ArrayContains, ArrayMaxSize, ArrayUnique, IsArray, IsDate, IsInt, IsMongoId, IsString} from "class-validator";
 
 export class ProjectInterface {
   @IsMongoId()
@@ -19,6 +19,10 @@ export class ProjectInterface {
 
   @IsInt()
   DislikeCount: number;
+
+  @IsArray()
+  @IsMongoId({each: true})
+  Comments: string[]
 
   @IsArray()
   @ArrayMaxSize(5)
