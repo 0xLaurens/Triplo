@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {ProjectOverviewComponent} from "./project-overview/project-overview.component";
 import {ProjectCardListComponent} from "./project-card-list/project-card-list.component";
 import {ProjectDetailComponent} from "./project-detail/project-detail.component";
@@ -74,7 +74,8 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
         maxlength: maxLengthValidator,
       },
     }
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class ProjectModule {

@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectOverviewComponent } from './project-overview.component';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('ProjectOverviewComponent', () => {
   let component: ProjectOverviewComponent;
@@ -11,7 +12,8 @@ describe('ProjectOverviewComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectOverviewComponent],
       imports: [HttpClientTestingModule],
-      providers: [ProjectHttpService]
+      providers: [ProjectHttpService],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectOverviewComponent);
