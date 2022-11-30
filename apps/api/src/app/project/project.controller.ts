@@ -34,7 +34,6 @@ export class ProjectController {
     return this.projectRepo.findProjectById(projectId)
   }
 
-  @UseFilters(HttpExceptionFilter)
   @Put(":projectId")
   async updateProject(
     @Param("projectId") projectId: string,

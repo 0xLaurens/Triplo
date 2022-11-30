@@ -13,4 +13,19 @@ export class UserRepository {
     return this.userModel.find()
   }
 
+  async createUser(user: UserInterface): Promise<UserInterface> {
+    return this.userModel.create(user);
+  }
+
+  async findUserById(userId: string): Promise<UserInterface> {
+    return this.userModel.findById(userId);
+  }
+
+  async updateUser(userId: string, changes: UserInterface): Promise<UserInterface> {
+    return this.userModel.findByIdAndUpdate(userId, changes)
+  }
+
+  async deleteUser(userId: string): Promise<UserInterface> {
+    return this.userModel.findByIdAndDelete(userId)
+  }
 }
