@@ -23,7 +23,7 @@ export class Project {
   Tags: string[]
 
   @Prop()
-  Comments?: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
+  comments?: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
 
 }
 

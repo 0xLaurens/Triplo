@@ -1,13 +1,9 @@
-import {IsDate, IsInt, IsMongoId, IsString, MaxLength, Min, MinLength} from "class-validator";
+import {IsArray, IsDate, IsInt, IsMongoId, IsString, MaxLength, Min, MinLength} from "class-validator";
 
 export class CommentInterface {
   @IsString()
   @IsMongoId()
   _id: string;
-
-  @IsString()
-  @IsMongoId()
-  project: string;
 
   @IsString()
   @IsMongoId()
@@ -27,6 +23,9 @@ export class CommentInterface {
 
   @IsDate()
   created?: Date
+
+  @IsArray()
+  comments: string[]
 
   @IsInt()
   @Min(0)

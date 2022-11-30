@@ -3,8 +3,6 @@ import mongoose from "mongoose";
 
 @Schema()
 export class Comment {
-  @Prop({type: mongoose.Schema.Types.ObjectId, ref: "Project"})
-  project: string;
   @Prop({})
   message: string;
 

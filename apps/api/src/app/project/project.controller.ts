@@ -8,7 +8,7 @@ import {
   Put,
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
-import {ProjectInterface} from "@triplo/models";
+import {CommentInterface, ProjectInterface} from "@triplo/models";
 
 @Controller("projects")
 export class ProjectController {
@@ -35,7 +35,7 @@ export class ProjectController {
   @Put(":projectId")
   async updateProject(
     @Param("projectId") projectId: string,
-    @Body() changes: ProjectInterface ): Promise<ProjectInterface> {
+    @Body() changes: ProjectInterface): Promise<ProjectInterface> {
 
     return this.projectRepo.updateProject(projectId, changes)
   }
