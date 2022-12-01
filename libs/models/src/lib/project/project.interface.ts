@@ -6,7 +6,8 @@ export class ProjectInterface {
   _id: string;
 
   @IsString()
-  @Max(100)
+  @Min(4)
+  @Max(20)
   name: string;
 
   @IsString()

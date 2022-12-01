@@ -21,7 +21,7 @@
         </triplo-project-card-list>
       </div>
       <div class="tui-col_xs-12 tui-col_md-6 tui-col_lg-4 mb-3" *ngFor="let n of [0,1,2,3,4,5]">
-        <div class="tui-island" *ngIf="showSkeleton" >
+        <div class="tui-island" *ngIf="projects$ === null" >
           <a
             class="h-100"
             tuiIsland
@@ -36,7 +36,7 @@
             </p>
 
             <div class="tui-island__paragraph tui-island__category d-inline-flex" *ngFor="let n of [0,1,2,3,4]">
-              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="showSkeleton.toString()"></a>
+              <a class="tui-space_left-2" [class.tui-skeleton]="true" tuiTag [autoColor]="true" size="m" [value]="(projects$ === null).toString()"></a>
             </div>
           </a>
         </div>

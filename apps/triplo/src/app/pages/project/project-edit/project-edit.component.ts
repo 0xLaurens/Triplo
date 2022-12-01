@@ -31,8 +31,8 @@ export class ProjectEditComponent implements OnInit {
     this.createMode = !this.id;
 
     const formControls = {
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      description: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
       Tags: new FormControl([], [Validators.maxLength(5)])
     };
     this.form = this.fb.group(formControls)
