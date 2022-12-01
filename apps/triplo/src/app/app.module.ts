@@ -10,14 +10,22 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { UserModule } from './models/User/user.module';
+import { UserModule } from './services/User/user.module';
 import { FormsModule } from '@angular/forms';
 import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
-import {ProjectHttpService} from "./services/projects/project-http.service";
-import {ProjectModule} from "./pages/project/project.module";
-import { TuiAlertModule, TuiRootModule, TuiDialogModule } from "@taiga-ui/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ProjectHttpService } from './services/projects/project-http.service';
+import { ProjectModule } from './pages/project/project.module';
+import {
+  TuiAlertModule,
+  TuiRootModule,
+  TuiDialogModule,
+  TuiThemeNightModule,
+  TuiModeModule,
+} from '@taiga-ui/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularComponent } from './angular/angular.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +36,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     NavbarComponent,
     HeroComponent,
     AboutComponent,
+    AngularComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -42,8 +52,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     UserModule,
     TuiRootModule,
     TuiDialogModule,
-    TuiAlertModule
-],
+    TuiAlertModule,
+    TuiThemeNightModule,
+    TuiModeModule,
+  ],
   providers: [ProjectHttpService],
   bootstrap: [AppComponent],
 })

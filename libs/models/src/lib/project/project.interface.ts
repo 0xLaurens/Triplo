@@ -9,6 +9,7 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
+import {CommentInterface} from "../comment/comment.interface";
 
 export class ProjectInterface {
   @IsMongoId()
@@ -34,8 +35,7 @@ export class ProjectInterface {
   DislikeCount: number;
 
   @IsArray()
-  @IsMongoId({each: true})
-  comments: string[]
+  comments: CommentInterface[]
 
   @IsArray()
   @ArrayMaxSize(5)

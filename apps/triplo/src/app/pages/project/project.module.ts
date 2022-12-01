@@ -9,7 +9,7 @@ import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   TuiAlertModule,
-  TuiButtonModule, TuiErrorModule,
+  TuiButtonModule, TuiErrorModule, TuiFormatDatePipeModule,
   TuiHintModule,
   TuiLinkModule,
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
@@ -62,7 +62,8 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     TuiTextAreaModule,
     RouterLink,
     TuiTagModule,
-    TuiInputTagModule
+    TuiInputTagModule,
+    TuiFormatDatePipeModule
   ],
   providers: [
     ProjectHttpService,

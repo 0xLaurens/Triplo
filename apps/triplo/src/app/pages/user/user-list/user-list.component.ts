@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { UserInterface } from "@triplo/models"
-import {UserService} from "../../../models/User/user.service";
+import {UserService} from "../../../services/User/user.service";
 
 
 @Component({
