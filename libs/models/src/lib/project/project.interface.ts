@@ -1,4 +1,14 @@
-import {ArrayMaxSize, ArrayUnique, IsArray, IsDate, IsInt, IsMongoId, IsString, Max, Min} from "class-validator";
+import {
+  ArrayMaxSize,
+  ArrayUnique,
+  IsArray,
+  IsDate,
+  IsInt,
+  IsMongoId,
+  IsString,
+  MaxLength,
+  MinLength
+} from "class-validator";
 
 export class ProjectInterface {
   @IsMongoId()
@@ -6,12 +16,12 @@ export class ProjectInterface {
   _id: string;
 
   @IsString()
-  @Min(4)
-  @Max(20)
+  @MinLength(4)
+  @MaxLength(20)
   name: string;
 
   @IsString()
-  @Max(1000)
+  @MaxLength(1000)
   description: string;
 
   @IsDate()
