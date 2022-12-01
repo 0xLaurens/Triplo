@@ -10,7 +10,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { UserModule } from './services/User/user.module';
 import { FormsModule } from '@angular/forms';
 import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
@@ -21,11 +20,11 @@ import {
   TuiRootModule,
   TuiDialogModule,
   TuiThemeNightModule,
-  TuiModeModule,
+  TuiModeModule, TuiLinkModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularComponent } from './angular/angular.component';
-import { CommentsComponent } from './components/comments/comments.component';
+import { CommentComponent } from './components/comment/comment.component';
+import {TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
 
 @NgModule({
   declarations: [
@@ -36,27 +35,30 @@ import { CommentsComponent } from './components/comments/comments.component';
     NavbarComponent,
     HeroComponent,
     AboutComponent,
-    AngularComponent,
-    CommentsComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     AboutModule,
-    ProjectModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterOutlet,
     RouterModule,
     AppRoutingModule,
-    UserModule,
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
     TuiThemeNightModule,
     TuiModeModule,
+    TuiLinkModule,
+    TuiTagModule,
+    TuiIslandModule,
   ],
   providers: [ProjectHttpService],
   bootstrap: [AppComponent],
+  exports: [
+    CommentComponent
+  ]
 })
 export class AppModule {}

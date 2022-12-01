@@ -1,12 +1,6 @@
-
-import {Injectable} from "@angular/core";
 import { UserInterface, gender } from "@triplo/models";
 import {v4 as uuid} from "uuid";
 
-
-@Injectable({
-  providedIn: 'root',
-})
 export class UserService {
   private users: UserInterface[] = [
     {

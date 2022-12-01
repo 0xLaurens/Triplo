@@ -21,6 +21,7 @@ import {
   TuiIslandModule, TuiTagModule,
   TuiTextAreaModule
 } from "@taiga-ui/kit";
+import {AppModule} from "../../app.module";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -63,7 +64,8 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     RouterLink,
     TuiTagModule,
     TuiInputTagModule,
-    TuiFormatDatePipeModule
+    TuiFormatDatePipeModule,
+    AppModule
   ],
   providers: [
     ProjectHttpService,
