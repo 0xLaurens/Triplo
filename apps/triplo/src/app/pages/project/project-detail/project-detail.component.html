@@ -12,6 +12,10 @@
     </div>
     <div class="comments tui-space-vertical-10">
       <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>
+      <div class="comment-reaction tui-space_vertical-5">
+        <triplo-comment-form></triplo-comment-form>
+      </div>
+
       <div *ngFor="let comment of project.comments">
         <triplo-comment [comment]="comment"></triplo-comment>
       </div>

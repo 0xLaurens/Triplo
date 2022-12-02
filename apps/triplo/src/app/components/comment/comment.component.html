@@ -1,0 +1,27 @@
+<tui-island>
+  <div class="header-comment">
+    <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
+    {{comment.created | date:'short'}}
+  </div>
+  <div class="message-comment tui-space_vertical-3">
+    <p class="tui-island__paragraph">
+      {{comment.message}}
+    </p>
+  </div>
+
+  <div class="d-inline-flex">
+    <div class="likes">
+      <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.LikeCount}}</a>
+      <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.DislikeCount}}</a>
+    </div>
+    <div class="reply">
+      <a tuiLink>Reply</a>
+    </div>
+  </div>
+
+</tui-island>
+<div class="replies">
+  <a tuiLink icon="tuiIconArrowDown">
+    Replies
+  </a>
+</div>
