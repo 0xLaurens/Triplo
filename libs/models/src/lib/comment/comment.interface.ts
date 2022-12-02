@@ -1,4 +1,4 @@
-import {IsArray, IsDate, IsInt, IsMongoId, IsString, MaxLength, Min, MinLength} from "class-validator";
+import {IsDate, IsInt, IsMongoId, IsString, MaxLength, Min, MinLength} from "class-validator";
 
 export class CommentInterface {
   @IsString()
@@ -7,7 +7,11 @@ export class CommentInterface {
 
   @IsString()
   @IsMongoId()
-  parent?: string;
+  projectId: string;
+
+  @IsString()
+  @IsMongoId()
+  parentId?: string;
 
   @IsString()
   @MaxLength(1000)
@@ -23,9 +27,6 @@ export class CommentInterface {
 
   @IsDate()
   created?: Date
-
-  @IsArray()
-  comments: string[]
 
   @IsInt()
   @Min(0)

@@ -35,9 +35,6 @@ export class ProjectInterface {
   DislikeCount: number;
 
   @IsArray()
-  comments: CommentInterface[]
-
-  @IsArray()
   @ArrayMaxSize(5)
   @ArrayUnique({message: "All the tags in the array have to be unique"})
   Tags: string[];
