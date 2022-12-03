@@ -1,27 +1,34 @@
-<tui-island>
-  <div class="header-comment">
-    <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
-    {{comment.created | date:'short'}}
-  </div>
-  <div class="message-comment tui-space_vertical-3">
-    <p class="tui-island__paragraph">
-      {{comment.message}}
-    </p>
-  </div>
-
-  <div class="d-inline-flex">
-    <div class="likes">
-      <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>
-      <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
+<div class="tui-space_vertical-3">
+  <tui-island class="tui-space_vertical-1">
+    <div class="header-comment text-muted">
+      <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
+      {{comment.created | date:'short'}}
     </div>
-    <div class="reply">
-      <a tuiLink>Reply</a>
+    <div class="message-comment tui-space_vertical-3">
+      <p>
+        {{comment.message}}
+      </p>
     </div>
-  </div>
 
-</tui-island>
-<div class="replies" *ngIf="comment.replyCount > 0">
-  <a>
-    <i class="bi bi-caret-down-fill"></i> Replies {{comment.replyCount}}
-  </a>
+    <div class="d-inline-flex text-muted">
+      <div class="likes">
+        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>
+        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
+      </div>
+      <div class="reply">
+        <a tuiLink>Reply</a>
+      </div>
+    </div>
+
+  </tui-island>
+  <div class="replies" *ngIf="comment.replyCount > 0">
+    <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active" >
+      <i *ngIf="show" class="bi bi-caret-down-fill"></i>
+      <i *ngIf="!show" class="bi bi-caret-up-fill"></i>
+      Replies {{comment.replyCount}}
+    </button>
+  </div>
+  <div *ngIf="show">
+    <triplo-comment [comment]="replies" *ngFor="let replies of (replies$ | async)"></triplo-comment>
+  </div>
 </div>

@@ -29,7 +29,7 @@ export class CommentController {
   }
 
   @Get("/comments/:commentId/replies")
-  async getCommentReplies(@Param() @Param("commentId") commentId: string): Promise<CommentInterface[]> {
+  async getCommentReplies(@Param("commentId") commentId: string): Promise<CommentInterface[]> {
     return this.commentRepo.getCommentReplies(commentId)
   }
 

@@ -46,7 +46,7 @@ export class ProjectDetailComponent implements OnInit {
     this.router.navigate(["/Projects"])
   }
 
-  async createComment($event: CommentInterface) {
+  createComment($event: CommentInterface) {
     // TODO: implement assign proper user
     $event.username = "Monke"
     $event.owner = "638b2dd312a4cfd63a04ba40"

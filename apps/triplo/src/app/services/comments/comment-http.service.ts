@@ -14,7 +14,7 @@ export class CommentHttpService {
   }
 
   getCommentReplies(commentId:string): Observable<CommentInterface[]> {
-    return this.http.get<CommentInterface[]>(`api/comments/${commentId}`)
+    return this.http.get<CommentInterface[]>(`api/comments/${commentId}/replies`)
   }
 
   createComment(projectId: string, comment: CommentInterface): Observable<CommentInterface>{
