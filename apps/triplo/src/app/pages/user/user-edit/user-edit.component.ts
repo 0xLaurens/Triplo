@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {gender, UserInterface} from "@triplo/models"
-import {UserService} from "../../../services/User/user.service";
+import {UserService} from "../../../services/user/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {v4 as uuid} from "uuid";
 

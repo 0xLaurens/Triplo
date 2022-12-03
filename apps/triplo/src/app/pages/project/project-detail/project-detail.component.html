@@ -13,10 +13,14 @@
     <div class="comments tui-space-vertical-10">
       <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>
       <div class="comment-reaction tui-space_vertical-5">
-        <triplo-comment-form></triplo-comment-form>
+        <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>
       </div>
 
-      <div *ngFor="let comment of project.comments">
+      <div *ngFor="let comment of recentComments">
+        <triplo-comment [comment]="comment"></triplo-comment>
+      </div>
+
+      <div *ngFor="let comment of (comments$ | async)">
         <triplo-comment [comment]="comment"></triplo-comment>
       </div>
     </div>

@@ -7,11 +7,11 @@ export class CommentInterface {
 
   @IsString()
   @IsMongoId()
-  projectId: string;
+  project: string;
 
   @IsString()
   @IsMongoId()
-  parentId?: string;
+  parent?: string;
 
   @IsString()
   @MaxLength(1000)
@@ -30,9 +30,13 @@ export class CommentInterface {
 
   @IsInt()
   @Min(0)
-  LikeCount: number;
+  replyCount: number;
 
   @IsInt()
   @Min(0)
-  DislikeCount: number;
+  likeCount: number;
+
+  @IsInt()
+  @Min(0)
+  dislikeCount: number;
 }

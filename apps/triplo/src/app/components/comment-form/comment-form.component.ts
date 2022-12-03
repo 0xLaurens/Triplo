@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CommentInterface} from "@triplo/models";
 
 @Component({
   selector: 'triplo-comment-form',
@@ -7,6 +8,9 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: [],
 })
 export class CommentFormComponent implements OnInit {
+
+  @Input() submitLabel = "Submit";
+  @Output() handleSubmit = new EventEmitter<CommentInterface>();
 
   form: FormGroup
 
@@ -25,6 +29,9 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const changes: CommentInterface = {
+      ...this.form.value
+    }
+    this.handleSubmit.emit(changes)
   }
 }

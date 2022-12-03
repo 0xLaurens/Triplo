@@ -9,23 +9,36 @@ export class CommentRepository {
   constructor(@InjectModel('Comment') private commentModel: Model<CommentInterface>) {
   }
 
-  async findAllComments(): Promise<CommentInterface[]> {
-    return this.commentModel.find();
+  async getTopLevelComments(projectId: string): Promise<CommentInterface[]> {
+    return this.commentModel.find({ project: projectId, parent: null });
   }
+
+  async getCommentReplies(commentId: string) {
+    return this.commentModel.find({ parent: commentId });
+  }
+
 
   async updateComment(commentId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {
     return this.commentModel.findByIdAndUpdate(commentId, comment, {new: true})
   }
 
-  async findCommentById(commentId: string): Promise<CommentInterface> {
+  async getCommentById(commentId: string): Promise<CommentInterface> {
     return this.commentModel.findById(commentId)
   }
 
-  deleteComment(commentId: string): Promise<CommentInterface> {
-    return this.commentModel.findByIdAndDelete(commentId).exec()
+  async deleteComment(commentId: string): Promise<CommentInterface> {
+    return this.commentModel.findByIdAndDelete(commentId)
   }
 
-  createComment(comment: Partial<CommentInterface>): Promise<CommentInterface> {
+  async createComment(projectId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {
+    comment.project = projectId
     return this.commentModel.create(comment)
   }
+
+  async createReply(projectId: string, commentId: string, comment: CommentInterface) {
+    comment.parent = commentId;
+    return this.createComment(projectId, comment);
+  }
+
+
 }

@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentComponent } from './components/comment/comment.component';
 import {TuiInputModule, TuiIslandModule, TuiTagModule} from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import {CommentHttpService} from "./services/comments/comment-http.service";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     TuiButtonModule,
     TuiTextfieldControllerModule,
   ],
-  providers: [ProjectHttpService],
+  providers: [ProjectHttpService, CommentHttpService],
   bootstrap: [AppComponent],
   exports: [CommentComponent, CommentFormComponent],
 })

@@ -11,8 +11,8 @@
 
   <div class="d-inline-flex">
     <div class="likes">
-      <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.LikeCount}}</a>
-      <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.DislikeCount}}</a>
+      <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>
+      <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
     </div>
     <div class="reply">
       <a tuiLink>Reply</a>
@@ -20,8 +20,8 @@
   </div>
 
 </tui-island>
-<div class="replies">
-  <a tuiLink icon="tuiIconArrowDown">
-    Replies
+<div class="replies" *ngIf="comment.replyCount > 0">
+  <a>
+    <i class="bi bi-caret-down-fill"></i> Replies {{comment.replyCount}}
   </a>
 </div>
