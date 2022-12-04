@@ -11,6 +11,7 @@ export class CommentFormComponent implements OnInit {
 
   @Input() submitLabel = "Submit";
   @Output() handleSubmit = new EventEmitter<CommentInterface>();
+  @Output() handleCancel = new EventEmitter();
 
   form: FormGroup
 

@@ -16,19 +16,26 @@
         <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
       </div>
       <div class="reply">
-        <a tuiLink>Reply</a>
+        <a tuiLink (click)="reply()">Reply</a>
       </div>
     </div>
 
   </tui-island>
   <div class="replies" *ngIf="comment.replyCount > 0">
-    <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active" >
+    <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active">
       <i *ngIf="show" class="bi bi-caret-down-fill"></i>
       <i *ngIf="!show" class="bi bi-caret-up-fill"></i>
       Replies {{comment.replyCount}}
     </button>
   </div>
-  <div *ngIf="show">
-    <triplo-comment [comment]="replies" *ngFor="let replies of (replies$ | async)"></triplo-comment>
+
+  <div class="reply-box tui-space_left-10 tui-space_vertical-3">
+    <div *ngIf="showReplyForm">
+      <triplo-comment-form (handleSubmit)="createReply($event)" (handleCancel)="cancelReply()"></triplo-comment-form>
+    </div>
+
+    <div *ngIf="show">
+      <triplo-comment [comment]="replies" *ngFor="let replies of (replies$ | async)"></triplo-comment>
+    </div>
   </div>
 </div>

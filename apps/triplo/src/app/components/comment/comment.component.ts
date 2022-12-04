@@ -11,6 +11,7 @@ export class CommentComponent implements OnInit {
   @Input() comment: CommentInterface
   replies$: Observable<CommentInterface[]>
   show = false;
+  showReplyForm = false;
 
   constructor(private commentService: CommentHttpService){
   }
@@ -23,4 +24,18 @@ export class CommentComponent implements OnInit {
   }
 
 
+  reply() {
+    this.showReplyForm = true
+  }
+
+  createReply($event: CommentInterface) {
+    $event.username = "Monke"
+    $event.owner = "638b2dd312a4cfd63a04ba40"
+    $event.parent = this.comment._id
+    this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe();
+  }
+
+  cancelReply() {
+    this.showReplyForm = false
+  }
 }
