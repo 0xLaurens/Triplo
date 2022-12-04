@@ -30,6 +30,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { TuiInputModule, TuiIslandModule, TuiTagModule } from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
+import {UserService} from "./services/user/user.service";
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { CommentHttpService } from './services/comments/comment-http.service';
     TuiButtonModule,
     TuiTextfieldControllerModule,
   ],
-  providers: [ProjectHttpService, CommentHttpService],
+  providers: [ProjectHttpService, CommentHttpService, UserService],
   bootstrap: [AppComponent],
   exports: [CommentComponent, CommentFormComponent],
 })
