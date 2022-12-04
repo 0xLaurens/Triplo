@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentComponent } from './comment.component';
+import {CommentHttpService} from "../../services/comments/comment-http.service";
 
 describe('CommentComponent', () => {
   let component: CommentComponent;
@@ -9,6 +10,7 @@ describe('CommentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CommentComponent],
+      providers: [CommentHttpService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CommentComponent);

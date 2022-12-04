@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 import {gender} from "@triplo/models";
+import {UserService} from "../../../services/user/user.service";
 
 describe('UserEditComponent', () => {
   let component: UserEditComponent;
@@ -15,6 +16,7 @@ describe('UserEditComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [UserEditComponent],
       imports: [CommonModule, RouterTestingModule, FormsModule, NgbDatepickerModule],
+      providers: [UserService]
     }).compileComponents();
 
 
