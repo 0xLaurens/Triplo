@@ -35,8 +35,13 @@ export class CommentRepository {
     return this.commentModel.create(comment)
   }
 
+  private async inc_reply(commentId: string): Promise<CommentInterface> {
+    return this.commentModel.findByIdAndUpdate(commentId, {$inc: {replyCount: 1}})
+  }
+
   async createReply(projectId: string, commentId: string, comment: CommentInterface) {
     comment.parent = commentId;
+    await this.inc_reply(commentId);
     return this.createComment(projectId, comment);
   }
 

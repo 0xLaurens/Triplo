@@ -13,8 +13,9 @@ export class CommentComponent implements OnInit {
   show = false;
   showReplyForm = false;
 
-  constructor(private commentService: CommentHttpService){
+  constructor(private commentService: CommentHttpService) {
   }
+
   ngOnInit(): void {
     this.replies$ = this.commentService.getCommentReplies(this.comment._id);
   }
@@ -25,14 +26,17 @@ export class CommentComponent implements OnInit {
 
 
   reply() {
-    this.showReplyForm = true
+    this.showReplyForm = !this.showReplyForm;
   }
 
   createReply($event: CommentInterface) {
     $event.username = "Monke"
     $event.owner = "638b2dd312a4cfd63a04ba40"
     $event.parent = this.comment._id
-    this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe();
+    this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe(() => {
+      this.show = true
+      this.cancelReply();
+    });
   }
 
   cancelReply() {

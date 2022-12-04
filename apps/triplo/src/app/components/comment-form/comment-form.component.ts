@@ -30,9 +30,17 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    const changes: CommentInterface = {
-      ...this.form.value
+    if (this.form.valid) {
+      const changes: CommentInterface = {
+        ...this.form.value
+      }
+      this.handleSubmit.emit(changes)
+      this.form.reset()
     }
-    this.handleSubmit.emit(changes)
+  }
+
+  submitCancel() {
+    this.form.reset()
+    this.handleCancel.emit()
   }
 }
