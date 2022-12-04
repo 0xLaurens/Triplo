@@ -30,7 +30,9 @@ import { CommentComponent } from './components/comment/comment.component';
 import { TuiInputModule, TuiIslandModule, TuiTagModule } from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
-import {UserService} from "./services/user/user.service";
+import { UserService } from './services/user/user.service';
+import { LoginComponent } from './pages/login/login.component';
+import {AuthHttpService} from "./services/authentication/auth-http.service";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import {UserService} from "./services/user/user.service";
     AboutComponent,
     CommentComponent,
     CommentFormComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -66,7 +69,7 @@ import {UserService} from "./services/user/user.service";
     TuiButtonModule,
     TuiTextfieldControllerModule,
   ],
-  providers: [ProjectHttpService, CommentHttpService, UserService],
+  providers: [ProjectHttpService, CommentHttpService, UserService, AuthHttpService],
   bootstrap: [AppComponent],
   exports: [CommentComponent, CommentFormComponent],
 })
