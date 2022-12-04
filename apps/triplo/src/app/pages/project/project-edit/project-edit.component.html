@@ -7,10 +7,11 @@
           <h3 *ngIf="!createMode" class="tui-form__header tui-form__header_margin-top_none">Edit</h3>
           <div class="tui-form__row">
             <tui-input
-              tuiHintContent="Project Name needs to be 4 or more chars"
+              tuiHintContent="The Name of the project needs to be 4-20 chars"
               class="b-form"
               [tuiTextfieldCleaner]="true"
               [tuiTextfieldCustomContent]="f['name'].valid ? success : ''"
+              [maxlength]="20"
               formControlName="name"
               ngDefaultControl
             >
@@ -33,6 +34,9 @@
             <tui-text-area
               tuiHintContent="Describe your project!"
               class="b-form"
+              [maxlength]="1000"
+              [expandable]="true"
+              [tuiTextfieldLabelOutside]="true"
               [tuiTextfieldCustomContent]="f['description'].valid ? success : ''"
               formControlName="description"
             >

@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,11 +6,9 @@ import {
   Param,
   Post,
   Put,
-  UseFilters
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
-import {ProjectInterface} from "@triplo/models";
-import {HttpExceptionFilter} from "../../filters/http.filter";
+import {CommentInterface, ProjectInterface} from "@triplo/models";
 
 @Controller("projects")
 export class ProjectController {
@@ -20,7 +17,7 @@ export class ProjectController {
 
   @Post()
   async createProject(
-    @Body() project: Partial<ProjectInterface>
+    @Body() project: ProjectInterface
   ): Promise<ProjectInterface> {
     return this.projectRepo.createProject(project)
   }
@@ -35,14 +32,10 @@ export class ProjectController {
     return this.projectRepo.findProjectById(projectId)
   }
 
-  @UseFilters(HttpExceptionFilter)
   @Put(":projectId")
   async updateProject(
     @Param("projectId") projectId: string,
-    @Body() changes: Partial<ProjectInterface> ): Promise<ProjectInterface> {
-
-    if (changes._id)
-      throw new BadRequestException("Can't update project _id")
+    @Body() changes: ProjectInterface): Promise<ProjectInterface> {
 
     return this.projectRepo.updateProject(projectId, changes)
   }

@@ -10,14 +10,27 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HeroComponent } from './pages/home/hero/hero.component';
-import { UserModule } from './models/User/user.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
-import {ProjectHttpService} from "./services/projects/project-http.service";
-import {ProjectModule} from "./pages/project/project.module";
-import { TuiAlertModule, TuiRootModule, TuiDialogModule } from "@taiga-ui/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { ProjectHttpService } from './services/projects/project-http.service';
+import { ProjectModule } from './pages/project/project.module';
+import {
+  TuiAlertModule,
+  TuiRootModule,
+  TuiDialogModule,
+  TuiThemeNightModule,
+  TuiModeModule,
+  TuiLinkModule,
+  TuiButtonModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommentComponent } from './components/comment/comment.component';
+import { TuiInputModule, TuiIslandModule, TuiTagModule } from '@taiga-ui/kit';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { CommentHttpService } from './services/comments/comment-http.service';
+import {UserService} from "./services/user/user.service";
 
 @NgModule({
   declarations: [
@@ -28,23 +41,33 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     NavbarComponent,
     HeroComponent,
     AboutComponent,
+    CommentComponent,
+    CommentFormComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     AboutModule,
-    ProjectModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,
     RouterOutlet,
     RouterModule,
     AppRoutingModule,
-    UserModule,
     TuiRootModule,
     TuiDialogModule,
-    TuiAlertModule
-],
-  providers: [ProjectHttpService],
+    TuiAlertModule,
+    TuiThemeNightModule,
+    TuiModeModule,
+    TuiLinkModule,
+    TuiTagModule,
+    TuiIslandModule,
+    ReactiveFormsModule,
+    TuiInputModule,
+    TuiButtonModule,
+    TuiTextfieldControllerModule,
+  ],
+  providers: [ProjectHttpService, CommentHttpService, UserService],
   bootstrap: [AppComponent],
+  exports: [CommentComponent, CommentFormComponent],
 })
 export class AppModule {}

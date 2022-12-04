@@ -6,17 +6,29 @@ export class Comment {
   @Prop({})
   message: string;
 
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
+  project
+
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Comment', index: true})
+  parent?: string
+
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
   owner: string;
 
   @Prop({})
   username: string;
 
-  @Prop({})
-  LikeCount: number;
+  @Prop({default: Date.now})
+  created: Date;
 
-  @Prop({})
-  DislikeCount: number;
+  @Prop({default: 0})
+  replyCount: number;
+
+  @Prop({default: 0})
+  likeCount: number;
+
+  @Prop({default: 0})
+  dislikeCount: number;
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment)

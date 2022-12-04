@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {ProjectOverviewComponent} from "./project-overview/project-overview.component";
 import {ProjectCardListComponent} from "./project-card-list/project-card-list.component";
 import {ProjectDetailComponent} from "./project-detail/project-detail.component";
@@ -9,7 +9,7 @@ import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   TuiAlertModule,
-  TuiButtonModule, TuiErrorModule,
+  TuiButtonModule, TuiErrorModule, TuiFormatDatePipeModule,
   TuiHintModule,
   TuiLinkModule,
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
@@ -21,6 +21,7 @@ import {
   TuiIslandModule, TuiTagModule,
   TuiTextAreaModule
 } from "@taiga-ui/kit";
+import {AppModule} from "../../app.module";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -62,7 +63,9 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     TuiTextAreaModule,
     RouterLink,
     TuiTagModule,
-    TuiInputTagModule
+    TuiInputTagModule,
+    TuiFormatDatePipeModule,
+    AppModule
   ],
   providers: [
     ProjectHttpService,
@@ -74,7 +77,8 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
         maxlength: maxLengthValidator,
       },
     }
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class ProjectModule {

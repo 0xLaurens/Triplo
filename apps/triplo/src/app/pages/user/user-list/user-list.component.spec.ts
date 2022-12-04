@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {UserListComponent} from './user-list.component';
 import {RouterLink} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
+import {UserService} from "../../../services/user/user.service";
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
@@ -11,7 +12,8 @@ describe('UserListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [UserListComponent],
-      imports: [RouterLink, RouterTestingModule]
+      imports: [RouterLink, RouterTestingModule],
+      providers: [UserService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserListComponent);

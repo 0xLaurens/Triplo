@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectDetailComponent } from './project-detail.component';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
-import {ActivatedRoute} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
+import {CommentHttpService} from "../../../services/comments/comment-http.service";
 
 describe('ProjectDetailComponent', () => {
   let component: ProjectDetailComponent;
@@ -14,7 +14,7 @@ describe('ProjectDetailComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectDetailComponent],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [ProjectHttpService]
+      providers: [ProjectHttpService, CommentHttpService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectDetailComponent);

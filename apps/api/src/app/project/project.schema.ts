@@ -1,4 +1,5 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import mongoose from "mongoose";
 
 
 @Schema({versionKey: false})
@@ -20,6 +21,10 @@ export class Project {
 
   @Prop()
   Tags: string[]
+
+  @Prop()
+  comments?: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
+
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

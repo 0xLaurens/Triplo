@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {ProjectInterface} from "@triplo/models"
+import {CommentInterface, ProjectInterface} from "@triplo/models"
 import {Model} from "mongoose";
 
 @Injectable()
@@ -17,14 +17,14 @@ export class ProjectRepository {
   }
 
   async findProjectById(projectId: string): Promise<ProjectInterface> {
-    return this.projectModel.findById(projectId)
+    return this.projectModel.findById(projectId).populate({path: "comments", model: "Comment"})
   }
 
-  deleteProject(projectId: string): Promise<ProjectInterface> {
-    return this.projectModel.findByIdAndDelete(projectId).exec()
+  async deleteProject(projectId: string): Promise<ProjectInterface> {
+    return this.projectModel.findByIdAndDelete(projectId)
   }
 
-  createProject(project: Partial<ProjectInterface>): Promise<ProjectInterface> {
+  async createProject(project: Partial<ProjectInterface>): Promise<ProjectInterface> {
     return this.projectModel.create(project)
   }
 }

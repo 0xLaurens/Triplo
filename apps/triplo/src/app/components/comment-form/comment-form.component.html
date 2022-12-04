@@ -1,0 +1,30 @@
+<form class="b-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <tui-input
+    formControlName="message"
+  >
+    Add a comment...
+  </tui-input>
+
+    <div class="tui-form__buttons d-flex justify-content-end" *ngIf="!form.invalid">
+      <button
+        (click)="submitCancel()"
+        [disabled]="form.invalid"
+        tuiButton
+        type="button"
+        appearance="flat"
+        size="s"
+        class="tui-form__button"
+      >
+        Cancel
+      </button>
+      <button
+        [disabled]="form.invalid"
+        tuiButton
+        size="s"
+        type="submit"
+        class="tui-form__button"
+      >
+        {{submitLabel}}
+      </button>
+  </div>
+</form>

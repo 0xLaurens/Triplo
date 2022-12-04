@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { UserInterface } from "@triplo/models"
-import {UserService} from "../../../models/User/user.service";
+import {UserService} from "../../../services/user/user.service";
 
 @Component({
   selector: 'triplo-user-detail',
