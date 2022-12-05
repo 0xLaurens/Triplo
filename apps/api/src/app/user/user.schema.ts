@@ -1,5 +1,8 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import { Document } from 'mongoose';
 import {gender} from "@triplo/models"
+
+export type UserDocument = User & Document;
 
 @Schema()
 export class User {
@@ -11,6 +14,9 @@ export class User {
 
   @Prop({type: String, enum: gender, required: true, default: gender.other})
   gender: string;
+
+  @Prop()
+  passwordHash: string;
 
   @Prop({default: Date.now})
   registered: Date;
