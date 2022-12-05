@@ -5,7 +5,7 @@ import { AuthRepository } from './auth.repository';
 
 @Injectable()
 export class TokenMiddleware implements NestMiddleware {
-  constructor(private authRepo: AuthRepository) {}
+  constructor(private authService: AuthRepository) {}
 
   async use(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.header('authorization');
@@ -15,7 +15,7 @@ export class TokenMiddleware implements NestMiddleware {
     }
 
     try {
-      const token = await this.authRepo.verifyToken(authHeader);
+      const token = await this.authService.verifyToken(authHeader);
 
       res.locals.token = token;
     } catch (e) {

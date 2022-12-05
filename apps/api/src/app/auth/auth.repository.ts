@@ -1,57 +1,56 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-import {JwtPayload, verify, sign} from 'jsonwebtoken';
-import {hash, compare} from 'bcrypt';
+import { JwtPayload, verify, sign } from 'jsonwebtoken';
+import { hash, compare } from 'bcrypt';
 
-import {Model} from 'mongoose';
-import {InjectModel} from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
-import {User, UserDocument} from '../user/user.schema';
-import {Identity, IdentityDocument} from "./identity.schema";
+import { Identity, IdentityDocument } from './identity.schema';
+import { User, UserDocument } from '../user/user.schema';
 
 @Injectable()
 export class AuthRepository {
-  constructor(
-    @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
-    @InjectModel(User.name) private userModel: Model<UserDocument>
-  ) {
-  }
+    constructor(
+        @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
+        @InjectModel(User.name) private userModel: Model<UserDocument>
+    ) {}
 
-  async createUser(name: string, emailAddress: string): Promise<string> {
-    const user = new this.userModel({name, emailAddress});
-    await user.save();
-    return user.id;
-  }
+    async createUser(name: string, emailAddress: string): Promise<string> {
+        const user = new this.userModel({name, emailAddress});
+        await user.save();
+        return user.id;
+      }
 
-  async verifyToken(token: string): Promise<string | JwtPayload> {
-    return new Promise((resolve, reject) => {
-      verify(token, process.env.JWT_SECRET, (err, payload) => {
-        if (err) reject(err);
-        else resolve(payload);
-      })
-    })
-  }
+    async verifyToken(token: string): Promise<string | JwtPayload> {
+        return new Promise((resolve, reject) => {
+            verify(token, process.env.JWT_SECRET, (err, payload) => {
+                if (err) reject(err);
+                else resolve(payload);
+            })
+        })
+    }
 
-  async registerUser(username: string, password: string, emailAddress: string) {
-    const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
+    async registerUser(password: string, emailAddress: string) {
+        const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
 
-    const identity = new this.identityModel({username, hash: generatedHash, emailAddress});
+        const identity = new this.identityModel({hash: generatedHash, emailAddress});
 
-    await identity.save();
-  }
+        await identity.save();
+    }
 
-  async generateToken(username: string, password: string): Promise<string> {
-    const identity = await this.identityModel.findOne({username});
+    async generateToken(email: string, password: string): Promise<string> {
+        const identity = await this.identityModel.findOne({emailAddress: email});
 
-    if (!identity || !(await compare(password, identity.hash))) throw new Error("user not authorized");
+        if (!identity || !(await compare(password, identity.hash))) throw new Error("user not authorized");
 
-    const user = await this.userModel.findOne({name: username});
+        const user = await this.userModel.findOne({email: email});
 
-    return new Promise((resolve, reject) => {
-      sign({username, id: user.id}, process.env.JWT_SECRET, (err: Error, token: string) => {
-        if (err) reject(err);
-        else resolve(token);
-      });
-    })
-  }
+        return new Promise((resolve, reject) => {
+            sign({email, id: user.id}, process.env.JWT_SECRET, (err: Error, token: string) => {
+                if (err) reject(err);
+                else resolve(token);
+            });
+        })
+    }
 }

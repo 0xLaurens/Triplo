@@ -5,7 +5,7 @@ import { AuthController } from './auth.controller';
 
 import { Identity, IdentitySchema } from './identity.schema';
 import { User, UserSchema } from '../user/user.schema';
-import {AuthRepository} from "./auth.repository";
+import { AuthRepository } from './auth.repository';
 
 @Module({
   imports: [
