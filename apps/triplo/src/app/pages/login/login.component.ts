@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthHttpService} from "../../services/authentication/auth-http.service";
+import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 
 @Component({
   selector: 'triplo-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
 
   constructor(
+    @Inject(TuiAlertService) private alertService: TuiAlertService,
     private fb: FormBuilder,
     private auth: AuthHttpService,
     private router: Router,
@@ -25,6 +27,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const login = this.form.value;
+    const cred = this.form.value;
+
+    this.auth.login(cred.email, cred.password)
+      .subscribe(
+        () => {
+          this.router.navigateByUrl("/");
+        },
+        err => {
+          this.alertService.open("Login failed!", {label: "Error", status: TuiNotification.Error}).subscribe()
+        }
+      )
   }
 }

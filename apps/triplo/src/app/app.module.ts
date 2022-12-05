@@ -27,7 +27,7 @@ import {
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentComponent } from './components/comment/comment.component';
-import { TuiInputModule, TuiIslandModule, TuiTagModule } from '@taiga-ui/kit';
+import {TuiInputModule, TuiInputPasswordModule, TuiIslandModule, TuiTagModule} from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
 import { UserService } from './services/user/user.service';
@@ -68,6 +68,7 @@ import {AuthHttpService} from "./services/authentication/auth-http.service";
     TuiInputModule,
     TuiButtonModule,
     TuiTextfieldControllerModule,
+    TuiInputPasswordModule,
   ],
   providers: [ProjectHttpService, CommentHttpService, UserService, AuthHttpService],
   bootstrap: [AppComponent],

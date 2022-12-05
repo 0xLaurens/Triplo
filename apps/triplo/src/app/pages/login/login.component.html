@@ -1,7 +1,32 @@
 <div class="min-vh-100 d-flex align-items-center">
-  <div class="tui-container_adaptive tui-container">
-    <form>
-
-    </form>
+  <div class="">
+    <tui-island size="l" textAlign="center" >
+      <h3 class="title">Login</h3>
+      <form [formGroup]="form">
+        <tui-input
+          tuiTextfieldSize="m"
+          formControlName="email"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Email
+          <input
+            tuiTextfield
+            type="email"
+          />
+        </tui-input>
+        <tui-input-password
+          formControlName="password"
+          tuiTextfieldSize="m"
+          class="tui-space_top-2"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Password
+          <input
+            tuiTextfield
+            placeholder="Password"
+          />
+        </tui-input-password>
+      </form>
+    </tui-island>
   </div>
 </div>

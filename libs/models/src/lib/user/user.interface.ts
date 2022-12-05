@@ -21,6 +21,9 @@ export class UserInterface {
   @IsEmail()
   email: string;
 
+  @IsString()
+  password: string;
+
   @IsEnum(gender)
   gender: gender;
 

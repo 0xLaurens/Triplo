@@ -11,6 +11,7 @@ import {AboutEntityComponent} from "./pages/about/about-entity/about-entity.comp
 import {ProjectOverviewComponent} from "./pages/project/project-overview/project-overview.component";
 import {ProjectDetailComponent} from "./pages/project/project-detail/project-detail.component";
 import {ProjectEditComponent} from "./pages/project/project-edit/project-edit.component";
+import {LoginComponent} from "./pages/login/login.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'Projects/:id', component: ProjectDetailComponent},
   {path: 'Projects/:id/Edit', component: ProjectEditComponent},
   {path: 'Projects', component: ProjectOverviewComponent},
+  {path: 'Login', component: LoginComponent}
 ];
 
 @NgModule({
