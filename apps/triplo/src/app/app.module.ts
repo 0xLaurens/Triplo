@@ -23,15 +23,16 @@ import {
   TuiModeModule,
   TuiLinkModule,
   TuiButtonModule,
-  TuiTextfieldControllerModule,
+  TuiTextfieldControllerModule, TuiErrorModule, TuiSvgModule, TuiHintModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentComponent } from './components/comments/comment/comment.component';
 import {
+  TuiFieldErrorPipeModule,
   TuiInputModule,
-  TuiInputPasswordModule,
+  TuiInputPasswordModule, TuiInputTagModule,
   TuiIslandModule,
-  TuiTagModule,
+  TuiTagModule, TuiTextAreaModule,
 } from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
@@ -80,6 +81,12 @@ import { TaskOverviewComponent } from './components/tasks/task-overview/task-ove
     TuiButtonModule,
     TuiTextfieldControllerModule,
     TuiInputPasswordModule,
+    TuiFieldErrorPipeModule,
+    TuiTextAreaModule,
+    TuiErrorModule,
+    TuiSvgModule,
+    TuiHintModule,
+    TuiInputTagModule,
   ],
   providers: [
     ProjectHttpService,
