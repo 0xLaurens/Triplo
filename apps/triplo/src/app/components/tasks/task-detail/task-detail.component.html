@@ -1,0 +1,28 @@
+<div class="min-vh-100 d-flex align-items-center" *ngIf="(task$ | async) as task">
+  <div class="tui-container_adaptive tui-container">
+    <div class="banner tui-space_vertical-10">
+      <h3 class="tui-text_h3 tui-space_vertical-5">{{task.name}}</h3>
+      <tui-tag value="Since {{task.created | date}}"></tui-tag>
+    </div>
+    <div class="description tui-space_vertical-10 w-50">
+      <h6 class="tui-text_h6">Description</h6>
+      <div class="tui-text_body-m">
+        {{task.description}}
+      </div>
+    </div>
+<!--    <div class="comments tui-space-vertical-10">-->
+<!--      <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>-->
+<!--      <div class="comment-reaction tui-space_vertical-5">-->
+<!--        <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>-->
+<!--      </div>-->
+
+<!--      <div *ngFor="let comment of recentComments">-->
+<!--        <triplo-comment [comment]="comment"></triplo-comment>-->
+<!--      </div>-->
+
+<!--      <div *ngFor="let comment of (comments$ | async)">-->
+<!--        <triplo-comment [comment]="comment"></triplo-comment>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>
