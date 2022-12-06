@@ -6,11 +6,13 @@ import {UserModule} from "./user/user.module";
 import {ProjectModule} from "./project/project.module";
 import {CommentModule} from "./comment/comment.module";
 import {AuthModule} from "./auth/auth.module";
+import {TaskModule} from "./task/task.module";
 
 
 @Module({
   imports: [
     AuthModule,
+    TaskModule,
     UserModule,
     ProjectModule,
     CommentModule,

@@ -7,7 +7,7 @@ export class Comment {
   message: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
-  project
+  project: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Comment', index: true})
   parent?: string
