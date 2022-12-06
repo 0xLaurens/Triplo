@@ -23,16 +23,23 @@ import {
   TuiModeModule,
   TuiLinkModule,
   TuiButtonModule,
-  TuiTextfieldControllerModule, TuiErrorModule, TuiSvgModule, TuiHintModule,
+  TuiTextfieldControllerModule,
+  TuiErrorModule,
+  TuiSvgModule,
+  TuiHintModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentComponent } from './components/comments/comment/comment.component';
 import {
+  TuiCarouselModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
-  TuiInputPasswordModule, TuiInputTagModule,
+  TuiInputPasswordModule,
+  TuiInputTagModule,
   TuiIslandModule,
-  TuiTagModule, TuiTextAreaModule,
+  TuiPaginationModule,
+  TuiTagModule,
+  TuiTextAreaModule,
 } from '@taiga-ui/kit';
 import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
@@ -41,7 +48,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthHttpService } from './services/authentication/auth-http.service';
 import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
 import { TaskDetailComponent } from './components/tasks/task-detail/task-detail.component';
-import { TaskOverviewComponent } from './components/tasks/task-overview/task-overview.component';
+import { TaskHttpService } from './services/task/task-http.service';
+import { TaskCardComponent } from './components/tasks/task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +65,7 @@ import { TaskOverviewComponent } from './components/tasks/task-overview/task-ove
     LoginComponent,
     TaskEditComponent,
     TaskDetailComponent,
-    TaskOverviewComponent,
+    TaskCardComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -87,14 +95,17 @@ import { TaskOverviewComponent } from './components/tasks/task-overview/task-ove
     TuiSvgModule,
     TuiHintModule,
     TuiInputTagModule,
+    TuiCarouselModule,
+    TuiPaginationModule,
   ],
   providers: [
     ProjectHttpService,
     CommentHttpService,
     UserService,
     AuthHttpService,
+    TaskHttpService,
   ],
   bootstrap: [AppComponent],
-  exports: [CommentComponent, CommentFormComponent],
+  exports: [CommentComponent, CommentFormComponent, TaskCardComponent],
 })
 export class AppModule {}

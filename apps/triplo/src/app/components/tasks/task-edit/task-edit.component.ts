@@ -8,7 +8,6 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
 @Component({
   selector: 'triplo-task-edit',
   templateUrl: './task-edit.component.html',
-  styleUrls: ['./task-edit.component.css'],
 })
 export class TaskEditComponent implements OnInit {
   @Input() projectId: string;

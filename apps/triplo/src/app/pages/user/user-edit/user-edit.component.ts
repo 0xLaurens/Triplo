@@ -35,6 +35,7 @@ export class UserEditComponent implements OnInit {
         this.user = {
           username: "",
           email: "",
+          password: "",
           gender: gender.other,
           _id: uuid(),
           registered: new Date,

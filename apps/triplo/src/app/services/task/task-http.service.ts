@@ -12,11 +12,6 @@ export class TaskHttpService {
     return this.http.get<TaskInterface[]>(`api/projects/${projectId}/tasks`)
   }
 
-  getTaskReplies(taskId: string): Observable<TaskInterface[]> {
-    return this.http.get<TaskInterface[]>(`api/tasks/${taskId}/replies`)
-  }
-
-
 
   createTask(projectId: string, task: Partial<TaskInterface>): Observable<TaskInterface> {
     return this.http.post<TaskInterface>(`api/projects/${projectId}/tasks`, task)

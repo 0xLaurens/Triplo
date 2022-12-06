@@ -10,6 +10,13 @@
         {{project.description}}
       </div>
     </div>
+    <div class="tasks tui-space-vertical-10">
+      <h5 class="tui-text_h6 tui-space_vertical-5">Tasks</h5>
+      <div *ngIf="($tasks | async)!.length === 0" class="tui-text_body-m">This project currently doesn't have any tasks available.</div>
+      <div *ngFor="let task of ($tasks | async)">
+        <triplo-task-card [task]="task"></triplo-task-card>
+      </div>
+    </div>
     <div class="comments tui-space-vertical-10">
       <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>
       <div class="comment-reaction tui-space_vertical-5">
@@ -23,6 +30,8 @@
       <div *ngFor="let comment of (comments$ | async)">
         <triplo-comment [comment]="comment"></triplo-comment>
       </div>
+
+      <div *ngIf="(comments$ | async)!.length === 0 && recentComments.length === 0" class="tui-text_body-m">No comments yet.</div>
     </div>
   </div>
 </div>

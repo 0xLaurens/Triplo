@@ -7,7 +7,6 @@ import {Observable} from "rxjs";
 @Component({
   selector: 'triplo-task-detail',
   templateUrl: './task-detail.component.html',
-  styleUrls: ['./task-detail.component.css'],
 })
 export class TaskDetailComponent implements OnInit {
   task$!: Observable<TaskInterface>
