@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CommentComponent } from './comment.component';
-import {CommentHttpService} from "../../services/comments/comment-http.service";
+import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
 

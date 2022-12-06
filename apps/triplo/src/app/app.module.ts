@@ -26,13 +26,21 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommentComponent } from './components/comment/comment.component';
-import {TuiInputModule, TuiInputPasswordModule, TuiIslandModule, TuiTagModule} from '@taiga-ui/kit';
-import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { CommentComponent } from './components/comments/comment/comment.component';
+import {
+  TuiInputModule,
+  TuiInputPasswordModule,
+  TuiIslandModule,
+  TuiTagModule,
+} from '@taiga-ui/kit';
+import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
 import { UserService } from './services/user/user.service';
 import { LoginComponent } from './pages/login/login.component';
-import {AuthHttpService} from "./services/authentication/auth-http.service";
+import { AuthHttpService } from './services/authentication/auth-http.service';
+import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
+import { TaskDetailComponent } from './components/tasks/task-detail/task-detail.component';
+import { TaskOverviewComponent } from './components/tasks/task-overview/task-overview.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +54,9 @@ import {AuthHttpService} from "./services/authentication/auth-http.service";
     CommentComponent,
     CommentFormComponent,
     LoginComponent,
+    TaskEditComponent,
+    TaskDetailComponent,
+    TaskOverviewComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -70,7 +81,12 @@ import {AuthHttpService} from "./services/authentication/auth-http.service";
     TuiTextfieldControllerModule,
     TuiInputPasswordModule,
   ],
-  providers: [ProjectHttpService, CommentHttpService, UserService, AuthHttpService],
+  providers: [
+    ProjectHttpService,
+    CommentHttpService,
+    UserService,
+    AuthHttpService,
+  ],
   bootstrap: [AppComponent],
   exports: [CommentComponent, CommentFormComponent],
 })
