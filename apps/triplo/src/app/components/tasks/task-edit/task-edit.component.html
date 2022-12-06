@@ -1,13 +1,13 @@
 <section class="min-vh-100 d-flex align-items-center">
   <div class="tui-container tui-container_adaptive">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" #projectForm="ngForm">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #taskForm="ngForm">
       <div class="tui-row tui-row_sme">
         <div class="tui-col_8">
           <h3 *ngIf="createMode" class="tui-form__header tui-form__header_margin-top_none">Create</h3>
           <h3 *ngIf="!createMode" class="tui-form__header tui-form__header_margin-top_none">Edit</h3>
           <div class="tui-form__row">
             <tui-input
-              tuiHintContent="The Name of the project needs to be 4-20 chars"
+              tuiHintContent="The Name of the task needs to be 4-20 chars"
               class="b-form"
               [tuiTextfieldCleaner]="true"
               [tuiTextfieldCustomContent]="f['name'].valid ? success : ''"
@@ -15,7 +15,7 @@
               formControlName="name"
               ngDefaultControl
             >
-              Project name
+              Task name
               <span class="tui-required"></span>
             </tui-input>
             <ng-template #success>
@@ -32,7 +32,7 @@
 
           <div class="tui-form__row">
             <tui-text-area
-              tuiHintContent="Describe your project!"
+              tuiHintContent="Describe your task!"
               class="b-form"
               [maxlength]="1000"
               [expandable]="true"
@@ -40,7 +40,7 @@
               [tuiTextfieldCustomContent]="f['description'].valid ? success : ''"
               formControlName="description"
             >
-              Project Description
+              Task Description
               <span class="tui-required"></span>
             </tui-text-area>
             <ng-template #success>
@@ -55,31 +55,9 @@
             ></tui-error>
           </div>
 
-          <div class="tui-form__row">
-            <tui-input-tag
-              tuiHintContent="Separate tags with comma's or hit enter!"
-              class="b-form"
-              [tuiTextfieldLabelOutside]="true"
-              [tuiTextfieldCustomContent]="f['Tags'].valid ? success : ''"
-              formControlName="Tags"
-            >
-              Project Tags
-            </tui-input-tag>
-            <ng-template #success>
-              <tui-svg
-                src="tuiIconCheckLarge"
-                class="success tui-space_left-3"
-              ></tui-svg>
-            </ng-template>
-            <tui-error
-              formControlName="Tags"
-              [error]="[] | tuiFieldError | async"
-            ></tui-error>
-          </div>
-
           <div class="tui-form__buttons">
             <button
-              [disabled]="projectForm.invalid || loading"
+              [disabled]="taskForm.invalid || loading"
               [showLoader]="loading"
               tuiButton
               size="l"
@@ -89,7 +67,7 @@
               Submit
             </button>
             <button
-              routerLink="/Projects"
+              routerLink="/Tasks"
               tuiButton
               type="button"
               appearance="flat"
