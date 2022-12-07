@@ -57,7 +57,7 @@ export class ProjectEditComponent implements OnInit {
       this.projectService.createProject(changes).subscribe(
         project => {
           this.loading = false;
-          this.alertService.open('Updated project', {label: "Success!"}).subscribe()
+          this.alertService.open('Created project', {label: "Success!"}).subscribe()
           this.router.navigate(["/Projects"])
         }
       );
@@ -65,7 +65,7 @@ export class ProjectEditComponent implements OnInit {
       this.projectService.updateProject(this.id, changes).subscribe(
         project => {
           this.loading = false;
-          this.alertService.open('Created project', {label: "Success!"}).subscribe()
+          this.alertService.open('Updated project', {label: "Success!"}).subscribe()
           this.router.navigate(["/Projects"])
         },
       )

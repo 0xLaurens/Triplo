@@ -10,19 +10,17 @@
         {{task.description}}
       </div>
     </div>
-<!--    <div class="comments tui-space-vertical-10">-->
-<!--      <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>-->
-<!--      <div class="comment-reaction tui-space_vertical-5">-->
-<!--        <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>-->
-<!--      </div>-->
-
-<!--      <div *ngFor="let comment of recentComments">-->
-<!--        <triplo-comment [comment]="comment"></triplo-comment>-->
-<!--      </div>-->
-
-<!--      <div *ngFor="let comment of (comments$ | async)">-->
-<!--        <triplo-comment [comment]="comment"></triplo-comment>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="tasks tui-space-vertical-10">
+      <div class="d-flex justify-content-between py-3">
+        <h5 class="tui-text_h6">Subtasks</h5>
+       	<a tuiMarkerIcon mode="link" size="s" src="tuiIconPlusLarge" class="tui-space_right-2"></a>
+      </div>
+      <div *ngIf="task.subtasks.length === 0" class="tui-text_body-m">This project currently doesn't have any subtasks
+        available.
+      </div>
+      <div *ngFor="let subtask of task.subtasks">
+        <triplo-task-card [task]="subtask"></triplo-task-card>
+      </div>
+    </div>
   </div>
 </div>

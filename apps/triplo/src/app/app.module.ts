@@ -36,7 +36,7 @@ import {
   TuiInputModule,
   TuiInputPasswordModule,
   TuiInputTagModule,
-  TuiIslandModule,
+  TuiIslandModule, TuiMarkerIconModule,
   TuiPaginationModule,
   TuiTagModule,
   TuiTextAreaModule,
@@ -97,6 +97,7 @@ import { TaskCardComponent } from './components/tasks/task-card/task-card.compon
     TuiInputTagModule,
     TuiCarouselModule,
     TuiPaginationModule,
+    TuiMarkerIconModule,
   ],
   providers: [
     ProjectHttpService,

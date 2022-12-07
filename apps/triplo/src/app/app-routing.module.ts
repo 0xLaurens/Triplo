@@ -13,6 +13,7 @@ import {ProjectDetailComponent} from "./pages/project/project-detail/project-det
 import {ProjectEditComponent} from "./pages/project/project-edit/project-edit.component";
 import {LoginComponent} from "./pages/login/login.component";
 import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
+import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 
 const routes: Routes = [
   {
@@ -34,7 +35,15 @@ const routes: Routes = [
   {path: 'Projects/:id', component: ProjectDetailComponent},
   {path: 'Projects/:id/Edit', component: ProjectEditComponent},
   {path: 'Projects', component: ProjectOverviewComponent},
-  {path: 'task/:id', component: TaskDetailComponent},
+  {
+    path: 'task/:id', component: TaskDetailComponent, children: [
+      {
+        path: 'edit', component: TaskEditComponent, children: [
+          {path: 'subtask', component: TaskEditComponent}
+        ]
+      }
+    ]
+  },
   {path: 'Login', component: LoginComponent}
 ];
 

@@ -15,11 +15,11 @@ import {
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-  TUI_VALIDATION_ERRORS,
-  TuiFieldErrorPipeModule,
-  TuiInputModule, TuiInputTagModule,
-  TuiIslandModule, TuiTagModule,
-  TuiTextAreaModule
+    TUI_VALIDATION_ERRORS,
+    TuiFieldErrorPipeModule,
+    TuiInputModule, TuiInputTagModule,
+    TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
+    TuiTextAreaModule
 } from "@taiga-ui/kit";
 import {AppModule} from "../../app.module";
 
@@ -44,30 +44,32 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     ProjectDetailComponent,
     ProjectEditComponent
   ],
-  imports: [
-    TuiRootModule,
-    CommonModule,
-    RouterLinkWithHref,
-    FormsModule,
-    ReactiveFormsModule,
-    TuiAlertModule,
-    TuiIslandModule,
-    TuiLinkModule,
-    TuiButtonModule,
-    TuiHintModule,
-    TuiTextfieldControllerModule,
-    TuiInputModule,
-    TuiSvgModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule,
-    TuiTextAreaModule,
-    RouterLink,
-    TuiTagModule,
-    TuiInputTagModule,
-    TuiFormatDatePipeModule,
-    AppModule
-  ],
+    imports: [
+        TuiRootModule,
+        CommonModule,
+        RouterLinkWithHref,
+        FormsModule,
+        ReactiveFormsModule,
+        TuiAlertModule,
+        TuiIslandModule,
+        TuiLinkModule,
+        TuiButtonModule,
+        TuiHintModule,
+        TuiTextfieldControllerModule,
+        TuiInputModule,
+        TuiSvgModule,
+        TuiErrorModule,
+        TuiFieldErrorPipeModule,
+        TuiTextAreaModule,
+        RouterLink,
+        TuiTagModule,
+        TuiInputTagModule,
+        TuiFormatDatePipeModule,
+        AppModule,
+        TuiMarkerIconModule
+    ],
   providers: [
+
     ProjectHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,
