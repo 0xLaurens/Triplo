@@ -35,13 +35,18 @@ const routes: Routes = [
   {path: 'Projects/:id', component: ProjectDetailComponent},
   {path: 'Projects/:id/Edit', component: ProjectEditComponent},
   {path: 'Projects', component: ProjectOverviewComponent},
+
+  {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent},
   {
-    path: 'task/:id', component: TaskDetailComponent, children: [
+    path: 'Task/:id', component: TaskDetailComponent, children: [
       {
-        path: 'edit', component: TaskEditComponent, children: [
-          {path: 'subtask', component: TaskEditComponent}
+        path: 'Subtask', component: TaskEditComponent, children: [
+          {path: "Create", component: TaskEditComponent},
+          {path: ":id/Edit", component: TaskEditComponent}
         ]
-      }
+      },
+      {path: 'Edit', component: TaskEditComponent}
+
     ]
   },
   {path: 'Login', component: LoginComponent}

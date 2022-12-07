@@ -22,7 +22,7 @@
     <div class="tasks tui-space-vertical-10">
       <div class="d-flex justify-content-between py-3">
         <h5 class="tui-text_h6">Tasks</h5>
-        <a tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge" class="tui-space_right-2"></a>
+        <a routerLink="Task/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge" class="tui-space_right-2"></a>
       </div>
       <div *ngIf="($tasks | async)?.length === 0" class="tui-text_body-m">This project currently doesn't have any tasks
         available.

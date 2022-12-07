@@ -10,7 +10,7 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
   templateUrl: './task-edit.component.html',
 })
 export class TaskEditComponent implements OnInit {
-  @Input() projectId: string;
+  projectId: string;
   createMode?: boolean;
   id!: string;
   form!: FormGroup
@@ -28,6 +28,7 @@ export class TaskEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.projectId = this.route.snapshot.params['projectId'];
     this.createMode = !this.id;
 
     const formControls = {
@@ -57,16 +58,16 @@ export class TaskEditComponent implements OnInit {
       this.taskService.createTask(this.projectId, changes).subscribe(
         task => {
           this.loading = false;
-          this.alertService.open('Updated task', {label: "Success!"}).subscribe()
-          this.router.navigate([`/projects/${this.projectId}`])
+          this.alertService.open('Created task', {label: "Success!"}).subscribe()
+          this.router.navigate([`/Projects/${this.projectId}`])
         }
       );
     } else if (!this.createMode) {
       this.taskService.updateTask(this.id, changes).subscribe(
         task => {
           this.loading = false;
-          this.alertService.open('Created task', {label: "Success!"}).subscribe()
-          this.router.navigate([`/projects/${this.projectId}`])
+          this.alertService.open('Updated task', {label: "Success!"}).subscribe()
+          this.router.navigate([`/Projects/${this.projectId}`])
         },
       )
     }
