@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {UserListComponent} from './pages/user/user-list/user-list.component';
 import {UserDetailComponent} from './pages/user/user-detail/user-detail.component';
 import {UserEditComponent} from './pages/user/user-edit/user-edit.component';
@@ -47,6 +47,8 @@ import {AuthHttpService} from './services/authentication/auth-http.service';
 import {TaskHttpService} from './services/task/task-http.service';
 import {ProjectModule} from './pages/project/project.module';
 import {RegisterComponent} from './pages/auth/register/register.component';
+import {AuthInterceptor} from "./services/authentication/auth.interceptor";
+import {AuthGuard} from "./services/authentication/auth.guard";
 
 @NgModule({
   declarations: [
@@ -105,6 +107,11 @@ import {RegisterComponent} from './pages/auth/register/register.component';
     UserService,
     AuthHttpService,
     TaskHttpService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   exports: [RegisterComponent],

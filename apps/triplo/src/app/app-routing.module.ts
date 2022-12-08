@@ -15,13 +15,14 @@ import {LoginComponent} from "./pages/auth/login/login.component";
 import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
+import {AuthGuard} from "./services/authentication/auth.guard";
 
 const routes: Routes = [
     {
-      path: 'Users', component: UserListComponent, children: [
-        {path: 'create', component: UserEditComponent},
-        {path: ':id/edit', component: UserEditComponent},
-        {path: ':id', component: UserDetailComponent},
+      path: 'Users', component: UserListComponent, canActivate: [AuthGuard], children: [
+        {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
+        {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
+        {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
       ]
     },
     {path: '', component: HeroComponent},
@@ -32,20 +33,28 @@ const routes: Routes = [
         {path: 'UserStories', component: AboutUserstoriesComponent}
       ]
     },
-    {path: 'Projects/Create', component: ProjectEditComponent},
-    {path: 'Projects/:id', component: ProjectDetailComponent},
-    {path: 'Projects/:id/Edit', component: ProjectEditComponent},
-    {path: 'Projects', component: ProjectOverviewComponent},
+    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects', component: ProjectOverviewComponent, canActivate: [AuthGuard]},
 
-    {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent},
-    {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent},
-    {path: 'Projects/:projectId/Task/:taskId/Edit', component: TaskEditComponent},
-    {path: 'Projects/:projectId/Task/:taskId/Subtask/Create', component: TaskEditComponent},
-    {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId', component: TaskDetailComponent},
-    {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit', component: TaskEditComponent},
-    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent},
+    {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId/Subtask/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {
+      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId',
+      component: TaskDetailComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit',
+      component: TaskEditComponent,
+      canActivate: [AuthGuard]
+    },
+    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Login', component: LoginComponent},
-    {path: 'Register', component: RegisterComponent }
+    {path: 'Register', component: RegisterComponent}
 
   ]
 ;
