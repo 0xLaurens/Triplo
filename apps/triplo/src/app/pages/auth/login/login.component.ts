@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AuthHttpService} from "../../services/authentication/auth-http.service";
+import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 
 @Component({

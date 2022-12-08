@@ -11,9 +11,10 @@ import {AboutEntityComponent} from "./pages/about/about-entity/about-entity.comp
 import {ProjectOverviewComponent} from "./pages/project/project-overview/project-overview.component";
 import {ProjectDetailComponent} from "./pages/project/project-detail/project-detail.component";
 import {ProjectEditComponent} from "./pages/project/project-edit/project-edit.component";
-import {LoginComponent} from "./pages/login/login.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
 import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
+import {RegisterComponent} from "./pages/auth/register/register.component";
 
 const routes: Routes = [
     {
@@ -43,9 +44,9 @@ const routes: Routes = [
     {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId', component: TaskDetailComponent},
     {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit', component: TaskEditComponent},
     {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent},
-    {
-      path: 'Login', component: LoginComponent
-    }
+    {path: 'Login', component: LoginComponent},
+    {path: 'Register', component: RegisterComponent }
+
   ]
 ;
 

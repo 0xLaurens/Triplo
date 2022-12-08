@@ -77,9 +77,9 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {
+        email: `Enter a valid email`,
         required: `This Field is Required!`,
-        minlength: minLengthValidator,
-        maxlength: maxLengthValidator,
+        passwordMatchingValidator: `Password needs to match`,
       },
     }
   ],

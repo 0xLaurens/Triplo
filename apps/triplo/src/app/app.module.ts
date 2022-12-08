@@ -34,17 +34,19 @@ import {
   TuiInputModule,
   TuiInputPasswordModule,
   TuiInputTagModule,
-  TuiIslandModule, TuiMarkerIconModule,
+  TuiIslandModule,
+  TuiMarkerIconModule,
   TuiPaginationModule,
   TuiTagModule,
   TuiTextAreaModule,
 } from '@taiga-ui/kit';
 import { CommentHttpService } from './services/comments/comment-http.service';
 import { UserService } from './services/user/user.service';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthHttpService } from './services/authentication/auth-http.service';
 import { TaskHttpService } from './services/task/task-http.service';
-import {ProjectModule} from "./pages/project/project.module";
+import { ProjectModule } from './pages/project/project.module';
+import { RegisterComponent } from './pages/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import {ProjectModule} from "./pages/project/project.module";
     HeroComponent,
     AboutComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     ProjectModule,
@@ -98,5 +101,6 @@ import {ProjectModule} from "./pages/project/project.module";
     TaskHttpService,
   ],
   bootstrap: [AppComponent],
+  exports: [RegisterComponent],
 })
 export class AppModule {}
