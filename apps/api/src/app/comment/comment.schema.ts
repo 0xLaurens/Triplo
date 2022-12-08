@@ -29,6 +29,7 @@ export class Comment {
 
   @Prop({default: 0})
   dislikeCount: number;
+
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment)

@@ -1,12 +1,13 @@
-import {Inject, Injectable} from "@angular/core";
+import {Inject, Injectable, OnInit} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserInterface} from "@triplo/models";
-import {BehaviorSubject, map, Observable, of, switchMap} from "rxjs";
+import {BehaviorSubject, map, Observable } from "rxjs";
 import {TuiAlertService} from "@taiga-ui/core";
 
 @Injectable()
 export class AuthHttpService {
   public currentUser$ = new BehaviorSubject<UserInterface | undefined>(undefined);
+  public $loggedInStatus: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly CURRENT_USER = 'token';
   private readonly headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -16,7 +17,9 @@ export class AuthHttpService {
     private http: HttpClient,
     @Inject(TuiAlertService) private alertService: TuiAlertService
   ) {
+    this.$loggedInStatus.next(!this.getToken() == null)
   }
+
 
   login(email: string, password: string): Observable<UserInterface> {
     return this.http.post<UserInterface>("/api/login", {email, password})
@@ -24,11 +27,12 @@ export class AuthHttpService {
         map((user: UserInterface) => {
           this.setTokenStorage(user?.token);
           this.currentUser$.next(user);
-          this.alertService.open("User login successful", {label: "Success!"});
+          this.$loggedInStatus.next(true)
           return user;
         }))
       ;
   }
+
 
   register(email: string, password: string, username: string, gender: string): Observable<UserInterface> {
     return this.http.post<UserInterface>("/api/register", {email, password, username, gender})
@@ -54,4 +58,7 @@ export class AuthHttpService {
   //   );
   // }
 
+  signOut() {
+    localStorage.removeItem('token')
+  }
 }
