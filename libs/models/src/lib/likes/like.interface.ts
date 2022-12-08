@@ -1,4 +1,4 @@
-import {IsMongoId, IsString} from "class-validator";
+import {IsBoolean, IsMongoId, IsString } from "class-validator";
 
 export class LikeInterface {
   @IsMongoId()
@@ -12,4 +12,7 @@ export class LikeInterface {
   @IsMongoId()
   @IsString()
   projectId: string;
+
+  @IsBoolean()
+  isPositive: boolean;
 }

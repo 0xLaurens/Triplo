@@ -1,4 +1,5 @@
 export * from './lib/auth/auth.interface';
+export * from './lib/likes/like.interface';
 export * from './lib/task/task.interface';
 export * from './lib/user/user.interface';
 export * from './lib/comment/comment.interface';
