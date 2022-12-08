@@ -16,41 +16,38 @@ import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.co
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 
 const routes: Routes = [
-  {
-    path: 'Users', component: UserListComponent, children: [
-      {path: 'create', component: UserEditComponent},
-      {path: ':id/edit', component: UserEditComponent},
-      {path: ':id', component: UserDetailComponent},
-    ]
-  },
-  {path: '', component: HeroComponent},
-  {
-    path: 'About', component: AboutComponent, children: [
-      {path: 'Project', component: AboutProjectComponent},
-      {path: 'Entity', component: AboutEntityComponent},
-      {path: 'UserStories', component: AboutUserstoriesComponent}
-    ]
-  },
-  {path: 'Projects/Create', component: ProjectEditComponent},
-  {path: 'Projects/:id', component: ProjectDetailComponent},
-  {path: 'Projects/:id/Edit', component: ProjectEditComponent},
-  {path: 'Projects', component: ProjectOverviewComponent},
+    {
+      path: 'Users', component: UserListComponent, children: [
+        {path: 'create', component: UserEditComponent},
+        {path: ':id/edit', component: UserEditComponent},
+        {path: ':id', component: UserDetailComponent},
+      ]
+    },
+    {path: '', component: HeroComponent},
+    {
+      path: 'About', component: AboutComponent, children: [
+        {path: 'Project', component: AboutProjectComponent},
+        {path: 'Entity', component: AboutEntityComponent},
+        {path: 'UserStories', component: AboutUserstoriesComponent}
+      ]
+    },
+    {path: 'Projects/Create', component: ProjectEditComponent},
+    {path: 'Projects/:id', component: ProjectDetailComponent},
+    {path: 'Projects/:id/Edit', component: ProjectEditComponent},
+    {path: 'Projects', component: ProjectOverviewComponent},
 
-  {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent},
-  {
-    path: 'Task/:id', component: TaskDetailComponent, children: [
-      {
-        path: 'Subtask', component: TaskEditComponent, children: [
-          {path: "Create", component: TaskEditComponent},
-          {path: ":id/Edit", component: TaskEditComponent}
-        ]
-      },
-      {path: 'Edit', component: TaskEditComponent}
-
-    ]
-  },
-  {path: 'Login', component: LoginComponent}
-];
+    {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent},
+    {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent},
+    {path: 'Projects/:projectId/Task/:taskId/Edit', component: TaskEditComponent},
+    {path: 'Projects/:projectId/Task/:taskId/Subtask/Create', component: TaskEditComponent},
+    {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId', component: TaskDetailComponent},
+    {path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit', component: TaskEditComponent},
+    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent},
+    {
+      path: 'Login', component: LoginComponent
+    }
+  ]
+;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

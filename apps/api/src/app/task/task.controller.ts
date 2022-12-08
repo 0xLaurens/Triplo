@@ -14,7 +14,7 @@ export class TaskController {
     return this.taskRepo.createTask(projectId, task)
   }
 
-  @Post("/projects/:projectId/tasks/:taskId")
+  @Put("/projects/:projectId/tasks/:taskId")
   async createSubTask(
     @Param("projectId") projectId: string, @Param("taskId") taskId: string, @Body() task: TaskInterface
   ): Promise<TaskInterface> {
@@ -26,14 +26,15 @@ export class TaskController {
     return this.taskRepo.getTopLevelTasks(projectId);
   }
 
-  @Get("/tasks/:taskId/replies")
-  async getTaskReplies(@Param("taskId") taskId: string): Promise<TaskInterface[]> {
-    return this.taskRepo.getTaskReplies(taskId)
-  }
 
   @Get("/tasks/:taskId")
   async getTaskById(@Param("taskId") taskId: string): Promise<TaskInterface> {
     return this.taskRepo.getTaskById(taskId)
+  }
+
+  @Get("/tasks/:taskId/subtask/:subtaskId")
+  async getSubtaskById(@Param("taskId") taskId: string, @Param("subtaskId") subtaskId: string): Promise<TaskInterface> {
+    return this.taskRepo.getSubtaskById(taskId, subtaskId)
   }
 
   @Put("/tasks/:taskId")

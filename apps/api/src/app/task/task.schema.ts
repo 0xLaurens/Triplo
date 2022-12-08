@@ -1,8 +1,9 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import mongoose from "mongoose";
 
+
 @Schema()
-export class SubTask {
+export class Subtask {
   @Prop()
   name: string;
 
@@ -11,15 +12,18 @@ export class SubTask {
 
   @Prop({default: Date.now})
   created: Date;
-}
 
-@Schema()
-export class Task extends SubTask {
+
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
   project: string;
-
-  subtasks: [SubTask]
 }
 
+export const subtaskSchema = SchemaFactory.createForClass(Subtask);
+
+@Schema()
+export class Task extends Subtask {
+  @Prop({type: [subtaskSchema]})
+  subtasks: [Subtask]
+}
 
 export const TaskSchema = SchemaFactory.createForClass(Task)

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {TaskHttpService} from "../../../services/task/task-http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CommentInterface, TaskInterface} from "@triplo/models";
+import {TaskInterface} from "@triplo/models";
 import {Observable} from "rxjs";
+import {TuiAlertService} from "@taiga-ui/core";
 
 @Component({
   selector: 'triplo-task-detail',
@@ -10,10 +11,12 @@ import {Observable} from "rxjs";
 })
 export class TaskDetailComponent implements OnInit {
   task$!: Observable<TaskInterface>
-  subTasks$!: Observable<TaskInterface[]>
-  id!: string
+  taskId: string
+  subtaskId: string;
+  subtaskMode = false;
 
   constructor(
+    @Inject(TuiAlertService) private alertService: TuiAlertService,
     private route: ActivatedRoute,
     private router: Router,
     private taskService: TaskHttpService,
@@ -22,19 +25,35 @@ export class TaskDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.id = params['id']
+      this.taskId = params['taskId']
+      this.subtaskId = params['subtaskId']
     });
+    if (this.subtaskId) {
+      this.subtaskMode = true
+      this.task$ = this.taskService.findSubtaskById(this.taskId, this.subtaskId);
+    } else {
+      this.task$ = this.taskService.findTaskById(this.taskId)
+    }
 
-    this.task$ = this.taskService.findTaskById(this.id)
-    // this.subTasks$ = this.taskService.getTopLevelComments(this.id)
   }
 
   deleteTask() {
-    this.taskService.deleteTask(this.id).subscribe(
-      p => {
-        this.router.navigate(["/Tasks"])
-      }
-    )
+    if (this.subtaskMode) {
+      this.taskService.deleteTask(this.subtaskId).subscribe(
+        p => {
+          this.alertService.open('Deleted subtask!', {label: "Success!"}).subscribe()
+          this.router.navigate(["/"])
+        }
+      )
+    } else {
+      this.taskService.deleteTask(this.taskId).subscribe(
+        p => {
+          this.alertService.open('Deleted Task', {label: "Success!"}).subscribe()
+          this.router.navigate(["/Tasks"])
+        }
+      )
+    }
+
   }
 
   back() {

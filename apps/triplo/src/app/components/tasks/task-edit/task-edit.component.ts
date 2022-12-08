@@ -12,9 +12,11 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
 export class TaskEditComponent implements OnInit {
   projectId: string;
   createMode?: boolean;
-  id!: string;
+  taskId!: string;
   form!: FormGroup
   loading = false
+  subtaskMode = false;
+  subtaskId: string;
 
   constructor(
     @Inject(TuiAlertService)
@@ -27,9 +29,14 @@ export class TaskEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
+    this.taskId = this.route.snapshot.params['taskId'];
+    this.subtaskId = this.route.snapshot.params['subtaskId'];
     this.projectId = this.route.snapshot.params['projectId'];
-    this.createMode = !this.id;
+    this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
+    this.createMode = this.route.snapshot.url.toString().includes("Create");
+
+    console.log(this.subtaskMode)
+    console.log(this.createMode)
 
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
@@ -38,7 +45,7 @@ export class TaskEditComponent implements OnInit {
     this.form = this.fb.group(formControls)
 
     if (!this.createMode) {
-      this.taskService.findTaskById(this.id)
+      this.taskService.findTaskById(this.taskId)
         .subscribe(x => this.form.patchValue(x))
     }
   }
@@ -54,22 +61,45 @@ export class TaskEditComponent implements OnInit {
 
     this.loading = true;
 
+    let value = "task";
+    if (this.subtaskMode) {
+      value = "subtask"
+    }
+
     if (this.createMode) {
-      this.taskService.createTask(this.projectId, changes).subscribe(
-        task => {
-          this.loading = false;
-          this.alertService.open('Created task', {label: "Success!"}).subscribe()
-          this.router.navigate([`/Projects/${this.projectId}`])
-        }
-      );
+      if (!this.subtaskMode) {
+        this.taskService.createTask(this.projectId, changes).subscribe(
+          task => {
+            this.loading = false;
+            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
+            this.router.navigate([`/Projects/${this.projectId}`])
+          }
+        );
+      } else {
+        this.taskService.createSubTask(this.projectId, this.taskId, changes).subscribe(
+          task => {
+            this.loading = false;
+            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
+            this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
+          }
+        );
+      }
     } else if (!this.createMode) {
-      this.taskService.updateTask(this.id, changes).subscribe(
+      this.taskService.updateTask(this.taskId, changes).subscribe(
         task => {
           this.loading = false;
-          this.alertService.open('Updated task', {label: "Success!"}).subscribe()
+          this.alertService.open(`Updated ${value}`, {label: "Success!"}).subscribe()
           this.router.navigate([`/Projects/${this.projectId}`])
         },
       )
+    }
+  }
+
+  back() {
+    if (this.subtaskMode) {
+      this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
+    } else {
+      this.router.navigate([`/Projects/${this.projectId}`])
     }
   }
 }

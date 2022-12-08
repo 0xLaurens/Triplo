@@ -1,5 +1,6 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {TaskInterface} from "@triplo/models";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'triplo-task-card',
@@ -7,6 +8,20 @@ import {TaskInterface} from "@triplo/models";
   styles: [],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class TaskCardComponent{
+export class TaskCardComponent {
+  constructor(
+    public route: ActivatedRoute,
+    private router: Router) {
+  }
+  @Input() subtask = false;
   @Input() task: TaskInterface
+
+  navigate() {
+    if (this.subtask) {
+      this.router.navigate([`Subtask/${this.task._id}`], {relativeTo: this.route})
+    } else {
+      this.router.navigate([`Projects/${this.task.project}/Task/${this.task._id}`])
+    }
+  }
+
 }
