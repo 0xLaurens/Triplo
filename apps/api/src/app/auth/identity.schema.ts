@@ -17,7 +17,7 @@ export class Identity {
           message: 'should be a valid email address',
         }
       })
-      emailAddress: string;
+      email: string;
 }
 
 export const IdentitySchema = SchemaFactory.createForClass(Identity);

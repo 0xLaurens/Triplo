@@ -8,7 +8,7 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import {TuiAlertService} from "@taiga-ui/core";
+import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 import {Router} from "@angular/router";
 import {TuiValidationError} from "@taiga-ui/cdk";
@@ -52,6 +52,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log("a")
+    const cred = this.form.value;
+    this.auth.register(cred.email, cred.password).subscribe(
+        () => {
+          this.router.navigateByUrl("/Login");
+        },
+        err => {
+          this.alertService.open("Registration failed!", {label: "Error", status: TuiNotification.Error}).subscribe()
+        });
   }
 }

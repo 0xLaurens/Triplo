@@ -28,19 +28,6 @@
           />
         </tui-input-password>
 
-        <tui-input-password
-          formControlName="passwordConfirm"
-          tuiTextfieldSize="m"
-          class="tui-space_top-3"
-          [tuiTextfieldLabelOutside]="true"
-        >
-          Confirm Password
-          <input
-            tuiTextfield
-            placeholder="Repeat Password"
-          />
-        </tui-input-password>
-
         <div class="d-flex justify-content-end tui-space_vertical-3">
           <button tuiButton size="m" [disabled]="form.invalid" (click)="login()">
             Login

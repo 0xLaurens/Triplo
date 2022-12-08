@@ -11,4 +11,8 @@ export class AuthHttpService {
   login(email: string, password: string): Observable<UserInterface> {
     return this.http.post<UserInterface>("/api/login", {email, password});
   }
+
+  register(email: string, password: string): Observable<UserInterface> {
+    return this.http.post<UserInterface>("/api/register", {email, password})
+  }
 }
