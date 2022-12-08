@@ -5,10 +5,34 @@
       <form [formGroup]="form">
         <tui-input
           tuiTextfieldSize="m"
+          formControlName="username"
+
+          [tuiTextfieldCustomContent]="f['username'].valid ? success : ''"
+          class="tui-space_top-5"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Username
+          <input
+            tuiTextfield
+          />
+        </tui-input>
+        <ng-template #success>
+          <tui-svg
+            src="tuiIconCheckLarge"
+            class="success tui-space_left-3"
+          ></tui-svg>
+        </ng-template>
+        <tui-error
+          formControlName="username"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+
+        <tui-input
+          tuiTextfieldSize="m"
           formControlName="email"
 
           [tuiTextfieldCustomContent]="f['email'].valid ? success : ''"
-          class="tui-space_top-5"
+          class="tui-space_top-3"
           [tuiTextfieldLabelOutside]="true"
         >
           Enter your Email
@@ -25,6 +49,34 @@
         </ng-template>
         <tui-error
           formControlName="email"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+
+
+        <tui-select
+          tuiTextfieldSize="m"
+          formControlName="gender"
+          class="tui-space_top-3"
+        >
+          Gender
+          <input
+            tuiTextfield
+            placeholder="Choose a gender"
+          />
+          <tui-data-list-wrapper
+            *tuiDataList=""
+            [items]="genders"
+          ></tui-data-list-wrapper>
+        </tui-select>
+
+        <ng-template #success>
+          <tui-svg
+            src="tuiIconCheckLarge"
+            class="success tui-space_left-3"
+          ></tui-svg>
+        </ng-template>
+        <tui-error
+          formControlName="gender"
           [error]="[] | tuiFieldError | async"
         ></tui-error>
 

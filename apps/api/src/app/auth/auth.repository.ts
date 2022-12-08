@@ -3,8 +3,8 @@ import {Injectable} from '@nestjs/common';
 import {JwtPayload, verify, sign} from 'jsonwebtoken';
 import {hash, compare} from 'bcrypt';
 
-import {Model} from 'mongoose';
-import {InjectModel} from '@nestjs/mongoose';
+import mongoose, {Model} from 'mongoose';
+import {InjectConnection, InjectModel} from '@nestjs/mongoose';
 
 import {Identity, IdentityDocument} from './identity.schema';
 import {User, UserDocument} from '../user/user.schema';
@@ -13,7 +13,8 @@ import {User, UserDocument} from '../user/user.schema';
 export class AuthRepository {
   constructor(
     @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
-    @InjectModel(User.name) private userModel: Model<UserDocument>
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectConnection() private readonly connection: mongoose.Connection,
   ) {
   }
 
@@ -32,12 +33,17 @@ export class AuthRepository {
     })
   }
 
-  async registerUser(password: string, email: string) {
-    const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
+  async registerUser(password: string, email: string, username: string, gender: string) {
+    const session = await this.connection.startSession();
+    await session.withTransaction(async () => {
+      const generatedHash = await hash(password, parseInt(process.env.SALT_ROUNDS, 10));
+      const identity = new this.identityModel({hash: generatedHash, email: email});
+      await identity.save({session})
 
-    const identity = new this.identityModel({hash: generatedHash, email});
-
-    await identity.save();
+      const user  = new this.userModel({email: email, username: username, gender: gender});
+      await user.save({session})
+    });
+    await session.endSession()
   }
 
   async generateToken(email: string, password: string): Promise<string> {

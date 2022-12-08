@@ -12,7 +12,7 @@ export class AuthHttpService {
     return this.http.post<UserInterface>("/api/login", {email, password});
   }
 
-  register(email: string, password: string): Observable<UserInterface> {
-    return this.http.post<UserInterface>("/api/register", {email, password})
+  register(email: string, password: string, username: string, gender: string): Observable<UserInterface> {
+    return this.http.post<UserInterface>("/api/register", {email, password, username, gender})
   }
 }

@@ -21,6 +21,7 @@ import {TuiValidationError} from "@taiga-ui/cdk";
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class RegisterComponent implements OnInit {
+  genders = ["Male", "Female", "Other"]
   form: FormGroup;
 
   constructor(
@@ -34,6 +35,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       email: new FormControl("", [Validators.required, Validators.email]),
+      gender: new FormControl("", [Validators.required]),
+      username: new FormControl("", [Validators.required]),
       password: new FormControl("", Validators.required),
       passwordConfirm: new FormControl("", Validators.required)
     }, {validators: this.passwordMatchingValidator})
@@ -53,7 +56,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     const cred = this.form.value;
-    this.auth.register(cred.email, cred.password).subscribe(
+    this.auth.register(cred.email, cred.password, cred.username, cred.gender).subscribe(
         () => {
           this.router.navigateByUrl("/Login");
         },
