@@ -5,11 +5,14 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, UseGuards,
 } from "@nestjs/common";
 import {LikeRepository} from "./like.repository";
 import {LikeInterface} from "@triplo/models";
+import {AuthGuard} from "../guard/auth.guard";
 
+
+@UseGuards(AuthGuard)
 @Controller("like")
 export class LikeController {
   constructor(private likeRepo: LikeRepository) {

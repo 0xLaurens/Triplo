@@ -5,11 +5,13 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, UseGuards,
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
-import {CommentInterface, ProjectInterface} from "@triplo/models";
+import {ProjectInterface} from "@triplo/models";
+import {AuthGuard} from "../guard/auth.guard";
 
+@UseGuards(AuthGuard)
 @Controller("projects")
 export class ProjectController {
   constructor(private projectRepo: ProjectRepository) {

@@ -1,7 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {UserRepository} from "./user.repository";
 import {UserInterface} from "@triplo/models";
+import {AuthGuard} from "../guard/auth.guard";
 
+
+@UseGuards(AuthGuard)
 @Controller("users")
 export class UserController {
 
