@@ -1,9 +1,9 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {TaskRepository} from "./task.repository";
 import {TaskInterface} from "@triplo/models";
-import {AuthGuard} from "../guard/auth.guard";
+import {AuthenticationGuard} from "../guard/authentication.guard";
 
-@UseGuards(AuthGuard)
+@UseGuards(AuthenticationGuard)
 @Controller()
 export class TaskController {
   constructor(private taskRepo: TaskRepository) {

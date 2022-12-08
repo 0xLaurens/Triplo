@@ -9,10 +9,10 @@ import {
 } from "@nestjs/common";
 import {LikeRepository} from "./like.repository";
 import {LikeInterface} from "@triplo/models";
-import {AuthGuard} from "../guard/auth.guard";
+import {AuthenticationGuard} from "../guard/authentication.guard";
 
 
-@UseGuards(AuthGuard)
+@UseGuards(AuthenticationGuard)
 @Controller("like")
 export class LikeController {
   constructor(private likeRepo: LikeRepository) {

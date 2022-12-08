@@ -1,10 +1,11 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {UserRepository} from "./user.repository";
 import {UserInterface} from "@triplo/models";
-import {AuthGuard} from "../guard/auth.guard";
+import {AuthenticationGuard} from "../guard/authentication.guard";
+import {AuthorizationUserGuard} from "../guard/authorization-user.guard";
 
 
-@UseGuards(AuthGuard)
+@UseGuards(AuthenticationGuard)
 @Controller("users")
 export class UserController {
 
@@ -28,6 +29,7 @@ export class UserController {
   }
 
   @Put(":userId")
+  @UseGuards(AuthorizationUserGuard)
   async updateUser(@Param("userId") userId: string, @Body() changes: UserInterface)
     : Promise<UserInterface> {
     return this.userRepo.updateUser(userId, changes);

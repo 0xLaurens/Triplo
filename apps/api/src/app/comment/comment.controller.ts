@@ -1,10 +1,10 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
 import {CommentRepository} from "./comment.repository";
 import {CommentInterface} from "@triplo/models";
-import {AuthGuard} from "../guard/auth.guard";
+import {AuthenticationGuard} from "../guard/authentication.guard";
 
 
-@UseGuards(AuthGuard)
+@UseGuards(AuthenticationGuard)
 @Controller("")
 export class CommentController {
   constructor(private commentRepo: CommentRepository) {
