@@ -14,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutModule } from './pages/about/about.module';
 import { AboutComponent } from './pages/about/about.component';
 import { ProjectHttpService } from './services/projects/project-http.service';
-import { ProjectModule } from './pages/project/project.module';
 import {
   TuiAlertModule,
   TuiRootModule,
@@ -29,7 +28,6 @@ import {
   TuiHintModule,
 } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommentComponent } from './components/comments/comment/comment.component';
 import {
   TuiCarouselModule,
   TuiFieldErrorPipeModule,
@@ -41,15 +39,12 @@ import {
   TuiTagModule,
   TuiTextAreaModule,
 } from '@taiga-ui/kit';
-import { CommentFormComponent } from './components/comments/comment-form/comment-form.component';
 import { CommentHttpService } from './services/comments/comment-http.service';
 import { UserService } from './services/user/user.service';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthHttpService } from './services/authentication/auth-http.service';
-import { TaskEditComponent } from './components/tasks/task-edit/task-edit.component';
-import { TaskDetailComponent } from './components/tasks/task-detail/task-detail.component';
 import { TaskHttpService } from './services/task/task-http.service';
-import { TaskCardComponent } from './components/tasks/task-card/task-card.component';
+import {ProjectModule} from "./pages/project/project.module";
 
 @NgModule({
   declarations: [
@@ -60,14 +55,10 @@ import { TaskCardComponent } from './components/tasks/task-card/task-card.compon
     NavbarComponent,
     HeroComponent,
     AboutComponent,
-    CommentComponent,
-    CommentFormComponent,
     LoginComponent,
-    TaskEditComponent,
-    TaskDetailComponent,
-    TaskCardComponent,
   ],
   imports: [
+    ProjectModule,
     BrowserAnimationsModule,
     AboutModule,
     FormsModule,
@@ -107,6 +98,5 @@ import { TaskCardComponent } from './components/tasks/task-card/task-card.compon
     TaskHttpService,
   ],
   bootstrap: [AppComponent],
-  exports: [CommentComponent, CommentFormComponent, TaskCardComponent],
 })
 export class AppModule {}

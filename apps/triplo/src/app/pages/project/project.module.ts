@@ -22,6 +22,8 @@ import {
     TuiTextAreaModule
 } from "@taiga-ui/kit";
 import {AppModule} from "../../app.module";
+import {TaskModule} from "../../components/tasks/task.module";
+import {CommentModule} from "../../components/comments/comment.module";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -44,30 +46,31 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     ProjectDetailComponent,
     ProjectEditComponent
   ],
-    imports: [
-        TuiRootModule,
-        CommonModule,
-        RouterLinkWithHref,
-        FormsModule,
-        ReactiveFormsModule,
-        TuiAlertModule,
-        TuiIslandModule,
-        TuiLinkModule,
-        TuiButtonModule,
-        TuiHintModule,
-        TuiTextfieldControllerModule,
-        TuiInputModule,
-        TuiSvgModule,
-        TuiErrorModule,
-        TuiFieldErrorPipeModule,
-        TuiTextAreaModule,
-        RouterLink,
-        TuiTagModule,
-        TuiInputTagModule,
-        TuiFormatDatePipeModule,
-        AppModule,
-        TuiMarkerIconModule
-    ],
+  imports: [
+    CommentModule,
+    TaskModule,
+    TuiRootModule,
+    CommonModule,
+    RouterLinkWithHref,
+    FormsModule,
+    ReactiveFormsModule,
+    TuiAlertModule,
+    TuiIslandModule,
+    TuiLinkModule,
+    TuiButtonModule,
+    TuiHintModule,
+    TuiTextfieldControllerModule,
+    TuiInputModule,
+    TuiSvgModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    TuiTextAreaModule,
+    RouterLink,
+    TuiTagModule,
+    TuiInputTagModule,
+    TuiFormatDatePipeModule,
+    TuiMarkerIconModule,
+  ],
   providers: [
 
     ProjectHttpService,
