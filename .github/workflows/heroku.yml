@@ -28,10 +28,11 @@ jobs:
     needs: build-artifacts
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: npm install and test
         run: |
           npm install
-          nx test api
+          npm run test api
 
   deploy:
     needs: test-api
