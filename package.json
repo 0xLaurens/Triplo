@@ -36,6 +36,7 @@
     "@taiga-ui/styles": "^3.10.0",
     "@tinkoff/ng-polymorpheus": "^4.0.10",
     "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.10.2",
     "class-transformer": "^0.5.1",

@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 
 import {JwtPayload, verify, sign} from 'jsonwebtoken';
-import {hash, compare} from 'bcrypt';
+import {hash, compare} from 'bcryptjs';
 
 import mongoose, {Model} from 'mongoose';
 import {InjectConnection, InjectModel} from '@nestjs/mongoose';
