@@ -1,20 +1,29 @@
 <header id="header" class="header fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-    <a routerLink="/" class="logo d-flex align-items-center">
+    <a routerLink="/" class="logo d-flex align-items-center text-decoration-none">
       <img src="assets/logo.png" alt="">
-      <span>Triplo</span>
+      <span class="tui-text_h3">Triplo</span>
     </a>
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link" routerLink="">Home</a></li>
-        <li><a class="nav-link" routerLink="About">About</a></li>
-        <li><a class="nav-link" routerLink="Users">Users</a></li>
-        <li><a class="nav-link" routerLink="Projects">Projects</a></li>
-        <li><a class="getstarted" routerLink="LogIn">Log In</a></li>
+        <li>
+          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="/">Home</button>
+        </li>
+        <li>
+          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="About">About</button>
+        </li>
+        <li>
+          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="Projects">Projects</button>
+        </li>
+        <li *ngIf="($loggedIn | async) === false">
+          <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" routerLink="Login">Login</button>
+        </li>
+        <li *ngIf="($loggedIn | async)">
+          <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" (click)="signOut()">Sign Out</button>
+        </li>
       </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->
 
   </div>

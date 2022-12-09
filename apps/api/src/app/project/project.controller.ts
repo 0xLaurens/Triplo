@@ -5,11 +5,14 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, UseGuards,
+  Headers
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
-import {CommentInterface, ProjectInterface} from "@triplo/models";
+import {ProjectInterface, UserInterface} from "@triplo/models";
+import {AuthenticationGuard} from "../guard/authentication.guard";
 
+@UseGuards(AuthenticationGuard)
 @Controller("projects")
 export class ProjectController {
   constructor(private projectRepo: ProjectRepository) {
@@ -34,6 +37,7 @@ export class ProjectController {
 
   @Put(":projectId")
   async updateProject(
+    @Headers('user') user: UserInterface,
     @Param("projectId") projectId: string,
     @Body() changes: ProjectInterface): Promise<ProjectInterface> {
 

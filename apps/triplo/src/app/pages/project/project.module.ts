@@ -15,13 +15,15 @@ import {
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-  TUI_VALIDATION_ERRORS,
-  TuiFieldErrorPipeModule,
-  TuiInputModule, TuiInputTagModule,
-  TuiIslandModule, TuiTagModule,
-  TuiTextAreaModule
+    TUI_VALIDATION_ERRORS,
+    TuiFieldErrorPipeModule,
+    TuiInputModule, TuiInputTagModule,
+    TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
+    TuiTextAreaModule
 } from "@taiga-ui/kit";
 import {AppModule} from "../../app.module";
+import {TaskModule} from "../../components/tasks/task.module";
+import {CommentModule} from "../../components/comments/comment.module";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -45,6 +47,8 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     ProjectEditComponent
   ],
   imports: [
+    CommentModule,
+    TaskModule,
     TuiRootModule,
     CommonModule,
     RouterLinkWithHref,
@@ -65,16 +69,17 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     TuiTagModule,
     TuiInputTagModule,
     TuiFormatDatePipeModule,
-    AppModule
+    TuiMarkerIconModule,
   ],
   providers: [
+
     ProjectHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {
+        email: `Enter a valid email`,
         required: `This Field is Required!`,
-        minlength: minLengthValidator,
-        maxlength: maxLengthValidator,
+        passwordMatchingValidator: `Password needs to match`,
       },
     }
   ],

@@ -1,0 +1,119 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center">
+  <div class="w-25 h-50">
+    <tui-island size="l" class="tui-space_vertical-10">
+      <h3 class="title">Register</h3>
+      <form [formGroup]="form">
+        <tui-input
+          tuiTextfieldSize="m"
+          formControlName="username"
+
+          [tuiTextfieldCustomContent]="f['username'].valid ? success : ''"
+          class="tui-space_top-5"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Username
+          <input
+            tuiTextfield
+          />
+        </tui-input>
+        <ng-template #success>
+          <tui-svg
+            src="tuiIconCheckLarge"
+            class="success tui-space_left-3"
+          ></tui-svg>
+        </ng-template>
+        <tui-error
+          formControlName="username"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+
+        <tui-input
+          tuiTextfieldSize="m"
+          formControlName="email"
+
+          [tuiTextfieldCustomContent]="f['email'].valid ? success : ''"
+          class="tui-space_top-3"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Email
+          <input
+            tuiTextfield
+            type="email"
+          />
+        </tui-input>
+        <ng-template #success>
+          <tui-svg
+            src="tuiIconCheckLarge"
+            class="success tui-space_left-3"
+          ></tui-svg>
+        </ng-template>
+        <tui-error
+          formControlName="email"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+
+
+        <tui-select
+          tuiTextfieldSize="m"
+          formControlName="gender"
+          class="tui-space_top-3"
+        >
+          Gender
+          <input
+            tuiTextfield
+            placeholder="Choose a gender"
+          />
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="genders"
+          ></tui-data-list-wrapper>
+        </tui-select>
+
+        <ng-template #success>
+          <tui-svg
+            src="tuiIconCheckLarge"
+            class="success tui-space_left-3"
+          ></tui-svg>
+        </ng-template>
+        <tui-error
+          formControlName="gender"
+          [error]="[] | tuiFieldError | async"
+        ></tui-error>
+
+        <tui-input-password
+          formControlName="password"
+          tuiTextfieldSize="m"
+          class="tui-space_top-3"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Enter your Password
+          <input
+            tuiTextfield
+            placeholder="Password"
+          />
+        </tui-input-password>
+        <tui-input-password
+          formControlName="passwordConfirm"
+          tuiTextfieldSize="m"
+          class="tui-space_top-3"
+          [tuiTextfieldLabelOutside]="true"
+        >
+          Confirm your password
+          <input
+            tuiTextfield
+            placeholder="Password"
+          />
+        </tui-input-password>
+
+        <tui-error *ngIf="form.get('passwordConfirm')?.touched" [formGroup]="form"
+                   [error]="['passwd'] | tuiFieldError | async">
+        </tui-error>
+        <div class="d-flex justify-content-end tui-space_vertical-3">
+          <button tuiButton size="m" [disabled]="form.invalid" (click)="register()">
+            Register
+          </button>
+        </div>
+      </form>
+    </tui-island>
+  </div>
+</div>

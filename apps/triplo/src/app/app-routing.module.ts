@@ -11,28 +11,53 @@ import {AboutEntityComponent} from "./pages/about/about-entity/about-entity.comp
 import {ProjectOverviewComponent} from "./pages/project/project-overview/project-overview.component";
 import {ProjectDetailComponent} from "./pages/project/project-detail/project-detail.component";
 import {ProjectEditComponent} from "./pages/project/project-edit/project-edit.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
+import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
+import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
+import {RegisterComponent} from "./pages/auth/register/register.component";
+import {AuthGuard} from "./services/authentication/auth.guard";
 
 const routes: Routes = [
-  {
-    path: 'Users', component: UserListComponent, children: [
-      {path: 'create', component: UserEditComponent},
-      {path: ':id/edit', component: UserEditComponent},
-      {path: ':id', component: UserDetailComponent},
-    ]
-  },
-  {path: '', component: HeroComponent},
-  {
-    path: 'About', component: AboutComponent, children: [
-      {path: 'Project', component: AboutProjectComponent},
-      {path: 'Entity', component: AboutEntityComponent},
-      {path: 'UserStories', component: AboutUserstoriesComponent}
-    ]
-  },
-  {path: 'Projects/Create', component: ProjectEditComponent},
-  {path: 'Projects/:id', component: ProjectDetailComponent},
-  {path: 'Projects/:id/Edit', component: ProjectEditComponent},
-  {path: 'Projects', component: ProjectOverviewComponent},
-];
+    {
+      path: 'Users', component: UserListComponent, canActivate: [AuthGuard], children: [
+        {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
+        {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
+        {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
+      ]
+    },
+    {path: '', component: HeroComponent},
+    {
+      path: 'About', component: AboutComponent, children: [
+        {path: 'Project', component: AboutProjectComponent},
+        {path: 'Entity', component: AboutEntityComponent},
+        {path: 'UserStories', component: AboutUserstoriesComponent}
+      ]
+    },
+    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects', component: ProjectOverviewComponent, canActivate: [AuthGuard]},
+
+    {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/:projectId/Task/:taskId/Subtask/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {
+      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId',
+      component: TaskDetailComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit',
+      component: TaskEditComponent,
+      canActivate: [AuthGuard]
+    },
+    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Login', component: LoginComponent},
+    {path: 'Register', component: RegisterComponent}
+
+  ]
+;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

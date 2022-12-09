@@ -23,8 +23,17 @@ jobs:
           name: Package
           path: './package.json'
 
+  test-api:
+    name: "Build Artifacts"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        run: |
+          npm install
+          nx test api
+
   deploy:
-    needs: build-artifacts
+    needs: test-api
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -39,11 +48,6 @@ jobs:
         with:
           name: Package
           path: './dist/apps/api/'
-
-      - name: show files
-        run: |
-          ls
-          pwd
 
       - name: Build, Push and Release a Docker container to Heroku.
         uses: gonuit/heroku-docker-deploy@v1.3.3

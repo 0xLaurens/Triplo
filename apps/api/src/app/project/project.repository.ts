@@ -1,11 +1,16 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {CommentInterface, ProjectInterface} from "@triplo/models"
+import {ProjectInterface} from "@triplo/models"
 import {Model} from "mongoose";
+import { Neo4jService } from "nest-neo4j/dist";
+
 
 @Injectable()
 export class ProjectRepository {
-  constructor(@InjectModel('Project') private projectModel: Model<ProjectInterface>) {
+  constructor(
+    private readonly neo4jService: Neo4jService,
+    @InjectModel('Project') private projectModel: Model<ProjectInterface>
+  ) {
   }
 
   async findAllProjects(): Promise<ProjectInterface[]> {
@@ -13,6 +18,7 @@ export class ProjectRepository {
   }
 
   async updateProject(projectId: string, project: Partial<ProjectInterface>): Promise<ProjectInterface> {
+    await this.neo4jService.write(`MATCH (p:Project {id: "${projectId}"}) SET p.name = "${project.name}"`);
     return this.projectModel.findByIdAndUpdate(projectId, project, {new: true})
   }
 
@@ -21,10 +27,14 @@ export class ProjectRepository {
   }
 
   async deleteProject(projectId: string): Promise<ProjectInterface> {
+    await this.neo4jService.write(`MATCH (p:Project {id: "${projectId}"}) DETACH DELETE (p)`);
     return this.projectModel.findByIdAndDelete(projectId)
   }
 
   async createProject(project: Partial<ProjectInterface>): Promise<ProjectInterface> {
-    return this.projectModel.create(project)
+    const created = new this.projectModel({...project});
+    await created.save();
+    await this.neo4jService.write(`CREATE (p:Project {id: "${created._id}", name: "${created.name}"})`);
+    return created
   }
 }

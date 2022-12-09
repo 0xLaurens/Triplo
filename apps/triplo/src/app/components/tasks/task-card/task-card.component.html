@@ -1,0 +1,16 @@
+<div class="tui-island tui-space_vertical-3">
+  <a
+    class="h-100"
+    tuiIsland
+    size="s"
+    (click)="navigate()"
+    [hoverable]="true"
+  >
+
+    <h3 class="title title_size_s" >{{task.name}}</h3>
+    <p class="text">
+      {{task.description}}
+    </p>
+    <tui-tag value="{{task.created | date}}"></tui-tag>
+  </a>
+</div>

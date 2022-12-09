@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommentInterface} from "@triplo/models";
-import {CommentHttpService} from "../../services/comments/comment-http.service";
+import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {Observable} from "rxjs";
 
 @Component({

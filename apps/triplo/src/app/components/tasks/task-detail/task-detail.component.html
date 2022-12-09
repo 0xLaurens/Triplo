@@ -1,0 +1,36 @@
+<div class="min-vh-100 d-flex align-items-center" *ngIf="(task$ | async) as task">
+  <div class="tui-container_adaptive tui-container">
+    <div class="d-flex justify-content-between py-3">
+      <div>
+        <h3 class="tui-text_h3">{{task.name}}</h3>
+        <tui-tag value="Since {{task.created | date}}"></tui-tag>
+      </div>
+      <div>
+        <a routerLink="Edit" tuiMarkerIcon mode="link" size="xs" src="tuiIconEditLarge"
+           class="tui-space_right-2"></a>
+        <a tuiMarkerIcon mode="link" size="xs" src="tuiIconTrashLarge"
+           class="tui-space_right-2"></a>
+      </div>
+    </div>
+
+    <div class="description tui-space_vertical-10 w-50">
+      <h6 class="tui-text_h6">Description</h6>
+      <div class="tui-text_body-m">
+        {{task.description}}
+      </div>
+    </div>
+    <div class="tasks tui-space-vertical-10" *ngIf="!subtaskMode">
+      <div class="d-flex justify-content-between py-3">
+        <h5 class="tui-text_h6">Subtasks</h5>
+        <a routerLink="Subtask/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"
+           class="tui-space_right-2"></a>
+      </div>
+      <div *ngIf="!task.subtasks" class="tui-text_body-m">This project currently doesn't have any subtasks
+        available.
+      </div>
+      <div *ngFor="let subtask of task.subtasks">
+        <triplo-task-card [task]="subtask" [subtask]="true"></triplo-task-card>
+      </div>
+    </div>
+  </div>
+</div>

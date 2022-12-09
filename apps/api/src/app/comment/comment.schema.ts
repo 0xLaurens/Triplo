@@ -7,7 +7,7 @@ export class Comment {
   message: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
-  project
+  project: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Comment', index: true})
   parent?: string
@@ -29,6 +29,7 @@ export class Comment {
 
   @Prop({default: 0})
   dislikeCount: number;
+
 }
 
 export const CommentSchema = SchemaFactory.createForClass(Comment)
