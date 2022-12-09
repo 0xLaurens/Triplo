@@ -6,7 +6,7 @@ import {Neo4jService} from "nest-neo4j";
 import {AuthenticationGuard} from "../guard/authentication.guard";
 
 @Injectable()
-// @UseGuards(AuthenticationGuard)
+@UseGuards(AuthenticationGuard)
 export class LikeRepository {
   constructor(
     private readonly neo4jService: Neo4jService,
@@ -16,7 +16,8 @@ export class LikeRepository {
   ) {
   }
 
-  async createLike(like: Partial<LikeInterface>): Promise<void> {
+  async createLike(like: Partial<LikeInterface>): Promise<LikeInterface> {
+    like.compositeId = `${like.userId}_${like.projectId}`
     const session = await this.connection.startSession();
     await session.withTransaction(async () => {
       const created = new this.likeModel({...like})
@@ -37,8 +38,8 @@ export class LikeRepository {
       }
       return created
     })
-    console.log(session)
-    return await session.endSession();
+    await session.endSession();
+    return this.likeModel.findOne({projectId: like.projectId, userId: like.userId})
   }
 
   async updateLike(likeId: string, like: Partial<LikeInterface>): Promise<LikeInterface> {

@@ -13,6 +13,9 @@ export class LikeInterface {
   @IsString()
   projectId: string;
 
+  @IsString()
+  compositeId:string
+
   @IsBoolean()
   isPositive: boolean;
 }
