@@ -11,9 +11,8 @@ import {
 import {ProjectRepository} from "./project.repository";
 import {ProjectInterface, UserInterface} from "@triplo/models";
 import {AuthenticationGuard} from "../guard/authentication.guard";
-import {AuthorizationUserGuard} from "../guard/authorization-user.guard";
 
-@UseGuards(AuthenticationGuard, AuthorizationUserGuard)
+@UseGuards(AuthenticationGuard)
 @Controller("projects")
 export class ProjectController {
   constructor(private projectRepo: ProjectRepository) {

@@ -48,7 +48,6 @@ import {TaskHttpService} from './services/task/task-http.service';
 import {ProjectModule} from './pages/project/project.module';
 import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthInterceptor} from "./services/authentication/auth.interceptor";
-import {AuthGuard} from "./services/authentication/auth.guard";
 
 @NgModule({
   declarations: [
@@ -63,11 +62,11 @@ import {AuthGuard} from "./services/authentication/auth.guard";
     RegisterComponent,
   ],
   imports: [
+    BrowserModule,
     ProjectModule,
     BrowserAnimationsModule,
     AboutModule,
     FormsModule,
-    BrowserModule,
     HttpClientModule,
     RouterOutlet,
     RouterModule,

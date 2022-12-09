@@ -53,7 +53,7 @@ export class AuthRepository {
     const user = await this.userModel.findOne({email: email});
 
     return new Promise((resolve, reject) => {
-      sign({email, id: user.id}, process.env.JWT_SECRET, (err: Error, token: string) => {
+      sign({email, id: user.id, username: user.username}, process.env.JWT_SECRET, (err: Error, token: string) => {
         if (err) reject(err);
         else resolve(token);
       });

@@ -13,16 +13,26 @@ import {CommentController} from "./comment/comment.controller";
 import {ProjectController} from "./project/project.controller";
 import {TaskController} from "./task/task.controller";
 import {UserController} from "./user/user.controller";
+import {LikeModule} from "./like/like.module";
+import {Neo4jModule} from 'nest-neo4j/dist';
 
 
 @Module({
   imports: [
+    LikeModule,
     AuthModule,
     TaskModule,
     UserModule,
     ProjectModule,
     CommentModule,
-    MongooseModule.forRoot(environment.MONGO_URL)
+    MongooseModule.forRoot(environment.MONGO_URL),
+    Neo4jModule.forRoot({
+      scheme: 'neo4j+s',
+      host: process.env.NEO4J_URL,
+      port: 7687,
+      username: 'neo4j',
+      password: process.env.NEO4J_PASSWORD
+    }),
   ],
   controllers: [],
   providers: [],

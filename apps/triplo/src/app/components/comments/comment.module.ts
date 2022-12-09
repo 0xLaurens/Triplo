@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommentComponent} from "./comment/comment.component";
 import {CommentFormComponent} from "./comment-form/comment-form.component";
 import {TuiInputModule, TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
-import {DatePipe} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {TuiButtonModule, TuiLinkModule} from "@taiga-ui/core";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -18,7 +18,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     TuiLinkModule,
     TuiButtonModule,
     ReactiveFormsModule,
-    TuiInputModule
+    TuiInputModule,
+    NgIf
   ],
   exports: [
     CommentComponent,

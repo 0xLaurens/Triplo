@@ -12,7 +12,7 @@ import {LikeInterface} from "@triplo/models";
 import {AuthenticationGuard} from "../guard/authentication.guard";
 
 
-@UseGuards(AuthenticationGuard)
+// @UseGuards(AuthenticationGuard)
 @Controller("like")
 export class LikeController {
   constructor(private likeRepo: LikeRepository) {

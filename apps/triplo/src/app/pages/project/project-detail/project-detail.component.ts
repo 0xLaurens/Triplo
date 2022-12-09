@@ -72,7 +72,6 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   createComment($event: CommentInterface) {
-    // TODO: implement assign proper user
     $event.username = "Monke"
     $event.owner = "638b2dd312a4cfd63a04ba40"
     this.commentService.createComment(this.id, $event).subscribe(data => {
