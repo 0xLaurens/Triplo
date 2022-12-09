@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 @Schema({versionKey: false})
 export class Project {
-  @Prop({required:true})
+  @Prop({required: true})
   name: string;
 
   @Prop({default: "No Description"})
@@ -23,8 +23,7 @@ export class Project {
   Tags: string[]
 
   @Prop()
-  comments?: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
-
+  comments?: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);
