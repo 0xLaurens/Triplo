@@ -8,10 +8,12 @@ import {InjectConnection, InjectModel} from '@nestjs/mongoose';
 
 import {Identity, IdentityDocument} from './identity.schema';
 import {User, UserDocument} from '../user/user.schema';
+import {Neo4jService} from "nest-neo4j/dist";
 
 @Injectable()
 export class AuthRepository {
   constructor(
+    private readonly neo4jService: Neo4jService,
     @InjectModel(Identity.name) private identityModel: Model<IdentityDocument>,
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     @InjectConnection() private readonly connection: mongoose.Connection,
@@ -42,8 +44,13 @@ export class AuthRepository {
 
       const user  = new this.userModel({email: email, username: username, gender: gender});
       await user.save({session})
+
+      const neo = await this.neo4jService.write(`CREATE (u:User {id: "${user._id}", email: "${user.email}", username: "${user.username}"})`)
+      if (!neo) {
+        await session.abortTransaction()
+      }
     });
-    await session.endSession()
+    return await session.endSession()
   }
 
   async generateToken(email: string, password: string): Promise<string> {

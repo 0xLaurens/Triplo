@@ -4,11 +4,11 @@ import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 @Schema({versionKey: false})
 export class Like {
   @Prop({required:true, index: true})
-  project: string;
+  projectId: string;
   @Prop({required:true, index: true})
-  user: string;
-  @Prop({required: true, default: 0})
-  value: number
+  userId: string;
+  @Prop({required: true})
+  isPositive: boolean
 }
 
 export const LikeSchema = SchemaFactory.createForClass(Like);

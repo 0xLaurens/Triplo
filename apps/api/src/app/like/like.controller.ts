@@ -21,7 +21,7 @@ export class LikeController {
   @Post()
   async createLike(
     @Body() like: LikeInterface
-  ): Promise<LikeInterface> {
+  ): Promise<void> {
     return this.likeRepo.createLike(like)
   }
 
@@ -33,7 +33,7 @@ export class LikeController {
   @Put(":likeId")
   async updateLike(
     @Param("likeId") likeId: string,
-    @Body() changes: LikeInterface): Promise<LikeInterface> {
+    @Body() changes: LikeInterface): Promise<void> {
 
     return this.likeRepo.updateLike(likeId, changes)
   }
