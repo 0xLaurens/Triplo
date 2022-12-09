@@ -24,7 +24,8 @@ jobs:
           path: './package.json'
 
   test-api:
-    name: "Build Artifacts"
+    name: "test api"
+    needs: build-artifacts
     runs-on: ubuntu-latest
     steps:
       - name: npm install and test
