@@ -19,8 +19,8 @@ import {Neo4jModule} from 'nest-neo4j/dist';
 
 @Module({
   imports: [
-    LikeModule,
     AuthModule,
+    LikeModule,
     TaskModule,
     UserModule,
     ProjectModule,
