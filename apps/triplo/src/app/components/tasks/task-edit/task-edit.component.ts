@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TaskInterface} from "@triplo/models";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TuiAlertService} from "@taiga-ui/core";

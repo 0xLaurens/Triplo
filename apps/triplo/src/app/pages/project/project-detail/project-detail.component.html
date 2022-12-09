@@ -3,7 +3,11 @@
     <div class="banner tui-space_vertical-10">
       <div class="d-flex justify-content-between py-3">
         <div>
-          <h3 class="tui-text_h3">{{project.name}}</h3>
+          <div class="d-flex">
+            <h3 class="tui-text_h3">{{project.name}}</h3>
+            <a tuiMarkerIcon (click)="like(project._id)" mode="link" size="xs" src="tuiIconLikeLarge" class="tui-space_left-10"></a>
+            <a tuiMarkerIcon (click)="dislike(project._id)" mode="link" size="xs" src="tuiIconDislikeLarge" class="tui-space_left-3"></a>
+          </div>
           <tui-tag value="Since {{project.created | date}}"></tui-tag>
         </div>
         <div>

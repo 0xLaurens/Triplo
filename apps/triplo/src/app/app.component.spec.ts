@@ -4,12 +4,14 @@ import { AppComponent } from './app.component';
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {RouterOutlet} from "@angular/router";
 import {TuiRootModule} from "@taiga-ui/core";
+import {AuthHttpService} from "./services/authentication/auth-http.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent, NavbarComponent],
       imports: [HttpClientModule, RouterOutlet, TuiRootModule],
+      providers: [AuthHttpService]
     }).compileComponents();
   }));
 

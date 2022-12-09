@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NavbarComponent } from './navbar.component';
+import {AuthHttpService} from "../../services/authentication/auth-http.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -9,6 +11,8 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
+      imports: [HttpClientTestingModule],
+      providers: [AuthHttpService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavbarComponent);

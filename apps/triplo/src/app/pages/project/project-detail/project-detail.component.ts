@@ -79,4 +79,12 @@ export class ProjectDetailComponent implements OnInit {
       }
     );
   }
+
+  dislike(_id: string) {
+
+  }
+
+  like(_id: string) {
+
+  }
 }
