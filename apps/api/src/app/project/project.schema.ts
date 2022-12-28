@@ -1,6 +1,7 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import mongoose from "mongoose";
 
+export type ProjectDocument = Project & Document;
 
 @Schema({versionKey: false})
 export class Project {

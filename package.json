@@ -43,6 +43,7 @@
     "class-validator": "^0.13.2",
     "dotenv": "^16.0.3",
     "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^8.10.2",
     "mongoose": "^6.7.2",
     "neo4j-driver": "^5.3.0",
     "nest-neo4j": "^0.2.0",
