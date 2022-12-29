@@ -14,13 +14,13 @@ export class Project {
   @Prop({default: Date.now})
   created: Date;
 
-  @Prop({default: 0})
+  @Prop({default: 0, min: 0})
   LikeCount: number;
 
-  @Prop({default: 0})
+  @Prop({default: 0, min: 0})
   DislikeCount: number;
 
-  @Prop()
+  @Prop({required: true})
   Tags: string[]
 
   @Prop()
