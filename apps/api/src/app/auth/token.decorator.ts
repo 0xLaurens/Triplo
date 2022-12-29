@@ -2,6 +2,7 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export interface Token {
   email: string,
+  username: string,
   id: string,
 }
 

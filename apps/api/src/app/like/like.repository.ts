@@ -17,10 +17,11 @@ export class LikeRepository {
   }
 
   async createLike(like: Partial<LikeInterface>): Promise<LikeInterface> {
+    let created;
     like.compositeId = `${like.userId}_${like.projectId}`
     const session = await this.connection.startSession();
     await session.withTransaction(async () => {
-      const created = new this.likeModel({...like})
+      created = new this.likeModel({...like})
       await created.save({session})
 
       const likeInc: number = like.isPositive ? 1 : 0
@@ -36,10 +37,9 @@ export class LikeRepository {
       if (!neo) {
         await session.abortTransaction()
       }
-      return created
     })
     await session.endSession();
-    return this.likeModel.findOne({projectId: like.projectId, userId: like.userId})
+    return created;
   }
 
   async updateLike(likeId: string, like: Partial<LikeInterface>): Promise<LikeInterface> {

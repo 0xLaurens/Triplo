@@ -1,11 +1,11 @@
-import {Headers, Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Request} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put, Request} from "@nestjs/common";
 import {CommentRepository} from "./comment.repository";
 import {CommentInterface} from "@triplo/models";
-import {jwt} from "jsonwebtoken"
 import {AuthenticationGuard} from "../guard/authentication.guard";
+import {InjectToken, Token} from "../auth/token.decorator";
 
 
-@UseGuards(AuthenticationGuard)
+// @UseGuards(AuthenticationGuard)
 @Controller("")
 export class CommentController {
   constructor(private commentRepo: CommentRepository) {
@@ -15,11 +15,10 @@ export class CommentController {
   @Post("/projects/:projectId/comments")
   async createComment(
     @Request() req,
-    @Param("projectId") projectId: string, @Body() comment: CommentInterface
+    @Param("projectId") projectId: string, @Body() comment: CommentInterface, @InjectToken() token: Token
   ): Promise<CommentInterface> {
-    const user = req['user']
-    comment.owner = user._id
-    comment.username = user.username
+    comment.owner = token.id
+    comment.username = token.username
     return this.commentRepo.createComment(projectId, comment)
   }
 
