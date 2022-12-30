@@ -23,6 +23,7 @@ const routes: Routes = [
         {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
+        {path: 'profile', component: UserDetailComponent, canActivate: [AuthGuard]},
       ]
     },
     {path: '', component: HeroComponent},
@@ -36,7 +37,7 @@ const routes: Routes = [
     {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard]},
     {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects', component: ProjectOverviewComponent, canActivate: [AuthGuard]},
+    {path: 'Projects', component: ProjectOverviewComponent},
 
     {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},
