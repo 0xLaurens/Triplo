@@ -7,7 +7,6 @@ import {ProjectModule} from "./project/project.module";
 import {CommentModule} from "./comment/comment.module";
 import {AuthModule} from "./auth/auth.module";
 import {TaskModule} from "./task/task.module";
-import {GetUserMiddleware} from "./middleware/get-user.middleware";
 import {LikeController} from "./like/like.controller";
 import {CommentController} from "./comment/comment.controller";
 import {ProjectController} from "./project/project.controller";
@@ -15,6 +14,7 @@ import {TaskController} from "./task/task.controller";
 import {UserController} from "./user/user.controller";
 import {LikeModule} from "./like/like.module";
 import {Neo4jModule} from 'nest-neo4j/dist';
+import {TokenMiddleware} from "./auth/token.middleware";
 
 
 @Module({
@@ -40,7 +40,7 @@ import {Neo4jModule} from 'nest-neo4j/dist';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
     consumer
-      .apply(GetUserMiddleware)
+      .apply(TokenMiddleware)
       .forRoutes(
         LikeController,
         CommentController,

@@ -25,7 +25,7 @@ import {
   TuiTextfieldControllerModule,
   TuiErrorModule,
   TuiSvgModule,
-  TuiHintModule, TuiDataListModule,
+  TuiHintModule, TuiDataListModule, TuiNotificationModule,
 } from '@taiga-ui/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
@@ -99,6 +99,7 @@ import {AuthInterceptor} from "./services/authentication/auth.interceptor";
     TuiSelectModule,
     TuiDataListModule,
     TuiDataListWrapperModule,
+    TuiNotificationModule,
   ],
   providers: [
     ProjectHttpService,

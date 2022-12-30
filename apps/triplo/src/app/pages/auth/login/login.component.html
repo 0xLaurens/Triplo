@@ -2,6 +2,9 @@
   <div class="w-25 h-50">
     <tui-island size="l" class="tui-space_vertical-10">
       <h3 class="title">Login</h3>
+      <tui-notification>
+        You can test the application with the email: dummy@gmail.com && password: secret
+      </tui-notification>
       <form [formGroup]="form">
         <tui-input
           tuiTextfieldSize="m"
@@ -33,7 +36,8 @@
             Login
           </button>
         </div>
-        <div class="tui-text_body-m">No account yet? <a routerLink="/Register" class="link-primary" tuiLink>Register</a></div>
+        <div class="tui-text_body-m">No account yet? <a routerLink="/Register" class="link-primary" tuiLink>Register</a>
+        </div>
       </form>
     </tui-island>
   </div>

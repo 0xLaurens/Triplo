@@ -11,6 +11,12 @@ export class Project {
   @Prop({default: "No Description"})
   description: string;
 
+  @Prop({type: mongoose.Schema.Types.ObjectId, ref: "User"})
+  ownerId: string;
+
+  @Prop()
+  members?: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
+
   @Prop({default: Date.now})
   created: Date;
 

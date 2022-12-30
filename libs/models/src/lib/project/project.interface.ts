@@ -9,7 +9,6 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
-import {CommentInterface} from "../comment/comment.interface";
 
 export class ProjectInterface {
   @IsMongoId()
@@ -27,6 +26,12 @@ export class ProjectInterface {
 
   @IsDate()
   created: Date;
+
+  @IsMongoId()
+  ownerId: string;
+
+  @IsArray()
+  members?: string[]
 
   @IsInt()
   LikeCount: number;
