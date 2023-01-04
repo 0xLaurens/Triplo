@@ -1,4 +1,4 @@
-<div class="tui-space_vertical-3">
+<div class="tui-space_vertical-3" *ngIf="!deleted">
   <tui-island class="tui-space_vertical-1">
     <div class="header-comment text-muted">
       <div class="d-flex justify-content-between">
@@ -34,7 +34,7 @@
                 Edit
               </button>
               <button tuiOption>
-                <tui-svg src="tuiIconTrash"></tui-svg>
+                <tui-svg (click)="deleteComment()" src="tuiIconTrash"></tui-svg>
                 Delete
               </button>
             </tui-data-list>

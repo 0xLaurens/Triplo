@@ -14,6 +14,7 @@ export class CommentComponent implements OnInit, AfterContentChecked {
   show = false;
   showReplyForm = false;
   editMode = false;
+  deleted = false;
 
   constructor(private commentService: CommentHttpService,
               private changeDetector: ChangeDetectorRef,) {
@@ -35,7 +36,6 @@ export class CommentComponent implements OnInit, AfterContentChecked {
 
   reply() {
     this.showReplyForm = !this.showReplyForm;
-    console.log(this.comment._id)
   }
 
   createReply($event: CommentInterface) {
@@ -46,12 +46,16 @@ export class CommentComponent implements OnInit, AfterContentChecked {
     });
   }
 
+  private closeDropdown(): void {
+    this.dropdownOpen = false
+  }
+
   cancelReply(): void {
     this.showReplyForm = false
   }
 
   editComment(): void {
-    this.dropdownOpen = false
+    this.closeDropdown()
     this.editMode = true;
   }
 
@@ -66,7 +70,10 @@ export class CommentComponent implements OnInit, AfterContentChecked {
     this.editMode = false;
   }
 
-  openDropdown() {
-    this.dropdownOpen = true
+  deleteComment() {
+    this.commentService.deleteComment(this.comment._id).subscribe(() => {
+      this.deleted = true
+    })
+    this.closeDropdown()
   }
 }
