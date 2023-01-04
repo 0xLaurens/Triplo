@@ -4,7 +4,7 @@ import {CommentInterface, ProjectInterface, TaskInterface} from "@triplo/models"
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
-import {Observable, switchMap} from "rxjs";
+import {Observable} from "rxjs";
 import {TaskHttpService} from "../../../services/task/task-http.service";
 import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 import {ConfirmAlertComponent} from "../../../shared/alert/confirm/confirm-alert.component";
@@ -15,8 +15,7 @@ import {ConfirmAlertComponent} from "../../../shared/alert/confirm/confirm-alert
 })
 export class ProjectDetailComponent implements OnInit {
   project$!: Observable<ProjectInterface>
-  recentComments: CommentInterface[] = []
-  comments$!: Observable<CommentInterface[]>
+  comments$: Observable<CommentInterface[]>
   id!: string
   $tasks: Observable<TaskInterface[]>;
   notification: Observable<boolean>
@@ -29,7 +28,7 @@ export class ProjectDetailComponent implements OnInit {
     private router: Router,
     private projectService: ProjectHttpService,
     private commentService: CommentHttpService,
-    private taskService: TaskHttpService
+    private taskService: TaskHttpService,
   ) {
   }
 
@@ -71,13 +70,9 @@ export class ProjectDetailComponent implements OnInit {
     this.router.navigate(["/Projects"])
   }
 
-  createComment($event: CommentInterface) {
-    $event.username = "Monke"
-    $event.owner = "638b2dd312a4cfd63a04ba40"
-    this.commentService.createComment(this.id, $event).subscribe(data => {
-        this.recentComments.push(data)
-      }
-    );
+  async createComment($event: CommentInterface) {
+    await this.commentService.createComment(this.id, $event).subscribe()
+    this.comments$ = this.commentService.getTopLevelComments(this.id)
   }
 
   dislike(_id: string) {

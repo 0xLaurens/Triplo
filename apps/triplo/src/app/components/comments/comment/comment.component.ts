@@ -27,11 +27,10 @@ export class CommentComponent implements OnInit {
 
   reply() {
     this.showReplyForm = !this.showReplyForm;
+    console.log(this.comment._id)
   }
 
   createReply($event: CommentInterface) {
-    $event.username = "Monke"
-    $event.owner = "638b2dd312a4cfd63a04ba40"
     $event.parent = this.comment._id
     this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe(() => {
       this.show = true

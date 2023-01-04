@@ -1,4 +1,4 @@
-import {IsDate, IsInt, IsMongoId, IsString, MaxLength, Min, MinLength} from "class-validator";
+import {IsArray, IsDate, IsInt, IsMongoId, IsNumber, IsString, MaxLength, Min, MinLength} from "class-validator";
 
 export class CommentInterface {
   @IsString()
@@ -39,4 +39,10 @@ export class CommentInterface {
   @IsInt()
   @Min(0)
   dislikeCount: number;
+
+  @IsArray()
+  replies: CommentInterface;
+
+  @IsNumber()
+  depth: number;
 }

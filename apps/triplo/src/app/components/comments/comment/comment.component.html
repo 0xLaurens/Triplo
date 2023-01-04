@@ -25,7 +25,7 @@
     <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active">
       <i *ngIf="show" class="bi bi-caret-down-fill"></i>
       <i *ngIf="!show" class="bi bi-caret-up-fill"></i>
-      Replies {{comment.replyCount}}
+      Show Replies
     </button>
   </div>
 
@@ -35,7 +35,7 @@
     </div>
 
     <div *ngIf="show">
-      <triplo-comment [comment]="replies" *ngFor="let replies of (replies$ | async)"></triplo-comment>
+        <triplo-comment [comment]="reply.replies" *ngFor="let reply of (replies$ | async)"></triplo-comment>
     </div>
   </div>
 </div>

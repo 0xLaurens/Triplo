@@ -14,7 +14,6 @@ export class CommentController {
 
   @Post("/projects/:projectId/comments")
   async createComment(
-    @Request() req,
     @Param("projectId") projectId: string, @Body() comment: CommentInterface, @InjectToken() token: Token
   ): Promise<CommentInterface> {
     comment.owner = token.id
@@ -25,11 +24,10 @@ export class CommentController {
   @Post("/projects/:projectId/comments/:commentId")
   async createReply(
     @Request() req,
-    @Param("projectId") projectId: string, @Param("commentId") commentId: string, @Body() comment: CommentInterface
+    @Param("projectId") projectId: string, @Param("commentId") commentId: string, @Body() comment: CommentInterface, @InjectToken() token: Token
   ): Promise<CommentInterface> {
-    const user = req['user']
-    comment.owner = user._id
-    comment.username = user.username
+    comment.owner = token.id
+    comment.username = token.username
     return this.commentRepo.createReply(projectId, commentId, comment)
   }
 
