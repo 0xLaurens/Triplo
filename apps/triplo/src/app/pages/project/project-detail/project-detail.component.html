@@ -42,7 +42,7 @@
       </div>
 
       <div *ngFor="let comment of (comments$ | async)">
-        <triplo-comment [comment]="comment"></triplo-comment>
+        <triplo-comment [comment]="comment" [user]="user$"></triplo-comment>
       </div>
 
       <div *ngIf="(comments$ | async)?.length === 0" class="tui-text_body-m">No comments

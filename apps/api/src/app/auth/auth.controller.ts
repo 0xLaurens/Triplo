@@ -1,8 +1,9 @@
-import {Body, Controller, HttpException, HttpStatus, Post} from '@nestjs/common';
+import {Body, Controller, Post} from '@nestjs/common';
 
-import {Token, UserInterface} from '@triplo/models';
+import {UserInterface} from '@triplo/models';
 
 import {AuthRepository} from './auth.repository';
+import {Token_Identity} from "./identity-token.schema";
 
 @Controller()
 export class AuthController {
@@ -15,9 +16,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() credentials: { password: string, email: string }): Promise<Token> {
-    return {
-      token: await this.authService.generateToken(credentials.email, credentials.password)
-    };
+  async login(@Body() credentials: { password: string, email: string }): Promise<Token_Identity> {
+    return this.authService.generateToken(credentials.email, credentials.password);
   }
 }

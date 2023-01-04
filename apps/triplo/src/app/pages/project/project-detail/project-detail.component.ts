@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import {TaskHttpService} from "../../../services/task/task-http.service";
 import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 import {ConfirmAlertComponent} from "../../../shared/alert/confirm/confirm-alert.component";
+import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 
 @Component({
   selector: 'triplo-project-detail',
@@ -19,6 +20,7 @@ export class ProjectDetailComponent implements OnInit {
   id!: string
   $tasks: Observable<TaskInterface[]>;
   notification: Observable<boolean>
+  user$: string | null;
 
   constructor(
     @Inject(TuiAlertService)
@@ -29,6 +31,7 @@ export class ProjectDetailComponent implements OnInit {
     private projectService: ProjectHttpService,
     private commentService: CommentHttpService,
     private taskService: TaskHttpService,
+    private authService: AuthHttpService,
   ) {
   }
 
@@ -37,7 +40,7 @@ export class ProjectDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
-
+    this.user$ = this.authService.getUser()
     this.project$ = this.projectService.findProjectById(this.id)
     this.comments$ = this.commentService.getTopLevelComments(this.id)
     this.$tasks = this.taskService.getTopLevelTasks(this.id);

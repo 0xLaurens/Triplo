@@ -1,5 +1,5 @@
 import {AfterContentChecked, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {CommentInterface} from "@triplo/models";
+import {CommentInterface, UserInterface} from "@triplo/models";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {Observable} from "rxjs";
 
@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 })
 export class CommentComponent implements OnInit, AfterContentChecked {
   @Input() comment: CommentInterface
+  @Input() user: string | null | undefined
   dropdownOpen: boolean;
   replies$: Observable<CommentInterface[]>
   show = false;

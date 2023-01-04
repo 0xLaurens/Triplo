@@ -10,6 +10,7 @@ import {Identity, IdentityDocument} from './identity.schema';
 import {User, UserDocument} from '../user/user.schema';
 import {Neo4jService} from "nest-neo4j/dist";
 import {UserInterface} from "@triplo/models";
+import {Token_Identity} from "./identity-token.schema";
 
 @Injectable()
 export class AuthRepository {
@@ -56,16 +57,22 @@ export class AuthRepository {
     return user;
   }
 
-  async generateToken(email: string, password: string): Promise<string> {
+  async generateToken(email: string, password: string): Promise<Token_Identity> {
     const identity = await this.identityModel.findOne({email: email});
     if (!identity || !(await compare(password, identity.hash))) throw new Error("user not authorized");
 
     const user = await this.userModel.findOne({email: email});
 
+    const token_id: Token_Identity = new Token_Identity()
+
     return new Promise((resolve, reject) => {
       sign({email, id: user.id, username: user.username}, process.env.JWT_SECRET, (err: Error, token: string) => {
         if (err) reject(err);
-        else resolve(token);
+        else {
+          token_id.token = token
+          token_id._id = user._id
+          resolve(token_id);
+        }
       });
     })
   }
