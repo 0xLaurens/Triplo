@@ -28,6 +28,7 @@ export class CommentRepository {
 
 
   async updateComment(commentId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {
+    comment.updated = true;
     return this.commentModel.findByIdAndUpdate(commentId, comment, {new: true})
   }
 

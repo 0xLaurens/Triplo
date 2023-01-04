@@ -2,9 +2,10 @@
   <tui-island class="tui-space_vertical-1">
     <div class="header-comment text-muted">
       <div class="d-flex justify-content-between">
-        <div>
+        <div class="d-flex">
           <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
-          {{comment.created | date:'short'}}
+          <span class="tui-space_horizontal-2">{{comment.created | date:'short'}}</span>
+          <div *ngIf="comment.updated">(edited)</div>
         </div>
         <div class="comment-triple-dots absolute">
           <tui-hosted-dropdown
@@ -28,16 +29,28 @@
               tuiDataListDropdownManager
               [tuiActiveZoneParent]="activeZone"
             >
-              <button tuiOption><tui-svg src="tuiIconEdit"></tui-svg>Edit</button>
-              <button tuiOption><tui-svg src="tuiIconTrash"></tui-svg>Delete</button>
+              <button (click)="editComment()" tuiOption>
+                <tui-svg src="tuiIconEdit"></tui-svg>
+                Edit
+              </button>
+              <button tuiOption>
+                <tui-svg src="tuiIconTrash"></tui-svg>
+                Delete
+              </button>
             </tui-data-list>
           </ng-template>
         </div>
       </div>
+
     </div>
     <div class="message-comment tui-space_vertical-3">
-      <p>
+      <p *ngIf="!editMode">
         {{comment.message}}
+      </p>
+      <p *ngIf="editMode">
+        <triplo-comment-form (handleSubmit)="updateComment($event)" (handleCancel)="cancelEdit()"
+                             [start_message]="comment.message" tooltip="Edit comment"
+                             submitLabel="Update"></triplo-comment-form>
       </p>
     </div>
 

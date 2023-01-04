@@ -1,4 +1,15 @@
-import {IsArray, IsDate, IsInt, IsMongoId, IsNumber, IsString, MaxLength, Min, MinLength} from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsDate,
+  IsInt,
+  IsMongoId,
+  IsNumber,
+  IsString,
+  MaxLength,
+  Min,
+  MinLength
+} from "class-validator";
 
 export class CommentInterface {
   @IsString()
@@ -45,4 +56,7 @@ export class CommentInterface {
 
   @IsNumber()
   depth: number;
+
+  @IsBoolean()
+  updated: boolean;
 }

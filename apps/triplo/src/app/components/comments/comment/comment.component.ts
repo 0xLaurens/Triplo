@@ -13,6 +13,7 @@ export class CommentComponent implements OnInit {
   replies$: Observable<CommentInterface[]>
   show = false;
   showReplyForm = false;
+  editMode = false;
 
   constructor(private commentService: CommentHttpService) {
   }
@@ -41,5 +42,18 @@ export class CommentComponent implements OnInit {
 
   cancelReply() {
     this.showReplyForm = false
+  }
+
+  editComment() {
+    this.editMode = true;
+  }
+
+  updateComment($event: CommentInterface) {
+    this.commentService.updateComment(this.comment._id, $event).subscribe(data => this.comment = data)
+    this.cancelEdit()
+  }
+
+  cancelEdit() {
+    this.editMode = false;
   }
 }
