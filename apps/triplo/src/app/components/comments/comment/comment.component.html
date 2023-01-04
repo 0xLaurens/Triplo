@@ -13,14 +13,14 @@
             [content]="content"
             [(open)]="dropdownOpen"
           >
-            <a
+            <button
               tuiIconButton
               size="xs"
               appearance="flat"
               icon="tuiIconMoreVer"
               type="button"
-              [pseudoHover]="dropdown.open || null"
-            ></a>
+              [pseudoHover]="dropdown.open"
+            ></button>
           </tui-hosted-dropdown>
           <ng-template
             #content
