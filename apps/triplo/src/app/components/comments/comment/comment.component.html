@@ -27,14 +27,15 @@
             let-activeZone>
             <tui-data-list
               tuiDataListDropdownManager
+              size="m"
               [tuiActiveZoneParent]="activeZone"
             >
               <button (click)="editComment()" tuiOption>
                 <tui-svg src="tuiIconEdit"></tui-svg>
                 Edit
               </button>
-              <button tuiOption>
-                <tui-svg (click)="deleteComment()" src="tuiIconTrash"></tui-svg>
+              <button (click)="deleteComment()" tuiOption>
+                <tui-svg src="tuiIconTrash"></tui-svg>
                 Delete
               </button>
             </tui-data-list>
