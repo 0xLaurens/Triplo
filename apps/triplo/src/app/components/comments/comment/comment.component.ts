@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 })
 export class CommentComponent implements OnInit {
   @Input() comment: CommentInterface
+  dropdownOpen = false;
   replies$: Observable<CommentInterface[]>
   show = false;
   showReplyForm = false;

@@ -1,10 +1,11 @@
 import {NgModule} from "@angular/core";
 import {CommentComponent} from "./comment/comment.component";
 import {CommentFormComponent} from "./comment-form/comment-form.component";
-import {TuiInputModule, TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
+import {TuiDataListDropdownManagerModule, TuiInputModule, TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
-import {TuiButtonModule, TuiLinkModule} from "@taiga-ui/core";
+import {TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiLinkModule, TuiSvgModule} from "@taiga-ui/core";
 import {ReactiveFormsModule} from "@angular/forms";
+import {TuiActiveZoneModule} from "@taiga-ui/cdk";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,12 @@ import {ReactiveFormsModule} from "@angular/forms";
     TuiInputModule,
     NgIf,
     AsyncPipe,
-    NgForOf
+    NgForOf,
+    TuiHostedDropdownModule,
+    TuiDataListModule,
+    TuiDataListDropdownManagerModule,
+    TuiActiveZoneModule,
+    TuiSvgModule
   ],
   exports: [
     CommentComponent,

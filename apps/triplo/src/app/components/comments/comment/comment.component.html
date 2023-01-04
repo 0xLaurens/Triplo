@@ -1,8 +1,39 @@
 <div class="tui-space_vertical-3">
   <tui-island class="tui-space_vertical-1">
     <div class="header-comment text-muted">
-      <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
-      {{comment.created | date:'short'}}
+      <div class="d-flex justify-content-between">
+        <div>
+          <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
+          {{comment.created | date:'short'}}
+        </div>
+        <div class="comment-triple-dots absolute">
+          <tui-hosted-dropdown
+            #dropdown
+            [content]="content"
+            [(open)]="dropdownOpen"
+          >
+            <a
+              tuiIconButton
+              size="xs"
+              appearance="flat"
+              icon="tuiIconMoreVer"
+              type="button"
+              [pseudoHover]="dropdown.open || null"
+            ></a>
+          </tui-hosted-dropdown>
+          <ng-template
+            #content
+            let-activeZone>
+            <tui-data-list
+              tuiDataListDropdownManager
+              [tuiActiveZoneParent]="activeZone"
+            >
+              <button tuiOption><tui-svg src="tuiIconEdit"></tui-svg>Edit</button>
+              <button tuiOption><tui-svg src="tuiIconTrash"></tui-svg>Delete</button>
+            </tui-data-list>
+          </ng-template>
+        </div>
+      </div>
     </div>
     <div class="message-comment tui-space_vertical-3">
       <p>
@@ -35,7 +66,7 @@
     </div>
 
     <div *ngIf="show">
-        <triplo-comment [comment]="reply.replies" *ngFor="let reply of (replies$ | async)"></triplo-comment>
+      <triplo-comment [comment]="reply.replies" *ngFor="let reply of (replies$ | async)"></triplo-comment>
     </div>
   </div>
 </div>
