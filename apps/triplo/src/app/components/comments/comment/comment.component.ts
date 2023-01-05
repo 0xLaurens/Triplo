@@ -1,5 +1,5 @@
 import {AfterContentChecked, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {CommentInterface, UserInterface} from "@triplo/models";
+import {CommentInterface} from "@triplo/models";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {Observable} from "rxjs";
 
@@ -36,13 +36,14 @@ export class CommentComponent implements OnInit, AfterContentChecked {
 
 
   reply() {
+    console.log(this.comment)
     this.showReplyForm = !this.showReplyForm;
   }
 
   createReply($event: CommentInterface) {
     $event.parent = this.comment._id
+    console.log($event)
     this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe(() => {
-      this.show = true
       this.cancelReply();
     });
   }

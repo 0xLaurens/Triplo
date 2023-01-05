@@ -52,7 +52,7 @@ export class CommentInterface {
   dislikeCount: number;
 
   @IsArray()
-  replies: CommentInterface;
+  replies: CommentInterface[];
 
   @IsNumber()
   depth: number;

@@ -80,8 +80,10 @@
       <triplo-comment-form (handleSubmit)="createReply($event)" (handleCancel)="cancelReply()"></triplo-comment-form>
     </div>
 
-    <div *ngIf="show">
-      <triplo-comment [comment]="reply.replies" *ngFor="let reply of (replies$ | async)"></triplo-comment>
+    <div *ngIf="show && (replies$ | async) as rep">
+      <div *ngFor="let reply of rep[0].replies">
+      <triplo-comment [comment]="reply" [user]="user" *ngIf="reply.parent === comment._id"></triplo-comment>
+      </div>
     </div>
   </div>
 </div>

@@ -12,17 +12,23 @@ export class CommentRepository {
 
   async getTopLevelComments(projectId: string): Promise<CommentInterface[]> {
     return this.commentModel.aggregate([
-      {$match: {project: new mongoose.Types.ObjectId(projectId)}},
-      {$graphLookup: {from: 'comments', startWith: '$_id', connectFromField: '_id', connectToField: 'parent', as: 'replies', restrictSearchWithMatch: {project: projectId}}}
+      {$match: {project: new mongoose.Types.ObjectId(projectId), parent: null}},
+      // {$graphLookup: {from: 'comments', startWith: '$_id', connectFromField: '_id', connectToField: 'parent', as: 'replies'}},
     ]);
   }
 
   async getCommentReplies(commentId: string)  {
     return this.commentModel.aggregate([
       {$match: {_id: new mongoose.Types.ObjectId(commentId)}},
-      {$graphLookup: {from: 'comments', startWith: '$_id', connectFromField: '_id', connectToField: 'parent', as: 'replies', depthField: 'depth'}},
-      {$unwind: '$replies'},
-      {$sort: {'replies.depth': 1, 'replies.created': 1}}
+      {
+        $graphLookup: {
+          from: 'comments',
+          startWith: '$_id',
+          connectFromField: '_id',
+          connectToField: 'parent',
+          as: 'replies',
+        },
+      },
     ]);
   }
 
