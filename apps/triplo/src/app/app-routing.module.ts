@@ -23,9 +23,9 @@ const routes: Routes = [
         {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
-        {path: 'profile', component: UserDetailComponent, canActivate: [AuthGuard]},
       ]
     },
+    {path: 'Profile', component: UserDetailComponent, canActivate: [AuthGuard]},
     {path: '', component: HeroComponent},
     {
       path: 'About', component: AboutComponent, children: [
