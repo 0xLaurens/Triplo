@@ -72,7 +72,6 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     TuiMarkerIconModule,
   ],
   providers: [
-
     ProjectHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,

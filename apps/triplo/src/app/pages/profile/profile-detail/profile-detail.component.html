@@ -1,0 +1,70 @@
+<div class="min-vh-100 d-flex align-items-center" *ngIf="(user$ | async) as user">
+  <div class="tui-container_adaptive tui-container">
+
+    <div class="justify-content-between d-flex">
+      <a
+        routerLink="../"
+        tuiIconButton
+        icon="tuiIconArrowLeftLarge"
+        type="button"
+        [tuiHint]="tooltip"
+        appearance="flat"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+      </a>
+      <ng-template #tooltip>
+      <div>Back</div>
+      </ng-template>
+      <button
+        tuiIconButton
+        icon="tuiIconSettingsLarge"
+        type="button"
+        [tuiHint]="settings_tooltip"
+        appearance="flat"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+      <ng-template #settings_tooltip>
+        <div>Settings</div>
+      </ng-template>
+      </button>
+    </div>
+
+
+    <div class="banner tui-space_vertical-10">
+      <div class="d-flex justify-content-between py-3">
+        <div>
+          <div class="d-flex">
+            <tui-avatar
+            text="{{user.username}}"
+            [autoColor]="true"
+            size="m"
+            ></tui-avatar>
+
+            <h3 class="tui-space_left-3 tui-text_h3">{{user.username}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="description tui-space_vertical-4 w-50">
+      <h6 class="tui-text_h6">Email</h6>
+      <div class="tui-text_body-m">
+        {{user.email}}
+      </div>
+    </div>
+
+    <div class="description tui-space_vertical-4 w-50">
+      <h6 class="tui-text_h6">Gender</h6>
+      <div class="tui-text_body-m">
+        {{user.gender}}
+      </div>
+    </div>
+
+    <div class="description tui-space_vertical-4 w-50">
+      <h6 class="tui-text_h6">Registered</h6>
+      <div class="tui-text_body-m">
+        {{user.registered | date}}
+      </div>
+    </div>
+  </div>
+</div>
