@@ -1,117 +1,22 @@
-<div class="min-vh-100 d-flex align-items-center" *ngIf="(user$ | async) as user">
-  <div class="tui-container_adaptive tui-container">
-
-    <div class="justify-content-between d-flex">
-      <a
-        routerLink="../"
-        tuiIconButton
-        icon="tuiIconArrowLeftLarge"
-        type="button"
-        [tuiHint]="tooltip"
-        appearance="flat"
-        class="tui-space_right-3 tui-space_bottom-3"
-      >
-      </a>
-      <ng-template #tooltip>
-        <div>Back</div>
-      </ng-template>
+<div *ngIf="(user$ | async) as user">
+  <h5 class="tui-text_h5">Overview</h5>
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Email</h6>
+    <div class="tui-text_body-m">
+      {{user.email}}
     </div>
+  </div>
 
-    <tui-island>
-      <div class="tui-island__content">
-        <div class="d-flex tui-space_vertical-3">
-          <tui-avatar
-            text="{{user.username}}"
-            [autoColor]="true"
-            size="m"
-          ></tui-avatar>
-          <h6 class="tui-text_h6 tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{user.username}}</h6>
-
-        </div>
-        <div class="tui-island__figure tui-space_vertical-3">
-          <a
-            size="s"
-            routerLink="./Settings"
-            tuiIconButton
-            icon="tuiIconSettingsLarge"
-            type="button"
-            [tuiHint]="settings_tooltip"
-            appearance="flat"
-            class="tui-space_right-3 tui-space_bottom-3"
-          >
-            <ng-template #settings_tooltip>
-              <div>Settings</div>
-            </ng-template>
-          </a>
-        </div>
-      </div>
-    </tui-island>
-
-    <tui-island class="tui-space_vertical-3">
-      <div class="">
-        <button
-          iconRight="tuiIconOutdentLarge"
-          routerLink="/Profile"
-          size="m"
-          tuiButton
-          type="button"
-          appearance="primary"
-          class="tui-space_right-6"
-        >
-          Overview
-        </button>
-
-        <button
-          tuiButton
-          routerLink="/Profile/Projects"
-          iconRight="tuiIconCompanyLarge"
-          size="m"
-          type="button"
-          appearance="primary"
-          class="tui-space_right-6"
-        >
-          Projects
-        </button>
-
-        <button
-          tuiButton
-          iconRight="tuiIconHeartLarge"
-          routerLink="/Profile/Projects"
-          size="m"
-          type="button"
-          appearance="primary"
-          class="tui-space_right-6"
-        >
-          Liked
-        </button>
-      </div>
-    </tui-island>
-
-    <div class="tui-space_vertical-4">
-      <router-outlet></router-outlet>
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Gender</h6>
+    <div class="tui-text_body-m">
+      {{user.gender}}
     </div>
-
-    <div class="tui-space_vertical-4 w-50">
-      <h6 class="tui-text_h6">Email</h6>
-      <div class="tui-text_body-m">
-        {{user.email}}
-      </div>
+  </div>
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Registered</h6>
+    <div class="tui-text_body-m">
+      {{user.registered | date}}
     </div>
-
-    <div class="tui-space_vertical-4 w-50">
-      <h6 class="tui-text_h6">Gender</h6>
-      <div class="tui-text_body-m">
-        {{user.gender}}
-      </div>
-    </div>
-    <div class="tui-space_vertical-4 w-50">
-      <h6 class="tui-text_h6">Registered</h6>
-      <div class="tui-text_body-m">
-        {{user.registered | date}}
-      </div>
-    </div>
-
-
   </div>
 </div>
-

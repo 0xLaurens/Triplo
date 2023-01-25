@@ -20,9 +20,13 @@ import {
 import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {ProfileSettingsComponent} from "./profile-settings/profile-settings.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ProfileOverviewComponent} from "./profile-overview/profile-overview.component";
+import {ProfileProjectsComponent} from "./profile-projects/profile-projects.component";
+import {ProfileLikedComponent} from "./profile-liked/profile-liked.component";
 
 @NgModule({
-  declarations: [ProfileDetailComponent, ProfileSettingsComponent],
+  declarations: [ProfileDetailComponent, ProfileSettingsComponent, ProfileOverviewComponent, ProfileProjectsComponent, ProfileLikedComponent],
+  exports: [ProfileDetailComponent, ProfileSettingsComponent, ProfileOverviewComponent, ProfileProjectsComponent, ProfileLikedComponent],
   imports: [
     CommonModule,
     TuiAvatarModule,
@@ -43,7 +47,6 @@ import {ReactiveFormsModule} from "@angular/forms";
     TuiIslandModule,
     TuiLinkModule
   ],
-  exports: [ProfileDetailComponent, ProfileSettingsComponent],
   providers: [
     AuthHttpService,
     UserHttpService
