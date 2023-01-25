@@ -16,6 +16,11 @@ import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.co
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {AuthGuard} from "./services/authentication/auth.guard";
+import {ProfileDetailComponent} from "./pages/profile/profile-detail/profile-detail.component";
+import {ProfileSettingsComponent} from "./pages/profile/profile-settings/profile-settings.component";
+import {ProfileOverviewComponent} from "./pages/profile/profile-overview/profile-overview.component";
+import {ProfileProjectsComponent} from "./pages/profile/profile-projects/profile-projects.component";
+import {ProfileLikedComponent} from "./pages/profile/profile-liked/profile-liked.component";
 
 const routes: Routes = [
     {
@@ -23,9 +28,14 @@ const routes: Routes = [
         {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
         {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
-        {path: 'profile', component: UserDetailComponent, canActivate: [AuthGuard]},
       ]
     },
+    {path: "Profile/Settings", component: ProfileSettingsComponent, canActivate: [AuthGuard]},
+    {path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
+        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
+        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
+        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
+    ]},
     {path: '', component: HeroComponent},
     {
       path: 'About', component: AboutComponent, children: [

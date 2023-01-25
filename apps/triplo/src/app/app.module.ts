@@ -48,6 +48,8 @@ import {TaskHttpService} from './services/task/task-http.service';
 import {ProjectModule} from './pages/project/project.module';
 import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthInterceptor} from "./services/authentication/auth.interceptor";
+import {UserHttpService} from "./services/user/user-http.service";
+import {ProfileModule} from "./pages/profile/profile.module";
 
 @NgModule({
   declarations: [
@@ -63,9 +65,10 @@ import {AuthInterceptor} from "./services/authentication/auth.interceptor";
   ],
   imports: [
     BrowserModule,
-    ProjectModule,
     BrowserAnimationsModule,
     AboutModule,
+    ProfileModule,
+    ProjectModule,
     FormsModule,
     HttpClientModule,
     RouterOutlet,
@@ -106,6 +109,7 @@ import {AuthInterceptor} from "./services/authentication/auth.interceptor";
     CommentHttpService,
     UserService,
     AuthHttpService,
+    UserHttpService,
     TaskHttpService,
     {
       provide: HTTP_INTERCEPTORS,
