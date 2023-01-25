@@ -10,6 +10,8 @@ import {CommentInterface} from "@triplo/models";
 export class CommentFormComponent implements OnInit {
 
   @Input() submitLabel = "Submit";
+  @Input() tooltip = "Add a comment...";
+  @Input() start_message = "";
   @Output() handleSubmit = new EventEmitter<CommentInterface>();
   @Output() handleCancel = new EventEmitter();
 
@@ -20,7 +22,7 @@ export class CommentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      message: new FormControl("", Validators.required)
+      message: new FormControl(this.start_message, Validators.required)
     })
   }
 

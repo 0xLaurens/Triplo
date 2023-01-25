@@ -1,0 +1,123 @@
+<div class="min-vh-100 d-flex align-items-center" *ngIf="(user$ | async) as user">
+  <div class="tui-container_adaptive tui-container">
+
+    <div class="justify-content-between d-flex">
+      <a
+        routerLink="../"
+        tuiIconButton
+        icon="tuiIconArrowLeftLarge"
+        type="button"
+        [tuiHint]="tooltip"
+        appearance="flat"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+      </a>
+      <ng-template #tooltip>
+        <div>Back</div>
+      </ng-template>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" #profileForm="ngForm">
+      <div class="tui-row tui-row_sme">
+        <div class="tui-col_8">
+          <div class="d-inline-flex">
+            <h3 class="tui-form__header tui-form__header_margin-top_none">Edit Profile</h3>
+            <tui-tooltip
+              class="tui-space_left-3"
+              content="Username can't be edited"
+              direction="right"
+            ></tui-tooltip>
+          </div>
+          <div class="tui-form__row">
+            <tui-input
+              [readOnly]="true"
+              formControlName="username"
+              [tuiTextfieldCustomContent]="f['username'].valid ? success : ''"
+              class="b-form"
+            >
+              Username
+              <input
+                [disabled]="true"
+                tuiTextfield
+              />
+            </tui-input>
+
+            <ng-template #success>
+              <tui-svg
+                src="tuiIconCheckLarge"
+                class="success tui-space_left-3"
+              ></tui-svg>
+            </ng-template>
+          </div>
+
+
+          <div class="tui-form__row">
+            <tui-input
+              class="b-form"
+              formControlName="email"
+              [tuiTextfieldCustomContent]="f['email'].valid ? success : ''"
+            >
+              Enter your Email
+              <input
+                tuiTextfield
+                type="email"
+              />
+            </tui-input>
+            <ng-template #success>
+              <tui-svg
+                src="tuiIconCheckLarge"
+                class="success tui-space_left-3"
+              ></tui-svg>
+            </ng-template>
+            <tui-error
+              formControlName="email"
+              [error]="[] | tuiFieldError | async"
+            ></tui-error>
+          </div>
+
+
+          <div class="tui-form__row">
+            <tui-select
+              formControlName="gender"
+              class="b-form"
+            >
+              Gender
+              <input
+                tuiTextfield
+                placeholder="Choose a gender"
+              />
+              <tui-data-list-wrapper
+                *tuiDataList
+                [items]="genders"
+              ></tui-data-list-wrapper>
+            </tui-select>
+          </div>
+
+
+          <div class="tui-form__buttons">
+            <button
+              [disabled]="profileForm.invalid || loading"
+              [showLoader]="loading"
+              tuiButton
+              size="l"
+              type="submit"
+              class="tui-form__button"
+            >
+              Update
+            </button>
+            <button
+              routerLink="../"
+              tuiButton
+              type="button"
+              appearance="flat"
+              size="l"
+              class="tui-form__button"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

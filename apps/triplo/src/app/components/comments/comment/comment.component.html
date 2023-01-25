@@ -1,20 +1,69 @@
-<div class="tui-space_vertical-3">
+<div class="tui-space_vertical-3" *ngIf="!deleted">
   <tui-island class="tui-space_vertical-1">
     <div class="header-comment text-muted">
-      <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
-      {{comment.created | date:'short'}}
+      <div class="d-flex justify-content-between">
+        <div class="d-flex">
+          <a routerLink="/Profile/{{comment.owner}}">
+          <tui-tag *ngIf="comment.owner === user" size="m" status="primary" value="{{comment.username}}"></tui-tag>
+          <tui-tag *ngIf="comment.owner !== user" size="m" status="default" value="{{comment.username}}"></tui-tag>
+          </a>
+          <span class="tui-space_horizontal-2">{{comment.created | date:'short'}}</span>
+          <div *ngIf="comment.updated">(edited)</div>
+        </div>
+        <div class="comment-triple-dots absolute" *ngIf="user">
+          <tui-hosted-dropdown
+            *ngIf="comment.owner === user"
+            #dropdown
+            [content]="content"
+            [(open)]="dropdownOpen"
+          >
+            <button
+              tuiIconButton
+              size="xs"
+              appearance="flat"
+              icon="tuiIconMoreVer"
+              type="button"
+              [pseudoHover]="dropdown.open"
+            ></button>
+          </tui-hosted-dropdown>
+          <ng-template
+            #content
+            let-activeZone>
+            <tui-data-list
+              tuiDataListDropdownManager
+              size="m"
+              [tuiActiveZoneParent]="activeZone"
+            >
+              <button (click)="editComment()" tuiOption>
+                <tui-svg src="tuiIconEdit"></tui-svg>
+                Edit
+              </button>
+              <button (click)="deleteComment()" tuiOption>
+                <tui-svg src="tuiIconTrash"></tui-svg>
+                Delete
+              </button>
+            </tui-data-list>
+          </ng-template>
+        </div>
+      </div>
+
     </div>
     <div class="message-comment tui-space_vertical-3">
-      <p>
+      <p *ngIf="!editMode">
         {{comment.message}}
+      </p>
+      <p *ngIf="editMode">
+        <triplo-comment-form (handleSubmit)="updateComment($event)" (handleCancel)="cancelEdit()"
+                             [start_message]="comment.message" tooltip="Edit comment"
+                             submitLabel="Update"></triplo-comment-form>
       </p>
     </div>
 
     <div class="d-inline-flex text-muted">
-      <div class="likes">
-        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>
-        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
-      </div>
+<!--      <div class="likes">-->
+<!--        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>-->
+<!--        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>-->
+<!--      </div>-->
       <div class="reply">
         <a tuiLink (click)="reply()">Reply</a>
       </div>
@@ -25,7 +74,7 @@
     <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active">
       <i *ngIf="show" class="bi bi-caret-down-fill"></i>
       <i *ngIf="!show" class="bi bi-caret-up-fill"></i>
-      Replies {{comment.replyCount}}
+      Show Replies
     </button>
   </div>
 
@@ -34,8 +83,10 @@
       <triplo-comment-form (handleSubmit)="createReply($event)" (handleCancel)="cancelReply()"></triplo-comment-form>
     </div>
 
-    <div *ngIf="show">
-      <triplo-comment [comment]="replies" *ngFor="let replies of (replies$ | async)"></triplo-comment>
+    <div *ngIf="show && (replies$ | async) as rep">
+      <div *ngFor="let reply of rep[0].replies">
+      <triplo-comment [comment]="reply" [user]="user" *ngIf="reply.parent === comment._id"></triplo-comment>
+      </div>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ import {AuthenticationGuard} from "../guard/authentication.guard";
 import {AuthorizationUserGuard} from "../guard/authorization-user.guard";
 
 
-@UseGuards(AuthenticationGuard)
+// @UseGuards(AuthenticationGuard)
 @Controller("users")
 export class UserController {
 

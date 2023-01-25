@@ -7,6 +7,26 @@ export enum gender {
   other = "Other"
 }
 
+export class UserRegistration {
+  @IsString()
+  @Min(4)
+  @Max(10)
+  username: string;
+
+  @IsString()
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  password: string;
+
+  @IsEnum(gender)
+  gender: gender;
+
+  @IsDate()
+  registered: Date;
+}
+
 export class UserInterface {
   @IsString()
   @IsMongoId()

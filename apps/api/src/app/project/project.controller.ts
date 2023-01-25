@@ -5,14 +5,15 @@ import {
   Get,
   Param,
   Post,
-  Put, UseGuards,
-  Headers
+  Put,
+  Headers,
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
 import {ProjectInterface, UserInterface} from "@triplo/models";
-import {AuthenticationGuard} from "../guard/authentication.guard";
+import {InjectToken, Token} from "../auth/token.decorator";
 
-@UseGuards(AuthenticationGuard)
+// @UseGuards(AuthenticationGuard)
+
 @Controller("projects")
 export class ProjectController {
   constructor(private projectRepo: ProjectRepository) {
@@ -20,8 +21,9 @@ export class ProjectController {
 
   @Post()
   async createProject(
-    @Body() project: ProjectInterface
+    @Body() project: ProjectInterface, @InjectToken() token: Token
   ): Promise<ProjectInterface> {
+    project.ownerId = token.id
     return this.projectRepo.createProject(project)
   }
 
@@ -40,7 +42,6 @@ export class ProjectController {
     @Headers('user') user: UserInterface,
     @Param("projectId") projectId: string,
     @Body() changes: ProjectInterface): Promise<ProjectInterface> {
-
     return this.projectRepo.updateProject(projectId, changes)
   }
 

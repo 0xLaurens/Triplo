@@ -6,6 +6,7 @@ import {ProjectHttpService} from "../../../services/projects/project-http.servic
 import {RouterTestingModule} from "@angular/router/testing";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {TaskHttpService} from "../../../services/task/task-http.service";
+import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 
 describe('ProjectDetailComponent', () => {
   let component: ProjectDetailComponent;
@@ -15,7 +16,7 @@ describe('ProjectDetailComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectDetailComponent],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [ProjectHttpService, CommentHttpService, TaskHttpService]
+      providers: [ProjectHttpService, CommentHttpService, TaskHttpService, AuthHttpService]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectDetailComponent);

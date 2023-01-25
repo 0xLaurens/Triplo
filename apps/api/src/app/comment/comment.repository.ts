@@ -2,6 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {CommentInterface} from "@triplo/models";
 import {Model} from "mongoose";
+import * as mongoose from "mongoose";
 
 @Injectable()
 export class CommentRepository {
@@ -10,15 +11,30 @@ export class CommentRepository {
   }
 
   async getTopLevelComments(projectId: string): Promise<CommentInterface[]> {
-    return this.commentModel.find({ project: projectId, parent: null });
+    return this.commentModel.aggregate([
+      {$match: {project: new mongoose.Types.ObjectId(projectId), parent: null}},
+      // {$graphLookup: {from: 'comments', startWith: '$_id', connectFromField: '_id', connectToField: 'parent', as: 'replies'}},
+    ]);
   }
 
-  async getCommentReplies(commentId: string) {
-    return this.commentModel.find({ parent: commentId });
+  async getCommentReplies(commentId: string)  {
+    return this.commentModel.aggregate([
+      {$match: {_id: new mongoose.Types.ObjectId(commentId)}},
+      {
+        $graphLookup: {
+          from: 'comments',
+          startWith: '$_id',
+          connectFromField: '_id',
+          connectToField: 'parent',
+          as: 'replies',
+        },
+      },
+    ]);
   }
 
 
   async updateComment(commentId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {
+    comment.updated = true;
     return this.commentModel.findByIdAndUpdate(commentId, comment, {new: true})
   }
 

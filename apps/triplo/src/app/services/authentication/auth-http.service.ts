@@ -25,8 +25,9 @@ export class AuthHttpService {
     return this.http.post<UserInterface>("/api/login", {email, password})
       .pipe(
         map((user: UserInterface) => {
+          console.log(user)
           this.setTokenStorage(user?.token);
-          this.currentUser$.next(user);
+          this.setIdStorage(user._id)
           this.$loggedInStatus.next(true)
           return user;
         }))
@@ -41,6 +42,10 @@ export class AuthHttpService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getUser(): string | null {
+    return localStorage.getItem('id')
   }
 
   private setTokenStorage(token: string | undefined): void {
@@ -60,5 +65,12 @@ export class AuthHttpService {
 
   signOut() {
     localStorage.removeItem('token')
+    localStorage.removeItem('id')
+  }
+
+  private setIdStorage(id: string): void {
+    if (id) {
+      localStorage.setItem('id', id)
+    }
   }
 }

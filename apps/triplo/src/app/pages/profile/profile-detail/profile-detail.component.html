@@ -1,0 +1,22 @@
+<div *ngIf="(user$ | async) as user">
+  <h5 class="tui-text_h5">Overview</h5>
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Email</h6>
+    <div class="tui-text_body-m">
+      {{user.email}}
+    </div>
+  </div>
+
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Gender</h6>
+    <div class="tui-text_body-m">
+      {{user.gender}}
+    </div>
+  </div>
+  <div class="tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Registered</h6>
+    <div class="tui-text_body-m">
+      {{user.registered | date}}
+    </div>
+  </div>
+</div>
