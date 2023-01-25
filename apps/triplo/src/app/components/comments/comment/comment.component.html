@@ -3,8 +3,10 @@
     <div class="header-comment text-muted">
       <div class="d-flex justify-content-between">
         <div class="d-flex">
+          <a routerLink="/Profile/{{comment.owner}}">
           <tui-tag *ngIf="comment.owner === user" size="m" status="primary" value="{{comment.username}}"></tui-tag>
           <tui-tag *ngIf="comment.owner !== user" size="m" status="default" value="{{comment.username}}"></tui-tag>
+          </a>
           <span class="tui-space_horizontal-2">{{comment.created | date:'short'}}</span>
           <div *ngIf="comment.updated">(edited)</div>
         </div>

@@ -31,11 +31,24 @@ const routes: Routes = [
       ]
     },
     {path: "Profile/Settings", component: ProfileSettingsComponent, canActivate: [AuthGuard]},
-    {path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
+
+
+    {
+      path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
         {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
         {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
         {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
-    ]},
+      ]
+    },
+
+    {
+      path: 'Profile/:id', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
+        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
+        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
+        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
+      ]
+    },
+
     {path: '', component: HeroComponent},
     {
       path: 'About', component: AboutComponent, children: [
