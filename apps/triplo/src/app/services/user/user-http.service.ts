@@ -17,8 +17,8 @@ export class UserHttpService {
     return this.http.get<UserInterface>(`/api/users/${userId}`)
   }
 
-  updateUser(userId: string, user: UserInterface): Observable<UserInterface> {
-    return this.http.post<UserInterface>(`/api/users/${userId}`, user)
+  updateUser(userId: string, user: Partial<UserInterface>): Observable<UserInterface> {
+    return this.http.put<UserInterface>(`/api/users/${userId}`, user)
   }
 
   deleteUser(userId: string): Observable<UserInterface> {

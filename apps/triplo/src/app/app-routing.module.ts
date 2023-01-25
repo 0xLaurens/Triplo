@@ -17,6 +17,7 @@ import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.componen
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {AuthGuard} from "./services/authentication/auth.guard";
 import {ProfileDetailComponent} from "./pages/profile/profile-detail/profile-detail.component";
+import {ProfileSettingsComponent} from "./pages/profile/profile-settings/profile-settings.component";
 
 const routes: Routes = [
     {
@@ -26,6 +27,7 @@ const routes: Routes = [
         {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
       ]
     },
+    {path: "Profile/Settings", component: ProfileSettingsComponent, canActivate: [AuthGuard]},
     {path: 'Profile', component: ProfileDetailComponent, canActivate: [AuthGuard]},
     {path: '', component: HeroComponent},
     {
