@@ -3,7 +3,7 @@
 
     <div class="justify-content-between d-flex">
       <a
-        routerLink="../"
+        routerLink="/"
         tuiIconButton
         icon="tuiIconArrowLeftLarge"
         type="button"
@@ -28,7 +28,7 @@
           <h6 class="tui-text_h6 tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{user.username}}</h6>
 
         </div>
-        <div class="tui-island__figure tui-space_vertical-3">
+        <div class="tui-island__figure tui-space_vertical-3" *ngIf="other === false">
           <a
             size="s"
             routerLink="./Settings"
@@ -48,7 +48,44 @@
     </tui-island>
 
     <tui-island class="tui-space_vertical-3">
-      <div class="">
+      <div *ngIf="other">
+        <button
+          iconRight="tuiIconOutdentLarge"
+          routerLink="/Profile/{{user._id}}"
+          size="m"
+          tuiButton
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Overview
+        </button>
+
+        <button
+          tuiButton
+          routerLink="/Profile/{{user._id}}/Projects"
+          iconRight="tuiIconCompanyLarge"
+          size="m"
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Projects
+        </button>
+
+        <button
+          tuiButton
+          iconRight="tuiIconHeartLarge"
+          routerLink="/Profile/{{user._id}}/Liked"
+          size="m"
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Liked
+        </button>
+      </div>
+      <div *ngIf="!other">
         <button
           iconRight="tuiIconOutdentLarge"
           routerLink="/Profile"

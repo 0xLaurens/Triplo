@@ -3,7 +3,10 @@
     <div class="header-comment text-muted">
       <div class="d-flex justify-content-between">
         <div class="d-flex">
-          <tui-tag size="m" status="primary" value="{{comment.username}}"></tui-tag>
+          <a routerLink="/Profile/{{comment.owner}}">
+          <tui-tag *ngIf="comment.owner === user" size="m" status="primary" value="{{comment.username}}"></tui-tag>
+          <tui-tag *ngIf="comment.owner !== user" size="m" status="default" value="{{comment.username}}"></tui-tag>
+          </a>
           <span class="tui-space_horizontal-2">{{comment.created | date:'short'}}</span>
           <div *ngIf="comment.updated">(edited)</div>
         </div>
@@ -57,10 +60,10 @@
     </div>
 
     <div class="d-inline-flex text-muted">
-      <div class="likes">
-        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>
-        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>
-      </div>
+<!--      <div class="likes">-->
+<!--        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>-->
+<!--        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>-->
+<!--      </div>-->
       <div class="reply">
         <a tuiLink (click)="reply()">Reply</a>
       </div>

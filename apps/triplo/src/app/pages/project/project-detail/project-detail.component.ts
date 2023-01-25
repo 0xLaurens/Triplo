@@ -78,11 +78,11 @@ export class ProjectDetailComponent implements OnInit {
     this.comments$ = this.commentService.getTopLevelComments(this.id)
   }
 
-  dislike(_id: string) {
-
+  dislike(projectId: string) {
+    console.log(projectId)
   }
 
-  like(_id: string) {
+  like(projectId: string) {
 
   }
 }
