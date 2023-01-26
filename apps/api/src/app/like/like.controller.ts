@@ -42,4 +42,10 @@ export class LikeController {
   async deleteLike(@Param("likeId") likeId: string): Promise<LikeInterface> {
     return this.likeRepo.deleteLike(likeId)
   }
+
+  @Get(":userId/:projectId")
+  async findLikeCompositeId (@Param("userId") userId: string, @Param("projectId") projectId): Promise<LikeInterface> {
+    return this.likeRepo.findLikeCompositeId(userId, projectId)
+  }
+
 }

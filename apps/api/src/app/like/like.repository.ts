@@ -95,4 +95,8 @@ export class LikeRepository {
   }
 
 
+  async findLikeCompositeId (userId: string, projectId): Promise<LikeInterface> {
+    return this.likeModel.findOne({compositeId: `${userId}_${projectId}`})
+  }
+
 }
