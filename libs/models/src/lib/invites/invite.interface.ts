@@ -14,6 +14,12 @@ export class InviteInterface{
   recipient: string;
 
   @IsString()
+  projectName: string;
+
+  @IsMongoId()
+  project: string;
+
+  @IsString()
   subject: string;
 
   @IsString()
