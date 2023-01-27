@@ -21,39 +21,50 @@
         <div>
           <div class="d-flex">
             <h3 class="tui-text_h3">{{project.name}}</h3>
-            <div *ngIf="(like$ | async) as current_like">
-              <a *ngIf="current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-up-fill"></i>
-              </a>
-              <a *ngIf="!current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-up"></i>
-              </a>
-              {{project.LikeCount}}
-
-              <a tuiButton *ngIf="!current_like.isPositive" (click)="like(false, current_like)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-down-fill"></i>
-              </a>
-              <a tuiButton *ngIf="current_like.isPositive" (click)="like(false, current_like)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-down"></i>
-              </a>
-              {{project.DislikeCount}}
+            <div class="like-group d-flex align-self-center" *ngIf="(like$ | async) as current_like">
+              <div class="like-button d-flex">
+                <a *ngIf="current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-up-fill"></i>
+                </a>
+                <a *ngIf="!current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-up"></i>
+                </a>
+                <p
+                  class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.LikeCount}}</p>
+              </div>
+              <div class="dislike-button d-flex">
+                <a tuiButton *ngIf="!current_like.isPositive" (click)="like(false, current_like)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-down-fill"></i>
+                </a>
+                <a tuiButton *ngIf="current_like.isPositive" (click)="like(false, current_like)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-down"></i>
+                </a>
+                <p
+                  class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.DislikeCount}}</p>
+              </div>
             </div>
 
-            <div *ngIf="(like$ | async) === null">
-              <a tuiButton (click)="like(true)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-up"></i>
-              </a>
-              {{project.LikeCount}}
-              <a tuiButton (click)="like(false)" size="s"
-                 class="tui-space_left-10">
-                <i class="bi-hand-thumbs-down"></i>
-              </a>
-              {{project.DislikeCount}}
+            <div class="like-group d-flex align-self-center" *ngIf="(like$ | async) === null">
+              <div class="like-button d-flex">
+                <a tuiButton (click)="like(true)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-up-fill"></i>
+                </a>
+                <p
+                  class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.LikeCount}}</p>
+              </div>
+              <div class="dislike-button d-flex">
+                <a tuiButton (click)="like(false)" size="s"
+                   class="tui-space_left-10">
+                  <i class="bi-hand-thumbs-down"></i>
+                </a>
+                <p
+                  class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.DislikeCount}}</p>
+              </div>
             </div>
           </div>
           <tui-tag value="Since {{project.created | date}}"></tui-tag>
