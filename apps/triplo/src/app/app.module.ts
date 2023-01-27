@@ -50,6 +50,7 @@ import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthInterceptor} from "./services/authentication/auth.interceptor";
 import {UserHttpService} from "./services/user/user-http.service";
 import {ProfileModule} from "./pages/profile/profile.module";
+import {LikeHttpService} from "./services/likes/like-http.service";
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import {ProfileModule} from "./pages/profile/profile.module";
     AuthHttpService,
     UserHttpService,
     TaskHttpService,
+    LikeHttpService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

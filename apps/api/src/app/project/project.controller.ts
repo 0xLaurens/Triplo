@@ -49,4 +49,14 @@ export class ProjectController {
   async deleteProject(@Param("projectId") projectId: string): Promise<ProjectInterface> {
     return this.projectRepo.deleteProject(projectId)
   }
+
+  @Post("/:projectId/user/:userId")
+  async addMemberToProject(@Param("projectId") projectId: string,@Param("userId") userId: string): Promise<ProjectInterface> {
+    return this.projectRepo.addMemberToProject(projectId, userId)
+  }
+
+  @Put("/:projectId/user/:userId/remove")
+  async removeMemberFromProject(@Param("projectId") projectId: string,@Param("userId") userId: string): Promise<ProjectInterface> {
+    return this.projectRepo.removeMemberFromProject(projectId, userId)
+  }
 }

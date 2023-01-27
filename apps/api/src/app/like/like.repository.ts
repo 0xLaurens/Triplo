@@ -46,7 +46,6 @@ export class LikeRepository {
     const session = await this.connection.startSession();
     await session.withTransaction(async () => {
       const prev = await this.likeModel.findById(likeId, {}, {session});
-      console.log(prev)
       await this.likeModel.findByIdAndUpdate(likeId, {...like}, {session})
 
       if (like.isPositive != prev.isPositive) {
@@ -94,5 +93,9 @@ export class LikeRepository {
     return like;
   }
 
+
+  async findLikeCompositeId (userId: string, projectId: string): Promise<LikeInterface> {
+    return this.likeModel.findOne({compositeId: `${userId}_${projectId}`})
+  }
 
 }

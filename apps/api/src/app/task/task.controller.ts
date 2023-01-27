@@ -3,7 +3,7 @@ import {TaskRepository} from "./task.repository";
 import {TaskInterface} from "@triplo/models";
 import {AuthenticationGuard} from "../guard/authentication.guard";
 
-@UseGuards(AuthenticationGuard)
+// @UseGuards(AuthenticationGuard)
 @Controller()
 export class TaskController {
   constructor(private taskRepo: TaskRepository) {
