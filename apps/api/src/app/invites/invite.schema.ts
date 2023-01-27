@@ -3,27 +3,24 @@ import mongoose from "mongoose";
 
 
 @Schema()
-export class Subtask {
-  @Prop()
-  name: string;
+export class Invite {
+  @Prop({required: true, index: true})
+  recipient: string;
 
   @Prop()
-  description: string;
-
-  @Prop({default: Date.now})
-  created: Date;
-
+  projectName: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
   project: string;
+
+  @Prop({default: "No subject"})
+  subject: string;
+
+  @Prop({default: "No message"})
+  message: string;
+
+  @Prop({default: Date.now})
+  created: Date;
 }
 
-export const subtaskSchema = SchemaFactory.createForClass(Subtask);
-
-@Schema()
-export class Task extends Subtask {
-  @Prop({type: [subtaskSchema]})
-  subtasks: [Subtask]
-}
-
-export const InviteSchema = SchemaFactory.createForClass(Task)
+export const InviteSchema = SchemaFactory.createForClass(Invite)

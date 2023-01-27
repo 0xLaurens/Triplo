@@ -21,8 +21,13 @@ export class InviteController {
     return this.inviteRepo.getInviteById(inviteId)
   }
 
+  @Get("/project/:projectId")
+  async getInviteByProjectId(@Param("projectId") projectId: string): Promise<InviteInterface[]> {
+    return this.inviteRepo.getInviteByProjectId(projectId)
+  }
+
   @Get("/user/:userId")
-  async getInviteByUserId(@Param("userId") userId: string): Promise<InviteInterface> {
+  async getInviteByUserId(@Param("userId") userId: string): Promise<InviteInterface[]> {
     return this.inviteRepo.getInviteByUserId(userId)
   }
 

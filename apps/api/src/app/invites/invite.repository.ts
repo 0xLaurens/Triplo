@@ -14,8 +14,12 @@ export class InviteRepository {
     return this.inviteModel.findByIdAndUpdate(inviteId, invite, {new: true})
   }
 
-  async getInviteByUserId(userId: string): Promise<InviteInterface> {
-    return this.inviteModel.findOne({recipient: userId})
+  async getInviteByProjectId(projectId: string): Promise<InviteInterface[]> {
+    return this.inviteModel.find({project: projectId})
+  }
+
+  async getInviteByUserId(userId: string): Promise<InviteInterface[]> {
+    return this.inviteModel.find({recipient: userId})
   }
 
   async deleteInvite(inviteId: string): Promise<InviteInterface> {
