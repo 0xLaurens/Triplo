@@ -1,5 +1,4 @@
 <div class="tui-space_vertical-16 d-flex align-items-center" *ngIf="(project$ | async) as project">
-
   <div class="tui-container_adaptive tui-container">
     <div class="justify-content-between d-flex tui-space_top-16">
       <a
@@ -22,10 +21,40 @@
         <div>
           <div class="d-flex">
             <h3 class="tui-text_h3">{{project.name}}</h3>
-            <a tuiMarkerIcon (click)="like(project._id)" mode="link" size="xs" src="tuiIconLikeLarge"
-               class="tui-space_left-10"></a>
-            <a tuiMarkerIcon (click)="dislike(project._id)" mode="link" size="xs" src="tuiIconDislikeLarge"
-               class="tui-space_left-3"></a>
+            <div *ngIf="(like$ | async) as current_like">
+              <a *ngIf="current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-up-fill"></i>
+              </a>
+              <a *ngIf="!current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-up"></i>
+              </a>
+              {{project.LikeCount}}
+
+              <a tuiButton *ngIf="!current_like.isPositive" (click)="like(false, current_like)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-down-fill"></i>
+              </a>
+              <a tuiButton *ngIf="current_like.isPositive" (click)="like(false, current_like)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-down"></i>
+              </a>
+              {{project.DislikeCount}}
+            </div>
+
+            <div *ngIf="(like$ | async) === null">
+              <a tuiButton (click)="like(true)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-up"></i>
+              </a>
+              {{project.LikeCount}}
+              <a tuiButton (click)="like(false)" size="s"
+                 class="tui-space_left-10">
+                <i class="bi-hand-thumbs-down"></i>
+              </a>
+              {{project.DislikeCount}}
+            </div>
           </div>
           <tui-tag value="Since {{project.created | date}}"></tui-tag>
         </div>
@@ -64,7 +93,7 @@
       </div>
 
       <div *ngFor="let comment of (comments$ | async)">
-        <triplo-comment [comment]="comment" [user]="user$"></triplo-comment>
+        <triplo-comment [comment]="comment" [user]="userId"></triplo-comment>
       </div>
 
       <div *ngIf="(comments$ | async)?.length === 0" class="tui-text_body-m">No comments

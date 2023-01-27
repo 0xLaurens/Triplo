@@ -44,7 +44,7 @@ export class LikeController {
   }
 
   @Get(":userId/:projectId")
-  async findLikeCompositeId (@Param("userId") userId: string, @Param("projectId") projectId): Promise<LikeInterface> {
+  async findLikeCompositeId (@Param("userId") userId: string, @Param("projectId") projectId: string): Promise<LikeInterface> {
     return this.likeRepo.findLikeCompositeId(userId, projectId)
   }
 

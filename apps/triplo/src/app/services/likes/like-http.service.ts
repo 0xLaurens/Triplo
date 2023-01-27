@@ -13,7 +13,7 @@ export class LikeHttpService {
     return this.http.get<LikeInterface>(`api/like/${likeId}`)
   }
 
-  createLike(like: LikeInterface): Observable<LikeInterface> {
+  createLike(like: Partial<LikeInterface>): Observable<LikeInterface> {
     return this.http.post<LikeInterface>(`api/like`, like)
   }
 
@@ -21,7 +21,7 @@ export class LikeHttpService {
     return this.http.put<LikeInterface>(`api/like/${likeId}`, like)
   }
 
-  deleteComment(likeId: string,): Observable<LikeInterface> {
+  deleteLike(likeId: string): Observable<LikeInterface> {
     return this.http.delete<LikeInterface>(`api/like/${likeId}`)
   }
 

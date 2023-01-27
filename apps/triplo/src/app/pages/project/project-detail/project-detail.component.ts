@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
-import {CommentInterface, ProjectInterface, TaskInterface} from "@triplo/models";
+import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface} from "@triplo/models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
@@ -9,6 +9,7 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
 import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 import {ConfirmAlertComponent} from "../../../shared/alert/confirm/confirm-alert.component";
 import {AuthHttpService} from "../../../services/authentication/auth-http.service";
+import {LikeHttpService} from "../../../services/likes/like-http.service";
 
 @Component({
   selector: 'triplo-project-detail',
@@ -20,7 +21,9 @@ export class ProjectDetailComponent implements OnInit {
   id!: string
   $tasks: Observable<TaskInterface[]>;
   notification: Observable<boolean>
-  user$: string | null;
+  userId: string | null;
+  projectId: string;
+  like$: Observable<LikeInterface>
 
   constructor(
     @Inject(TuiAlertService)
@@ -32,6 +35,7 @@ export class ProjectDetailComponent implements OnInit {
     private commentService: CommentHttpService,
     private taskService: TaskHttpService,
     private authService: AuthHttpService,
+    private likeService: LikeHttpService,
   ) {
   }
 
@@ -40,8 +44,14 @@ export class ProjectDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id']
     });
-    this.user$ = this.authService.getUser()
+    this.userId = this.authService.getUser()
     this.project$ = this.projectService.findProjectById(this.id)
+    this.project$.subscribe(p => {
+      this.projectId = p._id;
+      if (this.userId) {
+        this.like$ = this.likeService.findLikeCompositeId(this.userId, this.projectId)
+      }
+    })
     this.comments$ = this.commentService.getTopLevelComments(this.id)
     this.$tasks = this.taskService.getTopLevelTasks(this.id);
 
@@ -78,11 +88,65 @@ export class ProjectDetailComponent implements OnInit {
     this.comments$ = this.commentService.getTopLevelComments(this.id)
   }
 
-  dislike(projectId: string) {
-    console.log(projectId)
+  private createLike(isPositive: boolean, projectId: string, userId: string): Partial<LikeInterface> {
+    return {
+      isPositive: isPositive, projectId: projectId, userId: userId
+    }
   }
 
-  like(projectId: string) {
+  updateProjectCounter(isPositive: boolean, increase: number, both?: boolean) {
+    this.project$.subscribe(p => {
+        if (isPositive) {
+          p.LikeCount += increase;
+        } else {
+          p.DislikeCount += increase;
+        }
+        if(both) {
+          if (isPositive) {
+            p.LikeCount += 1
+            p.DislikeCount += -1
+          } else {
+            p.LikeCount += -1
+            p.DislikeCount += 1
+          }
+        }
 
+        if (p.DislikeCount < 0) {
+            p.DislikeCount = 0
+        }
+        if (p.LikeCount < 0) {
+            p.LikeCount = 0
+        }
+        this.project$ = new Observable<ProjectInterface>(o => o.next(p))
+      }
+    )
   }
+
+
+  like(isPositive: boolean, like?: LikeInterface) {
+    if (this.userId) {
+      if (!like) {
+        this.likeService.createLike(this.createLike(isPositive, this.projectId, this.userId)).subscribe(l => {
+          this.like$ = new Observable<LikeInterface>((o) => o.next(l))
+        });
+        this.updateProjectCounter(isPositive, 1)
+      }
+
+      if (like) {
+        if (like.isPositive === isPositive) {
+          this.likeService.deleteLike(like._id).subscribe(l => {
+            this.like$ = new Observable<LikeInterface>()
+            this.updateProjectCounter(isPositive, -1)
+          });
+        } else {
+          like.isPositive = isPositive
+          this.likeService.updateLike(like._id, like).subscribe(l => {
+            this.like$ = new Observable<LikeInterface>((o) => o.next(l))
+          });
+          this.updateProjectCounter(isPositive, 0, true)
+        }
+      }
+    }
+  }
+
 }

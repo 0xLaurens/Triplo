@@ -24,6 +24,7 @@ import {
 import {AppModule} from "../../app.module";
 import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
+import {LikeHttpService} from "../../services/likes/like-http.service";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -73,6 +74,7 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
   ],
   providers: [
     ProjectHttpService,
+    LikeHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,
       useValue: {
