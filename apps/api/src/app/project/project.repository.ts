@@ -37,4 +37,12 @@ export class ProjectRepository {
     await this.neo4jService.write(`CREATE (p:Project {id: "${created._id}", name: "${created.name}"})`);
     return created
   }
+
+  async addMemberToProject(projectId: string, userId: string): Promise<ProjectInterface> {
+    return this.projectModel.findByIdAndUpdate(projectId, {$addToSet: {members: userId}}, {new: true})
+  }
+
+  async removeMemberFromProject(projectId: string, userId: string): Promise<ProjectInterface> {
+    return this.projectModel.findByIdAndUpdate(projectId, {$pull: {members: userId}}, {new: true});
+  }
 }
