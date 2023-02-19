@@ -1,24 +1,4 @@
 <div class="tui-space_vertical-10" *ngIf="(project$ | async) as project">
-  <h4 class="tui-text_h4">Overview</h4>
-  <div class="description tui-space_vertical-4 w-50">
-    <h6 class="tui-text_h6">Description</h6>
-    <div class="tui-text_body-m">
-      {{project.description}}
-    </div>
-  </div>
-  <div class="tasks tui-space-vertical-10">
-    <div class="d-flex justify-content-between py-3">
-      <h6 class="tui-text_h6">Tasks</h6>
-      <a routerLink="Task/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"
-         class="tui-space_right-2"></a>
-    </div>
-    <div *ngIf="($tasks | async)?.length === 0" class="tui-text_body-m">This project currently doesn't have any
-      tasks
-      available.
-    </div>
-    <div *ngFor="let task of ($tasks | async)">
-      <triplo-task-card [task]="task"></triplo-task-card>
-    </div>
-  </div>
+  <h4 class="tui-text_h4">Members</h4>
 </div>
 

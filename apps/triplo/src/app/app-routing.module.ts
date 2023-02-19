@@ -24,6 +24,9 @@ import {ProfileLikedComponent} from "./pages/profile/profile-liked/profile-liked
 import {
   ProjectDetailOverviewComponent
 } from "./pages/project/project-detail/project-detail-overview/project-detail-overview.component";
+import {
+  ProjectDetailMembersComponent
+} from "./pages/project/project-detail/project-detail-members/project-detail-members.component";
 
 const routes: Routes = [
     {
@@ -60,14 +63,14 @@ const routes: Routes = [
         {path: 'UserStories', component: AboutUserstoriesComponent}
       ]
     },
-    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {
       path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
-        {path: 'Members', component: ProjectDetailOverviewComponent},
+        {path: 'Members', component: ProjectDetailMembersComponent},
       ]
     },
     {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects', component: ProjectOverviewComponent},
 
     {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},

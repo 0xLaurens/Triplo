@@ -25,14 +25,8 @@ import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
 import {ProjectDetailOverviewComponent} from "./project-detail/project-detail-overview/project-detail-overview.component";
+import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
 
-export function minLengthValidator(context: { requiredLength: string }): string {
-  return `Minimum length — ${context.requiredLength}`;
-}
-
-export function maxLengthValidator(context: { requiredLength: string }): string {
-  return `Max amount of tags — ${context.requiredLength}`;
-}
 
 @NgModule({
   declarations: [
@@ -40,14 +34,16 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     ProjectCardListComponent,
     ProjectDetailComponent,
     ProjectEditComponent,
-    ProjectDetailOverviewComponent
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
   ],
   exports: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
     ProjectEditComponent,
-    ProjectDetailOverviewComponent
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
   ],
   imports: [
     CommentModule,
