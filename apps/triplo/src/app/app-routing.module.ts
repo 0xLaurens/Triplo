@@ -21,6 +21,9 @@ import {ProfileSettingsComponent} from "./pages/profile/profile-settings/profile
 import {ProfileOverviewComponent} from "./pages/profile/profile-overview/profile-overview.component";
 import {ProfileProjectsComponent} from "./pages/profile/profile-projects/profile-projects.component";
 import {ProfileLikedComponent} from "./pages/profile/profile-liked/profile-liked.component";
+import {
+  ProjectDetailOverviewComponent
+} from "./pages/project/project-detail/project-detail-overview/project-detail-overview.component";
 
 const routes: Routes = [
     {
@@ -58,7 +61,12 @@ const routes: Routes = [
       ]
     },
     {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard]},
+    {
+      path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
+        {path: '', component: ProjectDetailOverviewComponent},
+        {path: 'Members', component: ProjectDetailOverviewComponent},
+      ]
+    },
     {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects', component: ProjectOverviewComponent},
 

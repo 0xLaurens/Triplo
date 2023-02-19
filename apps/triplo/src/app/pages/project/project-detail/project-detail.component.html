@@ -47,6 +47,7 @@
       <div>
         <button
           iconRight="tuiIconCompassLarge"
+          routerLink="/Projects/{{project._id}}"
           size="m"
           tuiButton
           type="button"
@@ -58,18 +59,8 @@
 
         <button
           tuiButton
-          iconRight="tuiIconActivityLarge"
-          size="m"
-          type="button"
-          appearance="primary"
-          class="tui-space_right-6"
-        >
-          Activity
-        </button>
-
-        <button
-          tuiButton
           iconRight="tuiIconUsersLarge"
+          routerLink="/Projects/{{project._id}}/Members"
           size="m"
           type="button"
           appearance="primary"
@@ -104,7 +95,8 @@
             <i class="bi-hand-thumbs-down"></i>
           </a>
           <p
-            class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.DislikeCount}}</p>
+            class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.DislikeCount}}
+          </p>
         </div>
       </div>
       <div class="like-group d-flex align-self-center" *ngIf="(like$ | async) === null">
@@ -146,74 +138,4 @@
       </div>
     </div>
   </div>
-  <!--    Old -->
-
-  <!--  <div class="justify-content-between d-flex tui-space_top-16">-->
-  <!--    <a-->
-  <!--      size="s"-->
-  <!--      routerLink="../"-->
-  <!--      tuiIconButton-->
-  <!--      icon="tuiIconArrowLeftLarge"-->
-  <!--      type="button"-->
-  <!--      [tuiHint]="tooltip"-->
-  <!--      appearance="flat"-->
-  <!--      class="tui-space_right-3 tui-space_bottom-3"-->
-  <!--    >-->
-  <!--    </a>-->
-  <!--    <ng-template #tooltip>-->
-  <!--      <div>Back</div>-->
-  <!--    </ng-template>-->
-  <!--  </div>-->
-  <!--  <div class="banner tui-space_bottom-10 tui-space_top-3">-->
-  <!--    <div class="d-flex justify-content-between py-3">-->
-  <!--      <div>-->
-  <!--        <div class="d-flex">-->
-  <!--          <h3 class="tui-text_h3">{{project.name}}</h3>-->
-
-  <!--          <tui-tag value="Since {{project.created | date}}"></tui-tag>-->
-  <!--        </div>-->
-  <!--        <div>-->
-  <!--          <a routerLink="/Projects/{{project._id}}/Edit" tuiMarkerIcon mode="link" size="xs" src="tuiIconEditLarge"-->
-  <!--             class="tui-space_right-2"></a>-->
-  <!--          <a tuiMarkerIcon (click)="deleteProject()" mode="link" size="xs" src="tuiIconTrashLarge"-->
-  <!--             class="tui-space_right-2"></a>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-
-  <!--    <div class="description tui-space_vertical-10 w-50">-->
-  <!--      <h6 class="tui-text_h6">Description</h6>-->
-  <!--      <div class="tui-text_body-m">-->
-  <!--        {{project.description}}-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="tasks tui-space-vertical-10">-->
-  <!--      <div class="d-flex justify-content-between py-3">-->
-  <!--        <h5 class="tui-text_h6">Tasks</h5>-->
-  <!--        <a routerLink="Task/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"-->
-  <!--           class="tui-space_right-2"></a>-->
-  <!--      </div>-->
-  <!--      <div *ngIf="($tasks | async)?.length === 0" class="tui-text_body-m">This project currently doesn't have any-->
-  <!--        tasks-->
-  <!--        available.-->
-  <!--      </div>-->
-  <!--      <div *ngFor="let task of ($tasks | async)">-->
-  <!--        <triplo-task-card [task]="task"></triplo-task-card>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="comments tui-space-vertical-10">-->
-  <!--      <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>-->
-  <!--      <div class="comment-reaction tui-space_vertical-5">-->
-  <!--        <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>-->
-  <!--      </div>-->
-
-  <!--      <div *ngFor="let comment of (comments$ | async)">-->
-  <!--        <triplo-comment [comment]="comment" [user]="userId"></triplo-comment>-->
-  <!--      </div>-->
-
-  <!--      <div *ngIf="(comments$ | async)?.length === 0" class="tui-text_body-m">No comments-->
-  <!--        yet.-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
+</div>

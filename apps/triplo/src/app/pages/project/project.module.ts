@@ -15,15 +15,16 @@ import {
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-    TUI_VALIDATION_ERRORS,
-    TuiFieldErrorPipeModule,
-    TuiInputModule, TuiInputTagModule,
-    TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
-    TuiTextAreaModule
+  TUI_VALIDATION_ERRORS,
+  TuiFieldErrorPipeModule,
+  TuiInputModule, TuiInputTagModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
+  TuiTextAreaModule
 } from "@taiga-ui/kit";
 import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
+import {ProjectDetailOverviewComponent} from "./project-detail/project-detail-overview/project-detail-overview.component";
 
 export function minLengthValidator(context: { requiredLength: string }): string {
   return `Minimum length — ${context.requiredLength}`;
@@ -38,40 +39,42 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailOverviewComponent
   ],
   exports: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailOverviewComponent
   ],
-    imports: [
-        CommentModule,
-        TaskModule,
-        TuiRootModule,
-        CommonModule,
-        RouterLinkWithHref,
-        FormsModule,
-        ReactiveFormsModule,
-        TuiAlertModule,
-        TuiIslandModule,
-        TuiLinkModule,
-        TuiButtonModule,
-        TuiHintModule,
-        TuiTextfieldControllerModule,
-        TuiInputModule,
-        TuiSvgModule,
-        TuiErrorModule,
-        TuiFieldErrorPipeModule,
-        TuiTextAreaModule,
-        RouterLink,
-        TuiTagModule,
-        TuiInputTagModule,
-        TuiFormatDatePipeModule,
-        TuiMarkerIconModule,
-        RouterOutlet,
-    ],
+  imports: [
+    CommentModule,
+    TaskModule,
+    TuiRootModule,
+    CommonModule,
+    RouterLinkWithHref,
+    FormsModule,
+    ReactiveFormsModule,
+    TuiAlertModule,
+    TuiIslandModule,
+    TuiLinkModule,
+    TuiButtonModule,
+    TuiHintModule,
+    TuiTextfieldControllerModule,
+    TuiInputModule,
+    TuiSvgModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    TuiTextAreaModule,
+    RouterLink,
+    TuiTagModule,
+    TuiInputTagModule,
+    TuiFormatDatePipeModule,
+    TuiMarkerIconModule,
+    RouterOutlet,
+  ],
   providers: [
     ProjectHttpService,
     LikeHttpService,
