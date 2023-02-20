@@ -6,7 +6,7 @@ import {
   Param,
   Post,
   Put,
-  Headers,
+  Headers, Query,
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
 import {ProjectInterface, UserInterface} from "@triplo/models";
@@ -33,8 +33,8 @@ export class ProjectController {
   }
 
   @Get(":projectId")
-  async findProjectById(@Param("projectId") projectId: string): Promise<ProjectInterface> {
-    return this.projectRepo.findProjectById(projectId)
+  async findProjectById(@Param("projectId") projectId: string, @Query("members") members: boolean): Promise<ProjectInterface> {
+    return this.projectRepo.findProjectById(projectId, members)
   }
 
   @Put(":projectId")

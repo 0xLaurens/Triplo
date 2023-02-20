@@ -1,5 +1,52 @@
 <div class="tui-space_vertical-10" *ngIf="(project$ | async) as project">
-  <h4 class="tui-text_h4">Members</h4>
-  IsOwner: {{isOwner}}
+  <h5 class="tui-text_h5 tui-space_vertical-4">Members</h5>
+  <tui-island class="tui-space_vertical-2" *ngIf="owner">
+    <div class="tui-island__content">
+      <div class="d-flex">
+        <tui-avatar
+          text="{{owner.username}}"
+          [autoColor]="true"
+          size="s"
+        ></tui-avatar>
+
+        <a tuiLink
+           *ngIf="userId === owner._id"
+           routerLink="/Profile"
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}</a>
+        <a tuiLink
+           *ngIf="userId !== owner._id"
+           routerLink="/Profile/{{owner._id}}"
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}</a>
+        <tui-badge
+          status="primary"
+          value="Owner"
+          class="tui-space_right-2 align-self-center"
+        >
+          <tui-svg src="tuiIconAward"></tui-svg>
+        </tui-badge>
+
+      </div>
+    </div>
+  </tui-island>
+  <tui-island class="tui-space_vertical-2" *ngFor="let member of project.members">
+    <div class="tui-island__content">
+      <div class="d-flex">
+        <tui-avatar
+          text="{{member.username}}"
+          [autoColor]="true"
+          size="s"
+        ></tui-avatar>
+
+        <a tuiLink
+           *ngIf="userId === member._id"
+           routerLink="/Profile"
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+        <a tuiLink
+           *ngIf="userId !== member._id"
+           routerLink="/Profile/{{member._id}}"
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+      </div>
+    </div>
+  </tui-island>
 </div>
 

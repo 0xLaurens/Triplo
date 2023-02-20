@@ -15,7 +15,7 @@ import {
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-  TUI_VALIDATION_ERRORS,
+  TUI_VALIDATION_ERRORS, TuiAvatarModule, TuiBadgeModule,
   TuiFieldErrorPipeModule,
   TuiInputModule, TuiInputTagModule,
   TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
@@ -70,6 +70,8 @@ import {ProjectDetailMembersComponent} from "./project-detail/project-detail-mem
     TuiFormatDatePipeModule,
     TuiMarkerIconModule,
     RouterOutlet,
+    TuiAvatarModule,
+    TuiBadgeModule,
   ],
   providers: [
     ProjectHttpService,

@@ -28,9 +28,6 @@ export class Project {
 
   @Prop({required: true})
   Tags: string[]
-
-  @Prop()
-  comments?: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }]
 }
 
 export const ProjectSchema = SchemaFactory.createForClass(Project);

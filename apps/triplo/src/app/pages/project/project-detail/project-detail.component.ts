@@ -1,6 +1,6 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
-import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface} from "@triplo/models";
+import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface, UserInterface} from "@triplo/models";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
@@ -24,7 +24,7 @@ export class ProjectDetailComponent implements OnInit {
   userId: string | null;
   projectId: string;
   like$: Observable<LikeInterface>
-  private ownerId: string;
+  private ownerId: string | UserInterface;
   isOwner = false;
 
   constructor(

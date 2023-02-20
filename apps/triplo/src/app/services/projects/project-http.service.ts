@@ -13,7 +13,11 @@ export class ProjectHttpService {
     return this.http.get<ProjectInterface[]>('/api/projects')
   }
 
-  findProjectById(projectId: string): Observable<ProjectInterface> {
+  findProjectById(projectId: string, members?: boolean): Observable<ProjectInterface> {
+    if(members) {
+      return this.http.get<ProjectInterface>(`/api/projects/${projectId}?members=${members}`)
+    }
+
     return this.http.get<ProjectInterface>(`/api/projects/${projectId}`)
   }
 
