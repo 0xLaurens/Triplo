@@ -84,4 +84,8 @@ export class ProjectMembersInviteComponent implements OnInit {
       }
     })
   }
+
+  removeFromList(user: UserInterface) {
+    this.usersToInvite.delete(user)
+  }
 }

@@ -12,7 +12,6 @@
     ></a>
   </div>
   <form
-    class="container"
     [formGroup]="inviteForm"
   >
     <tui-input
@@ -43,7 +42,7 @@
 
   <div class="tui-space_vertical-2" *ngIf="usersToInvite.size !== 0">
     <p class="tui-text_body-l tui-space_vertical-4">Members being invited</p>
-    <div class="tui-space_vertical-2" *ngFor="let member of usersToInvite">
+    <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let member of usersToInvite">
       <div class="tui-island__content">
         <div class="d-flex">
           <tui-avatar
@@ -62,6 +61,15 @@
              class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
         </div>
       </div>
+      <a
+        class="align-self-center"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="s"
+        (click)="removeFromList(member)"
+        icon="tuiIconCloseLarge"
+      ></a>
     </div>
   </div>
 
