@@ -1,0 +1,72 @@
+<div class="tui-space_vertical-10">
+  <h5 class="tui-text_h5 tui-space_vertical-4">Invite Member</h5>
+
+  <form
+    class="container"
+    [formGroup]="inviteForm"
+  >
+    <tui-input
+      *tuiLet="users$ | async as users"
+      formControlName="username"
+    >
+      Username
+      <input
+        tuiTextfield
+        placeholder="Enter the username"
+      />
+      <tui-data-list *tuiDataList>
+        <button
+          *ngFor="let user of users"
+          tuiOption
+          [value]="user.username"
+          (click)="onSelected(user)"
+        >
+          {{ user.username }}
+          <tui-avatar
+            size="xs"
+            [text]="user.username"
+          ></tui-avatar>
+        </button>
+      </tui-data-list>
+    </tui-input>
+  </form>
+
+  <div class="tui-space_vertical-2" *ngIf="usersToInvite.size !== 0">
+    <p class="tui-text_body-l tui-space_vertical-4">Members being invited</p>
+    <div class="tui-space_vertical-2" *ngFor="let member of usersToInvite">
+      <div class="tui-island__content">
+        <div class="d-flex">
+          <tui-avatar
+            text="{{member.username}}"
+            [autoColor]="true"
+            size="s"
+          ></tui-avatar>
+
+          <a tuiLink
+             *ngIf="userId === member._id"
+             routerLink="/Profile"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+          <a tuiLink
+             *ngIf="userId !== member._id"
+             routerLink="/Profile/{{member._id}}"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invite-button tui-space_vertical-4">
+    <button
+      [disabled]="usersToInvite.size === 0"
+      tuiButton
+      (click)="inviteMembers()"
+      size="s"
+      type="submit"
+      class="tui-form__button"
+      iconRight="tuiIconSend"
+    >
+      Send Invites
+    </button>
+  </div>
+</div>
+

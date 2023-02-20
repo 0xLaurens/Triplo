@@ -27,6 +27,9 @@ import {
 import {
   ProjectDetailMembersComponent
 } from "./pages/project/project-detail/project-detail-members/project-detail-members.component";
+import {
+  ProjectMembersInviteComponent
+} from "./pages/project/project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 
 const routes: Routes = [
     {
@@ -69,7 +72,11 @@ const routes: Routes = [
     {
       path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
-        {path: 'Members', component: ProjectDetailMembersComponent},
+        {
+          path: 'Members', component: ProjectDetailMembersComponent, children: [
+            {path: 'Invite', component: ProjectMembersInviteComponent},
+          ]
+        },
       ]
     },
     {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},

@@ -1,5 +1,17 @@
+<div class="tui-space_vertical-4">
+  <router-outlet></router-outlet>
+</div>
+
 <div class="tui-space_vertical-10" *ngIf="(project$ | async) as project">
-  <h5 class="tui-text_h5 tui-space_vertical-4">Members</h5>
+  <div class="d-flex align-content-center justify-content-between">
+    <h5 class="tui-text_h5 tui-space_vertical-4">Members</h5>
+    <a tuiButton size="s" iconRight="tuiIconUserPlus"
+       class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center"
+       routerLink="./Invite">
+      Invite Members</a>
+  </div>
+
+
   <tui-island class="tui-space_vertical-2" *ngIf="owner">
     <div class="tui-island__content">
       <div class="d-flex">
@@ -12,18 +24,28 @@
         <a tuiLink
            *ngIf="userId === owner._id"
            routerLink="/Profile"
-           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}</a>
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}
+          <tui-badge
+            status="primary"
+            value="Owner"
+            class="align-self-center"
+          >
+            <tui-svg src="tuiIconAward"></tui-svg>
+          </tui-badge>
+        </a>
         <a tuiLink
            *ngIf="userId !== owner._id"
            routerLink="/Profile/{{owner._id}}"
-           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}</a>
-        <tui-badge
-          status="primary"
-          value="Owner"
-          class="tui-space_right-2 align-self-center"
-        >
-          <tui-svg src="tuiIconAward"></tui-svg>
-        </tui-badge>
+           class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{owner.username}}
+          <tui-badge
+            status="primary"
+            value="Owner"
+            class="align-self-center"
+          >
+            <tui-svg src="tuiIconAward"></tui-svg>
+          </tui-badge>
+        </a>
+
 
       </div>
     </div>
