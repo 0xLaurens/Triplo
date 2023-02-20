@@ -1,6 +1,16 @@
 <div class="tui-space_vertical-10">
-  <h5 class="tui-text_h5 tui-space_vertical-4">Invite Member</h5>
-
+  <div class="d-flex justify-content-between">
+    <h5 class="tui-text_h5 tui-space_vertical-4">Invite Member</h5>
+    <a
+      class="align-self-center"
+      tuiIconButton
+      type="button"
+      appearance="flat"
+      size="l"
+      routerLink="../"
+      icon="tuiIconCloseLarge"
+    ></a>
+  </div>
   <form
     class="container"
     [formGroup]="inviteForm"

@@ -31,7 +31,7 @@ export class InviteRepository {
     invite.compositeId = `${invite.recipient}_${invite.project}`
     const exist = await this.findInviteCompositeId(invite.recipient, invite.project)
     if (exist) {
-      throw ConflictException
+      throw new ConflictException
     }
 
     return this.inviteModel.create(invite)

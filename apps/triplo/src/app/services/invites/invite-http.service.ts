@@ -10,8 +10,6 @@ export class InviteHttpService {
   }
 
   createInvite(userId: string, invite: InviteInterface): Observable<InviteInterface> {
-    console.log(invite)
-    console.log(userId)
     return this.http.post<InviteInterface>(`/api/invite/user/${userId}`, invite)
   }
 
