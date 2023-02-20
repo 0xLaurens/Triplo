@@ -50,7 +50,7 @@
     <tui-island class="tui-space_vertical-3">
       <div *ngIf="other">
         <button
-          iconRight="tuiIconOutdentLarge"
+          iconRight="tuiIconCompassLarge"
           routerLink="/Profile/{{user._id}}"
           size="m"
           tuiButton
@@ -64,7 +64,7 @@
         <button
           tuiButton
           routerLink="/Profile/{{user._id}}/Projects"
-          iconRight="tuiIconCompanyLarge"
+          iconRight="tuiIconBriefcaseLarge"
           size="m"
           type="button"
           appearance="primary"
@@ -87,7 +87,7 @@
       </div>
       <div *ngIf="!other">
         <button
-          iconRight="tuiIconOutdentLarge"
+          iconRight="tuiIconCompassLarge"
           routerLink="/Profile"
           size="m"
           tuiButton
@@ -101,7 +101,7 @@
         <button
           tuiButton
           routerLink="/Profile/Projects"
-          iconRight="tuiIconCompanyLarge"
+          iconRight="tuiIconBriefcaseLarge"
           size="m"
           type="button"
           appearance="primary"

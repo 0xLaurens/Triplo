@@ -13,6 +13,8 @@ export class ProjectDetailMembersComponent implements OnInit {
   private userId: string | null;
   project$: Observable<ProjectInterface>
   private projectId: string;
+  private ownerId: string;
+  isOwner = false;
 
   constructor(
     private authService: AuthHttpService,
@@ -25,6 +27,16 @@ export class ProjectDetailMembersComponent implements OnInit {
     this.userId = this.authService.getUser()
     this.route.parent?.params.subscribe(params => this.projectId = params['id'])
     this.project$ = this.projectService.findProjectById(this.projectId)
+    this.project$.subscribe((project) => {
+      this.OwnershipCheck(project)
+    })
+  }
+
+  private OwnershipCheck(project: ProjectInterface): void {
+    this.ownerId = project.ownerId
+    if (this.ownerId == this.userId) {
+      this.isOwner = true
+    }
   }
 
 }

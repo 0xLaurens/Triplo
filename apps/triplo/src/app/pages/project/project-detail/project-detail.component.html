@@ -24,7 +24,7 @@
             <tui-tag value="Since {{project.created | date:'yyyy'}}"></tui-tag>
           </div>
         </div>
-        <div class="tui-island__figure tui-space_vertical-3">
+        <div class="tui-island__figure tui-space_vertical-3" *ngIf="isOwner">
           <a
             size="s"
             routerLink="./Settings"

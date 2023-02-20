@@ -63,6 +63,9 @@ const routes: Routes = [
         {path: 'UserStories', component: AboutUserstoriesComponent}
       ]
     },
+
+    {path: 'Projects', component: ProjectOverviewComponent},
+    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {
       path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
@@ -70,8 +73,6 @@ const routes: Routes = [
       ]
     },
     {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects', component: ProjectOverviewComponent},
 
     {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},

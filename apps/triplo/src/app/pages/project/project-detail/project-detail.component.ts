@@ -24,6 +24,8 @@ export class ProjectDetailComponent implements OnInit {
   userId: string | null;
   projectId: string;
   like$: Observable<LikeInterface>
+  private ownerId: string;
+  isOwner = false;
 
   constructor(
     @Inject(TuiAlertService)
@@ -51,6 +53,7 @@ export class ProjectDetailComponent implements OnInit {
       if (this.userId) {
         this.like$ = this.likeService.findLikeCompositeId(this.userId, this.projectId)
       }
+      this.OwnershipCheck(p)
     })
     this.comments$ = this.commentService.getTopLevelComments(this.id)
     this.$tasks = this.taskService.getTopLevelTasks(this.id);
@@ -64,6 +67,13 @@ export class ProjectDetailComponent implements OnInit {
         autoClose: false,
       },
     )
+  }
+
+  private OwnershipCheck(project: ProjectInterface): void {
+    this.ownerId = project.ownerId
+    if (this.ownerId == this.userId) {
+      this.isOwner = true
+    }
   }
 
   deleteProject() {
@@ -101,7 +111,7 @@ export class ProjectDetailComponent implements OnInit {
         } else {
           p.DislikeCount += increase;
         }
-        if(both) {
+        if (both) {
           if (isPositive) {
             p.LikeCount += 1
             p.DislikeCount += -1
@@ -112,10 +122,10 @@ export class ProjectDetailComponent implements OnInit {
         }
 
         if (p.DislikeCount < 0) {
-            p.DislikeCount = 0
+          p.DislikeCount = 0
         }
         if (p.LikeCount < 0) {
-            p.LikeCount = 0
+          p.LikeCount = 0
         }
         this.project$ = new Observable<ProjectInterface>(o => o.next(p))
       }
