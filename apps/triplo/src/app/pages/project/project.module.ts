@@ -30,6 +30,8 @@ import {
   ProjectMembersInviteComponent
 } from "./project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 import {TuiLetModule} from "@taiga-ui/cdk";
+import {InviteHttpService} from "../../services/invites/invite-http.service";
+import {UserHttpService} from "../../services/user/user-http.service";
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import {TuiLetModule} from "@taiga-ui/cdk";
   ],
   providers: [
     ProjectHttpService,
+    InviteHttpService,
+    UserHttpService,
     LikeHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,

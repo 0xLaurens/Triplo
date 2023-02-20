@@ -1,6 +1,5 @@
 import {
   IsDate,
-  IsEmail,
   IsMongoId,
   IsString,
 } from "class-validator";
@@ -8,9 +7,9 @@ import {
 export class InviteInterface{
   @IsString()
   @IsMongoId()
-  _id: string;
+  _id?: string;
 
-  @IsEmail()
+  @IsMongoId()
   recipient: string;
 
   @IsString()
@@ -19,12 +18,12 @@ export class InviteInterface{
   @IsMongoId()
   project: string;
 
-  @IsString()
-  subject: string;
+  @IsMongoId()
+  compositeId?: string;
 
   @IsString()
-  message: string;
+  message?: string;
 
   @IsDate()
-  created: Date
+  created?: Date
 }

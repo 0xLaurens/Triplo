@@ -1,4 +1,4 @@
-import {Injectable} from "@nestjs/common";
+import {ConflictException, Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {InviteInterface} from "@triplo/models";
 import {Model} from "mongoose";
@@ -26,12 +26,22 @@ export class InviteRepository {
     return this.inviteModel.findByIdAndDelete(inviteId)
   }
 
-  async createInvite(userId: string, invite: Partial<InviteInterface>): Promise<InviteInterface> {
+  async createInvite(userId: string, invite:InviteInterface): Promise<InviteInterface> {
     invite.recipient = userId
+    invite.compositeId = `${invite.recipient}_${invite.project}`
+    const exist = await this.findInviteCompositeId(invite.recipient, invite.project)
+    if (exist) {
+      throw ConflictException
+    }
+
     return this.inviteModel.create(invite)
   }
 
   async getInviteById(inviteId: string) {
     return this.inviteModel.findById(inviteId);
+  }
+
+  private async findInviteCompositeId(userId: string, projectId: string): Promise<InviteInterface> {
+    return this.inviteModel.findOne({compositeId: `${userId}_${projectId}`})
   }
 }

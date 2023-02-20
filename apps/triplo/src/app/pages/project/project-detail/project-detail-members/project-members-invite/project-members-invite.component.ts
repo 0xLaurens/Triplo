@@ -1,9 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {AuthHttpService} from "../../../../../services/authentication/auth-http.service";
-import {UserInterface} from "@triplo/models";
+import {InviteInterface, ProjectInterface, UserInterface} from "@triplo/models";
 import {debounceTime, distinctUntilChanged, Observable} from "rxjs";
 import {UserHttpService} from "../../../../../services/user/user-http.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {InviteHttpService} from "../../../../../services/invites/invite-http.service";
+import {ProjectHttpService} from "../../../../../services/projects/project-http.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'triplo-project-detail-members',
@@ -13,18 +16,27 @@ export class ProjectMembersInviteComponent implements OnInit {
   userId: string | null;
   owner: UserInterface;
   users$: Observable<UserInterface[]>;
-  usersToInvite: Set<UserInterface>
+  usersToInvite: Set<UserInterface>;
   inviteForm: FormGroup;
+  private projectId: string;
+  project: ProjectInterface;
 
   constructor(
     private authService: AuthHttpService,
     private userService: UserHttpService,
+    private inviteService: InviteHttpService,
+    private projectService: ProjectHttpService,
+    private readonly route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
     this.userId = this.authService.getUser()
     this.users$ = this.userService.findAllUsers()
+
+    this.route.parent?.parent?.params.subscribe(params => this.projectId = params['id']);
+    this.projectService.findProjectById(this.projectId).subscribe(project => this.project = project);
+
     this.usersToInvite = new Set<UserInterface>();
     this.inviteForm = new FormGroup({
       username: new FormControl("")
@@ -49,7 +61,14 @@ export class ProjectMembersInviteComponent implements OnInit {
   }
 
   sendInviteToMember(user: UserInterface) {
-
+    const invite: InviteInterface = {
+      message: `The owner of ${this.project.name}`,
+      project: `${this.project._id}`,
+      projectName: `${this.project.name}`,
+      recipient: `${user._id}`
+    }
+    console.log(user)
+    this.inviteService.createInvite(user._id, invite).subscribe(console.log)
   }
 
 }
