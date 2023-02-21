@@ -1,10 +1,12 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import {AuthHttpService} from "../../../../services/authentication/auth-http.service";
 import {InviteInterface, UserInterface} from "@triplo/models";
 import {UserHttpService} from "../../../../services/user/user-http.service";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {InviteHttpService} from "../../../../services/invites/invite-http.service";
+import {ProjectHttpService} from "../../../../services/projects/project-http.service";
+import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 
 @Component({
   selector: 'triplo-profile-invite',
@@ -17,8 +19,10 @@ export class ProfileInviteComponent implements OnInit {
   other = false
 
   constructor(
+    @Inject(TuiAlertService) private alertService: TuiAlertService,
     private authService: AuthHttpService,
     private userService: UserHttpService,
+    private projectService: ProjectHttpService,
     private inviteService: InviteHttpService,
     private route: ActivatedRoute,
   ) {
@@ -39,10 +43,24 @@ export class ProfileInviteComponent implements OnInit {
   }
 
   acceptInvite(invite: InviteInterface) {
-
+    const userId = invite.recipient as string
+    this.projectService.addMemberToProject(invite.project, userId).subscribe(() => {
+      this.inviteService.deleteInvite(invite._id).subscribe()
+      this.alertService.open(`invite was successfully accepted`, {label: "Success!"}).subscribe()
+      this.invites$ = this.inviteService.getInviteByUserId(userId)
+    }, error => {
+      this.alertService.open(`${error.statusText}`, {label: "Error!", status: TuiNotification.Warning}).subscribe()
+    })
   }
 
   rejectInvite(invite: InviteInterface) {
-
+    const userId = invite.recipient as string
+    this.inviteService.deleteInvite(invite._id).subscribe(() => {
+      this.inviteService.deleteInvite(invite._id).subscribe()
+      this.alertService.open(`invite was successfully rejected`, {label: "Success!"}).subscribe()
+      this.invites$ = this.inviteService.getInviteByUserId(userId)
+    }, error => {
+      this.alertService.open(`${error.statusText}`, {label: "Error!", status: TuiNotification.Warning}).subscribe()
+    })
   }
 }

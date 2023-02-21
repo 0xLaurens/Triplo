@@ -1,6 +1,6 @@
 <div *ngIf="(invites$ | async) as invites">
   <h5 class="tui-text_h5">Invites</h5>
-  <p *ngIf="invites.length < 0" class="tui-text_body-m">No invites received yet.</p>
+  <p *ngIf="invites.length < 1" class="tui-text_body-m">No invites received yet.</p>
   <tui-island class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let invite of invites">
     <div class="invite content">
       <div class="tui-island__title">
@@ -18,7 +18,7 @@
         tuiIconButton
         type="button"
         appearance="flat"
-        size="s"
+        size="m"
         (click)="acceptInvite(invite)"
         icon="tuiIconCheckCircleLarge"
         [tuiHint]="accept_invite_tooltip"
@@ -32,7 +32,7 @@
         tuiIconButton
         type="button"
         appearance="flat"
-        size="s"
+        size="m"
         (click)="rejectInvite(invite)"
         icon="tuiIconSlashLarge"
         [tuiHint]="reject_invite_tooltip"
