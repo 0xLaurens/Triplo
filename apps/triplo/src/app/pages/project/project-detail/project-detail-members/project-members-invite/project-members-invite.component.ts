@@ -67,7 +67,7 @@ export class ProjectMembersInviteComponent implements OnInit {
 
   sendInviteToMember(user: UserInterface) {
     const invite = {
-      message: `The owner of ${this.project.name}`,
+      message: `The owner of ${this.project.name} wants you to join their team!`,
       project: `${this.project._id}`,
       projectName: `${this.project.name}`,
       recipient: `${user._id}`
