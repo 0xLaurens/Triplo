@@ -13,8 +13,10 @@
   </div>
 
 
-  <div class="tui-space_vertical-5" *ngIf="(invites$ | async) as invites">
-    <p *ngIf="invites.length > 0" class="tui-text_body-l">Pending invites</p>
+  <div class="tui-space_bottom-5" *ngIf="(invites$ | async) as invites">
+    <p class="tui-text_body-l tui-space_bottom-1 tui-text_bold">Pending invites</p>
+    <p *ngIf="invites.length < 1" class="tui-text_body-m">No Outbound Invites.</p>
+
     <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let invite of invites">
       <div class="tui-island__content">
         <div class="d-flex">
@@ -84,7 +86,7 @@
   </div>
 
   <div class="tui-space_vertical-2" *ngIf="usersToInvite.size !== 0">
-    <p class="tui-text_body-l tui-space_vertical-4">Members being invited</p>
+    <p class="tui-text_body-l tui-space_vertical-4 tui-text_bold">Members being invited</p>
     <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let member of usersToInvite">
       <div class="tui-island__content">
         <div class="d-flex">
