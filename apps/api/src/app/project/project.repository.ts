@@ -52,4 +52,8 @@ export class ProjectRepository {
   async removeMemberFromProject(projectId: string, userId: string): Promise<ProjectInterface> {
     return this.projectModel.findByIdAndUpdate( projectId, {$pull: {members: userId}}, {new: true});
   }
+
+  findProjectsByUserId(userId: string) {
+    return this.projectModel.find({$or: [{ownerId: userId}, {members: {$elemMatch: {userId}}}]});
+  }
 }

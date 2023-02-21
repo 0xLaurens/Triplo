@@ -41,5 +41,7 @@ export class ProjectHttpService {
     return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}/remove`, {"project": projectId, "user": userId})
   }
 
-
+  findProjectsByUserId(userId: string): Observable<ProjectInterface[]> {
+    return this.http.get<ProjectInterface[]>(`api/projects/user/${userId}`)
+  }
 }
