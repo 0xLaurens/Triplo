@@ -38,7 +38,7 @@ export class ProjectHttpService {
   }
 
   removeMemberFromProject(projectId: string, userId: string): Observable<ProjectInterface> {
-    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}`, {"project": projectId, "user": userId})
+    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}/remove`, {"project": projectId, "user": userId})
   }
 
 

@@ -21,6 +21,7 @@ export class ProjectMembersInviteComponent implements OnInit {
   inviteForm: FormGroup;
   private projectId: string;
   project: ProjectInterface;
+  invites$: Observable<InviteInterface[]>;
 
   constructor(
     @Inject(TuiAlertService) private alertService: TuiAlertService,
@@ -39,6 +40,7 @@ export class ProjectMembersInviteComponent implements OnInit {
 
     this.route.parent?.parent?.params.subscribe(params => this.projectId = params['id']);
     this.projectService.findProjectById(this.projectId).subscribe(project => this.project = project);
+    this.invites$ = this.inviteService.getInviteByProjectId(this.projectId);
 
     this.usersToInvite = new Set<UserInterface>();
     this.inviteForm = new FormGroup({
@@ -64,7 +66,7 @@ export class ProjectMembersInviteComponent implements OnInit {
   }
 
   sendInviteToMember(user: UserInterface) {
-    const invite: InviteInterface = {
+    const invite = {
       message: `The owner of ${this.project.name}`,
       project: `${this.project._id}`,
       projectName: `${this.project.name}`,
@@ -87,5 +89,18 @@ export class ProjectMembersInviteComponent implements OnInit {
 
   removeFromList(user: UserInterface) {
     this.usersToInvite.delete(user)
+  }
+
+  changeToUser(recipient: string | UserInterface): UserInterface {
+    return recipient as UserInterface
+  }
+
+  removeInvite(invite: InviteInterface) {
+    this.inviteService.deleteInvite(invite._id).subscribe(() => {
+      this.invites$ = this.inviteService.getInviteByProjectId(this.projectId);
+      this.alertService.open(`invite was deleted`, {label: "Success!"}).subscribe()
+    }, error => {
+      this.alertService.open(`${error.statusText}`, {label: "Error!", status: TuiNotification.Warning}).subscribe()
+    })
   }
 }

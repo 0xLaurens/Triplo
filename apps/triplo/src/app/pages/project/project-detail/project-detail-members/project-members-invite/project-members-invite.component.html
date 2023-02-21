@@ -11,34 +11,77 @@
       icon="tuiIconCloseLarge"
     ></a>
   </div>
-  <form
-    [formGroup]="inviteForm"
-  >
-    <tui-input
-      *tuiLet="users$ | async as users"
-      formControlName="username"
-    >
-      Username
-      <input
-        tuiTextfield
-        placeholder="Enter the username"
-      />
-      <tui-data-list *tuiDataList>
-        <button
-          *ngFor="let user of users"
-          tuiOption
-          [value]="user.username"
-          (click)="onSelected(user)"
-        >
-          {{ user.username }}
+
+
+  <div class="tui-space_vertical-5" *ngIf="(invites$ | async) as invites">
+    <p *ngIf="invites.length > 0" class="tui-text_body-l">Pending invites</p>
+    <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let invite of invites">
+      <div class="tui-island__content">
+        <div class="d-flex">
           <tui-avatar
-            size="xs"
-            [text]="user.username"
+            text="{{changeToUser(invite.recipient).username}}"
+            [autoColor]="true"
+            size="s"
           ></tui-avatar>
-        </button>
-      </tui-data-list>
-    </tui-input>
-  </form>
+
+          <a tuiLink
+             *ngIf="userId === changeToUser(invite.recipient)._id"
+             routerLink="/Profile"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{changeToUser(invite.recipient).username}}</a>
+          <a tuiLink
+             *ngIf="userId !== changeToUser(invite.recipient)._id"
+             routerLink="/Profile/{{changeToUser(invite.recipient)._id}}"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{changeToUser(invite.recipient).username}}</a>
+        </div>
+      </div>
+      <a
+        class="align-self-center"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="s"
+        (click)="removeInvite(invite)"
+        icon="tuiIconTrash"
+        [tuiHint]="delete_invite_tooltip"
+      >
+        <ng-template #delete_invite_tooltip>
+          <div>Remove Outbound Invite</div>
+        </ng-template>
+      </a>
+    </div>
+  </div>
+
+  <div class="tui-space_top-5">
+    <form
+      [formGroup]="inviteForm"
+    >
+      <h6 class="tui-text_h6 tui-space_bottom-3">Invite</h6>
+      <tui-input
+        *tuiLet="users$ | async as users"
+        formControlName="username"
+      >
+        Username
+        <input
+          tuiTextfield
+          placeholder="Enter the username"
+        />
+        <tui-data-list *tuiDataList>
+          <button
+            *ngFor="let user of users"
+            tuiOption
+            [value]="user.username"
+            (click)="onSelected(user)"
+          >
+            {{ user.username }}
+            <tui-avatar
+              size="xs"
+              [text]="user.username"
+            ></tui-avatar>
+          </button>
+        </tui-data-list>
+      </tui-input>
+    </form>
+  </div>
 
   <div class="tui-space_vertical-2" *ngIf="usersToInvite.size !== 0">
     <p class="tui-text_body-l tui-space_vertical-4">Members being invited</p>
@@ -69,7 +112,12 @@
         size="s"
         (click)="removeFromList(member)"
         icon="tuiIconCloseLarge"
-      ></a>
+        [tuiHint]="cancel_invite_tooltip"
+      >
+        <ng-template #cancel_invite_tooltip>
+          <div>Cancel Invitation</div>
+        </ng-template>
+      </a>
     </div>
   </div>
 

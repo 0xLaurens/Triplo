@@ -43,7 +43,7 @@ export class CommentRepository {
   }
 
   async deleteComment(commentId: string): Promise<CommentInterface> {
-    return this.commentModel.findByIdAndDelete(commentId)
+    return this.commentModel.findByIdAndUpdate(commentId, {username: "[DELETED]", message: "[DELETED]", owner: "63f3d349eee96c80623e4d55"})
   }
 
   async createComment(projectId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {

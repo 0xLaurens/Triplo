@@ -15,7 +15,7 @@ export class InviteRepository {
   }
 
   async getInviteByProjectId(projectId: string): Promise<InviteInterface[]> {
-    return this.inviteModel.find({project: projectId})
+    return this.inviteModel.find({project: projectId}).populate({path: "recipient", model: "User"})
   }
 
   async getInviteByUserId(userId: string): Promise<InviteInterface[]> {
@@ -26,7 +26,7 @@ export class InviteRepository {
     return this.inviteModel.findByIdAndDelete(inviteId)
   }
 
-  async createInvite(userId: string, invite:InviteInterface): Promise<InviteInterface> {
+  async createInvite(userId: string, invite: InviteInterface): Promise<InviteInterface> {
     invite.recipient = userId
     invite.compositeId = `${invite.recipient}_${invite.project}`
     const exist = await this.findInviteCompositeId(invite.recipient, invite.project)

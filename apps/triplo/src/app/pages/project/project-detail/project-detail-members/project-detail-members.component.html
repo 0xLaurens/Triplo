@@ -68,7 +68,23 @@
            routerLink="/Profile/{{member._id}}"
            class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
       </div>
+
+      <a *ngIf="owner && owner._id === userId"
+         (click)="removeMember(member)"
+         tuiIconButton
+         type="button"
+         size="s"
+         icon="tuiIconTrash"
+         [tuiHint]="remove_member_tooltip"
+      >
+        <ng-template #remove_member_tooltip>
+          <div>Remove Member</div>
+        </ng-template>
+      </a>
+
     </div>
+
   </tui-island>
+
 </div>
 

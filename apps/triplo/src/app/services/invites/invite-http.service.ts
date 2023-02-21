@@ -9,7 +9,7 @@ export class InviteHttpService {
   constructor(private http: HttpClient) {
   }
 
-  createInvite(userId: string, invite: InviteInterface): Observable<InviteInterface> {
+  createInvite(userId: string, invite: Partial<InviteInterface>): Observable<InviteInterface> {
     return this.http.post<InviteInterface>(`/api/invite/user/${userId}`, invite)
   }
 
@@ -26,11 +26,11 @@ export class InviteHttpService {
   }
 
   updateInvite(inviteId:string, invite: InviteInterface): Observable<InviteInterface> {
-    return this.http.put<InviteInterface>(`/api/invite/invite/${inviteId}`, invite)
+    return this.http.put<InviteInterface>(`/api/invite/${inviteId}`, invite)
   }
 
   deleteInvite(inviteId:string): Observable<InviteInterface> {
-    return this.http.delete<InviteInterface>(`/api/invite/invite/${inviteId}`)
+    return this.http.delete<InviteInterface>(`/api/invite/${inviteId}`)
   }
 }
 

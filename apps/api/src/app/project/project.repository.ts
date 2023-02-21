@@ -50,6 +50,6 @@ export class ProjectRepository {
   }
 
   async removeMemberFromProject(projectId: string, userId: string): Promise<ProjectInterface> {
-    return this.projectModel.findByIdAndUpdate(projectId, {$pull: {members: userId}}, {new: true});
+    return this.projectModel.findByIdAndUpdate( projectId, {$pull: {members: userId}}, {new: true});
   }
 }
