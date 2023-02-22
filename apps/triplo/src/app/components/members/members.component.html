@@ -1,10 +1,10 @@
-<div class="tui-space_vertical-4">
+<div>
   <router-outlet></router-outlet>
 </div>
 
-<div class="tui-space_vertical-10" *ngIf="(project$ | async) as project">
+<div class="tui-space_vertical-4" *ngIf="(project$ | async) as project">
   <div class="d-flex align-content-center justify-content-between">
-    <h5 class="tui-text_h5 tui-space_vertical-4">Members</h5>
+    <h5 class="tui-text_h5">Members</h5>
     <a *ngIf="owner && owner._id === userId && managementMode" tuiButton size="s" iconRight="tuiIconUserPlus"
        class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center"
        routerLink="./Invite">
