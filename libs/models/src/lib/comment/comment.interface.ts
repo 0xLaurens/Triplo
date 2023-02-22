@@ -1,13 +1,10 @@
 import {
   IsArray,
   IsBoolean,
-  IsDate,
-  IsInt,
   IsMongoId,
   IsNumber,
   IsString,
   MaxLength,
-  Min,
   MinLength
 } from "class-validator";
 
@@ -36,20 +33,7 @@ export class CommentInterface {
   @MaxLength(20)
   username: string;
 
-  @IsDate()
   created?: Date
-
-  @IsInt()
-  @Min(0)
-  replyCount: number;
-
-  @IsInt()
-  @Min(0)
-  likeCount: number;
-
-  @IsInt()
-  @Min(0)
-  dislikeCount: number;
 
   @IsArray()
   replies: CommentInterface[];

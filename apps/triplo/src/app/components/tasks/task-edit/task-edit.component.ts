@@ -35,9 +35,6 @@ export class TaskEditComponent implements OnInit {
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
 
-    console.log(this.subtaskMode)
-    console.log(this.createMode)
-
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),

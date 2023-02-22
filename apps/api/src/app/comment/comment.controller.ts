@@ -54,8 +54,8 @@ export class CommentController {
     return this.commentRepo.updateComment(commentId, changes)
   }
 
-  @Delete("/comments/:commentId")
-  async deleteComment(@Param("commentId") commentId: string): Promise<CommentInterface> {
-    return this.commentRepo.deleteComment(commentId)
+  @Put("/comments/:commentId/delete")
+  async deleteComment(@Param("commentId") commentId: string, @Body() comment: CommentInterface): Promise<CommentInterface> {
+    return this.commentRepo.deleteComment(commentId, comment)
   }
 }

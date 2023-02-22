@@ -122,20 +122,5 @@
     <div class="tui-space_vertical-4">
       <router-outlet></router-outlet>
     </div>
-
-    <div class="comments tui-space_vertical-10">
-      <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>
-      <div class="comment-reaction tui-space_vertical-5">
-        <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>
-      </div>
-
-      <div *ngFor="let comment of (comments$ | async)">
-        <triplo-comment [comment]="comment" [user]="userId"></triplo-comment>
-      </div>
-
-      <div *ngIf="(comments$ | async)?.length === 0" class="tui-text_body-m">No comments
-        yet.
-      </div>
-    </div>
   </div>
 </div>

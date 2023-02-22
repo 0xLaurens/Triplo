@@ -2,7 +2,6 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
 import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface, UserInterface} from "@triplo/models";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 import {Observable} from "rxjs";
 import {TaskHttpService} from "../../../services/task/task-http.service";
@@ -17,7 +16,6 @@ import {LikeHttpService} from "../../../services/likes/like-http.service";
 })
 export class ProjectDetailComponent implements OnInit {
   project$!: Observable<ProjectInterface>
-  comments$: Observable<CommentInterface[]>
   id!: string
   $tasks: Observable<TaskInterface[]>;
   notification: Observable<boolean>
@@ -34,7 +32,6 @@ export class ProjectDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectHttpService,
-    private commentService: CommentHttpService,
     private taskService: TaskHttpService,
     private authService: AuthHttpService,
     private likeService: LikeHttpService,
@@ -55,7 +52,6 @@ export class ProjectDetailComponent implements OnInit {
       }
       this.OwnershipCheck(p)
     })
-    this.comments$ = this.commentService.getTopLevelComments(this.id)
     this.$tasks = this.taskService.getTopLevelTasks(this.id);
 
 
@@ -87,15 +83,6 @@ export class ProjectDetailComponent implements OnInit {
         )
       }
     })
-  }
-
-  back() {
-    this.router.navigate(["/Projects"])
-  }
-
-  async createComment($event: CommentInterface) {
-    await this.commentService.createComment(this.id, $event).subscribe()
-    this.comments$ = this.commentService.getTopLevelComments(this.id)
   }
 
   private createLike(isPositive: boolean, projectId: string, userId: string): Partial<LikeInterface> {

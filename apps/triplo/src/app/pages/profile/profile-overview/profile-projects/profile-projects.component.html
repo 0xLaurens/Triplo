@@ -4,7 +4,7 @@
   <tui-island class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let project of projects">
     <div class="invite content">
       <div class="align-content-center tui-text_h6">
-        <a tuiLink target="_blank" routerLink="/Projects/{{project._id}}">
+        <a tuiLink routerLink="/Projects/{{project._id}}">
           {{project.name}}
         </a>
         <tui-badge *ngIf="project.ownerId === userId"

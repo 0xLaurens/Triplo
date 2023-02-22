@@ -49,7 +49,7 @@ export class ProjectDetailMembersComponent implements OnInit {
       if (b) {
         this.projectService.removeMemberFromProject(this.projectId, member._id).subscribe(() => {
           this.alertService.open(`${member.username} was removed`, {label: "Success!"}).subscribe()
-          this.projectService.removeMemberFromProject(this.projectId, member._id).subscribe(console.log)
+          this.projectService.removeMemberFromProject(this.projectId, member._id).subscribe()
           this.project$ = this.projectService.findProjectById(this.projectId, true)
         })
       }

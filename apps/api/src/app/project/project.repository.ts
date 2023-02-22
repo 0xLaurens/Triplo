@@ -54,6 +54,6 @@ export class ProjectRepository {
   }
 
   findProjectsByUserId(userId: string) {
-    return this.projectModel.find({$or: [{ownerId: userId}, {members: {$elemMatch: {userId}}}]});
+    return this.projectModel.find({$or: [{ownerId: userId}, {members: userId}]});
   }
 }
