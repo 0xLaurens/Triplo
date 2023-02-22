@@ -10,22 +10,26 @@ export class LikeHttpService {
   }
 
   findLikeById(likeId: string): Observable<LikeInterface> {
-    return this.http.get<LikeInterface>(`api/like/${likeId}`)
+    return this.http.get<LikeInterface>(`/api/like/${likeId}`)
   }
 
   createLike(like: Partial<LikeInterface>): Observable<LikeInterface> {
-    return this.http.post<LikeInterface>(`api/like`, like)
+    return this.http.post<LikeInterface>(`/api/like`, like)
   }
 
   updateLike(likeId: string, like: LikeInterface): Observable<LikeInterface> {
-    return this.http.put<LikeInterface>(`api/like/${likeId}`, like)
+    return this.http.put<LikeInterface>(`/api/like/${likeId}`, like)
   }
 
   deleteLike(likeId: string): Observable<LikeInterface> {
-    return this.http.delete<LikeInterface>(`api/like/${likeId}`)
+    return this.http.delete<LikeInterface>(`/api/like/${likeId}`)
   }
 
   findLikeCompositeId(userId: string, projectId: string): Observable<LikeInterface> {
-    return this.http.get<LikeInterface>(`api/like/${userId}/${projectId}`)
+    return this.http.get<LikeInterface>(`/api/like/${userId}/${projectId}`)
+  }
+
+  findLikesByUserId(userId: string): Observable<LikeInterface[]> {
+    return this.http.get<LikeInterface[]>(`/api/like/user/${userId}`)
   }
 }

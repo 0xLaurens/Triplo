@@ -25,7 +25,7 @@
             [autoColor]="true"
             size="m"
           ></tui-avatar>
-          <h6 class="tui-text_h6 tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{user.username}}</h6>
+          <h4 class="tui-text_h4 tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{user.username}}</h4>
 
         </div>
         <div class="tui-island__figure tui-space_vertical-3" *ngIf="other === false">
@@ -50,7 +50,7 @@
     <tui-island class="tui-space_vertical-3">
       <div *ngIf="other">
         <button
-          iconRight="tuiIconOutdentLarge"
+          iconRight="tuiIconCompassLarge"
           routerLink="/Profile/{{user._id}}"
           size="m"
           tuiButton
@@ -64,7 +64,7 @@
         <button
           tuiButton
           routerLink="/Profile/{{user._id}}/Projects"
-          iconRight="tuiIconCompanyLarge"
+          iconRight="tuiIconBriefcaseLarge"
           size="m"
           type="button"
           appearance="primary"
@@ -87,7 +87,7 @@
       </div>
       <div *ngIf="!other">
         <button
-          iconRight="tuiIconOutdentLarge"
+          iconRight="tuiIconCompassLarge"
           routerLink="/Profile"
           size="m"
           tuiButton
@@ -101,7 +101,7 @@
         <button
           tuiButton
           routerLink="/Profile/Projects"
-          iconRight="tuiIconCompanyLarge"
+          iconRight="tuiIconBriefcaseLarge"
           size="m"
           type="button"
           appearance="primary"
@@ -120,6 +120,18 @@
           class="tui-space_right-6"
         >
           Liked
+        </button>
+
+        <button
+          tuiButton
+          iconRight="tuiIconSendLarge"
+          routerLink="/Profile/Invites"
+          size="m"
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Invites
         </button>
       </div>
     </tui-island>

@@ -23,7 +23,6 @@ export class ProfileOverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUser()
-    console.log(this.userId)
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.userId = params['id']

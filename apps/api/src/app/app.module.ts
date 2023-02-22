@@ -15,6 +15,8 @@ import {UserController} from "./user/user.controller";
 import {LikeModule} from "./like/like.module";
 import {Neo4jModule} from 'nest-neo4j/dist';
 import {TokenMiddleware} from "./auth/token.middleware";
+import {InviteModule} from "./invites/invite.module";
+import {InviteController} from "./invites/invite.controller";
 
 
 @Module({
@@ -25,6 +27,7 @@ import {TokenMiddleware} from "./auth/token.middleware";
     UserModule,
     ProjectModule,
     CommentModule,
+    InviteModule,
     MongooseModule.forRoot(environment.MONGO_URL),
     Neo4jModule.forRoot({
       scheme: 'neo4j+s',
@@ -46,7 +49,7 @@ export class AppModule implements NestModule {
         CommentController,
         ProjectController,
         TaskController,
-        UserController
+        UserController,
       )
   }
 }

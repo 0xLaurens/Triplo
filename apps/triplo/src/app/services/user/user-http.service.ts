@@ -9,12 +9,15 @@ export class UserHttpService {
   constructor(private http: HttpClient) {
   }
 
-  findAllUsers(): Observable<UserInterface[]>{
-    return this.http.get<UserInterface[]>('/api/users')
+  findAllUsers(search?: string): Observable<UserInterface[]> {
+    if (search && !(search.length > 0)) {
+      return this.http.get<UserInterface[]>('/api/users')
+    }
+    return this.http.get<UserInterface[]>(`/api/users?search=${search}`)
   }
 
-  findUserById(userId: string): Observable<UserInterface> {
-    return this.http.get<UserInterface>(`/api/users/${userId}`)
+  findUserById(userId: string, ): Observable<UserInterface> {
+      return this.http.get<UserInterface>(`/api/users/${userId}`)
   }
 
   updateUser(userId: string, user: Partial<UserInterface>): Observable<UserInterface> {

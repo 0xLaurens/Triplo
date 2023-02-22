@@ -5,47 +5,53 @@ import {ProjectDetailComponent} from "./project-detail/project-detail.component"
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
 import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
-import {RouterLink, RouterLinkWithHref} from "@angular/router";
+import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   TuiAlertModule,
-  TuiButtonModule, TuiErrorModule, TuiFormatDatePipeModule,
+  TuiButtonModule, TuiDataListModule, TuiErrorModule, TuiFormatDatePipeModule,
   TuiHintModule,
   TuiLinkModule,
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-    TUI_VALIDATION_ERRORS,
-    TuiFieldErrorPipeModule,
-    TuiInputModule, TuiInputTagModule,
-    TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
-    TuiTextAreaModule
+  TUI_VALIDATION_ERRORS, TuiAvatarModule, TuiBadgeModule,
+  TuiFieldErrorPipeModule,
+  TuiInputModule, TuiInputTagModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
+  TuiTextAreaModule
 } from "@taiga-ui/kit";
-import {AppModule} from "../../app.module";
 import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
+import {ProjectDetailOverviewComponent} from "./project-detail/project-detail-overview/project-detail-overview.component";
+import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
+import {
+  ProjectMembersInviteComponent
+} from "./project-detail/project-detail-members/project-members-invite/project-members-invite.component";
+import {TuiLetModule} from "@taiga-ui/cdk";
+import {InviteHttpService} from "../../services/invites/invite-http.service";
+import {UserHttpService} from "../../services/user/user-http.service";
 
-export function minLengthValidator(context: { requiredLength: string }): string {
-  return `Minimum length — ${context.requiredLength}`;
-}
-
-export function maxLengthValidator(context: { requiredLength: string }): string {
-  return `Max amount of tags — ${context.requiredLength}`;
-}
 
 @NgModule({
   declarations: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
+    ProjectMembersInviteComponent,
   ],
   exports: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
+    ProjectMembersInviteComponent,
   ],
   imports: [
     CommentModule,
@@ -71,9 +77,16 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     TuiInputTagModule,
     TuiFormatDatePipeModule,
     TuiMarkerIconModule,
+    RouterOutlet,
+    TuiAvatarModule,
+    TuiBadgeModule,
+    TuiDataListModule,
+    TuiLetModule,
   ],
   providers: [
     ProjectHttpService,
+    InviteHttpService,
+    UserHttpService,
     LikeHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,

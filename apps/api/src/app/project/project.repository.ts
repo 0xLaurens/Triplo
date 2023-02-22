@@ -2,7 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {ProjectInterface} from "@triplo/models"
 import {Model} from "mongoose";
-import { Neo4jService } from "nest-neo4j/dist";
+import {Neo4jService} from "nest-neo4j/dist";
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class ProjectRepository {
   }
 
   async findAllProjects(): Promise<ProjectInterface[]> {
-    return this.projectModel.find();
+    return this.projectModel.find()
   }
 
   async updateProject(projectId: string, project: Partial<ProjectInterface>): Promise<ProjectInterface> {
@@ -22,8 +22,15 @@ export class ProjectRepository {
     return this.projectModel.findByIdAndUpdate(projectId, project, {new: true})
   }
 
-  async findProjectById(projectId: string): Promise<ProjectInterface> {
-    return this.projectModel.findById(projectId).populate({path: "comments", model: "Comment"})
+  async findProjectById(projectId: string, members: boolean): Promise<ProjectInterface> {
+    if (!members) {
+      return this.projectModel.findById(projectId)
+    }
+
+    return this.projectModel.findById(projectId, {ownerId: 1, members: 1}).populate([
+      {path: "members", model: "User"},
+      {path: "ownerId", model: "User"},
+    ])
   }
 
   async deleteProject(projectId: string): Promise<ProjectInterface> {
@@ -43,6 +50,10 @@ export class ProjectRepository {
   }
 
   async removeMemberFromProject(projectId: string, userId: string): Promise<ProjectInterface> {
-    return this.projectModel.findByIdAndUpdate(projectId, {$pull: {members: userId}}, {new: true});
+    return this.projectModel.findByIdAndUpdate( projectId, {$pull: {members: userId}}, {new: true});
+  }
+
+  findProjectsByUserId(userId: string) {
+    return this.projectModel.find({$or: [{ownerId: userId}, {members: userId}]});
   }
 }

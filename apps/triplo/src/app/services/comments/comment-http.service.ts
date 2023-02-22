@@ -25,8 +25,8 @@ export class CommentHttpService {
     return this.http.put<CommentInterface>(`api/comments/${commentId}`, comment)
   }
 
-  deleteComment(commentId: string,): Observable<CommentInterface> {
-    return this.http.delete<CommentInterface>(`api/comments/${commentId}`)
+  deleteComment(commentId: string, comment: CommentInterface): Observable<CommentInterface> {
+    return this.http.put<CommentInterface>(`api/comments/${commentId}/delete`, comment)
   }
 
   createReply(parentId: string, commentId: string, comment: CommentInterface): Observable<CommentInterface> {

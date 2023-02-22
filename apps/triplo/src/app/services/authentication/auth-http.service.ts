@@ -25,7 +25,6 @@ export class AuthHttpService {
     return this.http.post<UserInterface>("/api/login", {email, password})
       .pipe(
         map((user: UserInterface) => {
-          console.log(user)
           this.setTokenStorage(user?.token);
           this.setIdStorage(user._id)
           this.$loggedInStatus.next(true)

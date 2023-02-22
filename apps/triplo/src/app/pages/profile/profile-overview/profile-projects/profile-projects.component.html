@@ -1,0 +1,20 @@
+<div *ngIf="(projects$ | async) as projects">
+  <h5 class="tui-text_h5">Projects</h5>
+  <p *ngIf="projects.length < 1" class="tui-text_body-m">Not part of any project.</p>
+  <tui-island class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let project of projects">
+    <div class="invite content">
+      <div class="align-content-center tui-text_h6">
+        <a tuiLink routerLink="/Projects/{{project._id}}">
+          {{project.name}}
+        </a>
+        <tui-badge *ngIf="project.ownerId === userId"
+          status="primary"
+          value="Owner"
+          class="align-self-center"
+        >
+          <tui-svg src="tuiIconAward"></tui-svg>
+        </tui-badge>
+      </div>
+    </div>
+  </tui-island>
+</div>

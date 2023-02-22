@@ -13,7 +13,11 @@ export class ProjectHttpService {
     return this.http.get<ProjectInterface[]>('/api/projects')
   }
 
-  findProjectById(projectId: string): Observable<ProjectInterface> {
+  findProjectById(projectId: string, members?: boolean): Observable<ProjectInterface> {
+    if(members) {
+      return this.http.get<ProjectInterface>(`/api/projects/${projectId}?members=${members}`)
+    }
+
     return this.http.get<ProjectInterface>(`/api/projects/${projectId}`)
   }
 
@@ -34,8 +38,10 @@ export class ProjectHttpService {
   }
 
   removeMemberFromProject(projectId: string, userId: string): Observable<ProjectInterface> {
-    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}`, {"project": projectId, "user": userId})
+    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}/remove`, {"project": projectId, "user": userId})
   }
 
-
+  findProjectsByUserId(userId: string): Observable<ProjectInterface[]> {
+    return this.http.get<ProjectInterface[]>(`api/projects/user/${userId}`)
+  }
 }

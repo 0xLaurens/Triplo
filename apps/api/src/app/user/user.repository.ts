@@ -12,8 +12,12 @@ export class UserRepository {
     @InjectModel('User') private userModel: Model<UserInterface>) {
   }
 
-  async findAllUsers(): Promise<UserInterface[]> {
-    return this.userModel.find()
+  async findAllUsers(search?: string): Promise<UserInterface[]> {
+    if(search && !(search.length > 0)) {
+      return this.userModel.find()
+    }
+
+    return this.userModel.find({username: {$regex: search, $options: "i"}}).limit(4)
   }
 
   async createUser(user: Partial<UserInterface>): Promise<UserInterface> {
@@ -24,7 +28,7 @@ export class UserRepository {
   }
 
   async findUserById(userId: string): Promise<UserInterface> {
-    return this.userModel.findById(userId);
+      return this.userModel.findById(userId);
   }
 
   async updateUser(userId: string, changes: UserInterface): Promise<UserInterface> {

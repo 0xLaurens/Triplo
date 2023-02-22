@@ -25,6 +25,11 @@ export class LikeController {
     return this.likeRepo.createLike(like)
   }
 
+  @Get("user/:userId")
+  async findLikesByUserId(@Param("userId") userId: string): Promise<LikeInterface[]> {
+    return this.likeRepo.findLikesByUserId(userId);
+  }
+
   @Get(":likeId")
   async findLikeById(@Param("likeId") likeId: string): Promise<LikeInterface> {
     return this.likeRepo.findLikeById(likeId)
@@ -44,8 +49,7 @@ export class LikeController {
   }
 
   @Get(":userId/:projectId")
-  async findLikeCompositeId (@Param("userId") userId: string, @Param("projectId") projectId: string): Promise<LikeInterface> {
+  async findLikeCompositeId(@Param("userId") userId: string, @Param("projectId") projectId: string): Promise<LikeInterface> {
     return this.likeRepo.findLikeCompositeId(userId, projectId)
   }
-
 }

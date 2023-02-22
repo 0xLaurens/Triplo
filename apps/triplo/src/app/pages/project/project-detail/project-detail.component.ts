@@ -1,8 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ProjectHttpService} from "../../../services/projects/project-http.service";
-import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface} from "@triplo/models";
+import {CommentInterface, LikeInterface, ProjectInterface, TaskInterface, UserInterface} from "@triplo/models";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 import {Observable} from "rxjs";
 import {TaskHttpService} from "../../../services/task/task-http.service";
@@ -17,13 +16,14 @@ import {LikeHttpService} from "../../../services/likes/like-http.service";
 })
 export class ProjectDetailComponent implements OnInit {
   project$!: Observable<ProjectInterface>
-  comments$: Observable<CommentInterface[]>
   id!: string
   $tasks: Observable<TaskInterface[]>;
   notification: Observable<boolean>
   userId: string | null;
   projectId: string;
   like$: Observable<LikeInterface>
+  private ownerId: string | UserInterface;
+  isOwner = false;
 
   constructor(
     @Inject(TuiAlertService)
@@ -32,7 +32,6 @@ export class ProjectDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private projectService: ProjectHttpService,
-    private commentService: CommentHttpService,
     private taskService: TaskHttpService,
     private authService: AuthHttpService,
     private likeService: LikeHttpService,
@@ -51,8 +50,8 @@ export class ProjectDetailComponent implements OnInit {
       if (this.userId) {
         this.like$ = this.likeService.findLikeCompositeId(this.userId, this.projectId)
       }
+      this.OwnershipCheck(p)
     })
-    this.comments$ = this.commentService.getTopLevelComments(this.id)
     this.$tasks = this.taskService.getTopLevelTasks(this.id);
 
 
@@ -64,6 +63,13 @@ export class ProjectDetailComponent implements OnInit {
         autoClose: false,
       },
     )
+  }
+
+  private OwnershipCheck(project: ProjectInterface): void {
+    this.ownerId = project.ownerId
+    if (this.ownerId == this.userId) {
+      this.isOwner = true
+    }
   }
 
   deleteProject() {
@@ -79,15 +85,6 @@ export class ProjectDetailComponent implements OnInit {
     })
   }
 
-  back() {
-    this.router.navigate(["/Projects"])
-  }
-
-  async createComment($event: CommentInterface) {
-    await this.commentService.createComment(this.id, $event).subscribe()
-    this.comments$ = this.commentService.getTopLevelComments(this.id)
-  }
-
   private createLike(isPositive: boolean, projectId: string, userId: string): Partial<LikeInterface> {
     return {
       isPositive: isPositive, projectId: projectId, userId: userId
@@ -101,7 +98,7 @@ export class ProjectDetailComponent implements OnInit {
         } else {
           p.DislikeCount += increase;
         }
-        if(both) {
+        if (both) {
           if (isPositive) {
             p.LikeCount += 1
             p.DislikeCount += -1
@@ -112,10 +109,10 @@ export class ProjectDetailComponent implements OnInit {
         }
 
         if (p.DislikeCount < 0) {
-            p.DislikeCount = 0
+          p.DislikeCount = 0
         }
         if (p.LikeCount < 0) {
-            p.LikeCount = 0
+          p.LikeCount = 0
         }
         this.project$ = new Observable<ProjectInterface>(o => o.next(p))
       }

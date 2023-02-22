@@ -1,0 +1,46 @@
+<div *ngIf="(invites$ | async) as invites">
+  <h5 class="tui-text_h5">Invites</h5>
+  <p *ngIf="invites.length < 1" class="tui-text_body-m">No invites received yet.</p>
+  <tui-island class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let invite of invites">
+    <div class="invite content">
+      <div class="tui-island__title">
+        <a tuiLink target="_blank" routerLink="/Projects/{{invite.project}}">
+          {{invite.projectName}}
+        </a>
+      </div>
+      <div class="tui-island__paragraph">
+        <p class="">{{invite.message}}</p>
+      </div>
+    </div>
+    <div class="invite response align-self-center">
+      <a
+        class="align-self-center tui-space_horizontal-4"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="m"
+        (click)="acceptInvite(invite)"
+        icon="tuiIconCheckCircleLarge"
+        [tuiHint]="accept_invite_tooltip"
+      >
+        <ng-template #accept_invite_tooltip>
+          <div>Accept Invitation</div>
+        </ng-template>
+      </a>
+      <a
+        class="align-self-center"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="m"
+        (click)="rejectInvite(invite)"
+        icon="tuiIconSlashLarge"
+        [tuiHint]="reject_invite_tooltip"
+      >
+        <ng-template #reject_invite_tooltip>
+          <div>Reject Invitation</div>
+        </ng-template>
+      </a>
+    </div>
+  </tui-island>
+</div>

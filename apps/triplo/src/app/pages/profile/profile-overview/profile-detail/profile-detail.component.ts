@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {AuthHttpService} from "../../../services/authentication/auth-http.service";
+import {AuthHttpService} from "../../../../services/authentication/auth-http.service";
 import {UserInterface} from "@triplo/models";
-import {UserHttpService} from "../../../services/user/user-http.service";
+import {UserHttpService} from "../../../../services/user/user-http.service";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 

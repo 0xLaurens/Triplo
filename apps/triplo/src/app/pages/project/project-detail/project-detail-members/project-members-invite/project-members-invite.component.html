@@ -1,0 +1,140 @@
+<div class="tui-space_vertical-10">
+  <div class="d-flex justify-content-between">
+    <h5 class="tui-text_h5 tui-space_vertical-4">Invite Member</h5>
+    <a
+      class="align-self-center"
+      tuiIconButton
+      type="button"
+      appearance="flat"
+      size="l"
+      routerLink="../"
+      icon="tuiIconCloseLarge"
+    ></a>
+  </div>
+
+
+  <div class="tui-space_bottom-5" *ngIf="(invites$ | async) as invites">
+    <p class="tui-text_body-l tui-space_bottom-1 tui-text_bold">Pending invites</p>
+    <p *ngIf="invites.length < 1" class="tui-text_body-m">No Outbound Invites.</p>
+
+    <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let invite of invites">
+      <div class="tui-island__content">
+        <div class="d-flex">
+          <tui-avatar
+            text="{{changeToUser(invite.recipient).username}}"
+            [autoColor]="true"
+            size="s"
+          ></tui-avatar>
+
+          <a tuiLink
+             *ngIf="userId === changeToUser(invite.recipient)._id"
+             routerLink="/Profile"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{changeToUser(invite.recipient).username}}</a>
+          <a tuiLink
+             *ngIf="userId !== changeToUser(invite.recipient)._id"
+             routerLink="/Profile/{{changeToUser(invite.recipient)._id}}"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{changeToUser(invite.recipient).username}}</a>
+        </div>
+      </div>
+      <a
+        class="align-self-center"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="s"
+        (click)="removeInvite(invite)"
+        icon="tuiIconTrash"
+        [tuiHint]="delete_invite_tooltip"
+      >
+        <ng-template #delete_invite_tooltip>
+          <div>Remove Outbound Invite</div>
+        </ng-template>
+      </a>
+    </div>
+  </div>
+
+  <div class="tui-space_top-5">
+    <form
+      [formGroup]="inviteForm"
+    >
+      <h6 class="tui-text_h6 tui-space_bottom-3">Invite</h6>
+      <tui-input
+        *tuiLet="users$ | async as users"
+        formControlName="username"
+      >
+        Username
+        <input
+          tuiTextfield
+          placeholder="Enter the username"
+        />
+        <tui-data-list *tuiDataList>
+          <button
+            *ngFor="let user of users"
+            tuiOption
+            [value]="user.username"
+            (click)="onSelected(user)"
+          >
+            {{ user.username }}
+            <tui-avatar
+              size="xs"
+              [text]="user.username"
+            ></tui-avatar>
+          </button>
+        </tui-data-list>
+      </tui-input>
+    </form>
+  </div>
+
+  <div class="tui-space_vertical-2" *ngIf="usersToInvite.size !== 0">
+    <p class="tui-text_body-l tui-space_vertical-4 tui-text_bold">Members being invited</p>
+    <div class="tui-space_vertical-2 justify-content-between d-flex" *ngFor="let member of usersToInvite">
+      <div class="tui-island__content">
+        <div class="d-flex">
+          <tui-avatar
+            text="{{member.username}}"
+            [autoColor]="true"
+            size="s"
+          ></tui-avatar>
+
+          <a tuiLink
+             *ngIf="userId === member._id"
+             routerLink="/Profile"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+          <a tuiLink
+             *ngIf="userId !== member._id"
+             routerLink="/Profile/{{member._id}}"
+             class="tui-space_vertical-0 tui-space_horizontal-3 align-self-center">@{{member.username}}</a>
+        </div>
+      </div>
+      <a
+        class="align-self-center"
+        tuiIconButton
+        type="button"
+        appearance="flat"
+        size="s"
+        (click)="removeFromList(member)"
+        icon="tuiIconCloseLarge"
+        [tuiHint]="cancel_invite_tooltip"
+      >
+        <ng-template #cancel_invite_tooltip>
+          <div>Cancel Invitation</div>
+        </ng-template>
+      </a>
+    </div>
+  </div>
+
+  <div class="invite-button tui-space_vertical-4">
+    <button
+      [disabled]="usersToInvite.size === 0"
+      tuiButton
+      (click)="inviteMembers()"
+      size="s"
+      type="submit"
+      class="tui-form__button"
+      iconRight="tuiIconSend"
+    >
+      Send Invites
+    </button>
+  </div>
+</div>
+
