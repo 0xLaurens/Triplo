@@ -50,7 +50,6 @@ export class ProjectDetailOverviewComponent implements OnInit {
   }
 
   reloadReplies() {
-    console.log("replies reload")
     this.comments$ = this.commentService.getTopLevelComments(this.projectId)
   }
 }
