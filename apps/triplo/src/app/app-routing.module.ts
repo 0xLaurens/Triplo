@@ -31,6 +31,7 @@ import {
   ProjectMembersInviteComponent
 } from "./pages/project/project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 import {ProfileInviteComponent} from "./pages/profile/profile-overview/profile-invites/profile-invite.component";
+import {ProjectSettingsComponent} from "./pages/project/project-settings/project-settings.component";
 
 const routes: Routes = [
     {
@@ -72,7 +73,7 @@ const routes: Routes = [
     {path: 'Projects', component: ProjectOverviewComponent},
     {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {
-      path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
+      path: 'Projects/:projectId', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
         {
           path: 'Members', component: ProjectDetailMembersComponent, children: [
@@ -81,7 +82,11 @@ const routes: Routes = [
         },
       ]
     },
-    {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {
+      path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [AuthGuard], children: [
+        {path: "", component: ProjectEditComponent}
+      ]
+    },
 
     {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},
@@ -97,6 +102,8 @@ const routes: Routes = [
       component: TaskEditComponent,
       canActivate: [AuthGuard]
     },
+
+
     {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent}
