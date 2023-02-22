@@ -27,6 +27,7 @@
         <div class="tui-island__figure tui-space_vertical-3" *ngIf="isOwner">
           <a
             size="s"
+            (click)="deleteProject()"
             tuiIconButton
             icon="tuiIconTrash2Large"
             type="button"

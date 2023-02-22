@@ -65,10 +65,10 @@ export class ProjectSettingsComponent implements OnInit {
   }
 
   deleteProject() {
-    this.notification.subscribe(b => {
-      if (b) {
+    this.notification.subscribe(confirm => {
+      if (confirm) {
         this.projectService.deleteProject(this.projectId).subscribe(
-          p => {
+          () => {
             this.alertService.open('Deleted project', {label: "Success!"}).subscribe()
             this.router.navigate(["/Projects"])
           }

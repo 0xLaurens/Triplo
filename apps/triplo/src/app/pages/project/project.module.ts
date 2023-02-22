@@ -36,6 +36,7 @@ import {
 import {
   ProjectMembersInviteComponent
 } from "./project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {MembersComponent} from "../../components/members/members.component";
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import {
     ProjectSettingsComponent,
     ProjectMembersInviteComponent,
     ProjectMembersManagementComponent,
+    MembersComponent,
   ],
   exports: [
     ProjectOverviewComponent,
@@ -60,6 +62,7 @@ import {
     ProjectSettingsComponent,
     ProjectMembersInviteComponent,
     ProjectMembersManagementComponent,
+    MembersComponent,
   ],
   imports: [
     CommentModule,
