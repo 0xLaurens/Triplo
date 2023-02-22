@@ -27,11 +27,14 @@ import {
 import {
   ProjectDetailMembersComponent
 } from "./pages/project/project-detail/project-detail-members/project-detail-members.component";
-import {
-  ProjectMembersInviteComponent
-} from "./pages/project/project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 import {ProfileInviteComponent} from "./pages/profile/profile-overview/profile-invites/profile-invite.component";
 import {ProjectSettingsComponent} from "./pages/project/project-settings/project-settings.component";
+import {
+  ProjectMembersManagementComponent
+} from "./pages/project/project-settings/project-member-management/project-members-management.component";
+import {
+  ProjectMembersInviteComponent
+} from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
 
 const routes: Routes = [
     {
@@ -76,15 +79,18 @@ const routes: Routes = [
       path: 'Projects/:projectId', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
         {
-          path: 'Members', component: ProjectDetailMembersComponent, children: [
-            {path: 'Invite', component: ProjectMembersInviteComponent},
-          ]
+          path: 'Members', component: ProjectDetailMembersComponent,
         },
       ]
     },
     {
       path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [AuthGuard], children: [
-        {path: "", component: ProjectEditComponent}
+        {path: "", component: ProjectEditComponent},
+        {
+          path: "Members", component: ProjectMembersManagementComponent, children: [
+            {path: "Invite", component: ProjectMembersInviteComponent}
+          ]
+        }
       ]
     },
 
