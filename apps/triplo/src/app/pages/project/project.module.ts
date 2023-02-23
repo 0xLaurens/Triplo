@@ -26,13 +26,19 @@ import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
 import {ProjectDetailOverviewComponent} from "./project-detail/project-detail-overview/project-detail-overview.component";
 import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
-import {
-  ProjectMembersInviteComponent
-} from "./project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {InviteHttpService} from "../../services/invites/invite-http.service";
 import {UserHttpService} from "../../services/user/user-http.service";
 import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks/project-detail-tasks.component";
+import {ProjectSettingsComponent} from "./project-settings/project-settings.component";
+import {
+  ProjectMembersInviteComponent
+} from "./project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {
+  ProjectMembersManagementComponent
+} from "./project-settings/project-member-management/project-members-management.component";
+import {MembersComponent} from "../../components/members/members.component";
+
 
 
 @NgModule({
@@ -44,7 +50,10 @@ import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks
     ProjectDetailTasksComponent,
     ProjectDetailOverviewComponent,
     ProjectDetailMembersComponent,
+    ProjectSettingsComponent,
     ProjectMembersInviteComponent,
+    ProjectMembersManagementComponent,
+    MembersComponent,
   ],
   exports: [
     ProjectOverviewComponent,
@@ -53,8 +62,11 @@ import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks
     ProjectEditComponent,
     ProjectDetailOverviewComponent,
     ProjectDetailMembersComponent,
+    ProjectSettingsComponent,
     ProjectMembersInviteComponent,
     ProjectDetailTasksComponent,
+    ProjectMembersManagementComponent,
+    MembersComponent,
   ],
   imports: [
     CommentModule,

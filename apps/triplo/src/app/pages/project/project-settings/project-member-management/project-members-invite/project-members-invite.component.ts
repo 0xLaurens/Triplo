@@ -38,7 +38,7 @@ export class ProjectMembersInviteComponent implements OnInit {
     this.userId = this.authService.getUser()
     this.users$ = this.userService.findAllUsers()
 
-    this.route.parent?.parent?.params.subscribe(params => this.projectId = params['id']);
+    this.route.parent?.parent?.params.subscribe(params => this.projectId = params['projectId']);
     this.projectService.findProjectById(this.projectId).subscribe(project => this.project = project);
     this.invites$ = this.inviteService.getInviteByProjectId(this.projectId);
 
@@ -74,7 +74,7 @@ export class ProjectMembersInviteComponent implements OnInit {
     }
     this.inviteService.createInvite(user._id, invite).subscribe(() => {
       this.alertService.open(`${user.username} was invited`, {label: "Success!"}).subscribe()
-      this.router.navigate([`/Projects/${this.projectId}/Members`])
+      this.router.navigate([`/Projects/${this.projectId}/Settings/Members`])
     }, error => {
       if (error.status === 409) {
         this.alertService.open(`${user.username} has already been invited`, {

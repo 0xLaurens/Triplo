@@ -27,14 +27,17 @@ import {
 import {
   ProjectDetailMembersComponent
 } from "./pages/project/project-detail/project-detail-members/project-detail-members.component";
-import {
-  ProjectMembersInviteComponent
-} from "./pages/project/project-detail/project-detail-members/project-members-invite/project-members-invite.component";
 import {ProfileInviteComponent} from "./pages/profile/profile-overview/profile-invites/profile-invite.component";
+import {ProjectSettingsComponent} from "./pages/project/project-settings/project-settings.component";
+import {
+  ProjectMembersManagementComponent
+} from "./pages/project/project-settings/project-member-management/project-members-management.component";
 import {
   ProjectDetailTasksComponent
 } from "./pages/project/project-detail/project-detail-tasks/project-detail-tasks.component";
-
+import {
+  ProjectMembersInviteComponent
+} from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
 const routes: Routes = [
     {
       path: 'Users', component: UserListComponent, canActivate: [AuthGuard], children: [
@@ -75,12 +78,10 @@ const routes: Routes = [
     {path: 'Projects', component: ProjectOverviewComponent},
     {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
     {
-      path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
+      path: 'Projects/:projectId', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
         {path: '', component: ProjectDetailOverviewComponent},
         {
-          path: 'Members', component: ProjectDetailMembersComponent, children: [
-            {path: 'Invite', component: ProjectMembersInviteComponent},
-          ]
+          path: 'Members', component: ProjectDetailMembersComponent,
         },
         {
           path: "Tasks", component: ProjectDetailTasksComponent
@@ -99,7 +100,16 @@ const routes: Routes = [
         },
       ]
     },
-    {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {
+      path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [AuthGuard], children: [
+        {path: "", component: ProjectEditComponent},
+        {
+          path: "Members", component: ProjectMembersManagementComponent, children: [
+            {path: "Invite", component: ProjectMembersInviteComponent}
+          ]
+        }
+      ]
+    },
 
 
     {
@@ -112,6 +122,8 @@ const routes: Routes = [
       component: TaskEditComponent,
       canActivate: [AuthGuard]
     },
+
+
     {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent}

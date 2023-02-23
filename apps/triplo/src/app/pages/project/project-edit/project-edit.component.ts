@@ -12,9 +12,9 @@ import {TuiAlertService} from "@taiga-ui/core";
 })
 export class ProjectEditComponent implements OnInit {
   createMode?: boolean;
-  id!: string;
   form!: FormGroup
   loading = false
+  projectId: string;
 
   constructor(
     @Inject(TuiAlertService)
@@ -23,11 +23,14 @@ export class ProjectEditComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ){}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.createMode = !this.id;
+    this.route.params.subscribe(params => {
+      this.projectId = params['projectId']
+    });
+    this.createMode = !this.projectId;
 
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
@@ -37,7 +40,7 @@ export class ProjectEditComponent implements OnInit {
     this.form = this.fb.group(formControls)
 
     if (!this.createMode) {
-      this.projectService.findProjectById(this.id)
+      this.projectService.findProjectById(this.projectId)
         .subscribe(x => this.form.patchValue(x))
     }
   }
@@ -55,15 +58,15 @@ export class ProjectEditComponent implements OnInit {
 
     if (this.createMode) {
       this.projectService.createProject(changes).subscribe(
-        project => {
+        () => {
           this.loading = false;
           this.alertService.open('Created project', {label: "Success!"}).subscribe()
           this.router.navigate(["/Projects"])
         }
       );
     } else if (!this.createMode) {
-      this.projectService.updateProject(this.id, changes).subscribe(
-        project => {
+      this.projectService.updateProject(this.projectId, changes).subscribe(
+        () => {
           this.loading = false;
           this.alertService.open('Updated project', {label: "Success!"}).subscribe()
           this.router.navigate(["/Projects"])
