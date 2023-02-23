@@ -1,5 +1,12 @@
 import {IsDate,  IsMongoId, IsString, MaxLength } from "class-validator";
 
+export enum TaskType {
+  TODO,
+  PROGRESS,
+  TESTING,
+  DONE,
+}
+
 export class TaskInterface {
   @IsString()
   @IsMongoId()
