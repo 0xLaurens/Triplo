@@ -1,5 +1,5 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
-import { TaskType } from "@triplo/models";
+import { TaskStatus } from "@triplo/models";
 import mongoose from "mongoose";
 
 
@@ -27,7 +27,7 @@ export class Subtask {
   parent: string;
 
   @Prop({required: true, type: Number})
-  type: TaskType;
+  status: TaskStatus;
 }
 
 export const subtaskSchema = SchemaFactory.createForClass(Subtask);

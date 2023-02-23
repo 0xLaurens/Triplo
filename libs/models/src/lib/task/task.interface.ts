@@ -1,10 +1,10 @@
 import {IsMongoId, IsString, MaxLength } from "class-validator";
 
-export enum TaskType {
-  TODO,
-  PROGRESS,
-  TESTING,
-  DONE,
+export enum TaskStatus {
+  "Todo",
+  "In Progress",
+  "Testing",
+  "Done",
 }
 
 export class SubtaskInterface {
@@ -31,7 +31,7 @@ export class SubtaskInterface {
   @IsMongoId()
   project: string;
 
-  type: TaskType
+  status: TaskStatus;
 }
 
 export class TaskInterface extends SubtaskInterface {

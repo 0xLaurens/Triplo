@@ -3,13 +3,14 @@ import {TaskEditComponent} from "./task-edit/task-edit.component";
 import {TaskDetailComponent} from "./task-detail/task-detail.component";
 import {TaskCardComponent} from "./task-card/task-card.component";
 import {
+  TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
   TuiIslandModule,
-  TuiMarkerIconModule,
+  TuiMarkerIconModule, TuiSelectModule,
   TuiTagModule, TuiTextAreaModule
 } from "@taiga-ui/kit";
-import {AsyncPipe, DatePipe} from "@angular/common";
+import {AsyncPipe, DatePipe, NgClass, NgIf} from "@angular/common";
 import {RouterLinkWithHref} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
@@ -46,7 +47,11 @@ import {
     TuiFieldErrorPipeModule,
     TuiTextAreaModule,
     TuiSvgModule,
-    TuiButtonModule
+    TuiButtonModule,
+    NgIf,
+    TuiDataListWrapperModule,
+    TuiSelectModule,
+    NgClass
   ],
   providers: [],
 })

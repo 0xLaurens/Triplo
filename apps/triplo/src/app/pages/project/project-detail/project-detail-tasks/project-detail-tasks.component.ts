@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {AuthHttpService} from "../../../../services/authentication/auth-http.service";
-import {CommentInterface, ProjectInterface, TaskInterface} from "@triplo/models";
+import {TaskInterface} from "@triplo/models";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ProjectHttpService} from "../../../../services/projects/project-http.service";
@@ -33,6 +33,10 @@ export class ProjectDetailTasksComponent implements OnInit {
         this.projectId = params['projectId']
       }
     });
+    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
+  }
+
+  reloadTasks() {
     this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
   }
 }

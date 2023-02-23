@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {TaskInterface} from "@triplo/models";
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {TaskInterface, TaskStatus} from "@triplo/models";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TuiAlertService} from "@taiga-ui/core";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,6 +16,7 @@ export class TaskEditComponent implements OnInit {
   form!: FormGroup
   loading = false
   subtaskMode = false;
+  status = ["Todo", "In Progress", "Testing", "Done"]
   subtaskId: string;
 
   constructor(
@@ -29,15 +30,16 @@ export class TaskEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskId = this.route.snapshot.params['taskId'];
-    this.subtaskId = this.route.snapshot.params['subtaskId'];
-    this.projectId = this.route.snapshot.params['projectId'];
+    this.route.parent?.parent?.params.subscribe(params => {
+      this.projectId = params['projectId']
+    });
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
 
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
+      status: new FormControl('')
     };
     this.form = this.fb.group(formControls)
 
@@ -61,29 +63,31 @@ export class TaskEditComponent implements OnInit {
     let value = "task";
     if (this.subtaskMode) {
       value = "subtask"
+    } else {
+      changes.status = TaskStatus.Todo
     }
 
     if (this.createMode) {
       if (!this.subtaskMode) {
         this.taskService.createTask(this.projectId, changes).subscribe(
-          task => {
+          () => {
             this.loading = false;
             this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}`])
+            this.router.navigate([`/Projects/${this.projectId}/Tasks`])
           }
         );
       } else {
         this.taskService.createSubTask(this.projectId, this.taskId, changes).subscribe(
-          task => {
+          () => {
             this.loading = false;
             this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
+            this.router.navigate([`/Projects/${this.projectId}/Tasks`])
           }
         );
       }
     } else if (!this.createMode) {
       this.taskService.updateTask(this.taskId, changes).subscribe(
-        task => {
+        () => {
           this.loading = false;
           this.alertService.open(`Updated ${value}`, {label: "Success!"}).subscribe()
           this.router.navigate([`/Projects/${this.projectId}`])
@@ -94,7 +98,7 @@ export class TaskEditComponent implements OnInit {
 
   back() {
     if (this.subtaskMode) {
-      this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
+      this.router.navigate([`/Projects/${this.projectId}/Tasks/${this.taskId}`])
     } else {
       this.router.navigate([`/Projects/${this.projectId}`])
     }

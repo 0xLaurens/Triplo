@@ -8,8 +8,6 @@ import {TuiFieldErrorPipeModule, TuiTextAreaModule} from "@taiga-ui/kit";
 import {
   TuiAlertService,
   TuiErrorModule, TuiExpandModule,
-  TuiTextfieldCleanerDirective,
-  TuiTextfieldCustomContentDirective
 } from "@taiga-ui/core";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 
