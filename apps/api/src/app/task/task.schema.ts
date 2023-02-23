@@ -14,7 +14,7 @@ export class Subtask {
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'User'})
   assigned: string;
 
-  @Prop({required: true})
+  @Prop({})
   username: string;
 
   @Prop({default: Date.now})
@@ -22,6 +22,9 @@ export class Subtask {
 
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
   project: string;
+
+  @Prop({default: null})
+  parent: string;
 
   @Prop({required: true, type: Number})
   type: TaskType;
@@ -31,8 +34,8 @@ export const subtaskSchema = SchemaFactory.createForClass(Subtask);
 
 @Schema()
 export class Task extends Subtask {
-  @Prop({default: [[],[],[],[]]})
-  subtasks: [Subtask[]]
+  @Prop({default: []})
+  subtasks: [Subtask]
 }
 
 export const TaskSchema = SchemaFactory.createForClass(Task)

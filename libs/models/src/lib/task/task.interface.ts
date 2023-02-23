@@ -10,7 +10,7 @@ export enum TaskType {
 export class SubtaskInterface {
   @IsString()
   @IsMongoId()
-  _id: string;
+  _id?: string;
 
   @IsString()
   name: string;
@@ -35,5 +35,5 @@ export class SubtaskInterface {
 }
 
 export class TaskInterface extends SubtaskInterface {
-  subtasks: [SubtaskInterface[]]
+  subtasks: [SubtaskInterface]
 }
