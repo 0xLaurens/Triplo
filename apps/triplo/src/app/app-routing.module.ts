@@ -92,7 +92,7 @@ const routes: Routes = [
             {path: 'Create', component: TaskEditComponent, canActivate: [AuthGuard]},
             {path: 'Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
             {
-              path: '/Subtask/Create',
+              path: 'Subtask/Create',
               component: TaskEditComponent,
               canActivate: [AuthGuard]
             },

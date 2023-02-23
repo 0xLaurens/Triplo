@@ -28,9 +28,9 @@ export class ProjectDetailTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUser()
-    this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.projectId = params['id']
+    this.route.parent?.params.subscribe(params => {
+      if (params['projectId']) {
+        this.projectId = params['projectId']
       }
     });
     this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
