@@ -6,10 +6,10 @@ import {ProjectHttpService} from "../../../../services/projects/project-http.ser
 import {TuiAlertService} from "@taiga-ui/core";
 
 @Component({
-  selector: 'triplo-project-detail-members',
-  templateUrl: './project-detail-members.component.html',
+  selector: 'triplo-project-members-management',
+  templateUrl: './project-members-management.component.html',
 })
-export class ProjectDetailMembersComponent implements OnInit {
+export class ProjectMembersManagementComponent implements OnInit {
   userId: string | null;
   owner: UserInterface;
   projectId: string;

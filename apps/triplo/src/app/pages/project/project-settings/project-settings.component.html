@@ -1,0 +1,78 @@
+<div class="tui-space_vertical-16 d-flex align-items-center" *ngIf="(project$ | async) as project">
+  <div class="tui-container_adaptive tui-container">
+    <div class="justify-content-between d-flex">
+      <a
+        routerLink="../"
+        tuiIconButton
+        icon="tuiIconArrowLeftLarge"
+        type="button"
+        [tuiHint]="tooltip"
+        appearance="flat"
+        class="tui-space_right-3 tui-space_bottom-3"
+      >
+      </a>
+      <ng-template #tooltip>
+        <div>Back</div>
+      </ng-template>
+    </div>
+
+    <tui-island>
+      <div class="tui-island__content">
+        <div class="d-flex tui-space_vertical-3">
+          <h4 class="tui-text_h4 tui-space_vertical-0 tui-space_horizontal-3 align-self-center">{{project.name}}</h4>
+          <div class="align-self-center">
+            <tui-tag value="Since {{project.created | date:'yyyy'}}"></tui-tag>
+          </div>
+        </div>
+        <div class="tui-island__figure tui-space_vertical-3" *ngIf="isOwner">
+          <a
+            size="s"
+            (click)="deleteProject()"
+            tuiIconButton
+            icon="tuiIconTrash2Large"
+            type="button"
+            [tuiHint]="delete_project_tooltip"
+            appearance="flat"
+            class="tui-space_right-3 tui-space_bottom-3"
+          >
+            <ng-template #delete_project_tooltip>
+              <div>Delete Project</div>
+            </ng-template>
+          </a>
+        </div>
+      </div>
+    </tui-island>
+
+    <tui-island class="tui-space_vertical-3">
+      <div>
+        <button
+          iconRight="tuiIconEdit2Large"
+          routerLink="/Projects/{{project._id}}/Settings"
+          size="m"
+          tuiButton
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Edit Project
+        </button>
+
+        <button
+          tuiButton
+          iconRight="tuiIconUsersLarge"
+          routerLink="/Projects/{{project._id}}/Settings/Members"
+          size="m"
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Manage Members
+        </button>
+      </div>
+    </tui-island>
+
+    <div class="tui-space_vertical-4" *ngIf="isOwner">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

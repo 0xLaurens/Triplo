@@ -32,8 +32,8 @@ export class ProjectDetailOverviewComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.authService.getUser()
     this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.projectId = params['id']
+      if (params['projectId']) {
+        this.projectId = params['projectId']
       }
     });
     this.recentComments = new Set<CommentInterface>();
