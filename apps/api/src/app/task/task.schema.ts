@@ -23,7 +23,7 @@ export class Subtask {
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
   project: string;
 
-  @Prop({required: true})
+  @Prop({required: true, type: Number})
   type: TaskType;
 }
 
