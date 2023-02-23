@@ -1,4 +1,4 @@
-import {IsDate,  IsMongoId, IsString, MaxLength } from "class-validator";
+import {IsMongoId, IsString, MaxLength } from "class-validator";
 
 export enum TaskType {
   TODO,
@@ -7,7 +7,7 @@ export enum TaskType {
   DONE,
 }
 
-export class TaskInterface {
+export class SubtaskInterface {
   @IsString()
   @IsMongoId()
   _id: string;
@@ -19,12 +19,21 @@ export class TaskInterface {
   @MaxLength(1000)
   description:string;
 
+  @IsMongoId()
+  assigned: string;
+
+  @IsString()
+  username: string;
+
+  created: Date
+
   @IsString()
   @IsMongoId()
   project: string;
 
-  @IsDate()
-  created?: Date
+  type: TaskType
+}
 
-  subtasks: TaskInterface[]
+export class TaskInterface extends SubtaskInterface {
+  subtasks: [SubtaskInterface[]]
 }
