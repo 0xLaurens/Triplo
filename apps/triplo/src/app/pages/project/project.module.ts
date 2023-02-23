@@ -32,6 +32,7 @@ import {
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {InviteHttpService} from "../../services/invites/invite-http.service";
 import {UserHttpService} from "../../services/user/user-http.service";
+import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks/project-detail-tasks.component";
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {UserHttpService} from "../../services/user/user-http.service";
     ProjectCardListComponent,
     ProjectDetailComponent,
     ProjectEditComponent,
+    ProjectDetailTasksComponent,
     ProjectDetailOverviewComponent,
     ProjectDetailMembersComponent,
     ProjectMembersInviteComponent,
@@ -52,6 +54,7 @@ import {UserHttpService} from "../../services/user/user-http.service";
     ProjectDetailOverviewComponent,
     ProjectDetailMembersComponent,
     ProjectMembersInviteComponent,
+    ProjectDetailTasksComponent,
   ],
   imports: [
     CommentModule,

@@ -60,6 +60,18 @@
         <button
           tuiButton
           iconRight="tuiIconUsersLarge"
+          routerLink="/Projects/{{project._id}}/Tasks"
+          size="m"
+          type="button"
+          appearance="primary"
+          class="tui-space_right-6"
+        >
+          Tasks
+        </button>
+
+        <button
+          tuiButton
+          iconRight="tuiIconUsersLarge"
           routerLink="/Projects/{{project._id}}/Members"
           size="m"
           type="button"
@@ -68,6 +80,7 @@
         >
           Members
         </button>
+
       </div>
     </tui-island>
 
