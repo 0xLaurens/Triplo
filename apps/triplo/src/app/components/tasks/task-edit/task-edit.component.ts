@@ -16,7 +16,7 @@ export class TaskEditComponent implements OnInit {
   form!: FormGroup
   loading = false
   subtaskMode = false;
-  status = ["Todo", "In Progress", "Testing", "Done"]
+  status = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
   subtaskId: string;
   open = true;
 
@@ -32,6 +32,7 @@ export class TaskEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.parent?.parent?.params.subscribe(params => this.projectId = params['projectId']);
+    this.route.parent?.params.subscribe(params => this.taskId = params['taskId'])
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
     this.setupForm();
@@ -46,7 +47,13 @@ export class TaskEditComponent implements OnInit {
     this.form = this.fb.group(formControls)
 
     if (!this.createMode)
-      this.taskService.getTaskById(this.taskId).subscribe(x => this.form.patchValue(x))
+      this.taskService.getTaskById(this.taskId).subscribe(task => {
+        this.form.patchValue({
+          name: task.name,
+          description: task.description,
+          status: task.status
+        })
+      })
   }
 
   get f() {
@@ -61,7 +68,7 @@ export class TaskEditComponent implements OnInit {
     this.loading = true;
     const taskMessage = this.subtaskMode ? "subtask" : "task";
 
-    this.createMode ? changes.status = TaskStatus.Todo : changes.status;
+    this.createMode ? changes.status = TaskStatus.TODO: changes.status;
 
     if (this.createMode && !this.subtaskMode)
       this.taskService.createTask(this.projectId, changes).subscribe(() => this.toast(`Created ${taskMessage}`));

@@ -1,4 +1,4 @@
-import {Component, Inject, Injectable, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TaskHttpService} from "../../../services/task/task-http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TaskInterface} from "@triplo/models";
@@ -28,35 +28,34 @@ export class TaskDetailComponent implements OnInit {
       this.taskId = params['taskId']
       this.subtaskId = params['subtaskId']
     });
+    this.loadTask()
+  }
+
+  loadTask() {
     if (this.subtaskId) {
       this.subtaskMode = true
       this.task$ = this.taskService.findSubtaskById(this.taskId, this.subtaskId);
     } else {
       this.task$ = this.taskService.getTaskById(this.taskId)
     }
-
   }
 
   deleteTask() {
-    if (this.subtaskMode) {
-      this.taskService.deleteTask(this.subtaskId).subscribe(
-        p => {
-          this.alertService.open('Deleted subtask!', {label: "Success!"}).subscribe()
-          this.router.navigate(["/"])
-        }
-      )
-    } else {
-      this.taskService.deleteTask(this.taskId).subscribe(
-        p => {
-          this.alertService.open('Deleted Task', {label: "Success!"}).subscribe()
-          this.router.navigate(["/Tasks"])
-        }
-      )
-    }
+    const taskMessage = this.subtaskMode ? "subtask" : "task";
+    if (this.subtaskMode)
+      this.taskService.deleteSubtask(this.taskId, this.subtaskId).subscribe(() => this.toast(`Deleted ${taskMessage}`));
 
+    if (!this.subtaskMode)
+      this.taskService.deleteTask(this.taskId).subscribe(() => this.toast(`Deleted ${taskMessage}`));
   }
 
+  toast(content: string) {
+    this.alertService.open(content, {label: "Success!"}).subscribe()
+    this.back()
+  }
+
+
   back() {
-    this.router.navigate(["/Tasks"])
+    this.router.navigate(["../"], {relativeTo: this.route})
   }
 }

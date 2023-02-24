@@ -26,7 +26,7 @@ export class Subtask {
   @Prop({default: null})
   parent: string;
 
-  @Prop({required: true, type: Number})
+  @Prop({required: true, type: String})
   status: TaskStatus;
 }
 

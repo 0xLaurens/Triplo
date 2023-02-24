@@ -8,12 +8,13 @@
       <div>
         <a routerLink="Edit" tuiMarkerIcon mode="link" size="xs" src="tuiIconEditLarge"
            class="tui-space_right-2"></a>
-        <a tuiMarkerIcon mode="link" size="xs" src="tuiIconTrashLarge"
+        <a tuiMarkerIcon (click)="deleteTask()" mode="link" size="xs" src="tuiIconTrashLarge"
            class="tui-space_right-2"></a>
       </div>
     </div>
 
     <div class="description tui-space_vertical-10 w-50">
+      <div>{{task.status}}</div>
       <h6 class="tui-text_h6">Description</h6>
       <div class="tui-text_body-m">
         {{task.description}}
@@ -34,3 +35,5 @@
     </div>
   </div>
 </div>
+
+<router-outlet (deactivate)="loadTask()"></router-outlet>

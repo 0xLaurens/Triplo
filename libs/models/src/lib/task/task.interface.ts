@@ -1,10 +1,10 @@
-import {IsMongoId, IsString, MaxLength } from "class-validator";
+import {IsMongoId, IsString, MaxLength} from "class-validator";
 
 export enum TaskStatus {
-  "Todo",
-  "In Progress",
-  "Testing",
-  "Done",
+  TODO = "To Do",
+  PROGRESS = "In Progress",
+  TESTING = "Testing",
+  DONE = "Done"
 }
 
 export class SubtaskInterface {
@@ -17,7 +17,7 @@ export class SubtaskInterface {
 
   @IsString()
   @MaxLength(1000)
-  description:string;
+  description: string;
 
   @IsMongoId()
   assigned: string;

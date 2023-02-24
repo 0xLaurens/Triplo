@@ -1,6 +1,6 @@
 <ng-template
   (tuiDialogChange)="close()"
-  [tuiDialogOptions]="{size: 's'}"
+  [tuiDialogOptions]="{size: 'l'}"
   [(tuiDialog)]="open"
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()" #taskForm="ngForm">
@@ -54,7 +54,7 @@
     ></tui-error>
 
     <tui-select
-      *ngIf="subtaskMode"
+      *ngIf="!createMode"
       formControlName="status"
       class="tui-space_top-3"
     >

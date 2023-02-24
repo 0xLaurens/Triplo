@@ -87,14 +87,12 @@ const routes: Routes = [
         {
           path: "Tasks", component: ProjectDetailTasksComponent, children: [
             {path: 'Create', component: TaskEditComponent, canActivate: [AuthGuard]},
-            {path: 'Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
           ]
         },
         {
           path: "Tasks/:taskId", component: TaskDetailComponent, children: [
-            {path: '', component: TaskDetailComponent, canActivate: [AuthGuard]},
+            {path: 'Edit', component: TaskEditComponent},
             {path: 'Subtask/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
-            {path: 'Edit', component: TaskEditComponent}
           ]
         },
       ]

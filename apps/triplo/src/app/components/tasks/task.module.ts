@@ -11,7 +11,7 @@ import {
   TuiTagModule, TuiTextAreaModule
 } from "@taiga-ui/kit";
 import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import {RouterLink, RouterLinkWithHref} from "@angular/router";
+import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
   TuiButtonModule, TuiDialogModule,
@@ -56,7 +56,8 @@ import {TuiAutoFocusModule} from "@taiga-ui/cdk";
     RouterLink,
     NgForOf,
     TuiAutoFocusModule,
-    TuiDialogModule
+    TuiDialogModule,
+    RouterOutlet
   ],
   providers: [],
 })
