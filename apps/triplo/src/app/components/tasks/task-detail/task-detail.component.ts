@@ -59,4 +59,8 @@ export class TaskDetailComponent implements OnInit {
   back() {
     this.router.navigate(["../"], {relativeTo: this.route})
   }
+
+  changeStatus(task: TaskInterface) {
+    this.taskService.updateSubtask(this.taskId, task._id, task).subscribe(console.log)
+  }
 }

@@ -16,7 +16,7 @@ export class TaskCardComponent {
 
   @Input() subtask = false;
   @Input() task: TaskInterface
-  @Output() changeStatus = new EventEmitter<number>();
+  @Output() changeStatus = new EventEmitter<TaskInterface>();
   statuses = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
 
   navigate() {
@@ -31,13 +31,14 @@ export class TaskCardComponent {
     let index = this.statuses.indexOf(this.task.status)
     if (index > 0) index--
     this.task.status = this.statuses[index]
+    this.changeStatus.emit(this.task)
   }
 
   right() {
     let index = this.statuses.indexOf(this.task.status)
     if (index < 4) index++
-    this.changeStatus.emit(index)
     this.task.status = this.statuses[index]
+    this.changeStatus.emit(this.task)
   }
 
 }

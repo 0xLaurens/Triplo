@@ -37,7 +37,7 @@
             <div class="tui-text_h6">{{status}}</div>
           </tui-island>
           <div *ngFor="let subtask of task.subtasks">
-            <triplo-task-card *ngIf="subtask.status === status" [task]="subtask"
+            <triplo-task-card (changeStatus)="changeStatus($event)" *ngIf="subtask.status === status" [task]="subtask"
                               [subtask]="true"></triplo-task-card>
           </div>
         </div>

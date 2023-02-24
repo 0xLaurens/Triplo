@@ -10,7 +10,7 @@ export enum TaskStatus {
 export class SubtaskInterface {
   @IsString()
   @IsMongoId()
-  _id?: string;
+  _id: string;
 
   @IsString()
   name: string;
