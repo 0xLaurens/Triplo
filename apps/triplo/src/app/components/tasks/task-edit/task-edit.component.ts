@@ -16,6 +16,7 @@ export class TaskEditComponent implements OnInit {
   form!: FormGroup
   loading = false
   subtaskMode = false;
+  deleteMode = false;
   status = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
   subtaskId: string;
   taskMessage: string;
@@ -99,7 +100,20 @@ export class TaskEditComponent implements OnInit {
     if (this.subtaskMode)
       this.router.navigate([`../../`], {relativeTo: this.route})
 
-    if (!this.subtaskMode)
+    if (!this.subtaskMode && this.createMode)
       this.router.navigate([`../`], {relativeTo: this.route})
+
+    if (this.deleteMode)
+      this.router.navigate([`../../`], {relativeTo: this.route})
+  }
+
+  deleteTask() {
+    if (this.subtaskMode && !this.createMode)
+      this.taskService.deleteSubtask(this.taskId, this.subtaskId).subscribe(() => this.toast(`Deleted ${this.taskMessage}`))
+      this.deleteMode = true
+
+    if (!this.subtaskMode && !this.createMode)
+      this.taskService.deleteTask(this.taskId).subscribe(() => this.toast(`Deleted ${this.taskMessage}`))
+      this.deleteMode = true
   }
 }
