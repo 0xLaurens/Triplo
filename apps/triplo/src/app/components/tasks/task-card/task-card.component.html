@@ -11,6 +11,6 @@
     <p class="text">
       {{task.description}}
     </p>
-    <tui-tag value="{{task.created | date}}"></tui-tag>
+    <tui-tag *ngIf="!subtask" value="{{task.created | date}}"></tui-tag>
   </a>
 </div>

@@ -1,6 +1,6 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
-import {SubtaskInterface, TaskInterface} from "@triplo/models";
+import {TaskInterface} from "@triplo/models";
 import {Model} from "mongoose";
 
 @Injectable()
@@ -32,11 +32,15 @@ export class TaskRepository {
     return this.taskModel.findByIdAndDelete(taskId)
   }
 
-  async createSubtask(taskId: string, task: SubtaskInterface): Promise<TaskInterface> {
+  async getSubtaskById(taskId: string, subtaskId: string): Promise<TaskInterface> {
+    return this.taskModel.findOne({_id: taskId, "subtasks._id": subtaskId}, {"subtasks.$": 1})
+  }
+
+  async createSubtask(taskId: string, task: TaskInterface): Promise<TaskInterface> {
     return this.taskModel.findByIdAndUpdate(taskId, {$addToSet: {subtasks: {...task}}});
   }
 
-  async updateSubtask(taskId: string, subtaskId: string, task: SubtaskInterface): Promise<TaskInterface> {
+  async updateSubtask(taskId: string, subtaskId: string, task: TaskInterface): Promise<TaskInterface> {
     return this.taskModel.findOneAndUpdate({
       _id: taskId,
       "subtasks._id": subtaskId
@@ -46,4 +50,5 @@ export class TaskRepository {
   async deleteSubtask(taskId: string, subtaskId: string): Promise<TaskInterface> {
     return this.taskModel.findByIdAndUpdate(taskId, {$pull: {subtasks: {_id: subtaskId}}});
   }
+
 }

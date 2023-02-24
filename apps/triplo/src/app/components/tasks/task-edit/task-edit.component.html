@@ -4,8 +4,8 @@
   [(tuiDialog)]="open"
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()" #taskForm="ngForm">
-    <h3 *ngIf="createMode" class="tui-form__header tui-form__header_margin-top_none">Create Task</h3>
-    <h3 *ngIf="!createMode" class="tui-form__header tui-form__header_margin-top_none">Edit Task</h3>
+    <h3 *ngIf="createMode" class="tui-form__header tui-form__header_margin-top_none">Create {{taskMessage}}</h3>
+    <h3 *ngIf="!createMode" class="tui-form__header tui-form__header_margin-top_none">Edit {{taskMessage}}</h3>
     <tui-input
       tuiAutoFocus
       tuiHintContent="The Name of the task needs to be 0-100 chars"
@@ -54,9 +54,10 @@
     ></tui-error>
 
     <tui-select
-      *ngIf="!createMode"
       formControlName="status"
       class="tui-space_top-3"
+      [readOnly]="createMode"
+      [focusable]="!createMode"
     >
       Status
       <input
@@ -82,7 +83,7 @@
         Submit
       </button>
       <button
-        routerLink="../"
+        (click)="close()"
         tuiButton
         type="button"
         appearance="flat"

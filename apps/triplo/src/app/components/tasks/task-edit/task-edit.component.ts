@@ -11,13 +11,14 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
 })
 export class TaskEditComponent implements OnInit {
   projectId: string;
-  createMode?: boolean;
+  createMode: boolean;
   taskId!: string;
   form!: FormGroup
   loading = false
   subtaskMode = false;
   status = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
   subtaskId: string;
+  taskMessage: string;
   open = true;
 
   constructor(
@@ -33,8 +34,11 @@ export class TaskEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.parent?.parent?.params.subscribe(params => this.projectId = params['projectId']);
     this.route.parent?.params.subscribe(params => this.taskId = params['taskId'])
+    this.route.params.subscribe(params => this.subtaskId = params['subtaskId'])
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
+
+    this.taskMessage = this.subtaskMode ? "subtask" : "task";
     this.setupForm();
   }
 
@@ -42,19 +46,21 @@ export class TaskEditComponent implements OnInit {
     const formControls = {
       name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
-      status: new FormControl('')
+      status: new FormControl(TaskStatus.TODO)
     };
     this.form = this.fb.group(formControls)
 
-    if (!this.createMode)
+    if (!this.createMode && !this.subtaskMode)
       this.taskService.getTaskById(this.taskId).subscribe(task => {
-        this.form.patchValue({
-          name: task.name,
-          description: task.description,
-          status: task.status
-        })
+        this.form.patchValue(task)
+      })
+
+    if (!this.createMode && this.subtaskMode)
+      this.taskService.getSubtaskById(this.taskId, this.subtaskId).subscribe(parentTask => {
+        this.form.patchValue(parentTask.subtasks[0])
       })
   }
+
 
   get f() {
     return this.form.controls;
@@ -66,21 +72,20 @@ export class TaskEditComponent implements OnInit {
     }
 
     this.loading = true;
-    const taskMessage = this.subtaskMode ? "subtask" : "task";
 
-    this.createMode ? changes.status = TaskStatus.TODO: changes.status;
+    this.createMode ? changes.status = TaskStatus.TODO : changes.status;
 
     if (this.createMode && !this.subtaskMode)
-      this.taskService.createTask(this.projectId, changes).subscribe(() => this.toast(`Created ${taskMessage}`));
+      this.taskService.createTask(this.projectId, changes).subscribe(() => this.toast(`Created ${this.taskMessage}`));
 
     if (this.createMode && this.subtaskMode)
-      this.taskService.createSubtask(this.projectId, this.taskId, changes).subscribe(() => this.toast(`Created ${taskMessage}`));
+      this.taskService.createSubtask(this.taskId, changes).subscribe(() => this.toast(`Created ${this.taskMessage}`));
 
     if (!this.createMode && this.subtaskMode)
-      this.taskService.updateSubtask(this.taskId, this.subtaskId, changes).subscribe(() => this.toast(`Updated ${taskMessage}`))
+      this.taskService.updateSubtask(this.taskId, this.subtaskId, changes).subscribe(() => this.toast(`Updated ${this.taskMessage}`))
 
     if (!this.createMode && !this.subtaskMode)
-      this.taskService.updateTask(this.taskId, changes).subscribe(() => this.toast(`Updated ${taskMessage}`))
+      this.taskService.updateTask(this.taskId, changes).subscribe(() => this.toast(`Updated ${this.taskMessage}`))
 
   }
 
@@ -91,6 +96,10 @@ export class TaskEditComponent implements OnInit {
   }
 
   close() {
-    this.router.navigate([`../`], {relativeTo: this.route})
+    if (this.subtaskMode)
+      this.router.navigate([`../../`], {relativeTo: this.route})
+
+    if (!this.subtaskMode)
+      this.router.navigate([`../`], {relativeTo: this.route})
   }
 }

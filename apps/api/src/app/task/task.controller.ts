@@ -39,16 +39,23 @@ export class TaskController {
     return this.taskRepo.deleteTask(taskId)
   }
 
+
+  @Get("/tasks/:taskId/subtask/:subtaskId")
+  getSubtaskById(@Param("taskId") taskId: string, @Param("subtaskId") subtaskId: string): Promise<TaskInterface> {
+    return this.taskRepo.getSubtaskById(taskId, subtaskId)
+  }
+
+
   @Post("/tasks/:taskId/subtask/")
   async createSubtask(
-    @Param("taskId") taskId: string, @Body() task: SubtaskInterface
+    @Param("taskId") taskId: string, @Body() task: TaskInterface
   ): Promise<TaskInterface> {
     return this.taskRepo.createSubtask(taskId, task)
   }
 
   @Put("/tasks/:taskId/subtask/:subtaskId")
   async updateSubtask(
-    @Param("taskId") taskId: string, @Param("subtaskId") subtaskId: string, @Body() task: SubtaskInterface
+    @Param("taskId") taskId: string, @Param("subtaskId") subtaskId: string, @Body() task: TaskInterface
   ): Promise<TaskInterface> {
     return this.taskRepo.updateSubtask(taskId, subtaskId, task)
   }

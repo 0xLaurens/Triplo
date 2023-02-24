@@ -32,8 +32,8 @@ export class TaskHttpService {
     return this.http.get<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
   }
 
-  createSubtask(taskId: string, subtaskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
-    return this.http.post<TaskInterface>(`api/tasks/${taskId}/tasks/${subtaskId}`, subtask)
+  createSubtask(taskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
+    return this.http.post<TaskInterface>(`api/tasks/${taskId}/subtask/`, subtask)
   }
 
   updateSubtask(taskId: string, subtaskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
@@ -44,4 +44,7 @@ export class TaskHttpService {
     return this.http.delete<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
   }
 
+  getSubtaskById(taskId: string, subtaskId: string): Observable<TaskInterface> {
+    return this.http.get<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
+  }
 }

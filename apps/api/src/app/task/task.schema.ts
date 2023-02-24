@@ -34,7 +34,7 @@ export const subtaskSchema = SchemaFactory.createForClass(Subtask);
 
 @Schema()
 export class Task extends Subtask {
-  @Prop({default: []})
+  @Prop({default: [], type: [subtaskSchema]})
   subtasks: [Subtask]
 }
 
