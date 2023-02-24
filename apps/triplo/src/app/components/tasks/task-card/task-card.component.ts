@@ -13,6 +13,7 @@ export class TaskCardComponent {
     public route: ActivatedRoute,
     private router: Router) {
   }
+
   @Input() subtask = false;
   @Input() task: TaskInterface
 
@@ -20,7 +21,7 @@ export class TaskCardComponent {
     if (this.subtask) {
       this.router.navigate([`Subtask/${this.task._id}`], {relativeTo: this.route})
     } else {
-      this.router.navigate([`Projects/${this.task.project}/Task/${this.task._id}`])
+      this.router.navigate([`./${this.task._id}`], {relativeTo: this.route})
     }
   }
 

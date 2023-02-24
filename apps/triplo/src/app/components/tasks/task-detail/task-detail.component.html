@@ -1,4 +1,4 @@
-<div class="min-vh-100 d-flex align-items-center" *ngIf="(task$ | async) as task">
+<div class="d-flex align-items-center" *ngIf="(task$ | async) as task" [ngClass]="subtaskMode ? 'min-vh-100': 'tui-space__vertical-4'">
   <div class="tui-container_adaptive tui-container">
     <div class="d-flex justify-content-between py-3">
       <div>
@@ -25,7 +25,7 @@
         <a routerLink="Subtask/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"
            class="tui-space_right-2"></a>
       </div>
-      <div *ngIf="!task.subtasks" class="tui-text_body-m">This project currently doesn't have any subtasks
+      <div *ngIf="task.subtasks.length < 1" class="tui-text_body-m">This project currently doesn't have any subtasks
         available.
       </div>
       <div *ngFor="let subtask of task.subtasks">

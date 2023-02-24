@@ -96,11 +96,4 @@ export class TaskEditComponent implements OnInit {
     }
   }
 
-  back() {
-    if (this.subtaskMode) {
-      this.router.navigate([`/Projects/${this.projectId}/Tasks/${this.taskId}`])
-    } else {
-      this.router.navigate([`/Projects/${this.projectId}`])
-    }
-  }
 }

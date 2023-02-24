@@ -10,8 +10,8 @@ import {
   TuiMarkerIconModule, TuiSelectModule,
   TuiTagModule, TuiTextAreaModule
 } from "@taiga-ui/kit";
-import {AsyncPipe, DatePipe, NgClass, NgIf} from "@angular/common";
-import {RouterLinkWithHref} from "@angular/router";
+import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
   TuiButtonModule,
@@ -51,7 +51,9 @@ import {
     NgIf,
     TuiDataListWrapperModule,
     TuiSelectModule,
-    NgClass
+    NgClass,
+    RouterLink,
+    NgForOf
   ],
   providers: [],
 })
