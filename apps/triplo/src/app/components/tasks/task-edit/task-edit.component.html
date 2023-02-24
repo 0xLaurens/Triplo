@@ -4,7 +4,7 @@
   [(tuiDialog)]="open"
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()" #taskForm="ngForm">
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between tui-space_vertical-4">
       <h3 *ngIf="createMode" class="tui-form__header tui-form__header_margin-top_none">Create {{taskMessage}}</h3>
       <h3 *ngIf="!createMode" class="tui-form__header tui-form__header_margin-top_none">Edit {{taskMessage}}</h3>
       <a
@@ -26,8 +26,6 @@
     <tui-input
       tuiAutoFocus
       tuiHintContent="The Name of the task needs to be 0-100 chars"
-      [tuiTextfieldCleaner]="true"
-      [tuiTextfieldCustomContent]="f['name'].valid ? success : ''"
       [maxlength]="100"
       class="tui-space_top-3"
       formControlName="name"
@@ -36,12 +34,6 @@
       Task name
       <span class="tui-required"></span>
     </tui-input>
-    <ng-template #success>
-      <tui-svg
-        src="tuiIconCheckLarge"
-        class="success tui-space_left-3"
-      ></tui-svg>
-    </ng-template>
     <tui-error
       formControlName="name"
       [error]="[] | tuiFieldError | async"
@@ -53,18 +45,11 @@
       [maxlength]="1000"
       [expandable]="true"
       [tuiTextfieldLabelOutside]="true"
-      [tuiTextfieldCustomContent]="f['description'].valid ? success : ''"
       formControlName="description"
     >
       Task Description
       <span class="tui-required"></span>
     </tui-text-area>
-    <ng-template #success>
-      <tui-svg
-        src="tuiIconCheckLarge"
-        class="success tui-space_left-3"
-      ></tui-svg>
-    </ng-template>
     <tui-error
       formControlName="description"
       [error]="[] | tuiFieldError | async"
