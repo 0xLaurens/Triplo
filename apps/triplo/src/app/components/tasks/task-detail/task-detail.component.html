@@ -31,7 +31,7 @@
         available.
       </div>
 
-      <div class="tui-row tui-row_adaptive">
+      <div class="tui-row tui-row_adaptive" *ngIf="task.subtasks.length > 0">
         <div class="tui-col_xs-12 tui-col_md-6 tui-col_lg-3 px-2 tui-space_vertical-6" *ngFor="let status of statuses">
           <tui-island>
             <div class="tui-text_h6">{{status}}</div>

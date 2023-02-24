@@ -97,14 +97,11 @@ export class TaskEditComponent implements OnInit {
   }
 
   close() {
-    if (this.subtaskMode)
+    if (this.subtaskMode || this.deleteMode)
       this.router.navigate([`../../`], {relativeTo: this.route})
 
-    if (!this.subtaskMode && this.createMode)
+    if (!this.subtaskMode)
       this.router.navigate([`../`], {relativeTo: this.route})
-
-    if (this.deleteMode)
-      this.router.navigate([`../../`], {relativeTo: this.route})
   }
 
   deleteTask() {
