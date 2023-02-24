@@ -1,5 +1,5 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
-import {TaskInterface} from "@triplo/models";
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import {TaskInterface, TaskStatus} from "@triplo/models";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -16,6 +16,8 @@ export class TaskCardComponent {
 
   @Input() subtask = false;
   @Input() task: TaskInterface
+  @Output() changeStatus = new EventEmitter<number>();
+  statuses = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
 
   navigate() {
     if (this.subtask) {
@@ -23,6 +25,19 @@ export class TaskCardComponent {
     } else {
       this.router.navigate([`./${this.task._id}`], {relativeTo: this.route})
     }
+  }
+
+  left() {
+    let index = this.statuses.indexOf(this.task.status)
+    if (index > 0) index--
+    this.task.status = this.statuses[index]
+  }
+
+  right() {
+    let index = this.statuses.indexOf(this.task.status)
+    if (index < 4) index++
+    this.changeStatus.emit(index)
+    this.task.status = this.statuses[index]
   }
 
 }

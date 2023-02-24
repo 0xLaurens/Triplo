@@ -1,18 +1,26 @@
-<div class="tui-island tui-space_vertical-3">
-  <a
-    class="h-100"
-    tuiIsland
-    size="s"
-    (click)="navigate()"
-    [hoverable]="true"
-  >
-    <div class="d-flex">
-      <h6 class="tui-text_h6 align-self-center text" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">{{task.name}}</h6>
-      <tui-tag [autoColor]="true" class="tui-space_horizontal-3 align-self-center" value="{{task.status}}"></tui-tag>
-    </div>
-    <p class="text tui-text_body-m" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">
-      {{task.description}}
-    </p>
-    <tui-tag *ngIf="!subtask" value="{{task.created | date}}"></tui-tag>
-  </a>
+<div>
+  <div class="tui-island tui-space_top-6 tui-space_bottom-3">
+    <a
+      class="h-100"
+      tuiIsland
+      size="s"
+      (click)="navigate()"
+      [hoverable]="true"
+    >
+      <div class="d-flex">
+        <h6 class="tui-text_h6 align-self-center text"
+            [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">{{task.name}}</h6>
+        <tui-tag [autoColor]="true" class="tui-space_horizontal-3 align-self-center" value="{{task.status}}"></tui-tag>
+      </div>
+      <p class="text tui-text_body-m" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">
+        {{task.description}}
+      </p>
+      <tui-tag *ngIf="!subtask" value="{{task.created | date}}"></tui-tag>
+
+    </a>
+  </div>
+  <div class="d-flex justify-content-between" *ngIf="subtask">
+    <a [disabled]="task.status === 'To Do'" tuiIconButton size="xs" icon="tuiIconArrowLeft" class="tui-space_horizontal-3" (click)="left()"></a>
+    <a [disabled]="task.status === 'Done'" tuiIconButton size="xs" icon="tuiIconArrowRight" class="tui-space_horizontal-3" (click)="right()"></a>
+  </div>
 </div>
