@@ -6,9 +6,11 @@
     (click)="navigate()"
     [hoverable]="true"
   >
-
-    <h3 class="title title_size_s" >{{task.name}}</h3>
-    <p class="text">
+    <div class="d-flex">
+      <h6 class="tui-text_h6 align-self-center text" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">{{task.name}}</h6>
+      <tui-tag [autoColor]="true" class="tui-space_horizontal-3 align-self-center" value="{{task.status}}"></tui-tag>
+    </div>
+    <p class="text tui-text_body-m" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">
       {{task.description}}
     </p>
     <tui-tag *ngIf="!subtask" value="{{task.created | date}}"></tui-tag>
