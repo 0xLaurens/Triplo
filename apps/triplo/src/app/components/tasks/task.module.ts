@@ -16,7 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {
   TuiButtonModule, TuiDialogModule,
   TuiErrorModule,
-  TuiHintModule,
+  TuiHintModule, TuiScrollbarModule,
   TuiSvgModule,
   TuiTextfieldControllerModule
 } from "@taiga-ui/core";
@@ -57,7 +57,8 @@ import {TuiAutoFocusModule} from "@taiga-ui/cdk";
     NgForOf,
     TuiAutoFocusModule,
     TuiDialogModule,
-    RouterOutlet
+    RouterOutlet,
+    TuiScrollbarModule
   ],
   providers: [],
 })

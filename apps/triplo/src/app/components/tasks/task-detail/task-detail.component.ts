@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {TaskHttpService} from "../../../services/task/task-http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {TaskInterface} from "@triplo/models";
+import {TaskInterface, TaskStatus} from "@triplo/models";
 import {Observable} from "rxjs";
 import {TuiAlertService} from "@taiga-ui/core";
 
@@ -14,6 +14,7 @@ export class TaskDetailComponent implements OnInit {
   taskId: string
   subtaskId: string;
   subtaskMode = false;
+  statuses = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
 
   constructor(
     @Inject(TuiAlertService) private alertService: TuiAlertService,
