@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {TaskInterface, TaskStatus} from "@triplo/models";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TuiAlertService} from "@taiga-ui/core";
@@ -18,6 +18,7 @@ export class TaskEditComponent implements OnInit {
   subtaskMode = false;
   status = ["Todo", "In Progress", "Testing", "Done"]
   subtaskId: string;
+  open = true;
 
   constructor(
     @Inject(TuiAlertService)
@@ -30,23 +31,22 @@ export class TaskEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.parent?.parent?.params.subscribe(params => {
-      this.projectId = params['projectId']
-    });
+    this.route.parent?.parent?.params.subscribe(params => this.projectId = params['projectId']);
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
+    this.setupForm();
+  }
 
+  setupForm() {
     const formControls = {
-      name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
       status: new FormControl('')
     };
     this.form = this.fb.group(formControls)
 
-    if (!this.createMode) {
-      this.taskService.findTaskById(this.taskId)
-        .subscribe(x => this.form.patchValue(x))
-    }
+    if (!this.createMode)
+      this.taskService.getTaskById(this.taskId).subscribe(x => this.form.patchValue(x))
   }
 
   get f() {
@@ -59,41 +59,31 @@ export class TaskEditComponent implements OnInit {
     }
 
     this.loading = true;
+    const taskMessage = this.subtaskMode ? "subtask" : "task";
 
-    let value = "task";
-    if (this.subtaskMode) {
-      value = "subtask"
-    } else {
-      changes.status = TaskStatus.Todo
-    }
+    this.createMode ? changes.status = TaskStatus.Todo : changes.status;
 
-    if (this.createMode) {
-      if (!this.subtaskMode) {
-        this.taskService.createTask(this.projectId, changes).subscribe(
-          () => {
-            this.loading = false;
-            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}/Tasks`])
-          }
-        );
-      } else {
-        this.taskService.createSubTask(this.projectId, this.taskId, changes).subscribe(
-          () => {
-            this.loading = false;
-            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}/Tasks`])
-          }
-        );
-      }
-    } else if (!this.createMode) {
-      this.taskService.updateTask(this.taskId, changes).subscribe(
-        () => {
-          this.loading = false;
-          this.alertService.open(`Updated ${value}`, {label: "Success!"}).subscribe()
-          this.router.navigate([`/Projects/${this.projectId}`])
-        },
-      )
-    }
+    if (this.createMode && !this.subtaskMode)
+      this.taskService.createTask(this.projectId, changes).subscribe(() => this.toast(`Created ${taskMessage}`));
+
+    if (this.createMode && this.subtaskMode)
+      this.taskService.createSubtask(this.projectId, this.taskId, changes).subscribe(() => this.toast(`Created ${taskMessage}`));
+
+    if (!this.createMode && this.subtaskMode)
+      this.taskService.updateSubtask(this.taskId, this.subtaskId, changes).subscribe(() => this.toast(`Updated ${taskMessage}`))
+
+    if (!this.createMode && !this.subtaskMode)
+      this.taskService.updateTask(this.taskId, changes).subscribe(() => this.toast(`Updated ${taskMessage}`))
+
   }
 
+  toast(content: string) {
+    this.loading = false;
+    this.alertService.open(content, {label: "Success!"}).subscribe()
+    this.close()
+  }
+
+  close() {
+    this.router.navigate([`../`], {relativeTo: this.route})
+  }
 }

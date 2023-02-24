@@ -32,7 +32,7 @@ export class TaskDetailComponent implements OnInit {
       this.subtaskMode = true
       this.task$ = this.taskService.findSubtaskById(this.taskId, this.subtaskId);
     } else {
-      this.task$ = this.taskService.findTaskById(this.taskId)
+      this.task$ = this.taskService.getTaskById(this.taskId)
     }
 
   }

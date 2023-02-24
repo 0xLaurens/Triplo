@@ -14,12 +14,13 @@ import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
-  TuiButtonModule,
+  TuiButtonModule, TuiDialogModule,
   TuiErrorModule,
   TuiHintModule,
   TuiSvgModule,
   TuiTextfieldControllerModule
 } from "@taiga-ui/core";
+import {TuiAutoFocusModule} from "@taiga-ui/cdk";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import {
     TuiSelectModule,
     NgClass,
     RouterLink,
-    NgForOf
+    NgForOf,
+    TuiAutoFocusModule,
+    TuiDialogModule
   ],
   providers: [],
 })

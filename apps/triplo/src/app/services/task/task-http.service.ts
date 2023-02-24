@@ -12,16 +12,12 @@ export class TaskHttpService {
     return this.http.get<TaskInterface[]>(`api/projects/${projectId}/tasks`)
   }
 
-  createTask(projectId: string, task: Partial<TaskInterface>): Observable<TaskInterface> {
-    return this.http.post<TaskInterface>(`api/projects/${projectId}/tasks`, task)
-  }
-
-  findTaskById(taskId: string): Observable<TaskInterface> {
+  getTaskById(taskId: string): Observable<TaskInterface> {
     return this.http.get<TaskInterface>(`api/tasks/${taskId}`)
   }
 
-  findSubtaskById(taskId: string, subtaskId: string): Observable<TaskInterface> {
-    return this.http.get<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
+  createTask(projectId: string, task: Partial<TaskInterface>): Observable<TaskInterface> {
+    return this.http.post<TaskInterface>(`api/projects/${projectId}/tasks`, task)
   }
 
   updateTask(taskId: string, task: Partial<TaskInterface>): Observable<TaskInterface> {
@@ -32,8 +28,20 @@ export class TaskHttpService {
     return this.http.delete<TaskInterface>(`api/tasks/${taskId}`)
   }
 
-  createSubTask(parentId: string, taskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
-    return this.http.put<TaskInterface>(`api/projects/${parentId}/tasks/${taskId}`, subtask)
+  findSubtaskById(taskId: string, subtaskId: string): Observable<TaskInterface> {
+    return this.http.get<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
+  }
+
+  createSubtask(taskId: string, subtaskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
+    return this.http.post<TaskInterface>(`api/tasks/${taskId}/tasks/${subtaskId}`, subtask)
+  }
+
+  updateSubtask(taskId: string, subtaskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {
+    return this.http.put<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`, subtask)
+  }
+
+  deleteSubtask(taskId: string, subtaskId: string): Observable<TaskInterface> {
+    return this.http.delete<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
   }
 
 }
