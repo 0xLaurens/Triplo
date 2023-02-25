@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CommentInterface} from "@triplo/models";
+import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 
 @Component({
   selector: 'triplo-comment-form',
@@ -16,11 +17,16 @@ export class CommentFormComponent implements OnInit {
   @Output() handleCancel = new EventEmitter();
 
   form: FormGroup
+  userId: string | null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private readonly authService: AuthHttpService) {
   }
 
   ngOnInit(): void {
+    this.userId = this.authService.getUser()
+    if(this.tooltip === "Add a comment...") {
+      this.tooltip = this.userId === null ? "You need to be logged in to comment..." : "Add a comment...";
+    }
     this.form = this.fb.group({
       message: new FormControl(this.start_message, Validators.required)
     })

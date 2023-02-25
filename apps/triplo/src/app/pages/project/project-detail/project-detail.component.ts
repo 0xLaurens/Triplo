@@ -23,6 +23,7 @@ export class ProjectDetailComponent implements OnInit {
   like$: Observable<LikeInterface>
   private ownerId: string | UserInterface;
   isOwner = false;
+  isMember: boolean;
 
   constructor(
     @Inject(TuiAlertService)
@@ -67,6 +68,10 @@ export class ProjectDetailComponent implements OnInit {
     this.ownerId = project.ownerId
     if (this.ownerId == this.userId) {
       this.isOwner = true
+    }
+
+    if (project.members.some(m => m._id === this.userId)) {
+      this.isMember = true
     }
   }
 

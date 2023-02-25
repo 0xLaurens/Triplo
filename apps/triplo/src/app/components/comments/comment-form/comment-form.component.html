@@ -1,30 +1,30 @@
-<form class="b-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-  <tui-input
-    formControlName="message"
-  >
-    {{tooltip}}
-  </tui-input>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <tui-input
+      [readOnly]="userId === null"
+      formControlName="message"
+    >
+      {{tooltip}}
+    </tui-input>
 
-  <div class="tui-form__buttons d-flex justify-content-end" *ngIf="!form.invalid">
-    <button
-      (click)="submitCancel()"
-      [disabled]="form.invalid"
-      tuiButton
-      type="button"
-      appearance="flat"
-      size="s"
-      class="tui-form__button"
-    >
-      Cancel
-    </button>
-    <button
-      [disabled]="form.invalid"
-      tuiButton
-      size="s"
-      type="submit"
-      class="tui-form__button"
-    >
-      {{submitLabel}}
-    </button>
-  </div>
+    <div class="tui-space_vertical-4 d-flex justify-content-end" *ngIf="!form.invalid || userId === null">
+      <button
+        (click)="submitCancel()"
+        tuiButton
+        type="button"
+        appearance="flat"
+        size="s"
+        class="tui-form__button"
+      >
+        Cancel
+      </button>
+      <button
+        [disabled]="form.invalid"
+        tuiButton
+        size="s"
+        type="submit"
+        class="tui-form__button"
+      >
+        {{submitLabel}}
+      </button>
+    </div>
 </form>
