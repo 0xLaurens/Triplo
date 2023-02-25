@@ -26,8 +26,8 @@ export class ProfileProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.authService.getUser()
     this.route.parent?.params.subscribe(params => {
-      if (params['id']) {
-        this.userId = params['id']
+      if (params['userId']) {
+        this.userId = params['userId']
       }
     });
     if (this.userId) {

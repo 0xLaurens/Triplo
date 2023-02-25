@@ -6,20 +6,6 @@
       {{project.description}}
     </div>
   </div>
-  <div class="tasks tui-space-vertical-10">
-    <div class="d-flex justify-content-between py-3">
-      <h6 class="tui-text_h6">Tasks</h6>
-      <a routerLink="Task/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"
-         class="tui-space_right-2"></a>
-    </div>
-    <div *ngIf="($tasks | async)?.length === 0" class="tui-text_body-m">This project currently doesn't have any
-      tasks
-      available.
-    </div>
-    <div *ngFor="let task of ($tasks | async)">
-      <triplo-task-card [task]="task"></triplo-task-card>
-    </div>
-  </div>
 
   <div class="comments tui-space_vertical-10">
     <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>

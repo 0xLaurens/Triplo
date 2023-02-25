@@ -1,36 +1,49 @@
-<div class="min-vh-100 d-flex align-items-center" *ngIf="(task$ | async) as task">
-  <div class="tui-container_adaptive tui-container">
-    <div class="d-flex justify-content-between py-3">
-      <div>
-        <h3 class="tui-text_h3">{{task.name}}</h3>
-        <tui-tag value="Since {{task.created | date}}"></tui-tag>
-      </div>
-      <div>
-        <a routerLink="Edit" tuiMarkerIcon mode="link" size="xs" src="tuiIconEditLarge"
-           class="tui-space_right-2"></a>
-        <a tuiMarkerIcon mode="link" size="xs" src="tuiIconTrashLarge"
-           class="tui-space_right-2"></a>
-      </div>
+<div *ngIf="(task$ | async) as task"
+     [ngClass]="subtaskMode ? 'min-vh-100': 'tui-space__vertical-4'">
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <h5 class="tui-text_h5 align-self-center">{{task.name}}</h5>
+      <tui-tag class="align-self-center tui-space_horizontal-3" [autoColor]="true" value="{{task.status}}"></tui-tag>
+    </div>
+    <div>
+      <a tuiIconButton routerLink="Edit" size="s" icon="tuiIconSettingsLarge" appearance="flat"
+         [tuiHint]="edit_task_tooltip" class="tui-space_right-2"></a>
+      <ng-template #edit_task_tooltip>
+        Task Settings
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="description tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Description</h6>
+    <div class="tui-text_body-m">
+      {{task.description}}
+    </div>
+  </div>
+
+  <div class="tasks tui-space-vertical-4" *ngIf="!subtaskMode">
+    <div class="d-flex justify-content-between">
+      <h5 class="tui-text_h6">Subtasks</h5>
+      <a routerLink="Subtask/Create" tuiButton appearance="primary" size="s" iconRight="tuiIconBriefcase"
+         class="tui-space_right-2">Create Subtask</a>
+    </div>
+    <div *ngIf="task.subtasks.length < 1" class="tui-text_body-m">This project currently doesn't have any subtasks
+      available.
     </div>
 
-    <div class="description tui-space_vertical-10 w-50">
-      <h6 class="tui-text_h6">Description</h6>
-      <div class="tui-text_body-m">
-        {{task.description}}
-      </div>
-    </div>
-    <div class="tasks tui-space-vertical-10" *ngIf="!subtaskMode">
-      <div class="d-flex justify-content-between py-3">
-        <h5 class="tui-text_h6">Subtasks</h5>
-        <a routerLink="Subtask/Create" tuiMarkerIcon mode="link" size="xs" src="tuiIconPlusLarge"
-           class="tui-space_right-2"></a>
-      </div>
-      <div *ngIf="!task.subtasks" class="tui-text_body-m">This project currently doesn't have any subtasks
-        available.
-      </div>
-      <div *ngFor="let subtask of task.subtasks">
-        <triplo-task-card [task]="subtask" [subtask]="true"></triplo-task-card>
+    <div class="tui-row tui-row_adaptive" *ngIf="task.subtasks.length > 0">
+      <div class="tui-col_xs-12 tui-col_md-6 tui-col_lg-3 px-2 tui-space_vertical-6" *ngFor="let status of statuses">
+        <tui-island>
+          <div class="tui-text_h6">{{status}}</div>
+        </tui-island>
+        <div *ngFor="let subtask of task.subtasks">
+          <triplo-task-card (changeStatus)="changeStatus($event)" *ngIf="subtask.status === status" [task]="subtask"
+                            [subtask]="true"></triplo-task-card>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+
+<router-outlet (deactivate)="loadTask()"></router-outlet>

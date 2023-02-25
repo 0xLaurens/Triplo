@@ -1,10 +1,9 @@
 import {Component, OnInit} from "@angular/core";
 import {AuthHttpService} from "../../../../services/authentication/auth-http.service";
-import {CommentInterface, ProjectInterface, TaskInterface} from "@triplo/models";
+import {CommentInterface, ProjectInterface} from "@triplo/models";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ProjectHttpService} from "../../../../services/projects/project-http.service";
-import {TaskHttpService} from "../../../../services/task/task-http.service";
 import {CommentHttpService} from "../../../../services/comments/comment-http.service";
 
 @Component({
@@ -16,7 +15,6 @@ export class ProjectDetailOverviewComponent implements OnInit {
   project$: Observable<ProjectInterface>
   other = false;
   private projectId: string;
-  $tasks: Observable<TaskInterface[]>;
   comments$: Observable<CommentInterface[]>;
   recentComments: Set<CommentInterface>;
 
@@ -24,7 +22,6 @@ export class ProjectDetailOverviewComponent implements OnInit {
     private authService: AuthHttpService,
     private projectService: ProjectHttpService,
     private commentService: CommentHttpService,
-    private taskService: TaskHttpService,
     private readonly route: ActivatedRoute,
   ) {
   }
@@ -39,7 +36,6 @@ export class ProjectDetailOverviewComponent implements OnInit {
     this.recentComments = new Set<CommentInterface>();
     this.project$ = this.projectService.findProjectById(this.projectId)
     this.comments$ = this.commentService.getTopLevelComments(this.projectId)
-    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
   }
 
   async createComment($event: CommentInterface) {

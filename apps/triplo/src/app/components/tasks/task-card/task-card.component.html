@@ -1,16 +1,26 @@
-<div class="tui-island tui-space_vertical-3">
-  <a
-    class="h-100"
-    tuiIsland
-    size="s"
-    (click)="navigate()"
-    [hoverable]="true"
-  >
+<div>
+  <div class="tui-island tui-space_top-6 tui-space_bottom-3">
+    <a
+      class="h-100"
+      tuiIsland
+      size="s"
+      (click)="navigate()"
+      [hoverable]="true"
+    >
+      <h6 class="tui-text_h6 align-self-center text"
+          [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">{{task.name}}</h6>
+      <p class="text tui-text_body-m" [ngClass]="task.status === 'Done' ? 'text-decoration-line-through' : ''">
+        {{task.description}}
+      </p>
+      <tui-tag [autoColor]="true" value="{{task.status}}"></tui-tag>
+      <tui-tag class="tui-space_horizontal-3" *ngIf="!subtask" value="{{task.created | date}}"></tui-tag>
 
-    <h3 class="title title_size_s" >{{task.name}}</h3>
-    <p class="text">
-      {{task.description}}
-    </p>
-    <tui-tag value="{{task.created | date}}"></tui-tag>
-  </a>
+    </a>
+  </div>
+  <div class="d-flex justify-content-between" *ngIf="subtask">
+    <a [disabled]="task.status === 'To Do'" tuiIconButton size="xs" icon="tuiIconArrowLeft"
+       class="tui-space_horizontal-3" (click)="left()"></a>
+    <a [disabled]="task.status === 'Done'" tuiIconButton size="xs" icon="tuiIconArrowRight"
+       class="tui-space_horizontal-3" (click)="right()"></a>
+  </div>
 </div>

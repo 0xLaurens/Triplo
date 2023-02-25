@@ -53,7 +53,7 @@ export class ProjectRepository {
     return this.projectModel.findByIdAndUpdate( projectId, {$pull: {members: userId}}, {new: true});
   }
 
-  findProjectsByUserId(userId: string) {
+  async findProjectsByUserId(userId: string) {
     return this.projectModel.find({$or: [{ownerId: userId}, {members: userId}]});
   }
 }

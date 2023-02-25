@@ -29,14 +29,16 @@ import {ProjectDetailMembersComponent} from "./project-detail/project-detail-mem
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {InviteHttpService} from "../../services/invites/invite-http.service";
 import {UserHttpService} from "../../services/user/user-http.service";
+import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks/project-detail-tasks.component";
 import {ProjectSettingsComponent} from "./project-settings/project-settings.component";
-import {
-  ProjectMembersManagementComponent
-} from "./project-settings/project-member-management/project-members-management.component";
 import {
   ProjectMembersInviteComponent
 } from "./project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {
+  ProjectMembersManagementComponent
+} from "./project-settings/project-member-management/project-members-management.component";
 import {MembersComponent} from "../../components/members/members.component";
+
 
 
 @NgModule({
@@ -45,6 +47,7 @@ import {MembersComponent} from "../../components/members/members.component";
     ProjectCardListComponent,
     ProjectDetailComponent,
     ProjectEditComponent,
+    ProjectDetailTasksComponent,
     ProjectDetailOverviewComponent,
     ProjectDetailMembersComponent,
     ProjectSettingsComponent,
@@ -61,6 +64,7 @@ import {MembersComponent} from "../../components/members/members.component";
     ProjectDetailMembersComponent,
     ProjectSettingsComponent,
     ProjectMembersInviteComponent,
+    ProjectDetailTasksComponent,
     ProjectMembersManagementComponent,
     MembersComponent,
   ],

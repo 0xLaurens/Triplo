@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {TaskInterface} from "@triplo/models";
+import {TaskInterface, TaskStatus} from "@triplo/models";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {TuiAlertService} from "@taiga-ui/core";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,12 +11,16 @@ import {TaskHttpService} from "../../../services/task/task-http.service";
 })
 export class TaskEditComponent implements OnInit {
   projectId: string;
-  createMode?: boolean;
+  createMode: boolean;
   taskId!: string;
   form!: FormGroup
   loading = false
   subtaskMode = false;
+  deleteMode = false;
+  status = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
   subtaskId: string;
+  taskMessage: string;
+  open = true;
 
   constructor(
     @Inject(TuiAlertService)
@@ -29,23 +33,35 @@ export class TaskEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskId = this.route.snapshot.params['taskId'];
-    this.subtaskId = this.route.snapshot.params['subtaskId'];
-    this.projectId = this.route.snapshot.params['projectId'];
+    this.route.parent?.parent?.params.subscribe(params => this.projectId = params['projectId']);
+    this.route.parent?.params.subscribe(params => this.taskId = params['taskId'])
+    this.route.params.subscribe(params => this.subtaskId = params['subtaskId'])
     this.subtaskMode = this.route.snapshot.url.toString().includes("Subtask");
     this.createMode = this.route.snapshot.url.toString().includes("Create");
 
+    this.taskMessage = this.subtaskMode ? "subtask" : "task";
+    this.setupForm();
+  }
+
+  setupForm() {
     const formControls = {
-      name: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       description: new FormControl('', [Validators.required, Validators.maxLength(1000)]),
+      status: new FormControl(TaskStatus.TODO)
     };
     this.form = this.fb.group(formControls)
 
-    if (!this.createMode) {
-      this.taskService.findTaskById(this.taskId)
-        .subscribe(x => this.form.patchValue(x))
-    }
+    if (!this.createMode && !this.subtaskMode)
+      this.taskService.getTaskById(this.taskId).subscribe(task => {
+        this.form.patchValue(task)
+      })
+
+    if (!this.createMode && this.subtaskMode)
+      this.taskService.getSubtaskById(this.taskId, this.subtaskId).subscribe(parentTask => {
+        this.form.patchValue(parentTask.subtasks[0])
+      })
   }
+
 
   get f() {
     return this.form.controls;
@@ -58,45 +74,43 @@ export class TaskEditComponent implements OnInit {
 
     this.loading = true;
 
-    let value = "task";
-    if (this.subtaskMode) {
-      value = "subtask"
-    }
+    this.createMode ? changes.status = TaskStatus.TODO : changes.status;
 
-    if (this.createMode) {
-      if (!this.subtaskMode) {
-        this.taskService.createTask(this.projectId, changes).subscribe(
-          task => {
-            this.loading = false;
-            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}`])
-          }
-        );
-      } else {
-        this.taskService.createSubTask(this.projectId, this.taskId, changes).subscribe(
-          task => {
-            this.loading = false;
-            this.alertService.open(`Created ${value}`, {label: "Success!"}).subscribe()
-            this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
-          }
-        );
-      }
-    } else if (!this.createMode) {
-      this.taskService.updateTask(this.taskId, changes).subscribe(
-        task => {
-          this.loading = false;
-          this.alertService.open(`Updated ${value}`, {label: "Success!"}).subscribe()
-          this.router.navigate([`/Projects/${this.projectId}`])
-        },
-      )
-    }
+    if (this.createMode && !this.subtaskMode)
+      this.taskService.createTask(this.projectId, changes).subscribe(() => this.toast(`Created ${this.taskMessage}`));
+
+    if (this.createMode && this.subtaskMode)
+      this.taskService.createSubtask(this.taskId, changes).subscribe(() => this.toast(`Created ${this.taskMessage}`));
+
+    if (!this.createMode && this.subtaskMode)
+      this.taskService.updateSubtask(this.taskId, this.subtaskId, changes).subscribe(() => this.toast(`Updated ${this.taskMessage}`))
+
+    if (!this.createMode && !this.subtaskMode)
+      this.taskService.updateTask(this.taskId, changes).subscribe(() => this.toast(`Updated ${this.taskMessage}`))
+
   }
 
-  back() {
-    if (this.subtaskMode) {
-      this.router.navigate([`/Projects/${this.projectId}/Task/${this.taskId}`])
-    } else {
-      this.router.navigate([`/Projects/${this.projectId}`])
-    }
+  toast(content: string) {
+    this.loading = false;
+    this.alertService.open(content, {label: "Success!"}).subscribe()
+    this.close()
+  }
+
+  close() {
+    if (this.subtaskMode || this.deleteMode)
+      this.router.navigate([`../../`], {relativeTo: this.route})
+
+    if (!this.subtaskMode)
+      this.router.navigate([`../`], {relativeTo: this.route})
+  }
+
+  deleteTask() {
+    if (this.subtaskMode && !this.createMode)
+      this.taskService.deleteSubtask(this.taskId, this.subtaskId).subscribe(() => this.toast(`Deleted ${this.taskMessage}`))
+      this.deleteMode = true
+
+    if (!this.subtaskMode && !this.createMode)
+      this.taskService.deleteTask(this.taskId).subscribe(() => this.toast(`Deleted ${this.taskMessage}`))
+      this.deleteMode = true
   }
 }
