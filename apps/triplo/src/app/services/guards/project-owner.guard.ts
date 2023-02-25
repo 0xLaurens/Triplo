@@ -1,26 +1,27 @@
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Router,
-} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router,} from "@angular/router";
 import {Inject, Injectable} from "@angular/core";
 import {AuthHttpService} from "../authentication/auth-http.service";
 import {ProjectHttpService} from "../projects/project-http.service";
 import {map, Observable} from "rxjs";
 import {ProjectInterface, UserInterface} from "@triplo/models";
+import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectOwnerGuard implements CanActivate, CanActivateChild {
   constructor(
-    @Inject(AuthHttpService) private auth: AuthHttpService, private router: Router, private projectService: ProjectHttpService) {
+    @Inject(AuthHttpService) private auth: AuthHttpService,
+    private router: Router,
+    private projectService: ProjectHttpService,
+    @Inject(TuiAlertService) private alertService: TuiAlertService
+    ) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
     if (!this.auth.getUser()) {
+      this.alertService.open('You need to be logged in to access that page!', {label: 'Warning!', status: TuiNotification.Warning}).subscribe()
       this.router.navigate([`/Login`])
       return false;
     }
@@ -30,16 +31,19 @@ export class ProjectOwnerGuard implements CanActivate, CanActivateChild {
     const project$ = this.projectService.findProjectById(projectId, true)
 
     if (projectId === "") {
+      this.alertService.open('No project Found!', {label: 'Error!', status: TuiNotification.Error}).subscribe()
       this.router.navigate([`/Projects`])
       return false
     }
+    const canActivate$: Observable<boolean> = this.canOwnerActivate(project$, userId)
+    canActivate$.subscribe(canActivate => {
+      if(!canActivate) {
+        this.alertService.open('Access denied!', {label: 'Forbidden!', status: TuiNotification.Error}).subscribe()
+        this.router.navigate([`/Projects/${projectId}`])
+      }
+    })
 
-    if(this.canOwnerActivate(project$, userId)) {
-      return true
-    }
-
-    this.router.navigate([`/Projects/${projectId}`])
-    return false
+    return canActivate$
   }
 
   canActivateChild(
