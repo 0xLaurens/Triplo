@@ -59,6 +59,7 @@
 
         <button
           tuiButton
+          *ngIf="isMember || isOwner"
           iconRight="tuiIconBriefcaseLarge"
           routerLink="/Projects/{{project._id}}/Tasks"
           size="m"
