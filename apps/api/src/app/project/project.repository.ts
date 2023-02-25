@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {InjectModel} from "@nestjs/mongoose";
 import {ProjectInterface} from "@triplo/models"
-import {Model} from "mongoose";
+import mongoose, {Model, ObjectId} from "mongoose";
 import {Neo4jService} from "nest-neo4j/dist";
 
 
@@ -22,9 +22,16 @@ export class ProjectRepository {
     return this.projectModel.findByIdAndUpdate(projectId, project, {new: true})
   }
 
-  async findProjectById(projectId: string, members: boolean): Promise<ProjectInterface> {
+  async findProjectById(projectId: string, members: boolean, search?: string): Promise<ProjectInterface> {
     if (!members) {
       return this.projectModel.findById(projectId)
+    }
+
+    if (search) {
+      return this.projectModel.findById(projectId, {ownerId: 1, members: 1}).populate([
+        {path: "members", model: "User", match: {username: {$regex: search}}},
+        {path: "ownerId", model: "User", match: {username: {$regex: search}}},
+      ])
     }
 
     return this.projectModel.findById(projectId, {ownerId: 1, members: 1}).populate([
@@ -50,7 +57,7 @@ export class ProjectRepository {
   }
 
   async removeMemberFromProject(projectId: string, userId: string): Promise<ProjectInterface> {
-    return this.projectModel.findByIdAndUpdate( projectId, {$pull: {members: userId}}, {new: true});
+    return this.projectModel.findByIdAndUpdate(projectId, {$pull: {members: userId}}, {new: true});
   }
 
   async findProjectsByUserId(userId: string) {

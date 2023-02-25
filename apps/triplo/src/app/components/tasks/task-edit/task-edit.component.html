@@ -72,6 +72,31 @@
       ></tui-data-list-wrapper>
     </tui-select>
 
+    <tui-input
+        formControlName="username"
+        class="tui-space_top-3"
+      >
+        Username
+        <input
+          tuiTextfield
+          placeholder="Enter the username"
+        />
+        <tui-data-list *tuiDataList>
+          <button
+            *ngFor="let user of users"
+            tuiOption
+            (click)="onSelected(user)"
+            [value]="user.username"
+          >
+            {{ user.username }}
+            <tui-avatar
+              size="xs"
+              [text]="user.username"
+            ></tui-avatar>
+          </button>
+        </tui-data-list>
+      </tui-input>
+
 
     <div class="tui-form__buttons d-flex justify-content-between">
       <button

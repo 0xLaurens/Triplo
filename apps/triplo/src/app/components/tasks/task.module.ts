@@ -3,6 +3,7 @@ import {TaskEditComponent} from "./task-edit/task-edit.component";
 import {TaskDetailComponent} from "./task-detail/task-detail.component";
 import {TaskCardComponent} from "./task-card/task-card.component";
 import {
+  TuiAvatarModule,
   TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
@@ -14,11 +15,11 @@ import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
-  TuiButtonModule, TuiDialogModule,
-  TuiErrorModule,
-  TuiHintModule, TuiScrollbarModule,
-  TuiSvgModule,
-  TuiTextfieldControllerModule
+    TuiButtonModule, TuiDataListModule, TuiDialogModule,
+    TuiErrorModule,
+    TuiHintModule, TuiLinkModule, TuiScrollbarModule,
+    TuiSvgModule,
+    TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {TuiAutoFocusModule} from "@taiga-ui/cdk";
 
@@ -33,33 +34,36 @@ import {TuiAutoFocusModule} from "@taiga-ui/cdk";
     TaskDetailComponent,
     TaskCardComponent,
   ],
-  imports: [
-    TuiIslandModule,
-    TuiTagModule,
-    DatePipe,
-    RouterLinkWithHref,
-    TuiMarkerIconModule,
-    AsyncPipe,
-    ReactiveFormsModule,
-    TuiInputModule,
-    TuiHintModule,
-    TuiTextfieldControllerModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule,
-    TuiTextAreaModule,
-    TuiSvgModule,
-    TuiButtonModule,
-    NgIf,
-    TuiDataListWrapperModule,
-    TuiSelectModule,
-    NgClass,
-    RouterLink,
-    NgForOf,
-    TuiAutoFocusModule,
-    TuiDialogModule,
-    RouterOutlet,
-    TuiScrollbarModule
-  ],
+    imports: [
+        TuiIslandModule,
+        TuiTagModule,
+        DatePipe,
+        RouterLinkWithHref,
+        TuiMarkerIconModule,
+        AsyncPipe,
+        ReactiveFormsModule,
+        TuiInputModule,
+        TuiHintModule,
+        TuiTextfieldControllerModule,
+        TuiErrorModule,
+        TuiFieldErrorPipeModule,
+        TuiTextAreaModule,
+        TuiSvgModule,
+        TuiButtonModule,
+        NgIf,
+        TuiDataListWrapperModule,
+        TuiSelectModule,
+        NgClass,
+        RouterLink,
+        NgForOf,
+        TuiAutoFocusModule,
+        TuiDialogModule,
+        RouterOutlet,
+        TuiScrollbarModule,
+        TuiDataListModule,
+        TuiAvatarModule,
+        TuiLinkModule
+    ],
   providers: [],
 })
 

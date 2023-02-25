@@ -20,6 +20,23 @@
       {{task.description}}
     </div>
   </div>
+  <div *ngIf="task.username && task.assigned" class="description tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Assigned to:</h6>
+    <div class="d-flex">
+      <tui-avatar
+        size="s"
+        [text]="task.username"
+      ></tui-avatar>
+      <div class="tui-text_body-m align-self-center tui-space_horizontal-3">
+        <a tuiLink routerLink="/Profile/{{task.assigned}}" *ngIf="task.assigned !== userId">
+          {{task.username}}
+        </a>
+        <a tuiLink routerLink="/Profile" *ngIf="task.assigned === userId">
+          {{task.username}}
+        </a>
+      </div>
+    </div>
+  </div>
 
   <div class="tasks tui-space-vertical-4" *ngIf="!subtaskMode">
     <div class="d-flex justify-content-between">

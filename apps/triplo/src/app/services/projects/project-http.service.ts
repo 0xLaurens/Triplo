@@ -13,10 +13,19 @@ export class ProjectHttpService {
     return this.http.get<ProjectInterface[]>('/api/projects')
   }
 
-  findProjectById(projectId: string, members?: boolean): Observable<ProjectInterface> {
-    if(members) {
+  findProjectById(projectId: string, members?: boolean, search?: string): Observable<ProjectInterface> {
+    if (members && search) {
+      return this.http.get<ProjectInterface>(`/api/projects/${projectId}?members=${members}&search=${search}`)
+    }
+
+    if(search) {
+      return this.http.get<ProjectInterface>(`/api/projects/${projectId}?search=${search}`)
+    }
+
+    if (members) {
       return this.http.get<ProjectInterface>(`/api/projects/${projectId}?members=${members}`)
     }
+
 
     return this.http.get<ProjectInterface>(`/api/projects/${projectId}`)
   }
@@ -34,11 +43,17 @@ export class ProjectHttpService {
   }
 
   addMemberToProject(projectId: string, userId: string): Observable<ProjectInterface> {
-    return this.http.post<ProjectInterface>(`api/projects/${projectId}/user/${userId}`, {"project": projectId, "user": userId})
+    return this.http.post<ProjectInterface>(`api/projects/${projectId}/user/${userId}`, {
+      "project": projectId,
+      "user": userId
+    })
   }
 
   removeMemberFromProject(projectId: string, userId: string): Observable<ProjectInterface> {
-    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}/remove`, {"project": projectId, "user": userId})
+    return this.http.put<ProjectInterface>(`api/projects/${projectId}/user/${userId}/remove`, {
+      "project": projectId,
+      "user": userId
+    })
   }
 
   findProjectsByUserId(userId: string): Observable<ProjectInterface[]> {
