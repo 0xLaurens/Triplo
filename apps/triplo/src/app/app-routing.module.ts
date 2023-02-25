@@ -1,8 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from "@angular/router";
-import {UserListComponent} from "./pages/user/user-list/user-list.component";
-import {UserDetailComponent} from "./pages/user/user-detail/user-detail.component";
-import {UserEditComponent} from "./pages/user/user-edit/user-edit.component";
 import {HeroComponent} from "./pages/home/hero/hero.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {AboutUserstoriesComponent} from "./pages/about/about-userstories/about-userstories.component";
@@ -15,7 +12,7 @@ import {LoginComponent} from "./pages/auth/login/login.component";
 import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
-import {AuthGuard} from "./services/authentication/auth.guard";
+import {AuthGuard} from "./services/guards/auth.guard";
 import {ProfileDetailComponent} from "./pages/profile/profile-overview/profile-detail/profile-detail.component";
 import {ProfileSettingsComponent} from "./pages/profile/profile-settings/profile-settings.component";
 import {ProfileOverviewComponent} from "./pages/profile/profile-overview/profile-overview.component";
@@ -53,10 +50,10 @@ const routes: Routes = [
     },
 
     {
-      path: 'Profile/:userId', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
-        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
-        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
-        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
+      path: 'Profile/:userId', component: ProfileOverviewComponent, children: [
+        {path: "", component: ProfileDetailComponent},
+        {path: "Projects", component: ProfileProjectsComponent},
+        {path: "Liked", component: ProfileLikedComponent},
       ]
     },
 
