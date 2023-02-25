@@ -43,10 +43,8 @@ export class AppModule implements NestModule {
     consumer
       .apply(TokenMiddleware)
       .forRoutes(
-        LikeController,
         InviteController,
         TaskController,
-        UserController,
       )
   }
 }
