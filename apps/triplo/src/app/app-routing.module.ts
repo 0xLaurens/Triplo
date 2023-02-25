@@ -87,12 +87,20 @@ const routes: Routes = [
           path: 'Members', component: ProjectDetailMembersComponent,
         },
         {
-          path: "Tasks", component: ProjectDetailTasksComponent, canActivate: [MemberGuard], canActivateChild: [MemberGuard],children: [
+          path: "Tasks",
+          component: ProjectDetailTasksComponent,
+          canActivate: [MemberGuard],
+          canActivateChild: [MemberGuard],
+          children: [
             {path: 'Create', component: TaskEditComponent},
           ]
         },
         {
-          path: "Tasks/:taskId", component: TaskDetailComponent, canActivate: [MemberGuard], canActivateChild: [MemberGuard], children: [
+          path: "Tasks/:taskId",
+          component: TaskDetailComponent,
+          canActivate: [MemberGuard],
+          canActivateChild: [MemberGuard],
+          children: [
             {path: 'Edit', component: TaskEditComponent},
             {path: 'Subtask/Create', component: TaskEditComponent},
             {path: 'Subtask/:subtaskId', component: TaskEditComponent}
@@ -101,7 +109,11 @@ const routes: Routes = [
       ]
     },
     {
-      path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [ProjectOwnerGuard], canActivateChild: [ProjectOwnerGuard], children: [
+      path: 'Projects/:projectId/Settings',
+      component: ProjectSettingsComponent,
+      canActivate: [ProjectOwnerGuard],
+      canActivateChild: [ProjectOwnerGuard],
+      children: [
         {path: "", component: ProjectEditComponent},
         {
           path: "Members", component: ProjectMembersManagementComponent, children: [
@@ -110,21 +122,6 @@ const routes: Routes = [
         }
       ]
     },
-
-
-    {
-      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId',
-      component: TaskDetailComponent,
-      canActivate: [AuthGuard]
-    },
-    {
-      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit',
-      component: TaskEditComponent,
-      canActivate: [AuthGuard]
-    },
-
-
-    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent}
 
