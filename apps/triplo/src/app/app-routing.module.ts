@@ -70,9 +70,9 @@ const routes: Routes = [
     },
 
     {path: 'Projects', component: ProjectOverviewComponent},
-    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects/Create', component: ProjectEditComponent},
     {
-      path: 'Projects/:projectId', component: ProjectDetailComponent, canActivate: [AuthGuard], children: [
+      path: 'Projects/:projectId', component: ProjectDetailComponent, children: [
         {path: '', component: ProjectDetailOverviewComponent},
         {
           path: 'Members', component: ProjectDetailMembersComponent,

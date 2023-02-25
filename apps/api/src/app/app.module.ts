@@ -8,8 +8,6 @@ import {CommentModule} from "./comment/comment.module";
 import {AuthModule} from "./auth/auth.module";
 import {TaskModule} from "./task/task.module";
 import {LikeController} from "./like/like.controller";
-import {CommentController} from "./comment/comment.controller";
-import {ProjectController} from "./project/project.controller";
 import {TaskController} from "./task/task.controller";
 import {UserController} from "./user/user.controller";
 import {LikeModule} from "./like/like.module";
@@ -46,8 +44,7 @@ export class AppModule implements NestModule {
       .apply(TokenMiddleware)
       .forRoutes(
         LikeController,
-        CommentController,
-        ProjectController,
+        InviteController,
         TaskController,
         UserController,
       )
