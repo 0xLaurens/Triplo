@@ -53,7 +53,7 @@ const routes: Routes = [
     },
 
     {
-      path: 'Profile/:id', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
+      path: 'Profile/:userId', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
         {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
         {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
         {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
