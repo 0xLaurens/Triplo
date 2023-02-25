@@ -1,4 +1,4 @@
-import {Router, UrlTree} from "@angular/router";
+import {Router} from "@angular/router";
 import {CanActivate} from "@nestjs/common";
 import {AuthHttpService} from "./auth-http.service";
 import {Inject, Injectable} from "@angular/core";
@@ -13,14 +13,14 @@ export class AuthGuard implements CanActivate {
   ) {
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  canActivate(): boolean | UrlTree {
+
+  canActivate(): boolean {
     const token = this.auth.getToken()
     if (token) {
       return true;
     }
 
-    return this.router.parseUrl("/Login");
+    this.router.parseUrl("/Login");
+    return false;
   }
 }

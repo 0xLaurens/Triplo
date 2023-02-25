@@ -32,7 +32,7 @@ export class ProjectInterface {
   ownerId: string | UserInterface;
 
   @IsArray()
-  members?: UserInterface[]
+  members: UserInterface[]
 
   @IsInt()
   LikeCount: number;

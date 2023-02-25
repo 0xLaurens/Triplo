@@ -38,6 +38,7 @@ import {
 import {
   ProjectMembersInviteComponent
 } from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {MemberGuard} from "./services/authentication/member.guard";
 
 const routes: Routes = [
     {
@@ -85,14 +86,14 @@ const routes: Routes = [
           path: 'Members', component: ProjectDetailMembersComponent,
         },
         {
-          path: "Tasks", component: ProjectDetailTasksComponent, children: [
-            {path: 'Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+          path: "Tasks", component: ProjectDetailTasksComponent, canActivate: [MemberGuard], canActivateChild: [MemberGuard],children: [
+            {path: 'Create', component: TaskEditComponent},
           ]
         },
         {
-          path: "Tasks/:taskId", component: TaskDetailComponent, children: [
+          path: "Tasks/:taskId", component: TaskDetailComponent, canActivate: [MemberGuard], canActivateChild: [MemberGuard], children: [
             {path: 'Edit', component: TaskEditComponent},
-            {path: 'Subtask/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+            {path: 'Subtask/Create', component: TaskEditComponent},
             {path: 'Subtask/:subtaskId', component: TaskEditComponent}
           ]
         },
