@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TaskInterface, TaskStatus} from "@triplo/models";
 import {Observable} from "rxjs";
 import {TuiAlertService} from "@taiga-ui/core";
+import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 
 @Component({
   selector: 'triplo-task-detail',
@@ -14,12 +15,14 @@ export class TaskDetailComponent implements OnInit {
   taskId: string
   subtaskId: string;
   subtaskMode = false;
+  userId: string
   statuses = [TaskStatus.TODO, TaskStatus.PROGRESS, TaskStatus.TESTING, TaskStatus.DONE]
 
   constructor(
     @Inject(TuiAlertService) private alertService: TuiAlertService,
     private route: ActivatedRoute,
     private router: Router,
+    private authService: AuthHttpService,
     private taskService: TaskHttpService,
   ) {
   }
@@ -29,6 +32,7 @@ export class TaskDetailComponent implements OnInit {
       this.taskId = params['taskId']
       this.subtaskId = params['subtaskId']
     });
+    this.userId = this.authService.getUser() as string;
     this.loadTask()
   }
 
