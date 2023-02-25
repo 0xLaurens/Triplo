@@ -38,8 +38,8 @@ export class ProjectController {
   }
 
   @Get(":projectId")
-  async findProjectById(@Param("projectId") projectId: string, @Query("members") members: boolean): Promise<ProjectInterface> {
-    return this.projectRepo.findProjectById(projectId, members);
+  async findProjectById(@Param("projectId") projectId: string, @Query("members") members: boolean, @Query("search") search: string): Promise<ProjectInterface> {
+    return this.projectRepo.findProjectById(projectId, members, search);
   }
 
   @Put(":projectId")

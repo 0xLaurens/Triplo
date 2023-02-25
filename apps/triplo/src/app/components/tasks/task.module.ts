@@ -3,6 +3,7 @@ import {TaskEditComponent} from "./task-edit/task-edit.component";
 import {TaskDetailComponent} from "./task-detail/task-detail.component";
 import {TaskCardComponent} from "./task-card/task-card.component";
 import {
+  TuiAvatarModule,
   TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
@@ -14,11 +15,11 @@ import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
-  TuiButtonModule, TuiDialogModule,
-  TuiErrorModule,
-  TuiHintModule, TuiScrollbarModule,
-  TuiSvgModule,
-  TuiTextfieldControllerModule
+    TuiButtonModule, TuiDataListModule, TuiDialogModule,
+    TuiErrorModule,
+    TuiHintModule, TuiScrollbarModule,
+    TuiSvgModule,
+    TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {TuiAutoFocusModule} from "@taiga-ui/cdk";
 
@@ -58,7 +59,9 @@ import {TuiAutoFocusModule} from "@taiga-ui/cdk";
     TuiAutoFocusModule,
     TuiDialogModule,
     RouterOutlet,
-    TuiScrollbarModule
+    TuiScrollbarModule,
+    TuiDataListModule,
+    TuiAvatarModule
   ],
   providers: [],
 })

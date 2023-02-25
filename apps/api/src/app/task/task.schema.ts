@@ -23,9 +23,6 @@ export class Subtask {
   @Prop({type: mongoose.Schema.Types.ObjectId, ref: 'Project', index: true})
   project: string;
 
-  @Prop({default: null})
-  parent: string;
-
   @Prop({required: true, type: String})
   status: TaskStatus;
 }
