@@ -38,7 +38,8 @@ import {
 import {
   ProjectMembersInviteComponent
 } from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
-import {MemberGuard} from "./services/authentication/member.guard";
+import {MemberGuard} from "./services/guards/member.guard";
+import {ProjectOwnerGuard} from "./services/guards/project-owner.guard";
 
 const routes: Routes = [
     {
@@ -100,7 +101,7 @@ const routes: Routes = [
       ]
     },
     {
-      path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [AuthGuard], children: [
+      path: 'Projects/:projectId/Settings', component: ProjectSettingsComponent, canActivate: [ProjectOwnerGuard], canActivateChild: [ProjectOwnerGuard], children: [
         {path: "", component: ProjectEditComponent},
         {
           path: "Members", component: ProjectMembersManagementComponent, children: [
