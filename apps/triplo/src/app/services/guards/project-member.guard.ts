@@ -8,13 +8,13 @@ import {Inject, Injectable} from "@angular/core";
 import {AuthHttpService} from "../authentication/auth-http.service";
 import {ProjectHttpService} from "../projects/project-http.service";
 import {map, Observable} from "rxjs";
-import {ProjectInterface, UserInterface} from "@triplo/models";
+import {ProjectInterface} from "@triplo/models";
 import {ProjectOwnerGuard} from "./project-owner.guard"
 
 @Injectable({
   providedIn: 'root'
 })
-export class MemberGuard implements CanActivate, CanActivateChild {
+export class ProjectMemberGuard implements CanActivate, CanActivateChild {
   constructor(
     @Inject(AuthHttpService) private auth: AuthHttpService, private router: Router, private projectService: ProjectHttpService, private projectOwnerGuard: ProjectOwnerGuard) {
   }

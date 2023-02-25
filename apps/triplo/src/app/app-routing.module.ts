@@ -38,26 +38,17 @@ import {
 import {
   ProjectMembersInviteComponent
 } from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
-import {MemberGuard} from "./services/guards/member.guard";
+import {ProjectMemberGuard} from "./services/guards/project-member.guard";
 import {ProjectOwnerGuard} from "./services/guards/project-owner.guard";
 
 const routes: Routes = [
-    {
-      path: 'Users', component: UserListComponent, canActivate: [AuthGuard], children: [
-        {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
-        {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
-        {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
-      ]
-    },
     {path: "Profile/Settings", component: ProfileSettingsComponent, canActivate: [AuthGuard]},
-
-
     {
-      path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
-        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
-        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
-        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
-        {path: "Invites", component: ProfileInviteComponent, canActivate: [AuthGuard]},
+      path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+        {path: "", component: ProfileDetailComponent},
+        {path: "Projects", component: ProfileProjectsComponent},
+        {path: "Liked", component: ProfileLikedComponent},
+        {path: "Invites", component: ProfileInviteComponent},
       ]
     },
 
@@ -89,8 +80,8 @@ const routes: Routes = [
         {
           path: "Tasks",
           component: ProjectDetailTasksComponent,
-          canActivate: [MemberGuard],
-          canActivateChild: [MemberGuard],
+          canActivate: [ProjectMemberGuard],
+          canActivateChild: [ProjectMemberGuard],
           children: [
             {path: 'Create', component: TaskEditComponent},
           ]
@@ -98,8 +89,8 @@ const routes: Routes = [
         {
           path: "Tasks/:taskId",
           component: TaskDetailComponent,
-          canActivate: [MemberGuard],
-          canActivateChild: [MemberGuard],
+          canActivate: [ProjectMemberGuard],
+          canActivateChild: [ProjectMemberGuard],
           children: [
             {path: 'Edit', component: TaskEditComponent},
             {path: 'Subtask/Create', component: TaskEditComponent},
