@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TaskCardComponent } from './task-card.component';
+import {TaskCardComponent} from './task-card.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
-import {TaskInterface} from "@triplo/models";
+import {TaskInterface, TaskStatus} from "@triplo/models";
 
 describe('TaskCardComponent', () => {
   let component: TaskCardComponent;
@@ -17,7 +17,8 @@ describe('TaskCardComponent', () => {
     }).compileComponents();
 
     const task: TaskInterface = {
-      _id: "asdf", description: "asdf", name: "asdf", project: "adsf", subtasks: []
+      assigned: "", created: new Date(), status: TaskStatus.TODO, subtasks: [], username: "",
+      _id: "asdf", description: "asdf", name: "asdf", project: "adsf"
     }
 
     fixture = TestBed.createComponent(TaskCardComponent);
