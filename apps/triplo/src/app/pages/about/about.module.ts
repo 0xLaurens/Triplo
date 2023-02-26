@@ -6,11 +6,13 @@ import {AboutComponent} from "./about.component";
 
 @NgModule({
   declarations: [
+    AboutComponent,
     AboutProjectComponent,
     AboutEntityComponent,
     AboutUserstoriesComponent,
   ],
   exports: [
+    AboutComponent,
     AboutProjectComponent,
     AboutEntityComponent,
     AboutUserstoriesComponent,

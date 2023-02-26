@@ -14,7 +14,6 @@ import {TuiSidebarModule} from '@taiga-ui/addon-mobile';
 import {TuiActiveZoneModule} from '@taiga-ui/cdk';
 import {
   TuiAlertModule,
-
   TuiRootModule,
   TuiDialogModule,
   TuiThemeNightModule,
@@ -41,26 +40,26 @@ import {
 } from '@taiga-ui/kit';
 import {CommentHttpService} from './services/comments/comment-http.service';
 import {UserService} from './services/user/user.service';
-import {LoginComponent} from './pages/auth/login/login.component';
 import {AuthHttpService} from './services/authentication/auth-http.service';
 import {TaskHttpService} from './services/task/task-http.service';
 import {ProjectModule} from './pages/project/project.module';
-import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthInterceptor} from "./services/authentication/auth.interceptor";
 import {UserHttpService} from "./services/user/user-http.service";
 import {ProfileModule} from "./pages/profile/profile.module";
 import {LikeHttpService} from "./services/likes/like-http.service";
+import {AuthModule} from "./pages/auth/auth.module";
+import {HomeModule} from "./pages/home/home.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AboutComponent,
-    LoginComponent,
-    RegisterComponent,
   ],
   imports: [
+    AboutModule,
+    AuthModule,
     BrowserModule,
+    HomeModule,
     BrowserAnimationsModule,
     AboutModule,
     ProfileModule,
@@ -117,7 +116,7 @@ import {LikeHttpService} from "./services/likes/like-http.service";
     }
   ],
   bootstrap: [AppComponent],
-  exports: [RegisterComponent],
+  exports: [],
 })
 export class AppModule {
 }
