@@ -24,7 +24,9 @@ import {
 import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
-import {ProjectDetailOverviewComponent} from "./project-detail/project-detail-overview/project-detail-overview.component";
+import {
+  ProjectDetailOverviewComponent
+} from "./project-detail/project-detail-overview/project-detail-overview.component";
 import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {InviteHttpService} from "../../services/invites/invite-http.service";
@@ -37,8 +39,7 @@ import {
 import {
   ProjectMembersManagementComponent
 } from "./project-settings/project-member-management/project-members-management.component";
-import {MembersComponent} from "../../components/members/members.component";
-
+import {MembersModule} from "../../components/members/members.module";
 
 
 @NgModule({
@@ -53,7 +54,6 @@ import {MembersComponent} from "../../components/members/members.component";
     ProjectSettingsComponent,
     ProjectMembersInviteComponent,
     ProjectMembersManagementComponent,
-    MembersComponent,
   ],
   exports: [
     ProjectOverviewComponent,
@@ -66,9 +66,9 @@ import {MembersComponent} from "../../components/members/members.component";
     ProjectMembersInviteComponent,
     ProjectDetailTasksComponent,
     ProjectMembersManagementComponent,
-    MembersComponent,
   ],
   imports: [
+    MembersModule,
     CommentModule,
     TaskModule,
     TuiRootModule,
