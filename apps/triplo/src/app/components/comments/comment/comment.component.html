@@ -3,9 +3,12 @@
     <div class="header-comment text-muted">
       <div class="d-flex justify-content-between">
         <div class="d-flex">
-          <a routerLink="/Profile/{{comment.owner}}">
-          <tui-tag *ngIf="comment.owner === user" size="m" status="primary" value="{{comment.username}}"></tui-tag>
-          <tui-tag *ngIf="comment.owner !== user" size="m" status="default" value="{{comment.username}}"></tui-tag>
+          <a *ngIf="comment.owner !== '63f3d349eee96c80623e4d55'" routerLink="/Profile/{{comment.owner}}">
+            <tui-tag *ngIf="comment.owner === user" size="m" status="primary" value="{{comment.username}}"></tui-tag>
+            <tui-tag *ngIf="comment.owner !== user" size="m" status="default" value="{{comment.username}}"></tui-tag>
+          </a>
+          <a *ngIf="comment.owner === '63f3d349eee96c80623e4d55'">
+            <tui-tag size="m" status="default" value="{{comment.username}}"></tui-tag>
           </a>
           <span class="tui-space_horizontal-2">{{comment.created | date:'short'}}</span>
           <div *ngIf="comment.updated">(edited)</div>
@@ -21,7 +24,7 @@
               tuiIconButton
               size="xs"
               appearance="flat"
-              icon="tuiIconMoreVer"
+              icon="tuiIconMoreVertical"
               type="button"
               [pseudoHover]="dropdown.open"
             ></button>
@@ -60,17 +63,17 @@
     </div>
 
     <div class="d-inline-flex text-muted">
-<!--      <div class="likes">-->
-<!--        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>-->
-<!--        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>-->
-<!--      </div>-->
+      <!--      <div class="likes">-->
+      <!--        <a tuiLink class="mx-0"><i class="bi-hand-thumbs-up-fill"></i> {{comment.likeCount}}</a>-->
+      <!--        <a tuiLink class="mx-2"><i class="bi-hand-thumbs-down-fill"></i>{{comment.dislikeCount}}</a>-->
+      <!--      </div>-->
       <div class="reply">
         <a tuiLink (click)="reply()">Reply</a>
       </div>
     </div>
 
   </tui-island>
-  <div class="replies" *ngIf="comment.replyCount > 0">
+  <div class="replies" *ngIf="comment.replies.length">
     <button (click)="showReplies()" tuiButton size="xs" appearance="whiteblock-active">
       <i *ngIf="show" class="bi bi-caret-down-fill"></i>
       <i *ngIf="!show" class="bi bi-caret-up-fill"></i>
@@ -83,9 +86,9 @@
       <triplo-comment-form (handleSubmit)="createReply($event)" (handleCancel)="cancelReply()"></triplo-comment-form>
     </div>
 
-    <div *ngIf="show && (replies$ | async) as rep">
-      <div *ngFor="let reply of rep[0].replies">
-      <triplo-comment [comment]="reply" [user]="user" *ngIf="reply.parent === comment._id"></triplo-comment>
+    <div *ngIf="show">
+      <div *ngFor="let reply of this.comment.replies">
+        <triplo-comment (reload)="loadReplies()" [comment]="reply" [user]="user" *ngIf="reply.parent === comment._id"></triplo-comment>
       </div>
     </div>
   </div>

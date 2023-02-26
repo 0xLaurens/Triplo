@@ -1,8 +1,5 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from "@angular/router";
-import {UserListComponent} from "./pages/user/user-list/user-list.component";
-import {UserDetailComponent} from "./pages/user/user-detail/user-detail.component";
-import {UserEditComponent} from "./pages/user/user-edit/user-edit.component";
 import {HeroComponent} from "./pages/home/hero/hero.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {AboutUserstoriesComponent} from "./pages/about/about-userstories/about-userstories.component";
@@ -15,37 +12,48 @@ import {LoginComponent} from "./pages/auth/login/login.component";
 import {TaskDetailComponent} from "./components/tasks/task-detail/task-detail.component";
 import {TaskEditComponent} from "./components/tasks/task-edit/task-edit.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
-import {AuthGuard} from "./services/authentication/auth.guard";
-import {ProfileDetailComponent} from "./pages/profile/profile-detail/profile-detail.component";
+import {AuthGuard} from "./services/guards/auth.guard";
+import {ProfileDetailComponent} from "./pages/profile/profile-overview/profile-detail/profile-detail.component";
 import {ProfileSettingsComponent} from "./pages/profile/profile-settings/profile-settings.component";
 import {ProfileOverviewComponent} from "./pages/profile/profile-overview/profile-overview.component";
-import {ProfileProjectsComponent} from "./pages/profile/profile-projects/profile-projects.component";
-import {ProfileLikedComponent} from "./pages/profile/profile-liked/profile-liked.component";
+import {ProfileProjectsComponent} from "./pages/profile/profile-overview/profile-projects/profile-projects.component";
+import {ProfileLikedComponent} from "./pages/profile/profile-overview/profile-liked/profile-liked.component";
+import {
+  ProjectDetailOverviewComponent
+} from "./pages/project/project-detail/project-detail-overview/project-detail-overview.component";
+import {
+  ProjectDetailMembersComponent
+} from "./pages/project/project-detail/project-detail-members/project-detail-members.component";
+import {ProfileInviteComponent} from "./pages/profile/profile-overview/profile-invites/profile-invite.component";
+import {ProjectSettingsComponent} from "./pages/project/project-settings/project-settings.component";
+import {
+  ProjectMembersManagementComponent
+} from "./pages/project/project-settings/project-member-management/project-members-management.component";
+import {
+  ProjectDetailTasksComponent
+} from "./pages/project/project-detail/project-detail-tasks/project-detail-tasks.component";
+import {
+  ProjectMembersInviteComponent
+} from "./pages/project/project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {ProjectMemberGuard} from "./services/guards/project-member.guard";
+import {ProjectOwnerGuard} from "./services/guards/project-owner.guard";
 
 const routes: Routes = [
-    {
-      path: 'Users', component: UserListComponent, canActivate: [AuthGuard], children: [
-        {path: 'create', component: UserEditComponent, canActivate: [AuthGuard]},
-        {path: ':id/edit', component: UserEditComponent, canActivate: [AuthGuard]},
-        {path: ':id', component: UserDetailComponent, canActivate: [AuthGuard]},
-      ]
-    },
     {path: "Profile/Settings", component: ProfileSettingsComponent, canActivate: [AuthGuard]},
-
-
     {
-      path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
-        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
-        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
-        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
+      path: 'Profile', component: ProfileOverviewComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+        {path: "", component: ProfileDetailComponent},
+        {path: "Projects", component: ProfileProjectsComponent},
+        {path: "Liked", component: ProfileLikedComponent},
+        {path: "Invites", component: ProfileInviteComponent},
       ]
     },
 
     {
-      path: 'Profile/:id', component: ProfileOverviewComponent, canActivate: [AuthGuard], children: [
-        {path: "", component: ProfileDetailComponent, canActivate: [AuthGuard]},
-        {path: "Projects", component: ProfileProjectsComponent, canActivate: [AuthGuard]},
-        {path: "Liked", component: ProfileLikedComponent, canActivate: [AuthGuard]},
+      path: 'Profile/:userId', component: ProfileOverviewComponent, children: [
+        {path: "", component: ProfileDetailComponent},
+        {path: "Projects", component: ProfileProjectsComponent},
+        {path: "Liked", component: ProfileLikedComponent},
       ]
     },
 
@@ -57,26 +65,51 @@ const routes: Routes = [
         {path: 'UserStories', component: AboutUserstoriesComponent}
       ]
     },
-    {path: 'Projects/Create', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:id', component: ProjectDetailComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:id/Edit', component: ProjectEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects', component: ProjectOverviewComponent},
 
-    {path: 'Projects/:projectId/Task/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:projectId/Task/:taskId', component: TaskDetailComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:projectId/Task/:taskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
-    {path: 'Projects/:projectId/Task/:taskId/Subtask/Create', component: TaskEditComponent, canActivate: [AuthGuard]},
+    {path: 'Projects', component: ProjectOverviewComponent},
+    {path: 'Projects/Create', component: ProjectEditComponent},
     {
-      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId',
-      component: TaskDetailComponent,
-      canActivate: [AuthGuard]
+      path: 'Projects/:projectId', component: ProjectDetailComponent, children: [
+        {path: '', component: ProjectDetailOverviewComponent},
+        {
+          path: 'Members', component: ProjectDetailMembersComponent,
+        },
+        {
+          path: "Tasks",
+          component: ProjectDetailTasksComponent,
+          canActivate: [ProjectMemberGuard],
+          canActivateChild: [ProjectMemberGuard],
+          children: [
+            {path: 'Create', component: TaskEditComponent},
+          ]
+        },
+        {
+          path: "Tasks/:taskId",
+          component: TaskDetailComponent,
+          canActivate: [ProjectMemberGuard],
+          canActivateChild: [ProjectMemberGuard],
+          children: [
+            {path: 'Edit', component: TaskEditComponent},
+            {path: 'Subtask/Create', component: TaskEditComponent},
+            {path: 'Subtask/:subtaskId', component: TaskEditComponent}
+          ]
+        },
+      ]
     },
     {
-      path: 'Projects/:projectId/Task/:taskId/Subtask/:subtaskId/Edit',
-      component: TaskEditComponent,
-      canActivate: [AuthGuard]
+      path: 'Projects/:projectId/Settings',
+      component: ProjectSettingsComponent,
+      canActivate: [ProjectOwnerGuard],
+      canActivateChild: [ProjectOwnerGuard],
+      children: [
+        {path: "", component: ProjectEditComponent},
+        {
+          path: "Members", component: ProjectMembersManagementComponent, children: [
+            {path: "Invite", component: ProjectMembersInviteComponent}
+          ]
+        }
+      ]
     },
-    {path: 'Task/:id/Subtask/:subtaskId/Edit', component: TaskEditComponent, canActivate: [AuthGuard]},
     {path: 'Login', component: LoginComponent},
     {path: 'Register', component: RegisterComponent}
 

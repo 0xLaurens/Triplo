@@ -9,11 +9,11 @@ export class InviteController {
   constructor(private inviteRepo: InviteRepository) {
   }
 
-  @Post("/user/:userid")
+  @Post("/user/:userId")
   async createInvite(
-    @Param("projectId") projectId: string, @Body() invite: InviteInterface
+    @Param("userId") userId: string, @Body() invite: InviteInterface
   ): Promise<InviteInterface> {
-    return this.inviteRepo.createInvite(projectId, invite)
+    return this.inviteRepo.createInvite(userId, invite)
   }
 
   @Get("/:inviteId")
@@ -43,6 +43,4 @@ export class InviteController {
   async deleteInvite(@Param("inviteId") inviteId: string): Promise<InviteInterface> {
     return this.inviteRepo.deleteInvite(inviteId)
   }
-
-
 }

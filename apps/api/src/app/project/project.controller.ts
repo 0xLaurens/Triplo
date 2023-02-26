@@ -6,7 +6,7 @@ import {
   Param,
   Post,
   Put,
-  Headers,
+  Headers, Query,
 } from "@nestjs/common";
 import {ProjectRepository} from "./project.repository";
 import {ProjectInterface, UserInterface} from "@triplo/models";
@@ -24,7 +24,7 @@ export class ProjectController {
     @Body() project: ProjectInterface, @InjectToken() token: Token
   ): Promise<ProjectInterface> {
     project.ownerId = token.id
-    return this.projectRepo.createProject(project)
+    return this.projectRepo.createProject(project);
   }
 
   @Get()
@@ -32,9 +32,14 @@ export class ProjectController {
     return this.projectRepo.findAllProjects();
   }
 
+  @Get("user/:userId")
+  async findProjectsByUserId(@Param("userId") userId: string): Promise<ProjectInterface[]> {
+    return this.projectRepo.findProjectsByUserId(userId);
+  }
+
   @Get(":projectId")
-  async findProjectById(@Param("projectId") projectId: string): Promise<ProjectInterface> {
-    return this.projectRepo.findProjectById(projectId)
+  async findProjectById(@Param("projectId") projectId: string, @Query("members") members: boolean, @Query("search") search: string): Promise<ProjectInterface> {
+    return this.projectRepo.findProjectById(projectId, members, search);
   }
 
   @Put(":projectId")
@@ -42,21 +47,21 @@ export class ProjectController {
     @Headers('user') user: UserInterface,
     @Param("projectId") projectId: string,
     @Body() changes: ProjectInterface): Promise<ProjectInterface> {
-    return this.projectRepo.updateProject(projectId, changes)
+    return this.projectRepo.updateProject(projectId, changes);
   }
 
   @Delete(":projectId")
   async deleteProject(@Param("projectId") projectId: string): Promise<ProjectInterface> {
-    return this.projectRepo.deleteProject(projectId)
+    return this.projectRepo.deleteProject(projectId);
   }
 
   @Post("/:projectId/user/:userId")
   async addMemberToProject(@Param("projectId") projectId: string,@Param("userId") userId: string): Promise<ProjectInterface> {
-    return this.projectRepo.addMemberToProject(projectId, userId)
+    return this.projectRepo.addMemberToProject(projectId, userId);
   }
 
   @Put("/:projectId/user/:userId/remove")
   async removeMemberFromProject(@Param("projectId") projectId: string,@Param("userId") userId: string): Promise<ProjectInterface> {
-    return this.projectRepo.removeMemberFromProject(projectId, userId)
+    return this.projectRepo.removeMemberFromProject(projectId, userId);
   }
 }

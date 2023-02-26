@@ -5,49 +5,70 @@ import {ProjectDetailComponent} from "./project-detail/project-detail.component"
 import {ProjectEditComponent} from "./project-edit/project-edit.component";
 import {ProjectHttpService} from "../../services/projects/project-http.service";
 import {CommonModule} from "@angular/common";
-import {RouterLink, RouterLinkWithHref} from "@angular/router";
+import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   TuiAlertModule,
-  TuiButtonModule, TuiErrorModule, TuiFormatDatePipeModule,
+  TuiButtonModule, TuiDataListModule, TuiErrorModule, TuiFormatDatePipeModule,
   TuiHintModule,
   TuiLinkModule,
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
 } from "@taiga-ui/core";
 import {
-    TUI_VALIDATION_ERRORS,
-    TuiFieldErrorPipeModule,
-    TuiInputModule, TuiInputTagModule,
-    TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
-    TuiTextAreaModule
+  TUI_VALIDATION_ERRORS, TuiAvatarModule, TuiBadgeModule,
+  TuiFieldErrorPipeModule,
+  TuiInputModule, TuiInputTagModule,
+  TuiIslandModule, TuiMarkerIconModule, TuiTagModule,
+  TuiTextAreaModule
 } from "@taiga-ui/kit";
-import {AppModule} from "../../app.module";
 import {TaskModule} from "../../components/tasks/task.module";
 import {CommentModule} from "../../components/comments/comment.module";
 import {LikeHttpService} from "../../services/likes/like-http.service";
+import {
+  ProjectDetailOverviewComponent
+} from "./project-detail/project-detail-overview/project-detail-overview.component";
+import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
+import {TuiLetModule} from "@taiga-ui/cdk";
+import {InviteHttpService} from "../../services/invites/invite-http.service";
+import {UserHttpService} from "../../services/user/user-http.service";
+import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks/project-detail-tasks.component";
+import {ProjectSettingsComponent} from "./project-settings/project-settings.component";
+import {
+  ProjectMembersInviteComponent
+} from "./project-settings/project-member-management/project-members-invite/project-members-invite.component";
+import {
+  ProjectMembersManagementComponent
+} from "./project-settings/project-member-management/project-members-management.component";
+import {MembersModule} from "../../components/members/members.module";
 
-export function minLengthValidator(context: { requiredLength: string }): string {
-  return `Minimum length — ${context.requiredLength}`;
-}
-
-export function maxLengthValidator(context: { requiredLength: string }): string {
-  return `Max amount of tags — ${context.requiredLength}`;
-}
 
 @NgModule({
   declarations: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailTasksComponent,
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
+    ProjectSettingsComponent,
+    ProjectMembersInviteComponent,
+    ProjectMembersManagementComponent,
   ],
   exports: [
     ProjectOverviewComponent,
     ProjectCardListComponent,
     ProjectDetailComponent,
-    ProjectEditComponent
+    ProjectEditComponent,
+    ProjectDetailOverviewComponent,
+    ProjectDetailMembersComponent,
+    ProjectSettingsComponent,
+    ProjectMembersInviteComponent,
+    ProjectDetailTasksComponent,
+    ProjectMembersManagementComponent,
   ],
   imports: [
+    MembersModule,
     CommentModule,
     TaskModule,
     TuiRootModule,
@@ -55,25 +76,27 @@ export function maxLengthValidator(context: { requiredLength: string }): string 
     RouterLinkWithHref,
     FormsModule,
     ReactiveFormsModule,
-    TuiAlertModule,
+    RouterLink,
     TuiIslandModule,
     TuiLinkModule,
+    TuiTagModule,
+    RouterOutlet,
     TuiButtonModule,
     TuiHintModule,
-    TuiTextfieldControllerModule,
     TuiInputModule,
+    TuiTextfieldControllerModule,
     TuiSvgModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
     TuiTextAreaModule,
-    RouterLink,
-    TuiTagModule,
     TuiInputTagModule,
-    TuiFormatDatePipeModule,
-    TuiMarkerIconModule,
+    TuiAvatarModule,
+    TuiDataListModule,
   ],
   providers: [
     ProjectHttpService,
+    InviteHttpService,
+    UserHttpService,
     LikeHttpService,
     {
       provide: TUI_VALIDATION_ERRORS,

@@ -5,7 +5,7 @@ import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {AuthHttpService} from "../../../services/authentication/auth-http.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {TuiInputModule, TuiInputPasswordModule, TuiIslandModule, TuiTextAreaModule} from "@taiga-ui/kit";
-import {TuiTextfieldControllerModule} from "@taiga-ui/core";
+import {TuiNotificationModule, TuiTextfieldControllerModule} from "@taiga-ui/core";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -14,7 +14,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ HttpClientTestingModule, TuiIslandModule, TuiInputModule, TuiInputPasswordModule, ReactiveFormsModule, TuiTextfieldControllerModule, TuiTextAreaModule],
+      imports: [ HttpClientTestingModule, TuiIslandModule, TuiInputModule, TuiInputPasswordModule, TuiNotificationModule, ReactiveFormsModule, TuiTextfieldControllerModule, TuiTextAreaModule],
       providers: [FormBuilder, AuthHttpService],
     }).compileComponents();
 

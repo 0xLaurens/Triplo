@@ -1,0 +1,29 @@
+<div class="tui-space_vertical-4" *ngIf="(project$ | async) as project">
+  <h5 class="tui-text_h5">Overview</h5>
+  <div class="description tui-space_vertical-4 w-50">
+    <h6 class="tui-text_h6">Description</h6>
+    <div class="tui-text_body-m">
+      {{project.description}}
+    </div>
+  </div>
+
+  <div class="comments tui-space_vertical-10">
+    <h5 class="tui-text_h6 tui-space_vertical-5">Comments</h5>
+    <div class="comment-reaction tui-space_vertical-5">
+      <triplo-comment-form (handleSubmit)="createComment($event)"></triplo-comment-form>
+    </div>
+
+    <div *ngFor="let comment of recentComments">
+      <triplo-comment (reload)="reloadReplies()" [comment]="comment" [user]="userId"></triplo-comment>
+    </div>
+
+    <div *ngFor="let comment of (comments$ | async)">
+      <triplo-comment (reload)="reloadReplies()" [comment]="comment" [user]="userId"></triplo-comment>
+    </div>
+
+    <div *ngIf="(comments$ | async)?.length === 0 && recentComments.size === 0" class="tui-text_body-m">No comments
+      yet.
+    </div>
+  </div>
+</div>
+

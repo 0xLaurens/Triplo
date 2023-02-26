@@ -19,6 +19,8 @@ export class LikeRepository {
   async createLike(like: Partial<LikeInterface>): Promise<LikeInterface> {
     let created;
     like.compositeId = `${like.userId}_${like.projectId}`
+    const project: ProjectInterface = await this.projectModel.findById(like.projectId)
+    like.projectName = project.name
     const session = await this.connection.startSession();
     await session.withTransaction(async () => {
       created = new this.likeModel({...like})
@@ -93,9 +95,11 @@ export class LikeRepository {
     return like;
   }
 
-
   async findLikeCompositeId (userId: string, projectId: string): Promise<LikeInterface> {
     return this.likeModel.findOne({compositeId: `${userId}_${projectId}`})
   }
 
+  async findLikesByUserId(userId: string): Promise<LikeInterface[]> {
+    return this.likeModel.find({userId: userId, isPositive: true});
+  }
 }

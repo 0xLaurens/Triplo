@@ -3,22 +3,24 @@ import {TaskEditComponent} from "./task-edit/task-edit.component";
 import {TaskDetailComponent} from "./task-detail/task-detail.component";
 import {TaskCardComponent} from "./task-card/task-card.component";
 import {
+  TuiAvatarModule,
+  TuiDataListWrapperModule,
   TuiFieldErrorPipeModule,
   TuiInputModule,
   TuiIslandModule,
-  TuiMarkerIconModule,
+  TuiSelectModule,
   TuiTagModule, TuiTextAreaModule
 } from "@taiga-ui/kit";
-import {AsyncPipe, DatePipe} from "@angular/common";
-import {RouterLinkWithHref} from "@angular/router";
+import {AsyncPipe, DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import {
-  TuiButtonModule,
-  TuiErrorModule,
-  TuiHintModule,
-  TuiSvgModule,
-  TuiTextfieldControllerModule
+    TuiButtonModule, TuiDataListModule, TuiDialogModule,
+    TuiErrorModule,
+    TuiHintModule, TuiLinkModule,
+    TuiTextfieldControllerModule
 } from "@taiga-ui/core";
+import {TuiAutoFocusModule} from "@taiga-ui/cdk";
 
 @NgModule({
   declarations: [
@@ -32,21 +34,30 @@ import {
     TaskCardComponent,
   ],
   imports: [
-    TuiIslandModule,
-    TuiTagModule,
-    DatePipe,
-    RouterLinkWithHref,
-    TuiMarkerIconModule,
-    AsyncPipe,
+    TuiDialogModule,
     ReactiveFormsModule,
-    TuiInputModule,
+    TuiButtonModule,
+    NgIf,
     TuiHintModule,
-    TuiTextfieldControllerModule,
+    TuiInputModule,
+    TuiAutoFocusModule,
     TuiErrorModule,
     TuiFieldErrorPipeModule,
+    AsyncPipe,
     TuiTextAreaModule,
-    TuiSvgModule,
-    TuiButtonModule
+    TuiTextfieldControllerModule,
+    TuiSelectModule,
+    TuiDataListWrapperModule,
+    TuiDataListModule,
+    NgForOf,
+    TuiAvatarModule,
+    NgClass,
+    TuiTagModule,
+    RouterLinkWithHref,
+    TuiLinkModule,
+    TuiIslandModule,
+    RouterOutlet,
+    DatePipe
   ],
   providers: [],
 })

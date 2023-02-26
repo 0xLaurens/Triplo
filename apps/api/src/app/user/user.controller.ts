@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, UseGuards} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards} from "@nestjs/common";
 import {UserRepository} from "./user.repository";
 import {UserInterface} from "@triplo/models";
 import {AuthenticationGuard} from "../guard/authentication.guard";
@@ -18,8 +18,8 @@ export class UserController {
   }
 
   @Get()
-  async findAllUsers(): Promise<UserInterface[]> {
-    return this.userRepo.findAllUsers();
+  async findAllUsers(@Query("search") search?: string): Promise<UserInterface[]> {
+    return this.userRepo.findAllUsers(search);
   }
 
   @Get(":userId")

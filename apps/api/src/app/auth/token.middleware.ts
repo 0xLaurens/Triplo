@@ -1,7 +1,7 @@
-import { HttpException, HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import {HttpException, HttpStatus, Injectable, NestMiddleware} from '@nestjs/common';
+import {NextFunction, Request, Response} from 'express';
 
-import { AuthRepository } from './auth.repository';
+import {AuthRepository} from './auth.repository';
 
 @Injectable()
 export class TokenMiddleware implements NestMiddleware {
@@ -15,9 +15,7 @@ export class TokenMiddleware implements NestMiddleware {
     }
 
     try {
-      const token = await this.authService.verifyToken(authHeader);
-
-      res.locals.token = token;
+      res.locals.token = await this.authService.verifyToken(authHeader);
     } catch (e) {
       throw new HttpException('Token invalid', HttpStatus.UNAUTHORIZED);
     }

@@ -1,18 +1,17 @@
 import {Module} from "@nestjs/common";
 import {MongooseModule} from "@nestjs/mongoose";
-import {subtaskSchema, InviteSchema} from "./task.schema";
-import {TaskController} from "./task.controller";
-import {InviteRepository} from "./task.repository";
+import {InviteSchema} from "./invite.schema";
+import {InviteController} from "./invite.controller";
+import {InviteRepository} from "./invite.repository";
 
 @Module({
   imports: [
     MongooseModule.forFeature([
-      {name: "Task", schema: InviteSchema},
-      {name: "Subtask", schema: subtaskSchema}
+      {name: "Invite", schema: InviteSchema}
     ])
   ],
   controllers: [
-    TaskController
+    InviteController
   ],
   providers: [
     InviteRepository

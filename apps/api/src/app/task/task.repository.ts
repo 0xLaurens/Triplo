@@ -11,20 +11,12 @@ export class TaskRepository {
   ) {
   }
 
-  async getTopLevelTasks(projectId: string): Promise<TaskInterface[]> {
-    return this.taskModel.find({project: projectId, parent: null});
-  }
-
-  async updateTask(taskId: string, task: Partial<TaskInterface>): Promise<TaskInterface> {
-    return this.taskModel.findByIdAndUpdate(taskId, task, {new: true})
+  async getTasksByProjectId(projectId: string): Promise<TaskInterface[]> {
+    return this.taskModel.find({project: projectId});
   }
 
   async getTaskById(taskId: string): Promise<TaskInterface> {
     return this.taskModel.findById(taskId)
-  }
-
-  async deleteTask(taskId: string): Promise<TaskInterface> {
-    return this.taskModel.findByIdAndDelete(taskId)
   }
 
   async createTask(projectId: string, task: Partial<TaskInterface>): Promise<TaskInterface> {
@@ -32,12 +24,31 @@ export class TaskRepository {
     return this.taskModel.create(task)
   }
 
-  async createSubTask(projectId: string, taskId: string, task: TaskInterface): Promise<TaskInterface> {
-    task.project = projectId
-    return this.taskModel.findByIdAndUpdate(taskId, {$push: {subtasks: {...task}}});
+  async updateTask(taskId: string, task: Partial<TaskInterface>): Promise<TaskInterface> {
+    return this.taskModel.findByIdAndUpdate(taskId, task, {new: true})
+  }
+
+  async deleteTask(taskId: string): Promise<TaskInterface> {
+    return this.taskModel.findByIdAndDelete(taskId)
   }
 
   async getSubtaskById(taskId: string, subtaskId: string): Promise<TaskInterface> {
-    return this.taskModel.findById(taskId)
+    return this.taskModel.findOne({_id: taskId, "subtasks._id": subtaskId}, {"subtasks.$": 1})
   }
+
+  async createSubtask(taskId: string, task: TaskInterface): Promise<TaskInterface> {
+    return this.taskModel.findByIdAndUpdate(taskId, {$addToSet: {subtasks: {...task}}});
+  }
+
+  async updateSubtask(taskId: string, subtaskId: string, task: TaskInterface): Promise<TaskInterface> {
+    return this.taskModel.findOneAndUpdate({
+      _id: taskId,
+      "subtasks._id": subtaskId
+    }, {$set: {"subtasks.$": task}}, {new: true, upsert: true});
+  }
+
+  async deleteSubtask(taskId: string, subtaskId: string): Promise<TaskInterface> {
+    return this.taskModel.findByIdAndUpdate(taskId, {$pull: {subtasks: {_id: subtaskId}}});
+  }
+
 }

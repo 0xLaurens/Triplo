@@ -9,6 +9,7 @@ import {
   MaxLength,
   MinLength
 } from "class-validator";
+import {UserInterface} from "../user/user.interface";
 
 export class ProjectInterface {
   @IsMongoId()
@@ -28,10 +29,10 @@ export class ProjectInterface {
   created: Date;
 
   @IsMongoId()
-  ownerId: string;
+  ownerId: string | UserInterface;
 
   @IsArray()
-  members?: string[]
+  members: UserInterface[]
 
   @IsInt()
   LikeCount: number;

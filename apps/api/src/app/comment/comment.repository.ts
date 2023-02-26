@@ -13,22 +13,33 @@ export class CommentRepository {
   async getTopLevelComments(projectId: string): Promise<CommentInterface[]> {
     return this.commentModel.aggregate([
       {$match: {project: new mongoose.Types.ObjectId(projectId), parent: null}},
-      // {$graphLookup: {from: 'comments', startWith: '$_id', connectFromField: '_id', connectToField: 'parent', as: 'replies'}},
+      {
+        $graphLookup: {
+          from: 'comments',
+          startWith: '$_id',
+          maxDepth:0,
+          connectFromField: '_id',
+          connectToField: 'parent',
+          as: 'replies'
+        }
+      },
     ]);
   }
 
-  async getCommentReplies(commentId: string)  {
+  async getCommentReplies(commentId: string): Promise<CommentInterface[]> {
     return this.commentModel.aggregate([
       {$match: {_id: new mongoose.Types.ObjectId(commentId)}},
       {
         $graphLookup: {
           from: 'comments',
           startWith: '$_id',
+          maxDepth:0,
           connectFromField: '_id',
           connectToField: 'parent',
           as: 'replies',
         },
       },
+      {$limit: 1}
     ]);
   }
 
@@ -42,8 +53,16 @@ export class CommentRepository {
     return this.commentModel.findById(commentId)
   }
 
-  async deleteComment(commentId: string): Promise<CommentInterface> {
-    return this.commentModel.findByIdAndDelete(commentId)
+  async deleteComment(commentId: string, comment: CommentInterface): Promise<CommentInterface> {
+    if (comment.replies && comment.replies.length < 1) {
+      return this.commentModel.findByIdAndDelete(commentId)
+    }
+
+    return this.commentModel.findByIdAndUpdate(commentId, {
+      username: "[DELETED]",
+      message: "[DELETED]",
+      owner: "63f3d349eee96c80623e4d55"
+    }, {new: true})
   }
 
   async createComment(projectId: string, comment: Partial<CommentInterface>): Promise<CommentInterface> {
@@ -51,15 +70,8 @@ export class CommentRepository {
     return this.commentModel.create(comment)
   }
 
-  private async inc_reply(commentId: string): Promise<CommentInterface> {
-    return this.commentModel.findByIdAndUpdate(commentId, {$inc: {replyCount: 1}})
-  }
-
   async createReply(projectId: string, commentId: string, comment: CommentInterface) {
     comment.parent = commentId;
-    await this.inc_reply(commentId);
     return this.createComment(projectId, comment);
   }
-
-
 }

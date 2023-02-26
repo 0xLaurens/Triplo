@@ -14,6 +14,9 @@ export class LikeInterface {
   projectId: string;
 
   @IsString()
+  projectName: string;
+
+  @IsString()
   compositeId:string
 
   @IsBoolean()

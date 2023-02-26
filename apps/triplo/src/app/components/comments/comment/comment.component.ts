@@ -1,4 +1,4 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {AfterContentChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommentInterface} from "@triplo/models";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {Observable} from "rxjs";
@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 export class CommentComponent implements OnInit, AfterContentChecked {
   @Input() comment: CommentInterface
   @Input() user: string | null | undefined
+  @Output() reload: EventEmitter<void> = new EventEmitter<void>();
   dropdownOpen: boolean;
   replies$: Observable<CommentInterface[]>
   show = false;
@@ -23,6 +24,7 @@ export class CommentComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.replies$ = this.commentService.getCommentReplies(this.comment._id);
+    this.loadReplies();
     this.dropdownOpen = false;
   }
 
@@ -34,16 +36,22 @@ export class CommentComponent implements OnInit, AfterContentChecked {
     this.show = !this.show
   }
 
+  loadReplies() {
+    this.replies$.subscribe(comment => {
+      if (comment.length > 0) {
+        this.comment.replies = comment[0].replies
+      }
+    });
+  }
 
   reply() {
-    console.log(this.comment)
     this.showReplyForm = !this.showReplyForm;
   }
 
   createReply($event: CommentInterface) {
     $event.parent = this.comment._id
-    console.log($event)
-    this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe(() => {
+    this.commentService.createReply(this.comment.project, this.comment._id, $event).subscribe(comment => {
+      this.comment.replies.push(comment)
       this.cancelReply();
     });
   }
@@ -63,9 +71,16 @@ export class CommentComponent implements OnInit, AfterContentChecked {
 
   updateComment($event: CommentInterface) {
     this.commentService.updateComment(this.comment._id, $event).subscribe(data => {
-      this.comment = data
+      this.commentUpdateChangedProperties(data)
       this.cancelEdit()
     })
+  }
+
+  commentUpdateChangedProperties(comment: CommentInterface) {
+    this.comment.message = comment.message;
+    this.comment.owner = comment.owner;
+    this.comment.username = comment.username;
+    this.comment.updated = comment.updated;
   }
 
   cancelEdit() {
@@ -73,9 +88,16 @@ export class CommentComponent implements OnInit, AfterContentChecked {
   }
 
   deleteComment() {
-    this.commentService.deleteComment(this.comment._id).subscribe(() => {
-      this.deleted = true
+    this.commentService.deleteComment(this.comment._id, this.comment).subscribe(response => {
+      if (this.comment.replies && this.comment.replies.length < 1) {
+        this.deleted = true
+      } else {
+        this.commentUpdateChangedProperties(response)
+      }
+      this.reload.emit()
     })
     this.closeDropdown()
+
   }
+
 }

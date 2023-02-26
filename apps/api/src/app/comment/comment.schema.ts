@@ -1,5 +1,6 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import mongoose from "mongoose";
+import {CommentInterface} from "@triplo/models";
 
 @Schema()
 export class Comment {
@@ -21,14 +22,8 @@ export class Comment {
   @Prop({default: Date.now})
   created: Date;
 
-  @Prop({default: 0})
-  replyCount: number;
-
-  @Prop({default: 0})
-  likeCount: number;
-
-  @Prop({default: 0})
-  dislikeCount: number;
+  @Prop({default: []})
+  replies: CommentInterface[]
 
   @Prop({default: false})
   updated: boolean

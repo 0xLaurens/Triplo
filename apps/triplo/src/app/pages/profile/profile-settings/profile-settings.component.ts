@@ -58,7 +58,6 @@ export class ProfileSettingsComponent implements OnInit {
     };
 
     this.loading = true;
-    console.log(changes)
     if(this.userId)
       this.userService.updateUser(this.userId, changes).subscribe(
         user => {
