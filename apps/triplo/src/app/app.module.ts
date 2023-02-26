@@ -5,37 +5,10 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, RouterOutlet} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AboutModule} from './pages/about/about.module';
 import {ProjectHttpService} from './services/projects/project-http.service';
-import {TuiSidebarModule} from '@taiga-ui/addon-mobile';
-import {TuiActiveZoneModule} from '@taiga-ui/cdk';
-import {
-  TuiAlertModule,
-  TuiRootModule,
-  TuiDialogModule,
-  TuiThemeNightModule,
-  TuiModeModule,
-  TuiLinkModule,
-  TuiButtonModule,
-  TuiTextfieldControllerModule,
-  TuiErrorModule,
-  TuiSvgModule,
-  TuiHintModule, TuiDataListModule, TuiNotificationModule,
-} from '@taiga-ui/core';
+import {TuiRootModule} from '@taiga-ui/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {
-  TuiCarouselModule, TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule,
-  TuiInputModule,
-  TuiInputPasswordModule,
-  TuiInputTagModule,
-  TuiIslandModule,
-  TuiMarkerIconModule,
-  TuiPaginationModule, TuiSelectModule,
-  TuiTagModule,
-  TuiTextAreaModule,
-} from '@taiga-ui/kit';
 import {CommentHttpService} from './services/comments/comment-http.service';
 import {UserService} from './services/user/user.service';
 import {AuthHttpService} from './services/authentication/auth-http.service';
@@ -55,51 +28,19 @@ import {NavbarModule} from "./shared/navbar/navbar.module";
   ],
   imports: [
     BrowserAnimationsModule,
+    TuiRootModule,
     AboutModule,
     AuthModule,
     BrowserModule,
     HomeModule,
     AboutModule,
     ProfileModule,
+    AppRoutingModule,
     ProjectModule,
     NavbarModule,
-
-    FormsModule,
     HttpClientModule,
-    RouterOutlet,
     RouterModule,
-    AppRoutingModule,
-    TuiRootModule,
-    TuiDialogModule,
-    TuiAlertModule,
-    TuiThemeNightModule,
-    TuiModeModule,
-    TuiLinkModule,
-    TuiTagModule,
-    TuiIslandModule,
-    ReactiveFormsModule,
-    TuiInputModule,
-    TuiButtonModule,
-    TuiTextfieldControllerModule,
-    TuiInputPasswordModule,
-    TuiFieldErrorPipeModule,
-    TuiTextAreaModule,
-    TuiErrorModule,
-    TuiSvgModule,
-    TuiHintModule,
-    TuiInputTagModule,
-    TuiCarouselModule,
-    TuiPaginationModule,
-    TuiMarkerIconModule,
-    TuiDataListWrapperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TuiSelectModule,
-    TuiDataListModule,
-    TuiDataListWrapperModule,
-    TuiSidebarModule,
-    TuiActiveZoneModule,
-    TuiNotificationModule,
+    RouterOutlet,
   ],
   providers: [
     ProjectHttpService,
