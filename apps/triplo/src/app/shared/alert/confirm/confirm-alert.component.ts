@@ -5,7 +5,7 @@ import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'triplo-alert-confirm',
-  templateUrl: `./confirm-alert.template.html`,
+  templateUrl: `confirm-alert.template.html`,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmAlertComponent {

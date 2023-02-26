@@ -5,10 +5,8 @@ import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule, RouterOutlet} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
-import {NavbarComponent} from './shared/navbar/navbar.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AboutModule} from './pages/about/about.module';
-import {AboutComponent} from './pages/about/about.component';
 import {ProjectHttpService} from './services/projects/project-http.service';
 import {TuiSidebarModule} from '@taiga-ui/addon-mobile';
 import {TuiActiveZoneModule} from '@taiga-ui/cdk';
@@ -49,21 +47,23 @@ import {ProfileModule} from "./pages/profile/profile.module";
 import {LikeHttpService} from "./services/likes/like-http.service";
 import {AuthModule} from "./pages/auth/auth.module";
 import {HomeModule} from "./pages/home/home.module";
+import {NavbarModule} from "./shared/navbar/navbar.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     AboutModule,
     AuthModule,
     BrowserModule,
     HomeModule,
-    BrowserAnimationsModule,
     AboutModule,
     ProfileModule,
     ProjectModule,
+    NavbarModule,
+
     FormsModule,
     HttpClientModule,
     RouterOutlet,
