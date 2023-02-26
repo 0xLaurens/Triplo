@@ -11,11 +11,13 @@ import {BehaviorSubject} from "rxjs";
 
 export class NavbarComponent implements OnInit {
   $loggedIn = new BehaviorSubject<boolean>(false);
+  open = false;
 
   constructor(
     @Inject(AuthHttpService) private auth: AuthHttpService,
     private router: Router,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const token = this.auth.getToken()
@@ -26,10 +28,15 @@ export class NavbarComponent implements OnInit {
   }
 
   signOut() {
+    this.toggle(false)
     this.auth.signOut()
     this.auth.$loggedInStatus.next(false);
     this.router.navigate(["/Login"])
   }
-}
 
+  toggle(open: boolean): void {
+    this.open = open;
+  }
+
+}
 

@@ -1,33 +1,82 @@
-<header id="header" class="header fixed-top">
-  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <button tuiButton iconRight="tuiIconGitBranchLarge" type="button" appearance="flat"
+            routerLink="/">
+      <span class="tui-text_h4">Triplo</span>
+    </button>
+    <div class="collapse navbar-collapse">
+      <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space-right" routerLink="/">
+        Home
+      </button>
+      <button tuiButton type="button" appearance="flat" class="tui-space_right-3"
+              routerLink="About">About
+      </button>
 
-    <a routerLink="/" class="logo d-flex align-items-center text-decoration-none">
-      <img src="assets/logo.png" alt="">
-      <span class="tui-text_h3">Triplo</span>
-    </a>
+      <button tuiButton type="button" appearance="flat" class="tui-space_right-3"
+              routerLink="Projects">Projects
+      </button>
 
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li>
-          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="/">Home</button>
-        </li>
-        <li>
-          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="About">About</button>
-        </li>
-        <li>
-          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="Projects">Projects</button>
-        </li>
-        <li *ngIf="($loggedIn | async) === true">
-          <button tuiButton type="button" appearance="flat" class="tui-space_right-3 tui-space_bottom-3" routerLink="Profile">Profile</button>
-        </li>
-        <li *ngIf="($loggedIn | async) === false">
-          <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" routerLink="Login">Login</button>
-        </li>
-        <li *ngIf="($loggedIn | async)">
-          <button tuiButton type="button" appearance="primary" class="tui-space_right-3 tui-space_bottom-3" (click)="signOut()">Sign Out</button>
-        </li>
-      </ul>
-    </nav><!-- .navbar -->
+      <button *ngIf="($loggedIn | async) === true" tuiButton type="button" appearance="flat"
+              class="tui-space_right-3"
+              routerLink="Profile">Profile
+      </button>
+    </div>
 
+    <button
+      tuiIconButton
+      aria-label="Toggle navigation"
+      icon="tuiIconMenuLarge"
+      appearance="icon"
+      type="button"
+      class="navbar-toggler"
+      (click)="toggle(true)"
+      (tuiActiveZoneChange)="toggle($event)"
+    >
+      <div *tuiSidebar="open; direction: 'right'">
+        <div class="d-flex flex-column">
+          <button class="tui-space_top-10 tui-space_vertical-2 tui-space_horizontal-4" tuiButton type="button"
+                  appearance="flat"
+                  (click)="toggle(false)"
+                  routerLink="/">
+            Home
+          </button>
+          <button tuiButton type="button" appearance="flat"
+                  class="tui-space_horizontal-4 tui-space_vertical-2"
+                  (click)="toggle(false)"
+                  routerLink="About">About
+          </button>
+          <button tuiButton type="button" appearance="flat"
+                  class="tui-space_horizontal-4 tui-space_vertical-2"
+                  (click)="toggle(false)"
+                  routerLink="Projects">Projects
+          </button>
+          <button *ngIf="($loggedIn | async) === true" tuiButton type="button" appearance="flat"
+                  class="tui-space_horizontal-4 tui-space_vertical-2"
+                  (click)="toggle(false)"
+                  routerLink="Profile">
+            Profile
+          </button>
+          <button *ngIf="($loggedIn | async) === false" tuiButton type="button" appearance="primary"
+                  class="tui-space_top-10 tui-space_horizontal-4"
+                  (click)="toggle(false)"
+                  routerLink="Login">Login
+          </button>
+          <button *ngIf="($loggedIn | async)" tuiButton type="button" appearance="primary"
+                  class="tui-space_top-10 tui-space_horizontal-4"
+                  (click)="signOut()">Sign Out
+          </button>
+        </div>
+      </div>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0">
+      <button *ngIf="($loggedIn | async) === false" tuiButton type="button" appearance="primary"
+              class="tui-space_right-3"
+              routerLink="Login">Login
+      </button>
+      <button *ngIf="($loggedIn | async)" tuiButton type="button" appearance="primary"
+              class="tui-space_right-3"
+              (click)="signOut()">Sign Out
+      </button>
+    </div>
   </div>
-</header><!-- End Header -->
+</nav>
