@@ -35,5 +35,5 @@ export class SubtaskInterface {
 }
 
 export class TaskInterface extends SubtaskInterface {
-  subtasks: [TaskInterface]
+  subtasks: TaskInterface[]
 }

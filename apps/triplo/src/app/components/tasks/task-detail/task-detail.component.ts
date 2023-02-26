@@ -39,7 +39,7 @@ export class TaskDetailComponent implements OnInit {
   loadTask() {
     if (this.subtaskId) {
       this.subtaskMode = true
-      this.task$ = this.taskService.findSubtaskById(this.taskId, this.subtaskId);
+      this.task$ = this.taskService.getSubtaskById(this.taskId, this.subtaskId);
     } else {
       this.task$ = this.taskService.getTaskById(this.taskId)
     }

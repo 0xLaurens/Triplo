@@ -19,7 +19,7 @@ describe('ProjectCardListComponent', () => {
     component = fixture.componentInstance;
     component.project = {
       ownerId: "",
-      Tags: ["Tag", "Tag2"], DislikeCount: 0, LikeCount: 0, _id: "asdf", created: Date.prototype, description: "", name: ""}
+      Tags: ["Tag", "Tag2"], DislikeCount: 0, LikeCount: 0, members: [], _id: "asdf", created: Date.prototype, description: "", name: ""}
     fixture.detectChanges();
   });
 

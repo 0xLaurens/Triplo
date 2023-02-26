@@ -4,7 +4,6 @@ import { CommentComponent } from './comment.component';
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {TuiIslandModule, TuiTagModule} from "@taiga-ui/kit";
-import {CommonModule} from "@angular/common";
 import {RouterTestingModule} from "@angular/router/testing";
 
 describe('CommentComponent', () => {
@@ -22,7 +21,7 @@ describe('CommentComponent', () => {
     component = fixture.componentInstance;
     component.comment = {
       depth: 0, replies: [], updated: false,
-      dislikeCount: 0, likeCount: 0, message: "none", owner: "none", project: "none", replyCount: 1, username: "asdf",
+      message: "none", owner: "none", project: "none", username: "asdf",
       _id: "asdf"
     }
     fixture.detectChanges();

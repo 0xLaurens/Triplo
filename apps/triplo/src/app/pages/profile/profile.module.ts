@@ -4,11 +4,11 @@ import {CommonModule} from "@angular/common";
 import {AuthHttpService} from "../../services/authentication/auth-http.service";
 import {UserHttpService} from "../../services/user/user-http.service";
 import {
-    TuiAvatarModule, TuiBadgeModule,
-    TuiDataListWrapperModule,
-    TuiFieldErrorPipeModule,
-    TuiInputModule, TuiIslandModule,
-    TuiSelectModule
+  TuiAvatarModule, TuiBadgeModule,
+  TuiDataListWrapperModule,
+  TuiFieldErrorPipeModule,
+  TuiInputModule, TuiIslandModule,
+  TuiSelectModule
 } from "@taiga-ui/kit";
 import {
   TuiButtonModule,
@@ -28,27 +28,27 @@ import {ProfileInviteComponent} from "./profile-overview/profile-invites/profile
 @NgModule({
   declarations: [ProfileDetailComponent, ProfileSettingsComponent, ProfileOverviewComponent, ProfileProjectsComponent, ProfileLikedComponent, ProfileInviteComponent],
   exports: [ProfileDetailComponent, ProfileSettingsComponent, ProfileOverviewComponent, ProfileProjectsComponent, ProfileLikedComponent, ProfileInviteComponent],
-    imports: [
-        CommonModule,
-        TuiAvatarModule,
-        TuiButtonModule,
-        TuiHintModule,
-        RouterLinkWithHref,
-        TuiInputModule,
-        ReactiveFormsModule,
-        TuiTextfieldControllerModule,
-        TuiSvgModule,
-        TuiErrorModule,
-        TuiFieldErrorPipeModule,
-        RouterLink,
-        RouterOutlet,
-        TuiSelectModule,
-        TuiDataListWrapperModule,
-        TuiTooltipModule,
-        TuiIslandModule,
-        TuiLinkModule,
-        TuiBadgeModule
-    ],
+  imports: [
+    CommonModule,
+    TuiAvatarModule,
+    TuiButtonModule,
+    TuiHintModule,
+    RouterLinkWithHref,
+    TuiInputModule,
+    ReactiveFormsModule,
+    TuiTextfieldControllerModule,
+    TuiSvgModule,
+    TuiErrorModule,
+    TuiFieldErrorPipeModule,
+    RouterLink,
+    RouterOutlet,
+    TuiSelectModule,
+    TuiDataListWrapperModule,
+    TuiTooltipModule,
+    TuiIslandModule,
+    TuiLinkModule,
+    TuiBadgeModule
+  ],
   providers: [
     AuthHttpService,
     UserHttpService
