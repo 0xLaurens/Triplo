@@ -51,7 +51,7 @@ export class ProjectDetailComponent implements OnInit {
       }
       this.OwnershipCheck(p)
     })
-    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
+    this.$tasks = this.taskService.getTasksByProjectId(this.projectId);
 
 
     this.notification = this.alertService.open<boolean>(

@@ -8,7 +8,7 @@ export class TaskHttpService {
   constructor(private http: HttpClient) {
   }
 
-  getTopLevelTasks(projectId: string): Observable<TaskInterface[]> {
+  getTasksByProjectId(projectId: string): Observable<TaskInterface[]> {
     return this.http.get<TaskInterface[]>(`api/projects/${projectId}/tasks`)
   }
 
@@ -26,10 +26,6 @@ export class TaskHttpService {
 
   deleteTask(taskId: string,): Observable<TaskInterface> {
     return this.http.delete<TaskInterface>(`api/tasks/${taskId}`)
-  }
-
-  findSubtaskById(taskId: string, subtaskId: string): Observable<TaskInterface> {
-    return this.http.get<TaskInterface>(`api/tasks/${taskId}/subtask/${subtaskId}`)
   }
 
   createSubtask(taskId: string, subtask: Partial<TaskInterface>): Observable<TaskInterface> {

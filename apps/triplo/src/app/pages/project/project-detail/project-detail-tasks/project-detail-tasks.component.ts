@@ -33,10 +33,10 @@ export class ProjectDetailTasksComponent implements OnInit {
         this.projectId = params['projectId']
       }
     });
-    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
+    this.$tasks = this.taskService.getTasksByProjectId(this.projectId);
   }
 
   reloadTasks() {
-    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
+    this.$tasks = this.taskService.getTasksByProjectId(this.projectId);
   }
 }

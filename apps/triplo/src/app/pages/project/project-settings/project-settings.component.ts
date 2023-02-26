@@ -44,7 +44,7 @@ export class ProjectSettingsComponent implements OnInit {
     this.project$.subscribe(p => {
       this.OwnershipCheck(p)
     })
-    this.$tasks = this.taskService.getTopLevelTasks(this.projectId);
+    this.$tasks = this.taskService.getTasksByProjectId(this.projectId);
 
 
     this.notification = this.alertService.open<boolean>(
