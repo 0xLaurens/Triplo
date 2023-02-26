@@ -1,4 +1,4 @@
-import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
 
 import {MongooseModule} from '@nestjs/mongoose';
 import {environment} from "../environments/environment";
@@ -43,6 +43,12 @@ export class AppModule implements NestModule {
       .forRoutes(
         InviteController,
         TaskController,
+      )
+    consumer.apply(TokenMiddleware)
+      .forRoutes(
+        {path: "projects", method: RequestMethod.POST},
+        {path: "/projects/:projectId/comments", method: RequestMethod.POST},
+        {path: "/projects/:projectId/comments/:commentId", method: RequestMethod.POST},
       )
   }
 }
