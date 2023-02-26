@@ -3,7 +3,8 @@ import {AuthHttpService} from "../../../services/authentication/auth-http.servic
 import {UserInterface} from "@triplo/models";
 import {UserHttpService} from "../../../services/user/user-http.service";
 import {Observable} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'triplo-profile-overview',
@@ -18,6 +19,7 @@ export class ProfileOverviewComponent implements OnInit {
     private authService: AuthHttpService,
     private userService: UserHttpService,
     private readonly route: ActivatedRoute,
+    private readonly location: Location,
   ) {
   }
 
@@ -34,4 +36,7 @@ export class ProfileOverviewComponent implements OnInit {
       this.user$ = this.userService.findUserById(this.userId)
   }
 
+  back() {
+    this.location.back();
+  }
 }
