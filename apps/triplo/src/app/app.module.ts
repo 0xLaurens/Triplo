@@ -14,8 +14,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AboutModule} from './pages/about/about.module';
 import {AboutComponent} from './pages/about/about.component';
 import {ProjectHttpService} from './services/projects/project-http.service';
+import {TuiSidebarModule} from '@taiga-ui/addon-mobile';
+import {TuiActiveZoneModule} from '@taiga-ui/cdk';
 import {
   TuiAlertModule,
+
   TuiRootModule,
   TuiDialogModule,
   TuiThemeNightModule,
@@ -103,6 +106,8 @@ import {LikeHttpService} from "./services/likes/like-http.service";
     TuiSelectModule,
     TuiDataListModule,
     TuiDataListWrapperModule,
+    TuiSidebarModule,
+    TuiActiveZoneModule,
     TuiNotificationModule,
   ],
   providers: [

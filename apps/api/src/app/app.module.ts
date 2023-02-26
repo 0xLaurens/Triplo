@@ -1,4 +1,4 @@
-import {MiddlewareConsumer, Module, NestModule} from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
 
 import {MongooseModule} from '@nestjs/mongoose';
 import {environment} from "../environments/environment";
@@ -7,9 +7,7 @@ import {ProjectModule} from "./project/project.module";
 import {CommentModule} from "./comment/comment.module";
 import {AuthModule} from "./auth/auth.module";
 import {TaskModule} from "./task/task.module";
-import {LikeController} from "./like/like.controller";
 import {TaskController} from "./task/task.controller";
-import {UserController} from "./user/user.controller";
 import {LikeModule} from "./like/like.module";
 import {Neo4jModule} from 'nest-neo4j/dist';
 import {TokenMiddleware} from "./auth/token.middleware";
@@ -45,6 +43,12 @@ export class AppModule implements NestModule {
       .forRoutes(
         InviteController,
         TaskController,
+      )
+    consumer.apply(TokenMiddleware)
+      .forRoutes(
+        {path: "projects", method: RequestMethod.POST},
+        {path: "/projects/:projectId/comments", method: RequestMethod.POST},
+        {path: "/projects/:projectId/comments/:commentId", method: RequestMethod.POST},
       )
   }
 }

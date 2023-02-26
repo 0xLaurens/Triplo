@@ -49,7 +49,7 @@ export class ProjectRepository {
     const created = new this.projectModel({...project});
     await created.save();
     await this.neo4jService.write(`CREATE (p:Project {id: "${created._id}", name: "${created.name}"})`);
-    return created
+    return created;
   }
 
   async addMemberToProject(projectId: string, userId: string): Promise<ProjectInterface> {

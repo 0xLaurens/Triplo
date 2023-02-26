@@ -1,44 +1,47 @@
 <div class="min-vh-100 d-flex align-items-center justify-content-center">
-  <div class="w-25 h-50">
-    <tui-island size="l" class="tui-space_vertical-10">
-      <h3 class="title">Login</h3>
-      <tui-notification>
-        You can test the application with the email: dummy@gmail.com && password: secret
-      </tui-notification>
-      <form [formGroup]="form">
-        <tui-input
-          tuiTextfieldSize="m"
-          formControlName="email"
-          class="tui-space_top-5"
-          [tuiTextfieldLabelOutside]="true"
-        >
-          Enter your Email
-          <input
-            tuiTextfield
-            type="email"
-          />
-        </tui-input>
-        <tui-input-password
-          formControlName="password"
-          tuiTextfieldSize="m"
-          class="tui-space_top-3"
-          [tuiTextfieldLabelOutside]="true"
-        >
-          Enter your Password
-          <input
-            tuiTextfield
-            placeholder="Password"
-          />
-        </tui-input-password>
+  <div class="tui-container_adaptive tui-container">
+    <tui-island size="m">
+      <div class="align-self-center tui-space_vertical-8 tui-space_horizontal-4">
+        <h3 class="title tui-text_h3">Login</h3>
+        <tui-notification>
+          You can test the application with the email: dummy@gmail.com && password: secret
+        </tui-notification>
+        <form [formGroup]="form">
+          <tui-input
+            tuiTextfieldSize="m"
+            formControlName="email"
+            class="tui-space_top-5"
+            [tuiTextfieldLabelOutside]="true"
+          >
+            Enter your Email
+            <input
+              tuiTextfield
+              type="email"
+            />
+          </tui-input>
+          <tui-input-password
+            formControlName="password"
+            tuiTextfieldSize="m"
+            class="tui-space_top-3"
+            [tuiTextfieldLabelOutside]="true"
+          >
+            Enter your Password
+            <input
+              tuiTextfield
+              placeholder="Password"
+            />
+          </tui-input-password>
 
-        <div class="d-flex justify-content-end tui-space_vertical-3">
-          <button tuiButton size="m" [disabled]="form.invalid" (click)="login()">
-            Login
-          </button>
-        </div>
-        <div class="tui-text_body-m">No account yet? <a routerLink="/Register" class="link-primary" tuiLink>Register</a>
-        </div>
-      </form>
+          <div class="d-flex justify-content-end tui-space_vertical-3">
+            <button tuiButton size="m" [disabled]="form.invalid" (click)="login()">
+              Login
+            </button>
+          </div>
+          <div class="tui-text_body-m">No account yet? <a routerLink="/Register"
+                                                          tuiLink>Register</a>
+          </div>
+        </form>
+      </div>
     </tui-island>
   </div>
 </div>
