@@ -58,11 +58,7 @@ import {LikeHttpService} from "./services/likes/like-http.service";
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent,
-    UserDetailComponent,
-    UserEditComponent,
     NavbarComponent,
-    HeroComponent,
     AboutComponent,
     LoginComponent,
     RegisterComponent,
