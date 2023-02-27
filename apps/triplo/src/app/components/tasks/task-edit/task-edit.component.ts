@@ -60,16 +60,18 @@ export class TaskEditComponent implements OnInit {
     };
     this.form = this.fb.group(formControls)
 
-    if (!this.createMode && !this.subtaskMode && this.taskId)
+    if (!this.createMode && !this.subtaskMode && this.taskId !== undefined) {
       this.taskService.getTaskById(this.taskId).subscribe(task => {
         this.form.patchValue(task)
       })
+    }
 
-
-    if (!this.createMode && this.subtaskMode && this.subtaskId)
+    if (!this.createMode && this.subtaskMode && this.subtaskId !== undefined) {
       this.taskService.getSubtaskById(this.taskId, this.subtaskId).subscribe(parentTask => {
         this.form.patchValue(parentTask.subtasks[0])
       })
+    }
+
 
     this.projectService.findProjectById(this.projectId, true).subscribe(project => {
       const owner = project.ownerId as UserInterface

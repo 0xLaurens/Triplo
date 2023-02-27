@@ -76,125 +76,118 @@ describe('TaskEditComponent', () => {
           useValue: taskServiceMock,
         }, {provide: ActivatedRoute, useValue: activatedRouteMock}
       ],
+      teardown: {destroyAfterEach: true},
     }).compileComponents();
   });
 
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  describe('setupForm (create mode && task mode)', () => {
+    beforeEach(() => {
+      activatedRouteMock.snapshot.url = "Create"
+
+      fixture = TestBed.createComponent(TaskEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    })
+
+    it('Should not call getTaskById', () => {
+      expect(taskServiceMock.getTaskById).toHaveBeenCalledTimes(0)
+    })
+
+    it('Should fill the form with the data from getTaskId', () => {
+      const dummyForm = {
+        name: "",
+        description: "",
+        status: TaskStatus.TODO,
+        username: "",
+        assigned: "",
+      }
+      expect(component.form)
+      expect(component.form.value).toEqual(dummyForm)
+    });
   });
 
-  describe('setupForm', () => {
+  describe('setupForm (create mode && subtask mode)', () => {
+    beforeEach(() => {
+      activatedRouteMock.snapshot.url = "Subtask"
 
+      fixture = TestBed.createComponent(TaskEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    })
 
-    describe('setupForm (edit mode && subtask mode)', () => {
-      beforeEach(() => {
-        activatedRouteMock.parent.params = of({taskId: "taskId"})
-        activatedRouteMock.params = of({subtaskId: "subtaskId"})
-        activatedRouteMock.snapshot.url = "Subtask"
+    it('Should not call getSubtaskById', () => {
+      expect(taskServiceMock.getSubtaskById).toHaveBeenCalledTimes(0)
+    })
 
-        fixture = TestBed.createComponent(TaskEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      })
+    it('Should fill the form with the data from getSubtaskId', waitForAsync(() => {
+      const dummyForm = {
+        name: "",
+        description: "",
+        status: TaskStatus.TODO,
+        username: "",
+        assigned: "",
+      }
+      expect(component.form)
+      expect(component.form.value).toEqual(dummyForm)
+    }))
+  });
 
-      it('Should call getSubtaskById', () => {
-        expect(taskServiceMock.getSubtaskById).toHaveBeenCalled()
-        expect(taskServiceMock.getSubtaskById).toHaveBeenCalledWith("taskId", "subtaskId")
-        expect(taskServiceMock.getSubtaskById).toHaveBeenCalledTimes(1)
-      })
+  describe('setupForm (edit mode && task mode)', () => {
+    beforeEach(() => {
+      activatedRouteMock.snapshot.url = "url"
+      activatedRouteMock.parent.params = of({taskId: "taskId"})
 
-      it('Should fill the form with the data from getSubtaskId', waitForAsync(() => {
-        const dummyForm = {
-          name: dummyTask.subtasks[0].name,
-          description: dummyTask.subtasks[0].description,
-          status: dummyTask.subtasks[0].status,
-          username: dummyTask.subtasks[0].username,
-          assigned: dummyTask.subtasks[0].assigned,
-        }
-        expect(component.form)
-        expect(component.form.value).toEqual(dummyForm)
-      }))
-    });
+      fixture = TestBed.createComponent(TaskEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    })
 
-    describe('setupForm (create mode && task mode)', () => {
-      beforeEach(() => {
-        activatedRouteMock.snapshot.url = "Create"
+    it('Should not call getTaskById', () => {
+      expect(taskServiceMock.getTaskById).toHaveBeenCalledTimes(1)
+      expect(taskServiceMock.getTaskById).toHaveBeenCalledWith("taskId")
+    })
 
-        fixture = TestBed.createComponent(TaskEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      })
+    it('Should fill the form with the data from getTaskId', waitForAsync(() => {
+      const dummyForm = {
+        name: dummyTask.name,
+        description: dummyTask.description,
+        status: TaskStatus.TODO,
+        username: dummyTask.username,
+        assigned: dummyTask.assigned,
+      }
+      expect(component.form)
+      expect(component.form.value).toEqual(dummyForm)
+    }))
+  });
 
-      it('Should not call getTaskById', () => {
-        expect(taskServiceMock.getTaskById).toHaveBeenCalledTimes(0)
-      })
+  describe('setupForm (edit mode && subtask mode)', () => {
+    beforeEach(() => {
+      activatedRouteMock.parent.params = of({taskId: "taskId"})
+      activatedRouteMock.params = of({subtaskId: "subtaskId"})
+      activatedRouteMock.snapshot.url = "Subtask"
 
-      it('Should fill the form with the data from getTaskId', waitForAsync(() => {
-        const dummyForm = {
-          name: "",
-          description: "",
-          status: TaskStatus.TODO,
-          username: "",
-          assigned: "",
-        }
-        expect(component.form)
-        expect(component.form.value).toEqual(dummyForm)
-      }))
-    });
+      fixture = TestBed.createComponent(TaskEditComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    })
 
-    describe('setupForm (edit mode && task mode)', () => {
-      beforeEach(() => {
-        activatedRouteMock.snapshot.url = "url"
-        activatedRouteMock.parent.params = of({taskId: "taskId"})
+    it('Should call getSubtaskById', () => {
+      expect(taskServiceMock.getSubtaskById).toHaveBeenCalled()
+      expect(taskServiceMock.getSubtaskById).toHaveBeenCalledWith("taskId", "subtaskId")
+      expect(taskServiceMock.getSubtaskById).toHaveBeenCalledTimes(1)
+    })
 
-        fixture = TestBed.createComponent(TaskEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      })
-
-      it('Should not call getTaskById', () => {
-        expect(taskServiceMock.getTaskById).toHaveBeenCalledTimes(1)
-        expect(taskServiceMock.getTaskById).toHaveBeenCalledWith("taskId")
-      })
-
-      it('Should fill the form with the data from getTaskId', waitForAsync(() => {
-        const dummyForm = {
-          name: dummyTask.name,
-          description: dummyTask.description,
-          status: TaskStatus.TODO,
-          username: dummyTask.username,
-          assigned: dummyTask.assigned,
-        }
-        expect(component.form)
-        expect(component.form.value).toEqual(dummyForm)
-      }))
-    });
-
-    describe('setupForm (create mode && subtask mode)', () => {
-      beforeEach(() => {
-        activatedRouteMock.snapshot.url = "Subtask"
-
-        fixture = TestBed.createComponent(TaskEditComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-      })
-
-      it('Should not call getSubtaskById', () => {
-        expect(taskServiceMock.getSubtaskById).toHaveBeenCalledTimes(0)
-      })
-
-      it('Should fill the form with the data from getSubtaskId', waitForAsync(() => {
-        const dummyForm = {
-          name: "",
-          description: "",
-          status: TaskStatus.TODO,
-          username: "",
-          assigned: "",
-        }
-        expect(component.form)
-        expect(component.form.value).toEqual(dummyForm)
-      }))
-    });
+    it('Should fill the form with the data from getSubtaskId', waitForAsync(() => {
+      const dummyForm = {
+        name: dummyTask.subtasks[0].name,
+        description: dummyTask.subtasks[0].description,
+        status: dummyTask.subtasks[0].status,
+        username: dummyTask.subtasks[0].username,
+        assigned: dummyTask.subtasks[0].assigned,
+      }
+      expect(component.form)
+      expect(component.form.value).toEqual(dummyForm)
+    }))
   });
 });
