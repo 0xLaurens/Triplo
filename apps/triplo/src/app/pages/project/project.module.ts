@@ -9,7 +9,7 @@ import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {
   TuiAlertModule,
-  TuiButtonModule, TuiDataListModule, TuiErrorModule, TuiFormatDatePipeModule,
+  TuiButtonModule, TuiDataListModule, TuiDialogModule, TuiErrorModule, TuiFormatDatePipeModule,
   TuiHintModule,
   TuiLinkModule,
   TuiRootModule, TuiSvgModule, TuiTextfieldControllerModule
@@ -28,7 +28,6 @@ import {
   ProjectDetailOverviewComponent
 } from "./project-detail/project-detail-overview/project-detail-overview.component";
 import {ProjectDetailMembersComponent} from "./project-detail/project-detail-members/project-detail-members.component";
-import {TuiLetModule} from "@taiga-ui/cdk";
 import {InviteHttpService} from "../../services/invites/invite-http.service";
 import {UserHttpService} from "../../services/user/user-http.service";
 import {ProjectDetailTasksComponent} from "./project-detail/project-detail-tasks/project-detail-tasks.component";
@@ -40,6 +39,7 @@ import {
   ProjectMembersManagementComponent
 } from "./project-settings/project-member-management/project-members-management.component";
 import {MembersModule} from "../../components/members/members.module";
+import {TuiLetModule} from "@taiga-ui/cdk";
 
 
 @NgModule({
@@ -69,6 +69,7 @@ import {MembersModule} from "../../components/members/members.module";
   ],
   imports: [
     MembersModule,
+    TuiDialogModule,
     CommentModule,
     TaskModule,
     TuiRootModule,
@@ -92,6 +93,8 @@ import {MembersModule} from "../../components/members/members.module";
     TuiInputTagModule,
     TuiAvatarModule,
     TuiDataListModule,
+    TuiAlertModule,
+    TuiLetModule,
   ],
   providers: [
     ProjectHttpService,
