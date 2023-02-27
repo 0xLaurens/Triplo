@@ -74,7 +74,7 @@ export class ProjectMembersInviteComponent implements OnInit {
     }
     this.inviteService.createInvite(user._id, invite).subscribe(() => {
       this.alertService.open(`${user.username} was invited`, {label: "Success!"}).subscribe()
-      this.router.navigate([`/Projects/${this.projectId}/Settings/Members`])
+      this.invites$ = this.inviteService.getInviteByProjectId(this.projectId);
     }, error => {
       if (error.status === 409) {
         this.alertService.open(`${user.username} has already been invited`, {

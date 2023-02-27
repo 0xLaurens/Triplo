@@ -39,6 +39,7 @@ import {
   ProjectMembersManagementComponent
 } from "./project-settings/project-member-management/project-members-management.component";
 import {MembersModule} from "../../components/members/members.module";
+import {TuiLetModule} from "@taiga-ui/cdk";
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {MembersModule} from "../../components/members/members.module";
     TuiAvatarModule,
     TuiDataListModule,
     TuiAlertModule,
+    TuiLetModule,
   ],
   providers: [
     ProjectHttpService,
