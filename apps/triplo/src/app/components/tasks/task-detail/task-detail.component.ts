@@ -65,6 +65,6 @@ export class TaskDetailComponent implements OnInit {
   }
 
   changeStatus(task: TaskInterface) {
-    this.taskService.updateSubtask(this.taskId, task._id, task).subscribe(console.log)
+    this.taskService.updateSubtask(this.taskId, task._id, task).subscribe()
   }
 }

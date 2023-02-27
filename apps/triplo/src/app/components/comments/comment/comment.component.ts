@@ -1,7 +1,17 @@
-import {AfterContentChecked, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
 import {CommentInterface} from "@triplo/models";
 import {CommentHttpService} from "../../../services/comments/comment-http.service";
 import {Observable} from "rxjs";
+import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 
 @Component({
   selector: 'triplo-comment',
@@ -19,7 +29,7 @@ export class CommentComponent implements OnInit, AfterContentChecked {
   deleted = false;
 
   constructor(private commentService: CommentHttpService,
-              private changeDetector: ChangeDetectorRef,) {
+              private changeDetector: ChangeDetectorRef, @Inject(TuiAlertService) private readonly alertService: TuiAlertService) {
   }
 
   ngOnInit(): void {
@@ -72,6 +82,7 @@ export class CommentComponent implements OnInit, AfterContentChecked {
   updateComment($event: CommentInterface) {
     this.commentService.updateComment(this.comment._id, $event).subscribe(data => {
       this.commentUpdateChangedProperties(data)
+      this.alertService.open('updated comment', {label: 'Success!'}).subscribe()
       this.cancelEdit()
     })
   }
@@ -94,6 +105,7 @@ export class CommentComponent implements OnInit, AfterContentChecked {
       } else {
         this.commentUpdateChangedProperties(response)
       }
+      this.alertService.open('Deleted comment', {label: 'Success!'}).subscribe()
       this.reload.emit()
     })
     this.closeDropdown()
