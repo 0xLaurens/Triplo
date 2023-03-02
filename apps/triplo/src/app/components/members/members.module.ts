@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {MembersComponent} from "./members.component";
-import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {RouterLink, RouterLinkWithHref, RouterOutlet} from "@angular/router";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {TuiButtonModule, TuiHintModule, TuiLinkModule, TuiSvgModule} from "@taiga-ui/core";
 import {TuiAvatarModule, TuiBadgeModule, TuiIslandModule} from "@taiga-ui/kit";
 
@@ -23,7 +23,9 @@ import {TuiAvatarModule, TuiBadgeModule, TuiIslandModule} from "@taiga-ui/kit";
     NgIf,
     TuiBadgeModule,
     TuiSvgModule,
-    TuiHintModule
+    TuiHintModule,
+    RouterLink,
+    NgForOf
   ],
   providers: [],
 })
