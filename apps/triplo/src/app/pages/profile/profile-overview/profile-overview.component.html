@@ -1,9 +1,8 @@
-<div class="min-vh-100 d-flex align-items-center" *ngIf="(user$ | async) as user">
+<div class="d-flex align-items-center" *ngIf="(user$ | async) as user">
   <div class="tui-container_adaptive tui-container">
-
-    <div class="justify-content-between d-flex">
+    <div class="justify-content-between d-flex tui-space_top-10">
       <a
-        (click)="back()"
+        routerLink="/"
         tuiIconButton
         icon="tuiIconArrowLeftLarge"
         type="button"
