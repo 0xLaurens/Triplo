@@ -1,4 +1,4 @@
-<div *ngIf="(user$ | async) as user">
+<div *ngIf="(user$ | async) as user; else loading">
   <h5 class="tui-text_h5">Overview</h5>
   <div class="tui-space_vertical-4 w-50">
     <h6 class="tui-text_h6">Email</h6>
@@ -20,3 +20,26 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <h5 class="tui-text_h5" [class.tui-skeleton]="true">Overview</h5>
+  <div class="tui-space_vertical-4 w-50" [class.tui-skeleton]="true">
+    <h6 class="tui-text_h6" [class.tui-skeleton]="true">Email</h6>
+    <div class="tui-text_body-m" [class.tui-skeleton]="true">
+      Lorem Ipsum
+    </div>
+  </div>
+
+  <div class="tui-space_vertical-4 w-50" [class.tui-skeleton]="true">
+    <h6 class="tui-text_h6" [class.tui-skeleton]="true">Gender</h6>
+    <div class="tui-text_body-m" [class.tui-skeleton]="true">
+      Lorem Ipsum
+    </div>
+  </div>
+  <div class="tui-space_vertical-4 w-50" [class.tui-skeleton]="true">
+    <h6 class="tui-text_h6" [class.tui-skeleton]="true">Registered</h6>
+    <div class="tui-text_body-m" [class.tui-skeleton]="true">
+      Lorem Ipsum
+    </div>
+  </div>
+</ng-template>
