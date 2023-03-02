@@ -7,6 +7,7 @@ import {TuiSidebarModule} from "@taiga-ui/addon-mobile";
 import {RouterTestingModule} from "@angular/router/testing";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {TuiActiveZoneModule} from "@taiga-ui/cdk";
+import {TuiIslandModule} from "@taiga-ui/kit";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -16,7 +17,7 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       imports: [HttpClientTestingModule, TuiSidebarModule, TuiActiveZoneModule,
-        RouterTestingModule, NgIf, AsyncPipe, TuiSidebarModule],
+        RouterTestingModule, NgIf, AsyncPipe, TuiSidebarModule, TuiIslandModule],
       providers: [AuthHttpService]
     }).compileComponents();
 
