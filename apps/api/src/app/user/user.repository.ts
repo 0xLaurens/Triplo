@@ -13,11 +13,11 @@ export class UserRepository {
   }
 
   async findAllUsers(search?: string): Promise<UserInterface[]> {
-    if(search && !(search.length > 0)) {
-      return this.userModel.find()
+    if(search) {
+      return this.userModel.find({username: {$regex: search, $options: "i"}}).limit(4)
     }
 
-    return this.userModel.find({username: {$regex: search, $options: "i"}}).limit(4)
+    return this.userModel.find()
   }
 
   async createUser(user: Partial<UserInterface>): Promise<UserInterface> {
