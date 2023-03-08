@@ -29,11 +29,11 @@ let uri: string;
       envFilePath: ".env"
     }),
     Neo4jModule.forRoot({
-      scheme: "bolt",
+      scheme: "neo4j",
       host: "localhost",
       port: 7687,
       username: "neo4j",
-      password: "neox"
+      password: "neo4jsecret"
     }),
     MongooseModule.forRootAsync({
       useFactory: async () => {
