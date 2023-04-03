@@ -91,15 +91,15 @@
           <a *ngIf="current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s">
             <i class="bi-hand-thumbs-up-fill"></i>
           </a>
-          <a *ngIf="!current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s"
-             class="tui-space_left-10">
+          <a *ngIf="!current_like.isPositive" tuiButton (click)="like(true, current_like)" size="s">
             <i class="bi-hand-thumbs-up"></i>
           </a>
           <p
             class="tui-text_body-m tui-space_left-2 tui-space_vertical-0 align-self-center ">{{project.LikeCount}}</p>
         </div>
         <div class="dislike-button d-flex">
-          <a tuiButton *ngIf="!current_like.isPositive" (click)="like(false, current_like)" size="s">
+          <a tuiButton *ngIf="!current_like.isPositive" (click)="like(false, current_like)" size="s"
+          class="tui-space_left-10">
             <i class="bi-hand-thumbs-down-fill"></i>
           </a>
           <a tuiButton *ngIf="current_like.isPositive" (click)="like(false, current_like)" size="s"
