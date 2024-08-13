@@ -75,7 +75,7 @@
     "@nrwl/linter": "^16.10.0",
     "@nrwl/nest": "^16.10.0",
     "@nrwl/node": "^16.10.0",
-    "@nrwl/nx-cloud": "^18.0.1",
+    "@nrwl/nx-cloud": "^19.0.0",
     "@nrwl/workspace": "^16.10.0",
     "@nx-tools/nx-container": "^6.0.1",
     "@types/dompurify": "^3.0.5",
